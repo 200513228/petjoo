@@ -1,0 +1,1 @@
+enum Languages{ system, english, turkish, german}

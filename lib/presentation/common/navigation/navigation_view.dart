@@ -28,7 +28,8 @@ class NavigationView extends ConsumerStatefulWidget {
 }
 
 class _NavigationViewState extends ConsumerStateX<NavigationView> {
-  late final navigationViewModel = ChangeNotifierProvider((ref) => NavigationViewModel(context, AdvertRepositoryImpl()));
+  late final navigationViewModel = ChangeNotifierProvider(
+      (ref) => NavigationViewModel(context, AdvertRepositoryImpl()));
   late final viewModel = ref.read(navigationViewModel);
 
   @override
@@ -51,7 +52,9 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
         }
       }
     });
-    FirebaseDynamicLinks.instance.onLink.listen(viewModel.checkDynamicLink).onError((error) {
+    FirebaseDynamicLinks.instance.onLink
+        .listen(viewModel.checkDynamicLink)
+        .onError((error) {
       // Handle errors
     });
 
@@ -66,10 +69,12 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(navigationViewModel.select((value) => value.isLoading));
+    final isLoading =
+        ref.watch(navigationViewModel.select((value) => value.isLoading));
     final isAnonymous = FirebaseAuth.instance.currentUser?.isAnonymous == true;
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: OverlayStyles.toNavigationBar(theme.colorScheme.surface, Brightness.light),
+      value: OverlayStyles.toNavigationBar(
+          theme.colorScheme.surface, Brightness.light),
       child: isLoading
           ? Loading(
               background: theme.colorScheme.surface,
@@ -85,18 +90,26 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
                           icon: Consumer(
                               child: const Icon(Icons.message_rounded),
                               builder: (context, ref, child) {
-                                final unReadedChats = ref.watch(chatProvider.select((value) => value.unReadedChatsCount));
-                                return Badge(showBadge: unReadedChats > 0, position: BadgePosition.topEnd(end: -5), child: child);
+                                final unReadedChats = ref.watch(
+                                    chatProvider.select(
+                                        (value) => value.unReadedChatsCount));
+                                return Badge(
+                                    showBadge: unReadedChats > 0,
+                                    position: BadgePosition.topEnd(end: -5),
+                                    child: child);
                               }),
                           onPressed: () => context.pushNamed(Routes.chats),
                         )
                       ],
               ),
-              floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat,
               floatingActionButton: getFloatingActionButton(),
               body: Consumer(builder: (context, ref, child) {
-                final hasUser = ref.watch(userProvider.select((value) => value.hasUser));
-                final isUserExist = ref.watch(userProvider.select((value) => value.isUserExist));
+                final hasUser =
+                    ref.watch(userProvider.select((value) => value.hasUser));
+                final isUserExist = ref
+                    .watch(userProvider.select((value) => value.isUserExist));
                 if (!isUserExist) viewModel.logout();
                 return hasUser
                     ? PageView(
@@ -108,12 +121,20 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
               }),
               bottomNavigationBar: Consumer(
                 builder: (context, ref, child) {
-                  final index = ref.watch(navigationViewModel.select((value) => value.index));
+                  final index = ref.watch(
+                      navigationViewModel.select((value) => value.index));
                   return BottomNavigationBarX(
                     currentIndex: index,
                     onTap: viewModel.jumpToPage,
                     borderRadius: Dimens.radius.toTopBorderRadius(),
-                    children: [viewModel.hasTransport == true ? Icons.notifications_rounded : MdiIcons.truck, Icons.pets_rounded, Icons.menu_rounded],
+                    children: [
+                      viewModel.hasTransport == true
+                          ? Icons.notifications_rounded
+                          : MdiIcons.truck,
+                      Icons.pets_rounded,
+                      Icons.menu_rounded,
+                      Icons.store_rounded,
+                    ],
                   );
                 },
               ),
@@ -124,7 +145,9 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
   getTitle() => Consumer(builder: ((context, ref, child) {
         switch (ref.watch(navigationViewModel.select((value) => value.index))) {
           case 0:
-            return Text(viewModel.hasTransport == true ? localization.myReservationRequests : localization.transportAdverts);
+            return Text(viewModel.hasTransport == true
+                ? localization.myReservationRequests
+                : localization.transportAdverts);
           case 1:
             return Text(localization.adverts);
           case 2:
@@ -135,13 +158,15 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
       }));
 
   getFloatingActionButton() => Consumer(builder: (context, ref, _) {
-        final hasTransport = ref.watch(userProvider.select((value) => value.hasTransport));
+        final hasTransport =
+            ref.watch(userProvider.select((value) => value.hasTransport));
         switch (ref.watch(navigationViewModel.select((value) => value.index))) {
           case 0:
             return hasTransport
                 ? FloatingActionButton.extended(
                     label: Text(localization.myReservationRequests),
-                    onPressed: () => context.pushNamed(Routes.reservationRequestList),
+                    onPressed: () =>
+                        context.pushNamed(Routes.reservationRequestList),
                   )
                 : FloatingActionButton.extended(
                     label: Text(localization.myReservations),

@@ -17,7 +17,12 @@ class NavigationViewModel extends PageNotifier {
   int index = 1;
   final PageController pageController = PageController(initialPage: 1);
   bool? hasTransport;
-  List<Widget> pages = const [TransportAdvertListView(), AdvertListView(), ExtraView()];
+  List<Widget> pages = const [
+    TransportAdvertListView(),
+    AdvertListView(),
+    ExtraView(),
+    AdvertListView(),
+  ];
 
   @override
   void dispose() {
@@ -41,8 +46,11 @@ class NavigationViewModel extends PageNotifier {
 
   checkDynamicLink(PendingDynamicLinkData linkData) {
     changeLoading();
-    _advertRepository.getAdvert(linkData.link.query.split('=').last).then((value) {
-      Navigator.pushNamed(context, "navigation${linkData.link.path}", arguments: value);
+    _advertRepository
+        .getAdvert(linkData.link.query.split('=').last)
+        .then((value) {
+      Navigator.pushNamed(context, "navigation${linkData.link.path}",
+          arguments: value);
       changeLoading();
     });
   }

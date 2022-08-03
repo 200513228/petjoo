@@ -18,18 +18,23 @@ class AdvertMapInputView extends ConsumerStatefulWidget {
   const AdvertMapInputView(this.data, {Key? key}) : super(key: key);
 
   @override
-  ConsumerStateX<AdvertMapInputView> createState() => _AdvertMapInputViewState();
+  ConsumerStateX<AdvertMapInputView> createState() =>
+      _AdvertMapInputViewState();
 }
 
 class _AdvertMapInputViewState extends ConsumerStateX<AdvertMapInputView> {
-  late final advertMapInputViewModel = ChangeNotifierProvider.autoDispose((ref) => AdvertMapInputViewModel(context, AdvertRepositoryImpl(), widget.data));
+  late final advertMapInputViewModel = ChangeNotifierProvider.autoDispose(
+      (ref) => AdvertMapInputViewModel(
+          context, AdvertRepositoryImpl(), widget.data));
   late final viewModel = ref.read(advertMapInputViewModel);
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(advertMapInputViewModel.select((value) => value.isLoading));
+    final isLoading =
+        ref.watch(advertMapInputViewModel.select((value) => value.isLoading));
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: OverlayStyles.toNavigationBar(theme.colorScheme.surface, Brightness.light),
+      value: OverlayStyles.toNavigationBar(
+          theme.colorScheme.surface, Brightness.light),
       child: Stack(
         children: [
           Scaffold(
@@ -37,13 +42,15 @@ class _AdvertMapInputViewState extends ConsumerStateX<AdvertMapInputView> {
               title: Text(localization.locationOfAdvert),
               actions: [
                 TextButton(
-                  style: TextButton.styleFrom(primary: theme.colorScheme.secondary),
+                  style: TextButton.styleFrom(
+                      primary: theme.colorScheme.secondary),
                   onPressed: viewModel.skip,
                   child: Text(localization.skip),
                 )
               ],
             ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton.extended(
               label: Text(localization.pickLocation),
               onPressed: viewModel.save,
@@ -61,8 +68,10 @@ class _AdvertMapInputViewState extends ConsumerStateX<AdvertMapInputView> {
                       child: Stack(
                         children: [
                           GoogleMap(
-                            initialCameraPosition: CameraPosition(target: viewModel.currentLocation, zoom: 12),
-                            minMaxZoomPreference: const MinMaxZoomPreference(12, 16),
+                            initialCameraPosition: CameraPosition(
+                                target: viewModel.currentLocation, zoom: 12),
+                            minMaxZoomPreference:
+                                const MinMaxZoomPreference(12, 16),
                             mapToolbarEnabled: false,
                             myLocationButtonEnabled: false,
                             zoomControlsEnabled: false,
@@ -82,7 +91,9 @@ class _AdvertMapInputViewState extends ConsumerStateX<AdvertMapInputView> {
                               ],
                             ),
                           ),
-                          isLoading ? Loading(background: theme.colorScheme.surface) : const SizedBox()
+                          isLoading
+                              ? Loading(background: theme.colorScheme.surface)
+                              : const SizedBox()
                         ],
                       ),
                     ),

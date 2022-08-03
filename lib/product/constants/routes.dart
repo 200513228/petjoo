@@ -45,24 +45,35 @@ class Routes {
   static const String forgotPassword = "auth/login/forgotPassword";
   static const String navigation = "navigation";
   static const String reservationList = "navigation/reservationList";
-  static const String reservationRequestList = "navigation/reservationRequestList";
-  static const String reservationDetail = "navigation/reservationList/reservationDetail";
+  static const String reservationRequestList =
+      "navigation/reservationRequestList";
+  static const String reservationDetail =
+      "navigation/reservationList/reservationDetail";
   static const String advertUserList = "navigation/advertUserList";
   static const String advertInput = "navigation/advertUserList/advertInput";
-  static const String advertMapInput = "navigation/advertUserList/advertInput/advertMapInput";
-  static const String advertImageInput = "navigation/advertUserList/advertInput/advertMapInput/advertImageInput";
+  static const String advertMapInput =
+      "navigation/advertUserList/advertInput/advertMapInput";
+  static const String advertImageInput =
+      "navigation/advertUserList/advertInput/advertMapInput/advertImageInput";
   static const String advertSearch = "navigation/advertSearch";
   static const String advertDetail = "navigation/advertDetail";
   static const String chats = "navigation/chats";
   static const String messages = "navigation/chats/messages";
   static const String profile = "navigation/profile";
-  static const String transportAdvertDetail = "navigation/transportAdvertDetail";
-  static const String transportAdvertBooking = "navigation/transportAdvertDetail/transportAdvertBooking";
-  static const String transportAdvertDetailOwner = "navigation/transportAdvertDetailOwner";
-  static const String transportAdvertInput = "navigation/transportAdvertDetailOwner/transportAdvertInput";
-  static const String transportAdvertShiftInput = "navigation/transportAdvertDetailOwner/transportAdvertShiftInput";
-  static const String transportAdvertImageInput = "navigation/transportAdvertDetailOwner/transportAdvertInput/transportAdvertImageInput";
-  static const String transportAdvertMapInput = "navigation/transportAdvertDetailOwner/transportAdvertInput/transportAdvertMapInput";
+  static const String transportAdvertDetail =
+      "navigation/transportAdvertDetail";
+  static const String transportAdvertBooking =
+      "navigation/transportAdvertDetail/transportAdvertBooking";
+  static const String transportAdvertDetailOwner =
+      "navigation/transportAdvertDetailOwner";
+  static const String transportAdvertInput =
+      "navigation/transportAdvertDetailOwner/transportAdvertInput";
+  static const String transportAdvertShiftInput =
+      "navigation/transportAdvertDetailOwner/transportAdvertShiftInput";
+  static const String transportAdvertImageInput =
+      "navigation/transportAdvertDetailOwner/transportAdvertInput/transportAdvertImageInput";
+  static const String transportAdvertMapInput =
+      "navigation/transportAdvertDetailOwner/transportAdvertInput/transportAdvertMapInput";
   static const String settings = "navigation/settings";
   static const String appSettings = "navigation/settings/appSettings";
   static const String accountSettings = "navigation/settings/accountSettings";
@@ -98,7 +109,8 @@ class Routes {
         page = const TransportReservationRequestListView();
         break;
       case reservationDetail:
-        page = TransportReservationDetailView(routeSettings.arguments as TransportReservationModel);
+        page = TransportReservationDetailView(
+            routeSettings.arguments as TransportReservationModel);
         break;
       case advertUserList:
         page = const AdvertUserListView();
@@ -119,10 +131,12 @@ class Routes {
         page = AdvertDetailView(routeSettings.arguments as AdvertModel);
         break;
       case transportAdvertDetail:
-        page = TransportAdvertDetailView(routeSettings.arguments as TransportAdvertModel);
+        page = TransportAdvertDetailView(
+            routeSettings.arguments as TransportAdvertModel);
         break;
       case transportAdvertBooking:
-        page = TransportAdvertBookingView(routeSettings.arguments as TransportAdvertModel);
+        page = TransportAdvertBookingView(
+            routeSettings.arguments as TransportAdvertModel);
         break;
       case profile:
         page = const ProfileView();
@@ -131,16 +145,20 @@ class Routes {
         page = const TransportAdvertDetailOwnerView();
         break;
       case transportAdvertInput:
-        page = TransportAdvertInputView(routeSettings.arguments as TransportAdvertModel);
+        page = TransportAdvertInputView(
+            routeSettings.arguments as TransportAdvertModel);
         break;
       case transportAdvertShiftInput:
-        page = TransportAdvertShiftInputView(routeSettings.arguments as TransportAdvertModel);
+        page = TransportAdvertShiftInputView(
+            routeSettings.arguments as TransportAdvertModel);
         break;
       case transportAdvertImageInput:
-        page = TransportAdvertImageInputView(routeSettings.arguments as TransportAdvertModel);
+        page = TransportAdvertImageInputView(
+            routeSettings.arguments as TransportAdvertModel);
         break;
       case transportAdvertMapInput:
-        page = TransportAdvertMapView(geoPoint: routeSettings.arguments as GeoPoint);
+        page = TransportAdvertMapView(
+            geoPoint: routeSettings.arguments as GeoPoint);
         break;
       case settings:
         page = const SettingsView();
@@ -168,6 +186,7 @@ class Routes {
         break;
     }
     log(routeSettings.name ?? "Unknown", name: "Route");
-    return MaterialPageRoute(builder: (context) => page, settings: routeSettings);
+    return MaterialPageRoute(
+        builder: (context) => page, settings: routeSettings);
   }
 }

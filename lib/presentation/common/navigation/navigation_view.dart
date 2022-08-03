@@ -19,6 +19,7 @@ import 'package:petjoo/product/constants/overlay_styles.dart';
 import 'package:petjoo/product/constants/routes.dart';
 import 'package:petjoo/product/services/dynamic_link_service.dart';
 import 'package:petjoo/product/ui/widgets/bottom_navigation_bar_x.dart';
+import 'package:petjoo/teska/store/view/store_userlist_view.dart';
 
 class NavigationView extends ConsumerStatefulWidget {
   const NavigationView({Key? key}) : super(key: key);
@@ -132,8 +133,8 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
                           ? Icons.notifications_rounded
                           : MdiIcons.truck,
                       Icons.pets_rounded,
-                      Icons.menu_rounded,
                       Icons.store_rounded,
+                      Icons.menu_rounded,
                     ],
                   );
                 },
@@ -151,6 +152,8 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
           case 1:
             return Text(localization.adverts);
           case 2:
+            return Text(localization.adverts);
+          case 3:
             return Text(localization.extra);
           default:
             return const Text("");
@@ -177,6 +180,11 @@ class _NavigationViewState extends ConsumerStateX<NavigationView> {
             return FloatingActionButton.extended(
               label: Text(localization.myAdverts),
               onPressed: () => context.pushNamed(Routes.advertUserList),
+            );
+          case 2:
+            return FloatingActionButton.extended(
+              label: Text(localization.myAdverts),
+              onPressed: () => context.push(StoreUserListView()),
             );
           default:
             return const SizedBox();

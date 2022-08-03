@@ -8,6 +8,7 @@ import 'package:petjoo/presentation/animal_advert/view/advert_list_view.dart';
 import 'package:petjoo/presentation/animal_transport/view/transport_advert_list_view.dart';
 import 'package:petjoo/product/constants/routes.dart';
 import 'package:petjoo/product/network/requests.dart';
+import 'package:petjoo/teska/store/view/store_list_view.dart';
 import '../extra/extra_view.dart';
 
 class NavigationViewModel extends PageNotifier {
@@ -17,11 +18,11 @@ class NavigationViewModel extends PageNotifier {
   int index = 1;
   final PageController pageController = PageController(initialPage: 1);
   bool? hasTransport;
-  List<Widget> pages = const [
-    TransportAdvertListView(),
-    AdvertListView(),
-    ExtraView(),
-    AdvertListView(),
+  List<Widget> pages = [
+    const TransportAdvertListView(),
+    const AdvertListView(),
+    StoreListView(),
+    const ExtraView(),
   ];
 
   @override

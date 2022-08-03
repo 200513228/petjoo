@@ -7,6 +7,7 @@ import 'package:petjoo/product/models/block_model.dart';
 import 'package:petjoo/product/models/user_basic_model.dart';
 import 'package:petjoo/product/models/user_model.dart';
 import 'package:petjoo/product/network/requests.dart';
+import 'package:petjoo/teska/user/user_service.dart';
 
 class UserProvider extends ChangeNotifier {
   StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>? _userStream;
@@ -26,7 +27,9 @@ class UserProvider extends ChangeNotifier {
   List<BlockModel> get blocks => _blocks;
 
   UserProvider() {
-    FirebaseAuth.instance.authStateChanges().listen((event) => event == null ? _stopListen() : _startListen());
+    FirebaseAuth.instance
+        .authStateChanges()
+        .listen((event) => event == null ? _stopListen() : _startListen());
   }
 
   void _startListen() {
@@ -36,8 +39,11 @@ class UserProvider extends ChangeNotifier {
       return;
     }
     if (_userStream != null) return;
-    _userStream = Requests.getUserStream(FirebaseAuth.instance.currentUser!.uid).listen(_onUserNotify);
-    _blocksStream = Requests.getBlocksStream(FirebaseAuth.instance.currentUser!.uid).listen(_onBlocksNotify);
+    _userStream = Requests.getUserStream(FirebaseAuth.instance.currentUser!.uid)
+        .listen(_onUserNotify);
+    _blocksStream =
+        Requests.getBlocksStream(FirebaseAuth.instance.currentUser!.uid)
+            .listen(_onBlocksNotify);
   }
 
   void _stopListen() {

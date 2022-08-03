@@ -1,1 +1,3 @@
-class UserService {}
+class UserService {
+  static String userid = '';
+}

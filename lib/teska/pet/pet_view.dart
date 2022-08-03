@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:petjoo/product/constants/dimens.dart';
-import 'package:petjoo/product/ui/tiles/advert_tile.dart';
-import 'package:petjoo/teska/pet/pet_advert_tile.dart';
 import 'package:petjoo/teska/pet/pet_viewmodel.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -34,7 +32,7 @@ class PetView extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final data = vm.adverts[index];
-          return PetAdvertTile(data);
+          return Text(data.id);
         });
   }
 }

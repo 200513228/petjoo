@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:petjoo/presentation/animal_advert/view/advert_list_view.dart';
 import 'package:petjoo/teska/current_data.dart';
+import 'package:petjoo/teska/store/view/store_list_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
   }
 
   Widget buildBody() {
-    return AdvertListView();
+    return StoreListView();
   }
 
   Widget buildNav() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:petjoo/teska/current_data.dart';
-import 'package:petjoo/teska/store/view/store_list_view.dart';
+import 'package:petjoo/modules/current_data.dart';
+import 'package:petjoo/modules/store/view/store_list_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

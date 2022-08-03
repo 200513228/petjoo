@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:petjoo/teska/store/model/store_advert_model.dart';
-import 'package:petjoo/teska/store/service/store_service.dart';
+import 'package:petjoo/modules/store/model/store_advert_model.dart';
+import 'package:petjoo/modules/store/service/store_service.dart';
 part 'store_list_viewmodel.g.dart';
 
 class StoreListViewModel = StoreListViewModelBase with _$StoreListViewModel;

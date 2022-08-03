@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:petjoo/teska/store/model/store_advert_model.dart';
-import 'package:petjoo/teska/store/view/store_picture_view.dart';
+import 'package:petjoo/modules/store/model/store_advert_model.dart';
+import 'package:petjoo/modules/store/view/store_picture_view.dart';
 part 'store_add_viewmodel.g.dart';
 
 class StoreAddViewModel = StoreAddViewModelBase with _$StoreAddViewModel;

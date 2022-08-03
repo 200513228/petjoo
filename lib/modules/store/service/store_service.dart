@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:petjoo/teska/store/model/store_advert_model.dart';
+import 'package:petjoo/modules/store/model/store_advert_model.dart';
 
 class StoreService {
   static var db = FirebaseFirestore.instance;

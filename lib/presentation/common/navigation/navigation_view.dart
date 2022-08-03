@@ -19,7 +19,7 @@ import 'package:petjoo/product/constants/overlay_styles.dart';
 import 'package:petjoo/product/constants/routes.dart';
 import 'package:petjoo/product/services/dynamic_link_service.dart';
 import 'package:petjoo/product/ui/widgets/bottom_navigation_bar_x.dart';
-import 'package:petjoo/teska/store/view/store_userlist_view.dart';
+import 'package:petjoo/modules/store/view/store_userlist_view.dart';
 
 class NavigationView extends ConsumerStatefulWidget {
   const NavigationView({Key? key}) : super(key: key);

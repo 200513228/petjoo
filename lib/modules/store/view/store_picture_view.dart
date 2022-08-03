@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:petjoo/teska/store/model/store_advert_model.dart';
-import 'package:petjoo/teska/store/viewmodel/store_picture_viewmodel.dart';
+import 'package:petjoo/modules/store/model/store_advert_model.dart';
+import 'package:petjoo/modules/store/viewmodel/store_picture_viewmodel.dart';
 
 class StorePictureView extends StatelessWidget {
   final StorePictureViewModel vm = StorePictureViewModel();

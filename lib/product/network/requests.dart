@@ -7,7 +7,7 @@ import 'package:petjoo/product/models/message_model.dart';
 import 'package:petjoo/product/models/user_basic_model.dart';
 import 'package:petjoo/product/models/user_model.dart';
 import 'package:petjoo/product/services/notification_service.dart';
-import 'package:petjoo/teska/user/user_service.dart';
+import 'package:petjoo/modules/user/user_service.dart';
 
 const String _users = "users";
 const String _usersInfo = "users_info";

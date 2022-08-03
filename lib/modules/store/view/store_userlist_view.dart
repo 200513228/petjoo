@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/product/ui/widgets/nothing_to_see_here_widget.dart';
-import 'package:petjoo/teska/store/model/store_advert_model.dart';
-import 'package:petjoo/teska/store/viewmodel/store_userlist_viewmodel.dart';
+import 'package:petjoo/modules/store/model/store_advert_model.dart';
+import 'package:petjoo/modules/store/viewmodel/store_userlist_viewmodel.dart';
 
 class StoreUserListView extends StatelessWidget {
   final StoreUserListViewModel vm = StoreUserListViewModel();

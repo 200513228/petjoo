@@ -13,7 +13,7 @@ class StoreUserListView extends StatelessWidget {
     vm.getUserAdverts();
     return Scaffold(
       appBar: buildAppBar(),
-      floatingActionButton: buildFab(),
+      floatingActionButton: buildFab(context),
       body: buildBody(),
     );
   }
@@ -39,17 +39,19 @@ class StoreUserListView extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      centerTitle: true,
-      title: const Text('İLANLARIM'),
+  Widget buildFab(BuildContext _) {
+    return FloatingActionButton(
+      onPressed: () {
+        vm.newAdvert(_);
+      },
+      child: const Icon(Icons.add),
     );
   }
 
-  Widget buildFab() {
-    return FloatingActionButton(
-      onPressed: () {},
-      child: const Icon(Icons.add),
+  AppBar buildAppBar() {
+    return AppBar(
+      centerTitle: true,
+      title: const Text('İlanlarım'),
     );
   }
 }

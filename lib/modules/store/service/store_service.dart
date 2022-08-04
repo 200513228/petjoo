@@ -5,7 +5,6 @@ class StoreService {
   static var db = FirebaseFirestore.instance;
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getAdverts() async {
-    print('gett');
     return db
         .collection('store_adverts')
         // .where('isSold', isEqualTo: true)

@@ -9,6 +9,15 @@ class StorePictureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: buildAppBar(),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      centerTitle: true,
+      title: const Text('Fotoğraf Seçimi'),
+    );
   }
 }

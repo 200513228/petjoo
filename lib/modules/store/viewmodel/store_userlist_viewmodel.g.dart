@@ -34,6 +34,14 @@ mixin _$StoreUserListViewModel on StoreUserListViewModelBase, Store {
     return _$getUserAdvertsAsyncAction.run(() => super.getUserAdverts());
   }
 
+  late final _$newAdvertAsyncAction =
+      AsyncAction('StoreUserListViewModelBase.newAdvert', context: context);
+
+  @override
+  Future<dynamic> newAdvert(BuildContext _) {
+    return _$newAdvertAsyncAction.run(() => super.newAdvert(_));
+  }
+
   @override
   String toString() {
     return '''

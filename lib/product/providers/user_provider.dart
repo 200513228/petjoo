@@ -7,7 +7,6 @@ import 'package:petjoo/product/models/block_model.dart';
 import 'package:petjoo/product/models/user_basic_model.dart';
 import 'package:petjoo/product/models/user_model.dart';
 import 'package:petjoo/product/network/requests.dart';
-import 'package:petjoo/modules/user/user_service.dart';
 
 class UserProvider extends ChangeNotifier {
   StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>? _userStream;

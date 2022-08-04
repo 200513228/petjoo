@@ -19,58 +19,64 @@ class ExtraView extends ConsumerStatefulWidget {
 }
 
 class _ExtraViewState extends ConsumerStateX<ExtraView> {
-  late final extraViewModel = ChangeNotifierProvider.autoDispose((ref) => ExtraViewModel(context));
+  late final extraViewModel =
+      ChangeNotifierProvider.autoDispose((ref) => ExtraViewModel(context));
   late final viewModel = ref.read(extraViewModel);
 
   @override
   Widget build(BuildContext context) {
     final isAnonymous = FirebaseAuth.instance.currentUser?.isAnonymous == true;
-    return Column(
-      children: [
-        const ProfileContainer(
-          margin: EdgeInsets.only(top: Dimens.paddingSmall),
-        ),
-        Expanded(
-          child: ListView(
-            padding: const EdgeInsets.all(Dimens.padding),
-            children: [
-              Visibility(
-                  visible: !isAnonymous,
-                  child: SettingsTile(
-                    icon: Icons.person_rounded,
-                    title: localization.profile,
-                    onTap: viewModel.profile,
-                    margin: const EdgeInsets.only(bottom: Dimens.padding),
-                  )),
-              Consumer(builder: (context, ref, _) {
-                final hasTransport = ref.watch(userProvider.select((value) => value.user.hasTransport));
-                return Visibility(
-                  visible: hasTransport,
-                  child: SettingsTile(
-                    icon: MdiIcons.truck,
-                    title: localization.myPetTransport,
-                    onTap: () => context.pushNamed(Routes.transportAdvertDetailOwner),
-                    margin: const EdgeInsets.only(bottom: Dimens.padding),
-                  ),
-                );
-              }),
-              SettingsTile(
-                icon: Icons.settings_rounded,
-                title: localization.settings,
-                onTap: viewModel.settings,
-                margin: const EdgeInsets.only(bottom: Dimens.padding),
-              ),
-              SettingsTile(
-                icon: Icons.logout_rounded,
-                title: localization.logout,
-                showArrow: false,
-                onTap: viewModel.signOut,
-                margin: const EdgeInsets.only(bottom: Dimens.padding),
-              )
-            ],
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          const ProfileContainer(
+            margin: EdgeInsets.only(top: Dimens.paddingSmall),
           ),
-        )
-      ],
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(Dimens.padding),
+              children: [
+                Visibility(
+                    visible: !isAnonymous,
+                    child: SettingsTile(
+                      icon: Icons.person_rounded,
+                      title: localization.profile,
+                      onTap: viewModel.profile,
+                      margin: const EdgeInsets.only(bottom: Dimens.padding),
+                    )),
+                Consumer(builder: (context, ref, _) {
+                  final hasTransport = ref.watch(
+                      userProvider.select((value) => value.user.hasTransport));
+                  return Visibility(
+                    visible: hasTransport,
+                    child: SettingsTile(
+                      icon: MdiIcons.truck,
+                      title: localization.myPetTransport,
+                      onTap: () =>
+                          context.pushNamed(Routes.transportAdvertDetailOwner),
+                      margin: const EdgeInsets.only(bottom: Dimens.padding),
+                    ),
+                  );
+                }),
+                SettingsTile(
+                  icon: Icons.settings_rounded,
+                  title: localization.settings,
+                  onTap: viewModel.settings,
+                  margin: const EdgeInsets.only(bottom: Dimens.padding),
+                ),
+                SettingsTile(
+                  icon: Icons.logout_rounded,
+                  title: localization.logout,
+                  showArrow: false,
+                  onTap: viewModel.signOut,
+                  margin: const EdgeInsets.only(bottom: Dimens.padding),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

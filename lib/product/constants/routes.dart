@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petjoo/infrastructure/model/transport_advert_model.dart';
 import 'package:petjoo/infrastructure/model/transport_reservation_model.dart';
+import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/presentation/animal_advert/advert_image_input/advert_image_input_view.dart';
 import 'package:petjoo/presentation/animal_advert/advert_map_input/view/advert_map_input_view.dart';
 import 'package:petjoo/presentation/animal_advert/view/advert_detail_view.dart';
@@ -100,7 +101,9 @@ class Routes {
         page = ForgotPasswordView(routeSettings.arguments as String);
         break;
       case navigation:
-        page = const NavigationView();
+        // page = const NavigationView();
+        page = const WelcomeView();
+
         break;
       case reservationList:
         page = const TransportReservationListView();

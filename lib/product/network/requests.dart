@@ -2,12 +2,12 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:petjoo/modules/user/service/user_service.dart';
 import 'package:petjoo/product/models/chat_model.dart';
 import 'package:petjoo/product/models/message_model.dart';
 import 'package:petjoo/product/models/user_basic_model.dart';
 import 'package:petjoo/product/models/user_model.dart';
 import 'package:petjoo/product/services/notification_service.dart';
-import 'package:petjoo/modules/user/user_service.dart';
 
 const String _users = "users";
 const String _usersInfo = "users_info";
@@ -16,8 +16,12 @@ const String _messages = "messages";
 const String _blocks = "blocks";
 
 class Requests {
-  static Future<UserModel> getUser(String uid) async => UserModel.fromJson(
-      await FirebaseFirestore.instance.collection(_users).doc(uid).get());
+  static Future<UserModel> getUser(String uid) async {
+    await UserService.getUser(uid);
+    return UserModel.fromJson(
+        await FirebaseFirestore.instance.collection(_users).doc(uid).get());
+  }
+
   static Future<UserBasicModel> getUserInfo(String uid) async =>
       UserBasicModel.fromJson(await FirebaseFirestore.instance
           .collection(_usersInfo)
@@ -26,7 +30,7 @@ class Requests {
 
   static Stream<DocumentSnapshot<Map<String, dynamic>>> getUserStream(
       String uid) {
-    UserService.userid = uid;
+    UserService.getUser(uid);
     return FirebaseFirestore.instance.collection(_users).doc(uid).snapshots();
   }
 

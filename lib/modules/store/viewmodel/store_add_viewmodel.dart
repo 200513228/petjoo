@@ -9,31 +9,66 @@ class StoreAddViewModel = StoreAddViewModelBase with _$StoreAddViewModel;
 
 abstract class StoreAddViewModelBase with Store {
   @observable
-  StoreAdvertModel? advert;
+  StoreAdvertModel advert = StoreAdvertModel.fromManuel(
+    id: '',
+    title: '',
+    description: '',
+    price: 0,
+    userId: '',
+    dialCode: '',
+    phone: '',
+    address: '',
+    images: [],
+    date: Timestamp.now(),
+    geoPoint: const GeoPoint(0, 0),
+    type: 0,
+    delivery: 0,
+    isSold: false,
+  );
+
+  @observable
+  GlobalKey<FormState> formKey = GlobalKey();
+
+  @observable
+  TextEditingController titleCont = TextEditingController();
+
+  @observable
+  TextEditingController descCont = TextEditingController();
+
+  @observable
+  TextEditingController phoneCont = TextEditingController();
+
+  @observable
+  TextEditingController priceCont = TextEditingController();
+
+  @observable
+  TextEditingController addressCont = TextEditingController();
+
+  @observable
+  String? dialCode;
+
+  @observable
+  int? price;
+
+  @observable
+  int? type;
+
+  @observable
+  int? delivery;
 
   @action
-  Future nextStep(
-    BuildContext context, {
-    required String title,
-    required String description,
-    required String dialCode,
-    required String phone,
-    required int type,
-  }) async {
-    advert = StoreAdvertModel.fromManuel(
-      id: 'id',
-      title: title,
-      description: description,
-      userId: 'userId',
-      dialCode: dialCode,
-      phone: phone,
-      images: [],
-      date: Timestamp.now(),
-      geoPoint: const GeoPoint(0, 0),
-      type: type,
-      isSold: false,
-    );
-    Navigator.push(context,
-        MaterialPageRoute(builder: (_) => StorePictureView(model: advert!)));
+  Future nextStep(BuildContext context) async {
+    advert.title = titleCont.text;
+    advert.description = descCont.text;
+    advert.price = num.tryParse(priceCont.text) ?? 0;
+    advert.dialCode = dialCode ?? '';
+    advert.phone = phoneCont.text;
+    advert.address = addressCont.text;
+    advert.type = type ?? 0;
+    advert.delivery = delivery ?? 0;
+    if (formKey.currentState?.validate() ?? false) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => StorePictureView(model: advert)));
+    }
   }
 }

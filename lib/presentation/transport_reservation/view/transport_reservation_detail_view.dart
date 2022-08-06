@@ -24,12 +24,15 @@ class TransportReservationDetailView extends ConsumerStatefulWidget {
   final TransportReservationModel data;
 
   @override
-  ConsumerStateX<TransportReservationDetailView> createState() => _TransportReservationDetailViewState();
+  ConsumerStateX<TransportReservationDetailView> createState() =>
+      _TransportReservationDetailViewState();
 }
 
-class _TransportReservationDetailViewState extends ConsumerStateX<TransportReservationDetailView> {
-  late final reservationDetailViewModel =
-      ChangeNotifierProvider((ref) => TransportReservationDetailViewModel(context, TransportRepositoryImpl(), ref.read(chatProvider), widget.data));
+class _TransportReservationDetailViewState
+    extends ConsumerStateX<TransportReservationDetailView> {
+  late final reservationDetailViewModel = ChangeNotifierProvider((ref) =>
+      TransportReservationDetailViewModel(context, TransportRepositoryImpl(),
+          ref.read(chatProvider), widget.data));
 
   late final viewModel = ref.read(reservationDetailViewModel);
 
@@ -37,9 +40,11 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(reservationDetailViewModel.select((value) => value.isLoading));
+    final isLoading = ref
+        .watch(reservationDetailViewModel.select((value) => value.isLoading));
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: OverlayStyles.toNavigationBar(theme.colorScheme.surface, Brightness.light),
+      value: OverlayStyles.toNavigationBar(
+          theme.colorScheme.surface, Brightness.light),
       child: isLoading
           ? Loading(
               background: theme.colorScheme.background,
@@ -60,9 +65,14 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                           expandedHeight: mediaQuery.size.width * .75,
                           automaticallyImplyLeading: false,
                           bottom: PreferredSize(
-                              preferredSize: const Size.fromHeight(Dimens.padding),
-                              child:
-                                  Container(height: Dimens.padding, decoration: BoxDecoration(color: theme.colorScheme.surface, borderRadius: Dimens.radius.toTopBorderRadius()))),
+                              preferredSize:
+                                  const Size.fromHeight(Dimens.padding),
+                              child: Container(
+                                  height: Dimens.padding,
+                                  decoration: BoxDecoration(
+                                      color: theme.colorScheme.surface,
+                                      borderRadius:
+                                          Dimens.radius.toTopBorderRadius()))),
                           flexibleSpace: advert.images.isEmpty
                               ? Image.asset(
                                   Images.noImage,
@@ -70,40 +80,57 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                 )
                               : PageView.builder(
                                   itemCount: advert.images.length,
-                                  itemBuilder: (context, index) => GestureDetector(
+                                  itemBuilder: (context, index) =>
+                                      GestureDetector(
                                         child: ImageX(
                                           advert.images[index],
                                         ),
-                                        onTap: () => viewModel.showFullScreen(index),
+                                        onTap: () =>
+                                            viewModel.showFullScreen(index),
                                       )),
                         ),
                         SliverPadding(
-                          padding: const EdgeInsets.fromLTRB(Dimens.padding, 0, Dimens.padding, Dimens.padding),
+                          padding: const EdgeInsets.fromLTRB(Dimens.padding, 0,
+                              Dimens.padding, Dimens.padding),
                           sliver: SliverList(
                             delegate: SliverChildListDelegate(
                               [
                                 Text(
                                   advert.title,
-                                  style: theme.textTheme.headline6?.copyWith(color: theme.colorScheme.onSurface),
+                                  style: theme.textTheme.headline6?.copyWith(
+                                      color: theme.colorScheme.onSurface),
                                   maxLines: 2,
                                 ),
                                 const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       viewModel.data.date.toDateString(),
-                                      style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                      style: theme.textTheme.labelSmall
+                                          ?.copyWith(
+                                              color:
+                                                  theme.colorScheme.onSurface),
                                       maxLines: 1,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(color: viewModel.data.status.toColor(), borderRadius: Dimens.radiusSmall.toBorderRadius()),
-                                      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                      decoration: BoxDecoration(
+                                          color:
+                                              viewModel.data.status.toColor(),
+                                          borderRadius: Dimens.radiusSmall
+                                              .toBorderRadius()),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 10),
                                       child: Text(
-                                        viewModel.data.status.toLocalizedString(context),
-                                        style: theme.textTheme.caption?.copyWith(color: theme.colorScheme.surface),
+                                        viewModel.data.status
+                                            .toLocalizedString(context),
+                                        style: theme.textTheme.caption
+                                            ?.copyWith(
+                                                color:
+                                                    theme.colorScheme.surface),
                                       ),
                                     ),
                                   ],
@@ -113,16 +140,22 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                 _profile(),
                                 const Separator(),
                                 Material(
-                                  borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                  borderRadius:
+                                      Dimens.radiusSmall.toBorderRadius(),
                                   color: theme.colorScheme.onBackground,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(Dimens.paddingSmall),
+                                    padding: const EdgeInsets.all(
+                                        Dimens.paddingSmall),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
                                           localization.description,
-                                          style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                          style: theme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                  color: theme
+                                                      .colorScheme.onSurface),
                                         ),
                                         const SizedBox(
                                           height: 5,
@@ -137,16 +170,22 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                 ),
                                 const Separator(),
                                 Material(
-                                  borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                  borderRadius:
+                                      Dimens.radiusSmall.toBorderRadius(),
                                   color: theme.colorScheme.onBackground,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(Dimens.paddingSmall),
+                                    padding: const EdgeInsets.all(
+                                        Dimens.paddingSmall),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
                                           localization.address,
-                                          style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                          style: theme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                  color: theme
+                                                      .colorScheme.onSurface),
                                         ),
                                         const SizedBox(height: 5),
                                         Text(
@@ -156,23 +195,47 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                         const SizedBox(height: 5),
                                         viewModel.showBeginLocation
                                             ? ClipRRect(
-                                                borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                                borderRadius: Dimens.radiusSmall
+                                                    .toBorderRadius(),
                                                 child: SizedBox(
                                                   height: 160,
-                                                  child: Consumer(builder: (context, ref, _) {
-                                                    ref.watch(reservationDetailViewModel.select((value) => value.beginMarkers.length));
+                                                  child: Consumer(builder:
+                                                      (context, ref, _) {
+                                                    ref.watch(
+                                                        reservationDetailViewModel
+                                                            .select((value) =>
+                                                                value
+                                                                    .beginMarkers
+                                                                    .length));
                                                     return GoogleMap(
-                                                      onTap: (argument) => viewModel.getBeginDirections(),
-                                                      initialCameraPosition: CameraPosition(
-                                                          target: LatLng(viewModel.data.beginGeoPoint!.latitude, viewModel.data.beginGeoPoint!.longitude), zoom: 14.5),
+                                                      onTap: (argument) => viewModel
+                                                          .getBeginDirections(),
+                                                      initialCameraPosition:
+                                                          CameraPosition(
+                                                              target: LatLng(
+                                                                  viewModel
+                                                                      .data
+                                                                      .beginGeoPoint!
+                                                                      .latitude,
+                                                                  viewModel
+                                                                      .data
+                                                                      .beginGeoPoint!
+                                                                      .longitude),
+                                                              zoom: 14.5),
                                                       mapType: MapType.normal,
                                                       mapToolbarEnabled: false,
-                                                      myLocationButtonEnabled: false,
-                                                      zoomControlsEnabled: false,
-                                                      zoomGesturesEnabled: false,
-                                                      scrollGesturesEnabled: false,
-                                                      markers: viewModel.beginMarkers,
-                                                      onMapCreated: viewModel.onBeginMapCreated,
+                                                      myLocationButtonEnabled:
+                                                          false,
+                                                      zoomControlsEnabled:
+                                                          false,
+                                                      zoomGesturesEnabled:
+                                                          false,
+                                                      scrollGesturesEnabled:
+                                                          false,
+                                                      markers: viewModel
+                                                          .beginMarkers,
+                                                      onMapCreated: viewModel
+                                                          .onBeginMapCreated,
                                                     );
                                                   }),
                                                 ),
@@ -184,16 +247,22 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                 ),
                                 const Separator(),
                                 Material(
-                                  borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                  borderRadius:
+                                      Dimens.radiusSmall.toBorderRadius(),
                                   color: theme.colorScheme.onBackground,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(Dimens.paddingSmall),
+                                    padding: const EdgeInsets.all(
+                                        Dimens.paddingSmall),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
                                           localization.destinationAddress,
-                                          style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                          style: theme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                  color: theme
+                                                      .colorScheme.onSurface),
                                         ),
                                         const SizedBox(
                                           height: 5,
@@ -205,23 +274,47 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                         const SizedBox(height: 5),
                                         viewModel.showEndLocation
                                             ? ClipRRect(
-                                                borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                                borderRadius: Dimens.radiusSmall
+                                                    .toBorderRadius(),
                                                 child: SizedBox(
                                                   height: 160,
-                                                  child: Consumer(builder: (context, ref, _) {
-                                                    ref.watch(reservationDetailViewModel.select((value) => value.endMarkers.length));
+                                                  child: Consumer(builder:
+                                                      (context, ref, _) {
+                                                    ref.watch(
+                                                        reservationDetailViewModel
+                                                            .select((value) =>
+                                                                value.endMarkers
+                                                                    .length));
                                                     return GoogleMap(
-                                                      onTap: (argument) => viewModel.getEndDirections(),
+                                                      onTap: (argument) =>
+                                                          viewModel
+                                                              .getEndDirections(),
                                                       initialCameraPosition:
-                                                          CameraPosition(target: LatLng(viewModel.data.endGeoPoint!.latitude, viewModel.data.endGeoPoint!.longitude), zoom: 14.5),
+                                                          CameraPosition(
+                                                              target: LatLng(
+                                                                  viewModel
+                                                                      .data
+                                                                      .endGeoPoint!
+                                                                      .latitude,
+                                                                  viewModel
+                                                                      .data
+                                                                      .endGeoPoint!
+                                                                      .longitude),
+                                                              zoom: 14.5),
                                                       mapType: MapType.normal,
                                                       mapToolbarEnabled: false,
-                                                      myLocationButtonEnabled: false,
-                                                      zoomControlsEnabled: false,
-                                                      zoomGesturesEnabled: false,
-                                                      scrollGesturesEnabled: false,
-                                                      markers: viewModel.endMarkers,
-                                                      onMapCreated: viewModel.onEndMapCreated,
+                                                      myLocationButtonEnabled:
+                                                          false,
+                                                      zoomControlsEnabled:
+                                                          false,
+                                                      zoomGesturesEnabled:
+                                                          false,
+                                                      scrollGesturesEnabled:
+                                                          false,
+                                                      markers:
+                                                          viewModel.endMarkers,
+                                                      onMapCreated: viewModel
+                                                          .onEndMapCreated,
                                                     );
                                                   }),
                                                 ),
@@ -233,16 +326,22 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                 ),
                                 const Separator(),
                                 Material(
-                                  borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                  borderRadius:
+                                      Dimens.radiusSmall.toBorderRadius(),
                                   color: theme.colorScheme.onBackground,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(Dimens.paddingSmall),
+                                    padding: const EdgeInsets.all(
+                                        Dimens.paddingSmall),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
                                           localization.averageDistance,
-                                          style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                          style: theme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                  color: theme
+                                                      .colorScheme.onSurface),
                                         ),
                                         const SizedBox(
                                           height: 5,
@@ -257,16 +356,22 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                                 ),
                                 const Separator(),
                                 Material(
-                                  borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                  borderRadius:
+                                      Dimens.radiusSmall.toBorderRadius(),
                                   color: theme.colorScheme.onBackground,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(Dimens.paddingSmall),
+                                    padding: const EdgeInsets.all(
+                                        Dimens.paddingSmall),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
                                           localization.estimatedAmount,
-                                          style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                          style: theme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                  color: theme
+                                                      .colorScheme.onSurface),
                                         ),
                                         const SizedBox(
                                           height: 5,
@@ -295,7 +400,8 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
 
   Widget _profile() => Container(
         height: 70,
-        margin: const EdgeInsets.only(bottom: Dimens.padding, top: Dimens.paddingSmall),
+        margin: const EdgeInsets.only(
+            bottom: Dimens.padding, top: Dimens.paddingSmall),
         child: Material(
           color: theme.colorScheme.onBackground,
           borderRadius: Dimens.radiusSmall.toBorderRadius(),
@@ -314,7 +420,8 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
                 Expanded(
                     child: Text(
                   viewModel.data.fullName,
-                  style: theme.textTheme.subtitle1?.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.subtitle1
+                      ?.copyWith(fontWeight: FontWeight.bold),
                   maxLines: 2,
                 )),
               ],
@@ -330,16 +437,21 @@ class _TransportReservationDetailViewState extends ConsumerStateX<TransportReser
             top: BorderSide(width: .5, color: theme.highlightColor),
           ),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: Dimens.padding),
+        padding: const EdgeInsets.symmetric(
+            vertical: 10, horizontal: Dimens.padding),
         child: bottomContent(),
       );
 
   Widget bottomContent() => SafeArea(
+        bottom: false,
         child: Row(
           children: [
             Expanded(
               child: RezervationScheduleTile(
-                  start: viewModel.data.date.toTimeOfDay(), end: viewModel.data.date.toTimeOfDay().replacing(hour: viewModel.data.date.toTimeOfDay().hour + 2), isEmpty: null),
+                  start: viewModel.data.date.toTimeOfDay(),
+                  end: viewModel.data.date.toTimeOfDay().replacing(
+                      hour: viewModel.data.date.toTimeOfDay().hour + 2),
+                  isEmpty: null),
             ),
             const SizedBox(width: Dimens.paddingSmall),
             FloatingActionButton(

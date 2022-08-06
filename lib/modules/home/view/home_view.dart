@@ -17,12 +17,15 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context),
-      body: buildBody(),
-      bottomNavigationBar: buildNav(context),
-      floatingActionButton: buildFab(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    return WillPopScope(
+      onWillPop: () async => Navigator.canPop(context),
+      child: Scaffold(
+        appBar: buildAppBar(context),
+        body: buildBody(),
+        bottomNavigationBar: buildNav(context),
+        floatingActionButton: buildFab(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
     );
   }
 
@@ -75,8 +78,15 @@ class HomeView extends StatelessWidget {
   BottomNavigationBarItem navItem(
       BuildContext context, String label, IconData icon) {
     return BottomNavigationBarItem(
-      icon: Icon(icon),
+      icon: Icon(
+        icon,
+        color: Colors.white,
+      ),
       label: label,
+      activeIcon: Icon(
+        icon,
+        color: Colors.white,
+      ),
     );
   }
 

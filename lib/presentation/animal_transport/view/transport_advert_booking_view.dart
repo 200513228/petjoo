@@ -26,12 +26,18 @@ class TransportAdvertBookingView extends ConsumerStatefulWidget {
   final TransportAdvertModel data;
 
   @override
-  ConsumerStateX<TransportAdvertBookingView> createState() => _TransportAdvertBookingViewState();
+  ConsumerStateX<TransportAdvertBookingView> createState() =>
+      _TransportAdvertBookingViewState();
 }
 
-class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBookingView> with SingleTickerProviderStateMixin {
-  late final transportAdvertBookingViewModel = ChangeNotifierProvider((ref) => TransportAdvertBookingViewmodel(context, TransportReservationRepositoryImpl()));
-  late final viewModel = ref.read(transportAdvertBookingViewModel)..data = widget.data;
+class _TransportAdvertBookingViewState
+    extends ConsumerStateX<TransportAdvertBookingView>
+    with SingleTickerProviderStateMixin {
+  late final transportAdvertBookingViewModel = ChangeNotifierProvider((ref) =>
+      TransportAdvertBookingViewmodel(
+          context, TransportReservationRepositoryImpl()));
+  late final viewModel = ref.read(transportAdvertBookingViewModel)
+    ..data = widget.data;
 
   late final tabController = TabController(length: 7, vsync: this);
   TransportAdvertModel get data => viewModel.data;
@@ -52,7 +58,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: OverlayStyles.toNavigationBar(theme.colorScheme.surface, Brightness.light),
+      value: OverlayStyles.toNavigationBar(
+          theme.colorScheme.surface, Brightness.light),
       child: Scaffold(
         appBar: AppBar(
           title: Text(localization.bookNow),
@@ -72,7 +79,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
 
   Widget _schedule() {
     return Consumer(builder: (context, ref, _) {
-      final isDataFetched = ref.watch(transportAdvertBookingViewModel.select((value) => value.tabList.isNotEmpty));
+      final isDataFetched = ref.watch(transportAdvertBookingViewModel
+          .select((value) => value.tabList.isNotEmpty));
       return !isDataFetched
           ? const Loading()
           : Column(
@@ -94,26 +102,40 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                               ))
                           .toList()),
                 ),
-                Expanded(child: TabBarView(controller: tabController, children: viewModel.tabList.map((e) => rezervationListView(e)).toList()))
+                Expanded(
+                    child: TabBarView(
+                        controller: tabController,
+                        children: viewModel.tabList
+                            .map((e) => rezervationListView(e))
+                            .toList()))
               ],
             );
     });
   }
 
   Widget rezervationListView(ReservationTab currentDay) {
-    final dayShift = data.shifts.firstWhere((x) => x.day.index == currentDay.day.weekday - 1);
+    final dayShift = data.shifts
+        .firstWhere((x) => x.day.index == currentDay.day.weekday - 1);
     final today = DateTime.now();
     final todayHour = today.toTimeOfDay().hour;
-    int fixedStart = dayShift.start.hour > todayHour || today.day != currentDay.day.day ? dayShift.start.hour : todayHour + ((todayHour - dayShift.start.hour) % 2);
+    int fixedStart =
+        dayShift.start.hour > todayHour || today.day != currentDay.day.day
+            ? dayShift.start.hour
+            : todayHour + ((todayHour - dayShift.start.hour) % 2);
     final shiftCount = ((fixedStart - dayShift.end.hour).abs() / 2).floor();
     return ListView.separated(
       itemCount: shiftCount,
       padding: const EdgeInsets.all(Dimens.padding),
       itemBuilder: (context, index) {
         final fixedStartHour = fixedStart + index * 2;
-        final start = TimeOfDay(hour: fixedStartHour > 23 ? (fixedStartHour - 24) : fixedStartHour, minute: dayShift.start.minute);
-        final end = TimeOfDay(hour: start.hour >= 22 ? (start.hour - 22) : start.hour + 2, minute: start.minute);
-        final isEmpty = !currentDay.reservations.any((x) => x.date.hour == start.hour && x.date.minute == start.minute);
+        final start = TimeOfDay(
+            hour: fixedStartHour > 23 ? (fixedStartHour - 24) : fixedStartHour,
+            minute: dayShift.start.minute);
+        final end = TimeOfDay(
+            hour: start.hour >= 22 ? (start.hour - 22) : start.hour + 2,
+            minute: start.minute);
+        final isEmpty = !currentDay.reservations.any(
+            (x) => x.date.hour == start.hour && x.date.minute == start.minute);
         return RezervationScheduleTile(
           start: start,
           end: end,
@@ -148,8 +170,10 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                           builder: (context, value, _) => DropdownX<String>(
                             value: value,
                             color: theme.colorScheme.onBackground,
-                            borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
-                            validator: (value) => value?.isEmpty == true ? "" : null,
+                            borderRadius:
+                                Dimens.radiusSmall.toLeftBorderRadius(),
+                            validator: (value) =>
+                                value?.isEmpty == true ? "" : null,
                             items: dialCodes.values
                                 .map((e) => DropdownMenuItem(
                                       value: e,
@@ -169,7 +193,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                           controller: viewModel.phoneController,
                           keyboardType: TextInputType.phone,
                           textInputAction: TextInputAction.next,
-                          validator: Validators.phone(localization.phoneError, true),
+                          validator:
+                              Validators.phone(localization.phoneError, true),
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(10),
                           ],
@@ -177,10 +202,18 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                             label: Text(localization.phone),
                             hintText: localization.phoneFormat,
                             fillColor: theme.colorScheme.onBackground,
-                            border: UnderlineInputBorder(borderRadius: Dimens.radiusSmall.toRightBorderRadius()),
-                            focusedBorder: UnderlineInputBorder(borderRadius: Dimens.radiusSmall.toRightBorderRadius()),
-                            errorBorder: UnderlineInputBorder(borderRadius: Dimens.radiusSmall.toRightBorderRadius()),
-                            focusedErrorBorder: UnderlineInputBorder(borderRadius: Dimens.radiusSmall.toRightBorderRadius()),
+                            border: UnderlineInputBorder(
+                                borderRadius:
+                                    Dimens.radiusSmall.toRightBorderRadius()),
+                            focusedBorder: UnderlineInputBorder(
+                                borderRadius:
+                                    Dimens.radiusSmall.toRightBorderRadius()),
+                            errorBorder: UnderlineInputBorder(
+                                borderRadius:
+                                    Dimens.radiusSmall.toRightBorderRadius()),
+                            focusedErrorBorder: UnderlineInputBorder(
+                                borderRadius:
+                                    Dimens.radiusSmall.toRightBorderRadius()),
                           ),
                         ),
                       ),
@@ -204,7 +237,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                                     animal.toLocalizedString(context),
                                   )))
                               .toList(),
-                          onChanged: (value) => viewModel.animalType.value = value!,
+                          onChanged: (value) =>
+                              viewModel.animalType.value = value!,
                         )),
                 const Separator(),
                 TextFormField(
@@ -214,11 +248,17 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                   textInputAction: TextInputAction.next,
                   validator: Validators.title(localization.nameError),
                   decoration: InputDecoration(
-                      label: Text(localization.name), counterText: '', fillColor: theme.colorScheme.onBackground, counterStyle: TextStyle(color: theme.colorScheme.onSurface)),
+                      label: Text(localization.name),
+                      counterText: '',
+                      fillColor: theme.colorScheme.onBackground,
+                      counterStyle:
+                          TextStyle(color: theme.colorScheme.onSurface)),
                 ),
                 const Separator(),
                 Consumer(builder: (context, ref, _) {
-                  final beginLocation = ref.watch(transportAdvertBookingViewModel.select((value) => value.beginLocation));
+                  final beginLocation = ref.watch(
+                      transportAdvertBookingViewModel
+                          .select((value) => value.beginLocation));
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -226,25 +266,32 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                           ? ButtonX(
                               width: 80,
                               height: 120,
-                              borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
+                              borderRadius:
+                                  Dimens.radiusSmall.toLeftBorderRadius(),
                               color: theme.colorScheme.primary,
                               onTap: viewModel.selectBeginLocation,
                               child: Center(
                                 child: Text(
                                   localization.pickLocation,
                                   maxLines: 2,
-                                  style: TextStyle(color: theme.colorScheme.onPrimary),
+                                  style: TextStyle(
+                                      color: theme.colorScheme.onPrimary),
                                 ),
                               ),
                             )
                           : ClipRRect(
-                              borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
+                              borderRadius:
+                                  Dimens.radiusSmall.toLeftBorderRadius(),
                               child: SizedBox(
                                 width: 80,
                                 height: 120,
                                 child: GoogleMap(
-                                  onTap: (argument) => viewModel.selectBeginLocation(),
-                                  initialCameraPosition: CameraPosition(target: LatLng(beginLocation.latitude, beginLocation.longitude), zoom: 14),
+                                  onTap: (argument) =>
+                                      viewModel.selectBeginLocation(),
+                                  initialCameraPosition: CameraPosition(
+                                      target: LatLng(beginLocation.latitude,
+                                          beginLocation.longitude),
+                                      zoom: 14),
                                   mapType: MapType.normal,
                                   mapToolbarEnabled: false,
                                   myLocationButtonEnabled: false,
@@ -264,7 +311,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                             keyboardType: TextInputType.streetAddress,
                             maxLines: 3,
                             textInputAction: TextInputAction.next,
-                            validator: Validators.title(localization.addressError),
+                            validator:
+                                Validators.title(localization.addressError),
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(255),
                             ],
@@ -275,7 +323,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                               focusedErrorBorder: _inputBorder,
                               label: Text(localization.address),
                               fillColor: theme.colorScheme.onBackground,
-                              counterStyle: TextStyle(color: theme.colorScheme.onSurface),
+                              counterStyle:
+                                  TextStyle(color: theme.colorScheme.onSurface),
                             ),
                           ),
                         ),
@@ -285,7 +334,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                 }),
                 const Separator(),
                 Consumer(builder: (context, ref, _) {
-                  final endLocation = ref.watch(transportAdvertBookingViewModel.select((value) => value.endLocation));
+                  final endLocation = ref.watch(transportAdvertBookingViewModel
+                      .select((value) => value.endLocation));
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -293,25 +343,32 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                           ? ButtonX(
                               width: 80,
                               height: 120,
-                              borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
+                              borderRadius:
+                                  Dimens.radiusSmall.toLeftBorderRadius(),
                               color: theme.colorScheme.primary,
                               onTap: viewModel.selectEndLocation,
                               child: Center(
                                 child: Text(
                                   localization.pickLocation,
                                   maxLines: 2,
-                                  style: TextStyle(color: theme.colorScheme.onPrimary),
+                                  style: TextStyle(
+                                      color: theme.colorScheme.onPrimary),
                                 ),
                               ),
                             )
                           : ClipRRect(
-                              borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
+                              borderRadius:
+                                  Dimens.radiusSmall.toLeftBorderRadius(),
                               child: SizedBox(
                                 width: 80,
                                 height: 120,
                                 child: GoogleMap(
-                                  onTap: (argument) => viewModel.selectEndLocation(),
-                                  initialCameraPosition: CameraPosition(target: LatLng(endLocation.latitude, endLocation.longitude), zoom: 14),
+                                  onTap: (argument) =>
+                                      viewModel.selectEndLocation(),
+                                  initialCameraPosition: CameraPosition(
+                                      target: LatLng(endLocation.latitude,
+                                          endLocation.longitude),
+                                      zoom: 14),
                                   mapType: MapType.normal,
                                   mapToolbarEnabled: false,
                                   myLocationButtonEnabled: false,
@@ -331,7 +388,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                             keyboardType: TextInputType.streetAddress,
                             maxLines: 3,
                             textInputAction: TextInputAction.next,
-                            validator: Validators.title(localization.addressError),
+                            validator:
+                                Validators.title(localization.addressError),
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(255),
                             ],
@@ -342,7 +400,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                               focusedErrorBorder: _inputBorder,
                               label: Text(localization.destinationAddress),
                               fillColor: theme.colorScheme.onBackground,
-                              counterStyle: TextStyle(color: theme.colorScheme.onSurface),
+                              counterStyle:
+                                  TextStyle(color: theme.colorScheme.onSurface),
                             ),
                           ),
                         ),
@@ -356,7 +415,8 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
                   keyboardType: TextInputType.text,
                   maxLength: 255,
                   maxLines: 3,
-                  validator: Validators.description(localization.descriptionError),
+                  validator:
+                      Validators.description(localization.descriptionError),
                   decoration: InputDecoration(
                     label: Text(localization.description),
                     fillColor: theme.colorScheme.onBackground,
@@ -368,10 +428,12 @@ class _TransportAdvertBookingViewState extends ConsumerStateX<TransportAdvertBoo
           ),
         ),
         SafeArea(
+          bottom: false,
           child: ButtonX(
               width: double.maxFinite,
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              margin: const EdgeInsets.symmetric(horizontal: Dimens.padding, vertical: Dimens.paddingSmall),
+              margin: const EdgeInsets.symmetric(
+                  horizontal: Dimens.padding, vertical: Dimens.paddingSmall),
               padding: const EdgeInsets.all(Dimens.paddingSmall),
               color: theme.colorScheme.primary,
               onTap: viewModel.save,

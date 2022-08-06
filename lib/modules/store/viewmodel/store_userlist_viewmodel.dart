@@ -3,6 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
 import 'package:petjoo/modules/store/view/store_add_view.dart';
+import 'package:petjoo/modules/store/view/store_detail_view.dart';
 import 'package:petjoo/modules/user/model/user_model.dart';
 part 'store_userlist_viewmodel.g.dart';
 
@@ -25,7 +26,16 @@ abstract class StoreUserListViewModelBase with Store {
 
   @action
   Future newAdvert(BuildContext _) async {
+    Navigator.push(_, MaterialPageRoute(builder: (context) => StoreAddView()));
+  }
+
+  @action
+  Future openAdvert(BuildContext _, StoreAdvertModel model) async {
     Navigator.push(
-        _, MaterialPageRoute(builder: (context) => const StoreAddView()));
+        _,
+        MaterialPageRoute(
+            builder: (context) => StoreDetailView(
+                  model: model,
+                )));
   }
 }

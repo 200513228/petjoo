@@ -24,17 +24,22 @@ class StoreUserListView extends StatelessWidget {
         return const NothingToSeeHereWidget();
       } else {
         return Column(
-          children: [...vm.advertList.map((e) => advertCard(e))],
+          children: [...vm.advertList.map((e) => advertCard(_, e))],
         );
       }
     });
   }
 
-  Widget advertCard(StoreAdvertModel model) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Text(model.id),
+  Widget advertCard(BuildContext _, StoreAdvertModel model) {
+    return InkWell(
+      onTap: () {
+        vm.openAdvert(_, model);
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Text(model.id),
+        ),
       ),
     );
   }

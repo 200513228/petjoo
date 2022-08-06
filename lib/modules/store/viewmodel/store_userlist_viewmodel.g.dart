@@ -42,6 +42,14 @@ mixin _$StoreUserListViewModel on StoreUserListViewModelBase, Store {
     return _$newAdvertAsyncAction.run(() => super.newAdvert(_));
   }
 
+  late final _$openAdvertAsyncAction =
+      AsyncAction('StoreUserListViewModelBase.openAdvert', context: context);
+
+  @override
+  Future<dynamic> openAdvert(BuildContext _, StoreAdvertModel model) {
+    return _$openAdvertAsyncAction.run(() => super.openAdvert(_, model));
+  }
+
   @override
   String toString() {
     return '''

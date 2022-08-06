@@ -31,7 +31,9 @@ class AdvertDetailView extends ConsumerStatefulWidget {
 }
 
 class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
-  late final advertDetailViewModel = ChangeNotifierProvider((ref) => AdvertDetailViewModel(context, AdvertRepositoryImpl(), widget.data, ref.read(chatProvider)));
+  late final advertDetailViewModel = ChangeNotifierProvider((ref) =>
+      AdvertDetailViewModel(context, AdvertRepositoryImpl(), widget.data,
+          ref.read(chatProvider)));
   late final viewModel = ref.read(advertDetailViewModel);
 
   AdvertModel get data => viewModel.data;
@@ -45,14 +47,16 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: OverlayStyles.toNavigationBar(theme.colorScheme.surface, Brightness.light),
+      value: OverlayStyles.toNavigationBar(
+          theme.colorScheme.surface, Brightness.light),
       child: Scaffold(
         appBar: AppBar(
           title: Text(localization.advertDetail),
           actions: [
             PopupMenuButton(
               color: theme.colorScheme.surface,
-              shape: RoundedRectangleBorder(borderRadius: Dimens.radiusSmall.toBorderRadius()),
+              shape: RoundedRectangleBorder(
+                  borderRadius: Dimens.radiusSmall.toBorderRadius()),
               itemBuilder: (context) => [
                 PopupMenuItem(
                   value: 'share',
@@ -94,7 +98,12 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                     automaticallyImplyLeading: false,
                     bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(Dimens.padding),
-                        child: Container(height: Dimens.padding, decoration: BoxDecoration(color: theme.colorScheme.surface, borderRadius: Dimens.radius.toTopBorderRadius()))),
+                        child: Container(
+                            height: Dimens.padding,
+                            decoration: BoxDecoration(
+                                color: theme.colorScheme.surface,
+                                borderRadius:
+                                    Dimens.radius.toTopBorderRadius()))),
                     flexibleSpace: data.images.isEmpty
                         ? Image.asset(
                             Images.noImage,
@@ -110,13 +119,15 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                                 )),
                   ),
                   SliverPadding(
-                    padding: const EdgeInsets.fromLTRB(Dimens.padding, 0, Dimens.padding, Dimens.padding),
+                    padding: const EdgeInsets.fromLTRB(
+                        Dimens.padding, 0, Dimens.padding, Dimens.padding),
                     sliver: SliverList(
                       delegate: SliverChildListDelegate(
                         [
                           Text(
                             data.title,
-                            style: theme.textTheme.headline6?.copyWith(color: theme.colorScheme.onSurface),
+                            style: theme.textTheme.headline6
+                                ?.copyWith(color: theme.colorScheme.onSurface),
                             maxLines: 2,
                           ),
                           const Separator(size: 10),
@@ -128,11 +139,16 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                                 style: theme.textTheme.caption,
                               ),
                               Container(
-                                decoration: BoxDecoration(color: data.type.toColor(), borderRadius: Dimens.radiusSmall.toBorderRadius()),
-                                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                decoration: BoxDecoration(
+                                    color: data.type.toColor(),
+                                    borderRadius:
+                                        Dimens.radiusSmall.toBorderRadius()),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 10),
                                 child: Text(
                                   data.type.toLocalizedString(context),
-                                  style: theme.textTheme.caption?.copyWith(fontWeight: FontWeight.bold),
+                                  style: theme.textTheme.caption
+                                      ?.copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -140,9 +156,12 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                           const Separator(size: 5),
                           Divider(color: theme.highlightColor),
                           Consumer(builder: (context, ref, _) {
-                            final user = ref.watch(userProvider.select((value) => value.userInfos.firstOrNullWhere((x) => x.id == widget.data.userId)));
+                            final user = ref.watch(userProvider.select(
+                                (value) => value.userInfos.firstOrNullWhere(
+                                    (x) => x.id == widget.data.userId)));
                             if (user == null) {
-                              Requests.getUserInfo(data.userId).then((value) => ref.read(userProvider).addUserInfo(value));
+                              Requests.getUserInfo(data.userId).then((value) =>
+                                  ref.read(userProvider).addUserInfo(value));
                             }
                             return _profile(user);
                           }),
@@ -152,13 +171,15 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                             borderRadius: Dimens.radiusSmall.toBorderRadius(),
                             color: theme.colorScheme.onBackground,
                             child: Padding(
-                              padding: const EdgeInsets.all(Dimens.paddingSmall),
+                              padding:
+                                  const EdgeInsets.all(Dimens.paddingSmall),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
                                     localization.description,
-                                    style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                    style: theme.textTheme.titleSmall?.copyWith(
+                                        color: theme.colorScheme.onSurface),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
@@ -172,27 +193,45 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                           const Separator(),
                           data.geoPoint != null
                               ? Material(
-                                  borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                  borderRadius:
+                                      Dimens.radiusSmall.toBorderRadius(),
                                   color: theme.colorScheme.onBackground,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(Dimens.paddingSmall),
+                                    padding: const EdgeInsets.all(
+                                        Dimens.paddingSmall),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Text(
                                           localization.location,
-                                          style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                          style: theme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                  color: theme
+                                                      .colorScheme.onSurface),
                                         ),
                                         const SizedBox(height: 5),
                                         ClipRRect(
-                                          borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                          borderRadius: Dimens.radiusSmall
+                                              .toBorderRadius(),
                                           child: SizedBox(
                                             height: 160,
-                                            child: Consumer(builder: (context, ref, _) {
-                                              ref.watch(advertDetailViewModel.select((value) => value.markers.length));
+                                            child: Consumer(
+                                                builder: (context, ref, _) {
+                                              ref.watch(advertDetailViewModel
+                                                  .select((value) =>
+                                                      value.markers.length));
                                               return GoogleMap(
-                                                onTap: (argument) => viewModel.getDirections(),
-                                                initialCameraPosition: CameraPosition(target: LatLng(data.geoPoint!.latitude, data.geoPoint!.longitude), zoom: 14.5),
+                                                onTap: (argument) =>
+                                                    viewModel.getDirections(),
+                                                initialCameraPosition:
+                                                    CameraPosition(
+                                                        target: LatLng(
+                                                            data.geoPoint!
+                                                                .latitude,
+                                                            data.geoPoint!
+                                                                .longitude),
+                                                        zoom: 14.5),
                                                 mapType: MapType.normal,
                                                 mapToolbarEnabled: false,
                                                 myLocationButtonEnabled: false,
@@ -200,9 +239,14 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                                                 zoomGesturesEnabled: false,
                                                 scrollGesturesEnabled: false,
                                                 markers: viewModel.markers,
-                                                onMapCreated: (GoogleMapController controller) {
-                                                  viewModel.mapController = controller;
-                                                  viewModel.mapController.setMapStyle(MapArgument.darkStyleText);
+                                                onMapCreated:
+                                                    (GoogleMapController
+                                                        controller) {
+                                                  viewModel.mapController =
+                                                      controller;
+                                                  viewModel.mapController
+                                                      .setMapStyle(MapArgument
+                                                          .darkStyleText);
                                                 },
                                               );
                                             }),
@@ -301,7 +345,8 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
 
   Widget _profile(UserBasicModel? user) => Container(
         height: 70,
-        margin: const EdgeInsets.only(bottom: Dimens.padding, top: Dimens.paddingSmall),
+        margin: const EdgeInsets.only(
+            bottom: Dimens.padding, top: Dimens.paddingSmall),
         child: Material(
           color: theme.colorScheme.onBackground,
           borderRadius: Dimens.radiusSmall.toBorderRadius(),
@@ -322,7 +367,8 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                       Expanded(
                           child: Text(
                         user.fullname,
-                        style: theme.textTheme.subtitle1?.copyWith(fontWeight: FontWeight.bold),
+                        style: theme.textTheme.subtitle1
+                            ?.copyWith(fontWeight: FontWeight.bold),
                         maxLines: 2,
                       )),
                     ],
@@ -338,10 +384,12 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
             top: BorderSide(width: .5, color: theme.highlightColor),
           ),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: Dimens.padding),
+        padding: const EdgeInsets.symmetric(
+            vertical: 10, horizontal: Dimens.padding),
         child: Consumer(
           builder: (context, ref, child) {
-            final isLoading = ref.watch(advertDetailViewModel.select((value) => value.isLoading));
+            final isLoading = ref.watch(
+                advertDetailViewModel.select((value) => value.isLoading));
             return isLoading
                 ? const SizedBox(height: 56, child: Loading())
                 : viewModel.isOwner
@@ -352,13 +400,15 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
       );
 
   Widget bottomContent() => SafeArea(
+        bottom: false,
         child: Row(
           children: [
             Expanded(
                 child: FloatingActionButton.extended(
               heroTag: null,
               backgroundColor: theme.colorScheme.primary,
-              label: Text(localization.getDirections, style: TextStyle(color: theme.colorScheme.onPrimary)),
+              label: Text(localization.getDirections,
+                  style: TextStyle(color: theme.colorScheme.onPrimary)),
               onPressed: data.geoPoint == null ? null : viewModel.getDirections,
             )),
             const SizedBox(width: Dimens.paddingSmall),
@@ -386,8 +436,10 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
       );
 
   Widget ownerBottomContent() => SafeArea(
+        bottom: false,
         child: Consumer(builder: (context, ref, _) {
-          final isAdopted = ref.watch(advertDetailViewModel.select((value) => value.data.isAdopted));
+          final isAdopted = ref.watch(
+              advertDetailViewModel.select((value) => value.data.isAdopted));
           return Row(
             children: [
               ...isAdopted
@@ -395,7 +447,9 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                       Expanded(
                           child: Text(
                         localization.adopted,
-                        style: const TextStyle(color: Colors.greenAccent, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            color: Colors.greenAccent,
+                            fontWeight: FontWeight.bold),
                       ))
                     ]
                   : [
@@ -403,7 +457,9 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
                         child: FloatingActionButton.extended(
                           heroTag: null,
                           backgroundColor: theme.colorScheme.primary,
-                          label: Text(localization.markAdopted, style: TextStyle(color: theme.colorScheme.onPrimary)),
+                          label: Text(localization.markAdopted,
+                              style: TextStyle(
+                                  color: theme.colorScheme.onPrimary)),
                           onPressed: viewModel.adaptionWarning,
                         ),
                       ),

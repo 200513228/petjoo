@@ -26,11 +26,15 @@ class TransportAdvertDetailView extends ConsumerStatefulWidget {
   const TransportAdvertDetailView(this.data, {Key? key}) : super(key: key);
 
   @override
-  ConsumerStateX<TransportAdvertDetailView> createState() => _TransportAdvertDetailViewState();
+  ConsumerStateX<TransportAdvertDetailView> createState() =>
+      _TransportAdvertDetailViewState();
 }
 
-class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDetailView> {
-  late final advertDetailViewModel = ChangeNotifierProvider((ref) => TransportAdvertDetailViewModel(context, TransportRepositoryImpl(), widget.data, ref.read(chatProvider)));
+class _TransportAdvertDetailViewState
+    extends ConsumerStateX<TransportAdvertDetailView> {
+  late final advertDetailViewModel = ChangeNotifierProvider((ref) =>
+      TransportAdvertDetailViewModel(context, TransportRepositoryImpl(),
+          widget.data, ref.read(chatProvider)));
 
   late final viewModel = ref.read(advertDetailViewModel);
 
@@ -45,14 +49,16 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: OverlayStyles.toNavigationBar(theme.colorScheme.surface, Brightness.light),
+      value: OverlayStyles.toNavigationBar(
+          theme.colorScheme.surface, Brightness.light),
       child: Scaffold(
         appBar: AppBar(
           title: Text(localization.transportAdvertDetail),
           actions: [
             PopupMenuButton(
               color: theme.colorScheme.surface,
-              shape: RoundedRectangleBorder(borderRadius: Dimens.radiusSmall.toBorderRadius()),
+              shape: RoundedRectangleBorder(
+                  borderRadius: Dimens.radiusSmall.toBorderRadius()),
               itemBuilder: (context) => [
                 PopupMenuItem(
                   value: 'share',
@@ -94,7 +100,12 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
                     automaticallyImplyLeading: false,
                     bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(Dimens.padding),
-                        child: Container(height: Dimens.padding, decoration: BoxDecoration(color: theme.colorScheme.surface, borderRadius: Dimens.radius.toTopBorderRadius()))),
+                        child: Container(
+                            height: Dimens.padding,
+                            decoration: BoxDecoration(
+                                color: theme.colorScheme.surface,
+                                borderRadius:
+                                    Dimens.radius.toTopBorderRadius()))),
                     flexibleSpace: data.images.isEmpty
                         ? Image.asset(
                             Images.noImage,
@@ -110,13 +121,15 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
                                 )),
                   ),
                   SliverPadding(
-                    padding: const EdgeInsets.fromLTRB(Dimens.padding, 0, Dimens.padding, Dimens.padding),
+                    padding: const EdgeInsets.fromLTRB(
+                        Dimens.padding, 0, Dimens.padding, Dimens.padding),
                     sliver: SliverList(
                       delegate: SliverChildListDelegate(
                         [
                           Text(
                             data.title,
-                            style: theme.textTheme.headline6?.copyWith(color: theme.colorScheme.onSurface),
+                            style: theme.textTheme.headline6
+                                ?.copyWith(color: theme.colorScheme.onSurface),
                             maxLines: 2,
                           ),
                           const SizedBox(
@@ -127,15 +140,21 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
                             children: [
                               Text(
                                 "${localization.turkishCurrency}${data.pricePerKm}/${localization.km}",
-                                style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                style: theme.textTheme.labelSmall?.copyWith(
+                                    color: theme.colorScheme.onSurface),
                                 maxLines: 1,
                               ),
                               Container(
-                                decoration: BoxDecoration(color: Colors.greenAccent, borderRadius: Dimens.radiusSmall.toBorderRadius()),
-                                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                decoration: BoxDecoration(
+                                    color: Colors.greenAccent,
+                                    borderRadius:
+                                        Dimens.radiusSmall.toBorderRadius()),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 10),
                                 child: Text(
                                   localization.open,
-                                  style: theme.textTheme.caption?.copyWith(color: theme.colorScheme.surface),
+                                  style: theme.textTheme.caption?.copyWith(
+                                      color: theme.colorScheme.surface),
                                 ),
                               ),
                             ],
@@ -148,13 +167,15 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
                             borderRadius: Dimens.radiusSmall.toBorderRadius(),
                             color: theme.colorScheme.onBackground,
                             child: Padding(
-                              padding: const EdgeInsets.all(Dimens.paddingSmall),
+                              padding:
+                                  const EdgeInsets.all(Dimens.paddingSmall),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
                                     localization.description,
-                                    style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                    style: theme.textTheme.titleSmall?.copyWith(
+                                        color: theme.colorScheme.onSurface),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
@@ -170,13 +191,15 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
                             borderRadius: Dimens.radiusSmall.toBorderRadius(),
                             color: theme.colorScheme.onBackground,
                             child: Padding(
-                              padding: const EdgeInsets.all(Dimens.paddingSmall),
+                              padding:
+                                  const EdgeInsets.all(Dimens.paddingSmall),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
                                     localization.location,
-                                    style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
+                                    style: theme.textTheme.titleSmall?.copyWith(
+                                        color: theme.colorScheme.onSurface),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
@@ -185,16 +208,30 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
                                   ),
                                   const SizedBox(height: 5),
                                   ClipRRect(
-                                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                                    borderRadius:
+                                        Dimens.radiusSmall.toBorderRadius(),
                                     child: SizedBox(
                                       height: 160,
-                                      child: Consumer(builder: (context, ref, _) {
-                                        ref.watch(advertDetailViewModel.select((value) => value.markers.length));
+                                      child:
+                                          Consumer(builder: (context, ref, _) {
+                                        ref.watch(advertDetailViewModel.select(
+                                            (value) => value.markers.length));
                                         return GoogleMap(
-                                          onTap: (argument) => viewModel.getDirections(),
-                                          initialCameraPosition: data.geoPoint != null
-                                              ? CameraPosition(target: LatLng(data.geoPoint!.latitude, data.geoPoint!.longitude), zoom: 14.5)
-                                              : const CameraPosition(target: LatLng(41.11611786832982, 29.06299121667866), zoom: 8),
+                                          onTap: (argument) =>
+                                              viewModel.getDirections(),
+                                          initialCameraPosition: data
+                                                      .geoPoint !=
+                                                  null
+                                              ? CameraPosition(
+                                                  target: LatLng(
+                                                      data.geoPoint!.latitude,
+                                                      data.geoPoint!.longitude),
+                                                  zoom: 14.5)
+                                              : const CameraPosition(
+                                                  target: LatLng(
+                                                      41.11611786832982,
+                                                      29.06299121667866),
+                                                  zoom: 8),
                                           mapType: MapType.normal,
                                           mapToolbarEnabled: false,
                                           myLocationButtonEnabled: false,
@@ -202,9 +239,12 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
                                           zoomGesturesEnabled: false,
                                           scrollGesturesEnabled: false,
                                           markers: viewModel.markers,
-                                          onMapCreated: (GoogleMapController controller) {
-                                            viewModel.mapController = controller;
-                                            viewModel.mapController.setMapStyle(MapArgument.darkStyleText);
+                                          onMapCreated:
+                                              (GoogleMapController controller) {
+                                            viewModel.mapController =
+                                                controller;
+                                            viewModel.mapController.setMapStyle(
+                                                MapArgument.darkStyleText);
                                           },
                                         );
                                       }),
@@ -237,28 +277,36 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
               child: FeatureWidget(
             icon: FontAwesomeIcons.earthAmericas,
             text: localization.intercity,
-            iconColor: data.isIntercity ? null : theme.colorScheme.onSurface.withOpacity(.3),
+            iconColor: data.isIntercity
+                ? null
+                : theme.colorScheme.onSurface.withOpacity(.3),
           )),
           const SizedBox(width: 10),
           Flexible(
               child: FeatureWidget(
             icon: FontAwesomeIcons.shieldDog,
             text: localization.cage,
-            iconColor: data.hasCage ? null : theme.colorScheme.onSurface.withOpacity(.3),
+            iconColor: data.hasCage
+                ? null
+                : theme.colorScheme.onSurface.withOpacity(.3),
           )),
           const SizedBox(width: 10),
           Flexible(
               child: FeatureWidget(
             icon: Icons.circle_outlined,
             text: localization.collar,
-            iconColor: data.hasCollar ? null : theme.colorScheme.onSurface.withOpacity(.3),
+            iconColor: data.hasCollar
+                ? null
+                : theme.colorScheme.onSurface.withOpacity(.3),
           )),
           const SizedBox(width: 10),
           Flexible(
               child: FeatureWidget(
             icon: FontAwesomeIcons.personRunning,
             text: localization.catching,
-            iconColor: data.canCatch ? null : theme.colorScheme.onSurface.withOpacity(.3),
+            iconColor: data.canCatch
+                ? null
+                : theme.colorScheme.onSurface.withOpacity(.3),
           )),
         ],
       );
@@ -270,7 +318,8 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
             top: BorderSide(width: .5, color: theme.highlightColor),
           ),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: Dimens.padding),
+        padding: const EdgeInsets.symmetric(
+            vertical: 10, horizontal: Dimens.padding),
         child: viewModel.isOwner ? ownerBottomContent() : bottomContent(),
       );
 
@@ -278,6 +327,7 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
     final isAnonymous = FirebaseAuth.instance.currentUser!.isAnonymous;
 
     return SafeArea(
+      bottom: false,
       child: Row(
         children: [
           Expanded(
@@ -286,8 +336,10 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
             child: FloatingActionButton.extended(
               heroTag: null,
               backgroundColor: theme.colorScheme.primary,
-              label: Text(localization.bookNow, style: TextStyle(color: theme.colorScheme.onPrimary)),
-              onPressed: () => context.pushNamed(Routes.transportAdvertBooking, arguments: data),
+              label: Text(localization.bookNow,
+                  style: TextStyle(color: theme.colorScheme.onPrimary)),
+              onPressed: () => context.pushNamed(Routes.transportAdvertBooking,
+                  arguments: data),
             ),
           )),
           const SizedBox(width: Dimens.paddingSmall),
@@ -316,13 +368,15 @@ class _TransportAdvertDetailViewState extends ConsumerStateX<TransportAdvertDeta
   }
 
   Widget ownerBottomContent() => SafeArea(
+        bottom: false,
         child: Row(
           children: [
             Expanded(
                 child: FloatingActionButton.extended(
               heroTag: null,
               backgroundColor: theme.colorScheme.primary,
-              label: Text(localization.editShifts, style: TextStyle(color: theme.colorScheme.onPrimary)),
+              label: Text(localization.editShifts,
+                  style: TextStyle(color: theme.colorScheme.onPrimary)),
               onPressed: viewModel.editShifts,
             )),
             const SizedBox(width: Dimens.paddingSmall),

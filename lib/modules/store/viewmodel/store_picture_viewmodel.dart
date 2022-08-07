@@ -42,9 +42,7 @@ abstract class StorePictureViewModelBase with Store {
   }
 
   @action
-  void error(BuildContext _) {
-    print('error');
-  }
+  void error(BuildContext _) {}
 
   @action
   void successfull(BuildContext context) {

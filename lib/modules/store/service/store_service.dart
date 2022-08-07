@@ -48,8 +48,7 @@ class StoreService {
         ]
       });
       return true;
-    } on Exception catch (e) {
-      print(e);
+    } on Exception {
       return false;
     }
   }

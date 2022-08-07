@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/viewmodel/store_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/user_model.dart';
+import 'package:petjoo/product/constants/images.dart';
 
 class StoreDetailView extends StatelessWidget {
   final StoreDetailViewModel vm = StoreDetailViewModel();
@@ -10,30 +11,39 @@ class StoreDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    vm.setModel(model);
     return Scaffold(
       appBar: buildAppBar(),
       floatingActionButton: buildFab(),
-      body: buildBody(),
+      body: buildBody(context),
     );
   }
 
-  Widget buildBody() {
+  Widget buildBody(BuildContext context) {
     return Column(
       children: [
-        dataCard(model.id),
-        dataCard(model.userId),
-        dataCard(model.title),
-        dataCard(model.date.toString()),
+        Expanded(flex: 3, child: gallery),
+        Expanded(child: features),
       ],
     );
   }
 
-  Widget dataCard(String data) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(data),
-      ),
+  Widget get features {
+    return Column(
+      children: [
+        Card(
+          child: Text('Başlık ${vm.advert!.title}'),
+        )
+      ],
+    );
+  }
+
+  Widget get gallery {
+    return PageView(
+      children: [
+        if (vm.advert!.images.isEmpty) Image.network(Images.noImage),
+        ...vm.advert!.images.map((e) => Image.network(e)),
+      ],
     );
   }
 
@@ -47,7 +57,8 @@ class StoreDetailView extends StatelessWidget {
   Widget buildFab() {
     return FloatingActionButton(
       onPressed: () {},
-      child: Icon(model.userId == CurrentUser.id ? Icons.edit : Icons.call),
+      child:
+          Icon(vm.advert!.userId == CurrentUser.id ? Icons.edit : Icons.call),
     );
   }
 }

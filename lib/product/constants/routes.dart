@@ -25,7 +25,6 @@ import 'package:petjoo/presentation/auth/view/register_view.dart';
 import 'package:petjoo/presentation/auth/view/tutorial_view.dart';
 import 'package:petjoo/presentation/chat/view/chat_list_view.dart';
 import 'package:petjoo/presentation/chat/view/chat_message_list_view.dart';
-import 'package:petjoo/presentation/common/navigation/navigation_view.dart';
 import 'package:petjoo/presentation/common/profile/profile_view.dart';
 import 'package:petjoo/presentation/settings/view/about_view.dart';
 import 'package:petjoo/presentation/settings/view/account_settings_view.dart';

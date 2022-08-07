@@ -4,8 +4,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
 import 'package:petjoo/core/widgets/dropdown_x.dart';
-import 'package:petjoo/modules/store/consts/store_advert_deliveries.dart';
-import 'package:petjoo/modules/store/consts/store_adverts_types.dart';
+import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
+import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_add_viewmodel.dart';
 import 'package:petjoo/product/constants/dial_codes.dart';
 import 'package:petjoo/product/constants/dimens.dart';
@@ -131,7 +131,6 @@ class StoreAddView extends StatelessWidget {
               value: vm.type,
               hint: 'Kategori',
               borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
-              // validator: (value) => value? == null ? "" : null,
               items: storeAdvertTypes.keys
                   .map((e) => DropdownMenuItem(
                         value: e,
@@ -147,7 +146,6 @@ class StoreAddView extends StatelessWidget {
               value: vm.delivery,
               hint: 'Teslimat',
               borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
-              // validator: (value) => value? == null ? "" : null,
               items: storeAdvertDeliveries.keys
                   .map((e) => DropdownMenuItem(
                         value: e,

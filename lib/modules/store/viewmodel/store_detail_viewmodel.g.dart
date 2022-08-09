@@ -40,6 +40,17 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
   }
 
   @override
+  void call() {
+    final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
+        name: 'StoreDetailViewModelBase.call');
+    try {
+      return super.call();
+    } finally {
+      _$StoreDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 advert: ${advert}

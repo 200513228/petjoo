@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/home/viewmodel/home_viewmodel.dart';
+import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
-import 'package:petjoo/modules/user/model/user_model.dart';
+import 'package:petjoo/presentation/animal_advert/view/advert_list_view.dart';
 import 'package:petjoo/presentation/animal_advert/view/advert_user_list_view.dart';
 import 'package:petjoo/presentation/animal_transport/view/transport_advert_list_view.dart';
 import 'package:petjoo/presentation/chat/view/chat_list_view.dart';
+import 'package:pandabar/pandabar.dart';
 import 'package:petjoo/presentation/common/extra/extra_view.dart';
 import 'package:petjoo/presentation/transport_reservation/view/transport_reservation_list_view.dart';
 
 class HomeView extends StatelessWidget {
-  final Widget pageView;
   final String title;
   final HomeViewModel vm = HomeViewModel();
-  HomeView({super.key, required this.pageView, required this.title});
+  HomeView({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
+    titleToPage();
     return WillPopScope(
       onWillPop: () async => Navigator.canPop(context),
       child: Scaffold(
         appBar: buildAppBar(context),
         body: buildBody(),
-        bottomNavigationBar: buildNav(context),
-        floatingActionButton: buildFab(context),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: buildBottomBar(context),
       ),
     );
   }
@@ -44,88 +45,122 @@ class HomeView extends StatelessWidget {
   }
 
   Widget buildBody() {
-    return pageView;
+    return Observer(builder: (_) {
+      return vm.currentPage;
+    });
   }
 
-  Widget buildFab(BuildContext _) {
-    return FloatingActionButton.extended(
-      elevation: 8,
-      isExtended: true,
-      onPressed: () {
-        vm.navigate(_, titleToWidget(title));
-      },
-      label: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(titleToFabTitle(title)),
-      ),
-    );
-  }
-
-  Widget buildNav(BuildContext _) {
-    return BottomNavigationBar(
-      enableFeedback: true,
-      iconSize: 30,
-      onTap: (value) {
-        vm.navigate(_, indexToWidget(value));
-      },
-      items: [
-        navItem(_, 'Anasayfa', Icons.home),
-        navItem(_, 'Kullanıcı', Icons.person),
+  Widget buildBottomBar(BuildContext _) {
+    return PandaBar(
+      fabIcon: const Icon(Icons.filter_alt_rounded),
+      fabColors: const [
+        Color(0xff202020),
+        Color(0xff423f3f),
       ],
+      buttonSelectedColor: Colors.white,
+      buttonColor: Colors.white,
+      buttonData: [
+        PandaBarButtonData(id: 'home', icon: Icons.home, title: 'Anasayfa'),
+        PandaBarButtonData(
+            id: 'custom1', icon: toCustom1Icon, title: toCustom1Title),
+        PandaBarButtonData(
+            id: 'custom2', icon: toCustom2Icon, title: toCustom2Title),
+        PandaBarButtonData(
+            id: 'settings', icon: Icons.settings, title: 'Ayarlar'),
+      ],
+      onChange: (id) {
+        id == 'home' ? vm.navigate(_, WelcomeView()) : null;
+        id == 'settings' ? vm.navigate(_, const ExtraView()) : null;
+        id == 'custom1' || id == 'custom2'
+            ? vm.swithPage(pageSwitch(id))
+            : null;
+      },
+      onFabButtonPressed: () {},
     );
   }
 
-  BottomNavigationBarItem navItem(
-      BuildContext context, String label, IconData icon) {
-    return BottomNavigationBarItem(
-      icon: Icon(
-        icon,
-        color: Colors.white,
-      ),
-      label: label,
-      activeIcon: Icon(
-        icon,
-        color: Colors.white,
-      ),
-    );
-  }
-
-  Widget titleToWidget(String text) {
-    switch (text) {
-      case 'Mağaza':
-        return StoreUserListView();
+  Widget pageSwitch(String id) {
+    switch (title) {
+      case 'Pazar İlanları':
+        return id == 'custom1' ? StoreListView() : StoreUserListView();
       case 'Pet İlanları':
-        return const AdvertUserListView();
+        return id == 'custom1'
+            ? const AdvertListView()
+            : const AdvertUserListView();
       case 'Pet Nakil İlanları':
-        return CurrentUser.hasTransport
+        return id == 'custom1'
             ? const TransportAdvertListView()
             : const TransportReservationListView();
       default:
-        return const WelcomeView();
+        return Container();
     }
   }
 
-  Widget indexToWidget(int index) {
-    switch (index) {
-      case 0:
-        return const WelcomeView();
-      case 1:
-        return const ExtraView();
-      default:
-        return const WelcomeView();
-    }
-  }
-
-  String titleToFabTitle(String title) {
+  String get toCustom1Title {
     switch (title) {
-      case 'Mağaza':
+      case 'Pazar İlanları':
+        return 'Tüm İlanlar';
+      case 'Pet İlanları':
+        return 'Tüm İlanlar';
+      case 'Pet Nakil İlanları':
+        return 'Tüm İlanlar';
+      default:
+        return 'Tüm İlanlar';
+    }
+  }
+
+  String get toCustom2Title {
+    switch (title) {
+      case 'Pazar İlanları':
         return 'İlanlarım';
       case 'Pet İlanları':
         return 'İlanlarım';
       case 'Pet Nakil İlanları':
-        return CurrentUser.hasTransport ? 'İlanlarım' : 'Rezervasyonlarım';
+        return 'Rezervasyonlarım';
       default:
-        return '';
+        return 'İlanlarım';
     }
+  }
+
+  IconData get toCustom1Icon {
+    switch (title) {
+      case 'Pazar İlanları':
+        return Icons.book;
+      case 'Pet İlanları':
+        return Icons.book;
+      case 'Pet Nakil İlanları':
+        return Icons.book;
+      default:
+        return Icons.book;
+    }
+  }
+
+  IconData get toCustom2Icon {
+    switch (title) {
+      case 'Pazar İlanları':
+        return Icons.list;
+      case 'Pet İlanları':
+        return Icons.list;
+      default:
+        return Icons.list;
+    }
+  }
+
+  void titleToPage() {
+    Widget page = Container();
+    switch (title) {
+      case 'Pazar İlanları':
+        page = StoreListView();
+        break;
+      case 'Pet İlanları':
+        page = const AdvertListView();
+        break;
+      case 'Pet Nakil İlanları':
+        page = const TransportAdvertListView();
+        break;
+      default:
+        page = Container();
+    }
+    vm.swithPage(page);
   }
 }

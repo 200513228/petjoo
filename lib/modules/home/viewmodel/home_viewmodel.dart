@@ -6,12 +6,19 @@ part 'home_viewmodel.g.dart';
 class HomeViewModel = HomeViewModelBase with _$HomeViewModel;
 
 abstract class HomeViewModelBase with Store {
+  @observable
+  Widget currentPage = Container();
+
+  @action
+  void swithPage(Widget page) {
+    currentPage = page;
+  }
+
   @action
   void navigate(BuildContext context, Widget page) {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => page),
-        (route) =>
-            page.toString() == const WelcomeView().toString() ? false : true);
+        (route) => page.toString() == WelcomeView().toString() ? false : true);
   }
 }

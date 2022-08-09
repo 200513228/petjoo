@@ -5,7 +5,6 @@ import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
-import 'package:petjoo/modules/store/view/store_list_view.dart';
 part 'store_picture_viewmodel.g.dart';
 
 class StorePictureViewModel = StorePictureViewModelBase
@@ -49,8 +48,7 @@ abstract class StorePictureViewModelBase with Store {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                HomeView(pageView: StoreListView(), title: 'Mağaza')),
+            builder: (context) => HomeView(title: 'Pazar İlanları')),
         (route) => false);
   }
 }

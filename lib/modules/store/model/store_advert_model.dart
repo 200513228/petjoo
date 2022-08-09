@@ -15,6 +15,7 @@ class StoreAdvertModel {
   GeoPoint geoPoint = const GeoPoint(0, 0);
   int type = 0;
   int delivery = 0;
+  int status = 0;
   bool isSold = true;
 
   StoreAdvertModel.fromQDS(
@@ -33,6 +34,7 @@ class StoreAdvertModel {
     geoPoint = data['geoPoint'] ?? const GeoPoint(0, 0);
     type = data['type'] ?? 0;
     delivery = data['delivery'] ?? 0;
+    status = data['status'] ?? 0;
     isSold = data['isSold'] ?? true;
   }
 
@@ -50,6 +52,7 @@ class StoreAdvertModel {
     required this.geoPoint,
     required this.type,
     required this.delivery,
+    required this.status,
     required this.isSold,
   });
 
@@ -67,6 +70,7 @@ class StoreAdvertModel {
       'geoPoint': const GeoPoint(0, 0),
       'type': model.type,
       'delivery': model.delivery,
+      'status': model.status,
       'isSold': false,
     };
   }

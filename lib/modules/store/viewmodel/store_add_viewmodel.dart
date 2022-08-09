@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/view/store_picture_view.dart';
+import 'package:petjoo/modules/user/model/user_model.dart';
 part 'store_add_viewmodel.g.dart';
 
 class StoreAddViewModel = StoreAddViewModelBase with _$StoreAddViewModel;
@@ -23,6 +24,7 @@ abstract class StoreAddViewModelBase with Store {
     geoPoint: const GeoPoint(0, 0),
     type: 0,
     delivery: 0,
+    status: 0,
     isSold: false,
   );
 
@@ -36,7 +38,8 @@ abstract class StoreAddViewModelBase with Store {
   TextEditingController descCont = TextEditingController();
 
   @observable
-  TextEditingController phoneCont = TextEditingController();
+  TextEditingController phoneCont =
+      TextEditingController(text: CurrentUser.phone);
 
   @observable
   TextEditingController priceCont = TextEditingController();
@@ -45,7 +48,7 @@ abstract class StoreAddViewModelBase with Store {
   TextEditingController addressCont = TextEditingController();
 
   @observable
-  String? dialCode;
+  String? dialCode = CurrentUser.dialCode != '' ? CurrentUser.dialCode : null;
 
   @observable
   int? price;
@@ -55,6 +58,9 @@ abstract class StoreAddViewModelBase with Store {
 
   @observable
   int? delivery;
+
+  @observable
+  int? status;
 
   @action
   Future nextStep(BuildContext context) async {
@@ -66,6 +72,7 @@ abstract class StoreAddViewModelBase with Store {
     advert.address = addressCont.text;
     advert.type = type ?? 0;
     advert.delivery = delivery ?? 0;
+    advert.status = status ?? 0;
     if (formKey.currentState?.validate() ?? false) {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => StorePictureView(model: advert)));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:petjoo/product/ui/widgets/nothing_to_see_here_widget.dart';
+import 'package:petjoo/modules/user/model/user_model.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/viewmodel/store_userlist_viewmodel.dart';
 
@@ -12,21 +12,20 @@ class StoreUserListView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.getUserAdverts();
     return Scaffold(
-      appBar: buildAppBar(),
-      floatingActionButton: buildFab(context),
       body: buildBody(),
     );
   }
 
   Widget buildBody() {
     return Observer(builder: (_) {
-      if (vm.advertList.isEmpty) {
-        return const NothingToSeeHereWidget();
-      } else {
-        return Column(
-          children: [...vm.advertList.map((e) => advertCard(_, e))],
-        );
-      }
+      return Column(
+        children: [
+          addAdvertCard(_),
+          ...vm.advertList
+              .where((element) => element.userId == CurrentUser.id)
+              .map((e) => advertCard(_, e))
+        ],
+      );
     });
   }
 
@@ -44,19 +43,17 @@ class StoreUserListView extends StatelessWidget {
     );
   }
 
-  Widget buildFab(BuildContext _) {
-    return FloatingActionButton(
-      onPressed: () {
+  Widget addAdvertCard(BuildContext _) {
+    return InkWell(
+      onTap: () {
         vm.newAdvert(_);
       },
-      child: const Icon(Icons.add),
-    );
-  }
-
-  AppBar buildAppBar() {
-    return AppBar(
-      centerTitle: true,
-      title: const Text('İlanlarım'),
+      child: const Card(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Text('Yeni İlan'),
+        ),
+      ),
     );
   }
 }

@@ -33,6 +33,20 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
     return _$getAdvertsAsyncAction.run(() => super.getAdverts());
   }
 
+  late final _$StoreListViewModelBaseActionController =
+      ActionController(name: 'StoreListViewModelBase', context: context);
+
+  @override
+  void pickAdvert(StoreAdvertModel model, BuildContext _) {
+    final _$actionInfo = _$StoreListViewModelBaseActionController.startAction(
+        name: 'StoreListViewModelBase.pickAdvert');
+    try {
+      return super.pickAdvert(model, _);
+    } finally {
+      _$StoreListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

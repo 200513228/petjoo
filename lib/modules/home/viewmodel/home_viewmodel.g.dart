@@ -9,8 +9,35 @@ part of 'home_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$HomeViewModel on HomeViewModelBase, Store {
+  late final _$currentPageAtom =
+      Atom(name: 'HomeViewModelBase.currentPage', context: context);
+
+  @override
+  Widget get currentPage {
+    _$currentPageAtom.reportRead();
+    return super.currentPage;
+  }
+
+  @override
+  set currentPage(Widget value) {
+    _$currentPageAtom.reportWrite(value, super.currentPage, () {
+      super.currentPage = value;
+    });
+  }
+
   late final _$HomeViewModelBaseActionController =
       ActionController(name: 'HomeViewModelBase', context: context);
+
+  @override
+  void swithPage(Widget page) {
+    final _$actionInfo = _$HomeViewModelBaseActionController.startAction(
+        name: 'HomeViewModelBase.swithPage');
+    try {
+      return super.swithPage(page);
+    } finally {
+      _$HomeViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void navigate(BuildContext context, Widget page) {
@@ -26,7 +53,7 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
   @override
   String toString() {
     return '''
-
+currentPage: ${currentPage}
     ''';
   }
 }

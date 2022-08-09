@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
 import 'package:petjoo/core/widgets/dropdown_x.dart';
 import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
+import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_add_viewmodel.dart';
 import 'package:petjoo/product/constants/dial_codes.dart';
@@ -159,18 +160,40 @@ class StoreAddView extends StatelessWidget {
       ),
       Padding(
         padding: const EdgeInsets.only(top: 10),
-        child: TextFormField(
-          controller: vm.priceCont,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'[.0-9]'))
+        child: Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: vm.priceCont,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[.0-9]'))
+                ],
+                textInputAction: TextInputAction.next,
+                maxLength: 50,
+                decoration: const InputDecoration(
+                  counterText: '',
+                  prefixText: '₺',
+                  label: Text('Fiyat'),
+                ),
+              ),
+            ),
+            const SizedBox(width: 5),
+            Expanded(
+              child: DropdownX<int>(
+                value: vm.status,
+                hint: 'Durum',
+                borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
+                items: storeAdvertStatuses.keys
+                    .map((e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(storeAdvertStatuses[e]!),
+                        ))
+                    .toList(),
+                onChanged: (value) => vm.status = value,
+              ),
+            ),
           ],
-          textInputAction: TextInputAction.next,
-          maxLength: 50,
-          decoration: const InputDecoration(
-            counterText: '',
-            label: Text('Fiyat'),
-          ),
         ),
       ),
       Padding(
@@ -191,6 +214,7 @@ class StoreAddView extends StatelessWidget {
 
   Widget buildFab(BuildContext context) {
     return FloatingActionButton(
+      heroTag: '<default FloatingActionButton tag>',
       onPressed: () {
         vm.nextStep(context);
       },

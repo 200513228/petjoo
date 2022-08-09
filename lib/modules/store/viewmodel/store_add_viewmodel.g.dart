@@ -185,6 +185,22 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
     });
   }
 
+  late final _$statusAtom =
+      Atom(name: 'StoreAddViewModelBase.status', context: context);
+
+  @override
+  int? get status {
+    _$statusAtom.reportRead();
+    return super.status;
+  }
+
+  @override
+  set status(int? value) {
+    _$statusAtom.reportWrite(value, super.status, () {
+      super.status = value;
+    });
+  }
+
   late final _$nextStepAsyncAction =
       AsyncAction('StoreAddViewModelBase.nextStep', context: context);
 
@@ -206,7 +222,8 @@ addressCont: ${addressCont},
 dialCode: ${dialCode},
 price: ${price},
 type: ${type},
-delivery: ${delivery}
+delivery: ${delivery},
+status: ${status}
     ''';
   }
 }

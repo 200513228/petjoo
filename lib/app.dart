@@ -15,7 +15,8 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   @override
-  Widget build(BuildContext context) => Consumer(builder: (context, ref, child) {
+  Widget build(BuildContext context) =>
+      Consumer(builder: (context, ref, child) {
         final provider = ref.watch(settingsProvider);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -25,7 +26,10 @@ class _AppState extends State<App> {
           locale: provider.locale,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          initialRoute: FirebaseAuth.instance.currentUser == null ? Routes.auth : Routes.navigation,
+          // home: const WelcomeView(),
+          initialRoute: FirebaseAuth.instance.currentUser == null
+              ? Routes.auth
+              : Routes.navigation,
           onGenerateRoute: Routes.onGenerateRoute,
         );
       });

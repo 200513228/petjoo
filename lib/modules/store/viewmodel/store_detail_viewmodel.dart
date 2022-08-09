@@ -13,4 +13,7 @@ abstract class StoreDetailViewModelBase with Store {
   void setModel(StoreAdvertModel model) {
     advert = model;
   }
+
+  @action
+  void call() {}
 }

@@ -400,7 +400,6 @@ class _AdvertDetailViewState extends ConsumerStateX<AdvertDetailView> {
       );
 
   Widget bottomContent() => SafeArea(
-        bottom: false,
         child: Row(
           children: [
             Expanded(

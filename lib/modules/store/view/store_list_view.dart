@@ -127,6 +127,7 @@ class StoreListView extends StatelessWidget {
 
   String dateToString(Timestamp date) {
     var d = date.toDate();
+
     return '${d.day}.${d.month}.${d.year}';
   }
 

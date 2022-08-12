@@ -78,10 +78,10 @@ class StoreDetailView extends StatelessWidget {
             Expanded(
                 child: FloatingActionButton.extended(
               heroTag: null,
-              backgroundColor: const Color(0xfffaee4a),
+              backgroundColor: Colors.black,
               label: Text(
-                '${model.price}₺',
-                style: const TextStyle(color: Colors.black),
+                '${model.price} ₺',
+                style: const TextStyle(color: Colors.white, fontSize: 22),
               ),
               onPressed: null,
               // onPressed: data.geoPoint == null ? null : viewModel.getDirections,
@@ -119,10 +119,12 @@ class StoreDetailView extends StatelessWidget {
               parent: AlwaysScrollableScrollPhysics()),
           children: [
             if (model.images.isEmpty) Image.asset(Images.noImage),
-            ...model.images.map((e) => GestureDetector(
-                  onTap: () => fullScreen(context),
-                  child: Image.network(e, fit: BoxFit.fitWidth),
-                )),
+            ...model.images.map(
+              (e) => GestureDetector(
+                onTap: () => fullScreen(context),
+                child: Image.network(e, fit: BoxFit.fitWidth),
+              ),
+            ),
           ],
         ),
         // Align(alignment: Alignment.bottomCenter, child: imageCounter()),

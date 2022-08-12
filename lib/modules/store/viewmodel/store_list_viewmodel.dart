@@ -19,6 +19,8 @@ abstract class StoreListViewModelBase with Store {
       temp.add(StoreAdvertModel.fromQDS(element));
     }
     advertList = temp;
+    advertList.sort((b, a) =>
+        a.date.microsecondsSinceEpoch.compareTo(b.date.microsecondsSinceEpoch));
   }
 
   @action

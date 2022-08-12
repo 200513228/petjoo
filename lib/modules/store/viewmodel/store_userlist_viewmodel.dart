@@ -22,6 +22,8 @@ abstract class StoreUserListViewModelBase with Store {
       temp.add(StoreAdvertModel.fromQDS(element));
     }
     advertList = temp;
+    advertList.sort((b, a) =>
+        a.date.microsecondsSinceEpoch.compareTo(b.date.microsecondsSinceEpoch));
   }
 
   @action
@@ -30,12 +32,8 @@ abstract class StoreUserListViewModelBase with Store {
   }
 
   @action
-  Future openAdvert(BuildContext _, StoreAdvertModel model) async {
+  void pickAdvert(StoreAdvertModel model, BuildContext _) {
     Navigator.push(
-        _,
-        MaterialPageRoute(
-            builder: (context) => StoreDetailView(
-                  model: model,
-                )));
+        _, MaterialPageRoute(builder: (_) => StoreDetailView(model: model)));
   }
 }

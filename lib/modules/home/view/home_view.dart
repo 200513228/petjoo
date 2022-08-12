@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/home/viewmodel/home_viewmodel.dart';
+import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
 import 'package:petjoo/presentation/animal_advert/view/advert_list_view.dart';
@@ -9,7 +10,6 @@ import 'package:petjoo/presentation/animal_advert/view/advert_user_list_view.dar
 import 'package:petjoo/presentation/animal_transport/view/transport_advert_list_view.dart';
 import 'package:petjoo/presentation/chat/view/chat_list_view.dart';
 import 'package:pandabar/pandabar.dart';
-import 'package:petjoo/presentation/common/extra/extra_view.dart';
 import 'package:petjoo/presentation/transport_reservation/view/transport_reservation_list_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () {
-              vm.navigate(_, const ChatListView());
+              vm.navigate(_, const ChatListView(), true);
             },
             icon: const Icon(Icons.message_rounded))
       ],
@@ -69,8 +69,8 @@ class HomeView extends StatelessWidget {
             id: 'settings', icon: Icons.settings, title: 'Ayarlar'),
       ],
       onChange: (id) {
-        id == 'home' ? vm.navigate(_, WelcomeView()) : null;
-        id == 'settings' ? vm.navigate(_, const ExtraView()) : null;
+        id == 'home' ? vm.navigate(_, WelcomeView(), false) : null;
+        id == 'settings' ? vm.navigate(_, SettingsView(), true) : null;
         id == 'custom1' || id == 'custom2'
             ? vm.swithPage(pageSwitch(id))
             : null;

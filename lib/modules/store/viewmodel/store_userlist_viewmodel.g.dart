@@ -42,12 +42,18 @@ mixin _$StoreUserListViewModel on StoreUserListViewModelBase, Store {
     return _$newAdvertAsyncAction.run(() => super.newAdvert(_));
   }
 
-  late final _$openAdvertAsyncAction =
-      AsyncAction('StoreUserListViewModelBase.openAdvert', context: context);
+  late final _$StoreUserListViewModelBaseActionController =
+      ActionController(name: 'StoreUserListViewModelBase', context: context);
 
   @override
-  Future<dynamic> openAdvert(BuildContext _, StoreAdvertModel model) {
-    return _$openAdvertAsyncAction.run(() => super.openAdvert(_, model));
+  void pickAdvert(StoreAdvertModel model, BuildContext _) {
+    final _$actionInfo = _$StoreUserListViewModelBaseActionController
+        .startAction(name: 'StoreUserListViewModelBase.pickAdvert');
+    try {
+      return super.pickAdvert(model, _);
+    } finally {
+      _$StoreUserListViewModelBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

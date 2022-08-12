@@ -40,11 +40,11 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
   }
 
   @override
-  void navigate(BuildContext context, Widget page) {
+  void navigate(BuildContext context, Widget page, bool pop) {
     final _$actionInfo = _$HomeViewModelBaseActionController.startAction(
         name: 'HomeViewModelBase.navigate');
     try {
-      return super.navigate(context, page);
+      return super.navigate(context, page, pop);
     } finally {
       _$HomeViewModelBaseActionController.endAction(_$actionInfo);
     }

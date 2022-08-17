@@ -25,15 +25,31 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
     });
   }
 
+  late final _$currentIndexAtom =
+      Atom(name: 'HomeViewModelBase.currentIndex', context: context);
+
+  @override
+  int get currentIndex {
+    _$currentIndexAtom.reportRead();
+    return super.currentIndex;
+  }
+
+  @override
+  set currentIndex(int value) {
+    _$currentIndexAtom.reportWrite(value, super.currentIndex, () {
+      super.currentIndex = value;
+    });
+  }
+
   late final _$HomeViewModelBaseActionController =
       ActionController(name: 'HomeViewModelBase', context: context);
 
   @override
-  void swithPage(Widget page) {
+  void swithPage(Widget page, int x) {
     final _$actionInfo = _$HomeViewModelBaseActionController.startAction(
         name: 'HomeViewModelBase.swithPage');
     try {
-      return super.swithPage(page);
+      return super.swithPage(page, x);
     } finally {
       _$HomeViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -53,7 +69,8 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
   @override
   String toString() {
     return '''
-currentPage: ${currentPage}
+currentPage: ${currentPage},
+currentIndex: ${currentIndex}
     ''';
   }
 }

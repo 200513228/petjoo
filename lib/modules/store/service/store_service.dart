@@ -3,18 +3,25 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
+import 'package:petjoo/modules/user/model/user_model.dart';
 
 class StoreService {
   static var db = FirebaseFirestore.instance;
   static var storage = FirebaseStorage.instance.ref();
 
-  static Future<QuerySnapshot<Map<String, dynamic>>> getAdverts() async {
-    return db
-        .collection('store_adverts')
-        // .where('isSold', isEqualTo: true)
-        .orderBy('date', descending: true)
-        .limit(3)
-        .get();
+  static Future<QuerySnapshot<Map<String, dynamic>>> getAdverts(
+      {required bool isUser}) async {
+    return isUser
+        ? db
+            .collection('store_adverts')
+            .where('userIde', isEqualTo: CurrentUser.id)
+            .limit(5)
+            .get()
+        : db
+            .collection('store_adverts')
+            .where('isSold', isEqualTo: false)
+            .limit(5)
+            .get();
   }
 
   static Future<bool> addAdverts(

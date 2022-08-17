@@ -15,13 +15,9 @@ class WelcomeView extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => Navigator.canPop(context),
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('PETJOO'),
-        ),
         body: Column(
           children: [
-            const Expanded(flex: 3, child: Placeholder()),
+            Expanded(flex: 5, child: slider()),
             Expanded(
               flex: 4,
               child: Column(
@@ -39,6 +35,14 @@ class WelcomeView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget slider() {
+    return Container(
+      decoration: const BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(38))),
     );
   }
 

@@ -721,13 +721,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  pandabar:
-    dependency: "direct main"
-    description:
-      name: pandabar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   path:
     dependency: transitive
     description:
@@ -992,6 +985,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  stylish_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: stylish_bottom_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   table_calendar:
     dependency: "direct main"
     description:

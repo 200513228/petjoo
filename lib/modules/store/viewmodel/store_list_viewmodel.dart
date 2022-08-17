@@ -14,13 +14,13 @@ abstract class StoreListViewModelBase with Store {
   @action
   Future getAdverts() async {
     List<StoreAdvertModel> temp = [];
-    var data = await StoreService.getAdverts();
+    var data = await StoreService.getAdverts(isUser: false);
     for (var element in data.docs) {
       temp.add(StoreAdvertModel.fromQDS(element));
     }
-    advertList = temp;
-    advertList.sort((b, a) =>
+    temp.sort((b, a) =>
         a.date.microsecondsSinceEpoch.compareTo(b.date.microsecondsSinceEpoch));
+    advertList = temp;
   }
 
   @action

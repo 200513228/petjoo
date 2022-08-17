@@ -8,8 +8,12 @@ abstract class HomeViewModelBase with Store {
   @observable
   Widget currentPage = Container();
 
+  @observable
+  int currentIndex = 1;
+
   @action
-  void swithPage(Widget page) {
+  void swithPage(Widget page, int x) {
+    currentIndex = x;
     currentPage = page;
   }
 

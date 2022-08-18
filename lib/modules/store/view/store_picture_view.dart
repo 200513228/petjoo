@@ -24,12 +24,16 @@ class StorePictureView extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
-        children: [
-          if (vm.imageList.length < 2) pickerButton,
-          ...vm.imageList.map((e) => Image.file(e)),
-        ],
+        children: images,
       );
     });
+  }
+
+  List<Widget> get images {
+    return [
+      if (vm.imageList.length < 2) pickerButton,
+      ...vm.imageList.map((e) => Image.file(e)),
+    ];
   }
 
   Widget get pickerButton {

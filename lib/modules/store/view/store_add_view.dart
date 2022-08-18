@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
 import 'package:petjoo/core/widgets/dropdown_x.dart';
 import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
+import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_add_viewmodel.dart';
@@ -13,11 +14,13 @@ import 'package:petjoo/product/constants/dimens.dart';
 import 'package:petjoo/product/constants/validators.dart';
 
 class StoreAddView extends StatelessWidget {
+  final StoreAdvertModel? model;
   final StoreAddViewModel vm = StoreAddViewModel();
-  StoreAddView({Key? key}) : super(key: key);
+  StoreAddView({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (model != null) vm.preEdit(model!);
     return Scaffold(
       appBar: buildAppBar(),
       floatingActionButton: buildFab(context),
@@ -53,7 +56,7 @@ class StoreAddView extends StatelessWidget {
           controller: vm.titleCont,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
-          maxLength: 50,
+          maxLength: 30,
           validator: Validators.title('Başlık En Az 3 harfli olmalıdır.'),
           decoration: const InputDecoration(
             counterText: '',
@@ -214,18 +217,17 @@ class StoreAddView extends StatelessWidget {
 
   Widget buildFab(BuildContext context) {
     return FloatingActionButton(
-      heroTag: '<default FloatingActionButton tag>',
       onPressed: () {
-        vm.nextStep(context);
+        model != null ? vm.update(context) : vm.nextStep(context);
       },
-      child: const Icon(FontAwesomeIcons.photoFilm),
+      child: Icon(model != null ? Icons.done : FontAwesomeIcons.photoFilm),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
       centerTitle: true,
-      title: const Text('Yeni İlan'),
+      title: Text(model != null ? 'İlan Düzenle' : 'Yeni İlan'),
     );
   }
 }

@@ -141,13 +141,13 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
       Atom(name: 'StoreAddViewModelBase.price', context: context);
 
   @override
-  int? get price {
+  num? get price {
     _$priceAtom.reportRead();
     return super.price;
   }
 
   @override
-  set price(int? value) {
+  set price(num? value) {
     _$priceAtom.reportWrite(value, super.price, () {
       super.price = value;
     });
@@ -201,12 +201,56 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
     });
   }
 
+  late final _$updateAsyncAction =
+      AsyncAction('StoreAddViewModelBase.update', context: context);
+
+  @override
+  Future<dynamic> update(BuildContext _) {
+    return _$updateAsyncAction.run(() => super.update(_));
+  }
+
   late final _$nextStepAsyncAction =
       AsyncAction('StoreAddViewModelBase.nextStep', context: context);
 
   @override
   Future<dynamic> nextStep(BuildContext context) {
     return _$nextStepAsyncAction.run(() => super.nextStep(context));
+  }
+
+  late final _$StoreAddViewModelBaseActionController =
+      ActionController(name: 'StoreAddViewModelBase', context: context);
+
+  @override
+  void preEdit(StoreAdvertModel model) {
+    final _$actionInfo = _$StoreAddViewModelBaseActionController.startAction(
+        name: 'StoreAddViewModelBase.preEdit');
+    try {
+      return super.preEdit(model);
+    } finally {
+      _$StoreAddViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void error(BuildContext _) {
+    final _$actionInfo = _$StoreAddViewModelBaseActionController.startAction(
+        name: 'StoreAddViewModelBase.error');
+    try {
+      return super.error(_);
+    } finally {
+      _$StoreAddViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void successfull(BuildContext context) {
+    final _$actionInfo = _$StoreAddViewModelBaseActionController.startAction(
+        name: 'StoreAddViewModelBase.successfull');
+    try {
+      return super.successfull(context);
+    } finally {
+      _$StoreAddViewModelBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

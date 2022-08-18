@@ -1,6 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/modules/base/color_palette.dart';
+import 'package:petjoo/modules/base/string_converters.dart';
+import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
+import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
+import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/user_model.dart';
 import 'package:petjoo/product/constants/images.dart';
@@ -13,9 +18,11 @@ class StoreDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.setModel(model);
+    vm.userInfo(model.userId);
     return Scaffold(
       appBar: buildAppBar(),
       body: buildBody(context),
+      backgroundColor: colorPalette['primary'],
     );
   }
 
@@ -28,20 +35,17 @@ class StoreDetailView extends StatelessWidget {
               Expanded(flex: 3, child: gallery(context)),
               Expanded(
                 flex: 7,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(model.title,
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 20),
-                            maxLines: 2),
-                        dateToText(model.date),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                  ],
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: colorPalette['secondary'],
+                  child: Column(
+                    children: [
+                      title(),
+                      userCard(),
+                      Expanded(child: advertInfo),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -52,11 +56,142 @@ class StoreDetailView extends StatelessWidget {
     );
   }
 
-  Widget dateToText(Timestamp date) {
-    DateTime d = date.toDate();
-    return Text(
-      '${d.day}.${d.month}.${d.year}',
-      style: const TextStyle(color: Colors.black, fontSize: 14),
+  Widget get advertInfo {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: advertInfoCard(storeAdvertTypes[model.type] as String,
+                  Icons.dataset_outlined, 'Kategori'),
+            ),
+            Expanded(
+              child: advertInfoCard(storeAdvertStatuses[model.status] as String,
+                  Icons.store_rounded, 'Durum'),
+            ),
+            Expanded(
+              child: advertInfoCard(
+                  storeAdvertDeliveries[model.delivery] as String,
+                  Icons.delivery_dining_rounded,
+                  'Teslimat'),
+            ),
+          ],
+        ),
+        Expanded(child: advertDesc)
+      ],
+    );
+  }
+
+  Widget userCard() {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.all(Radius.circular(8))),
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Observer(builder: (_) {
+                  if (vm.userImage != null) {
+                    return Container(
+                      width: 50,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                        child: Image.network(
+                          vm.userImage!,
+                          fit: BoxFit.fitWidth,
+                          isAntiAlias: true,
+                        ),
+                      ),
+                    );
+                  }
+                  return Container(
+                    width: 50,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: const Icon(
+                      Icons.person,
+                      color: Colors.black,
+                    ),
+                  );
+                }),
+                const SizedBox(width: 15),
+                Observer(builder: (_) {
+                  return Text(
+                    vm.userName ?? 'Kullanıcı İsmi Bulunamadı',
+                    style: const TextStyle(fontSize: 18),
+                  );
+                }),
+              ],
+            ),
+          ),
+          Column(
+            children: [Text(dateToString(model.date))],
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
+    );
+  }
+
+  Widget advertInfoCard(String text, IconData icon, String title) {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+          color: Color.fromARGB(78, 235, 228, 100),
+          borderRadius: BorderRadius.all(Radius.circular(8))),
+      child: Column(
+        children: [
+          Padding(padding: const EdgeInsets.all(3), child: Text(title)),
+          Icon(
+            icon,
+            size: 35,
+            color: Colors.white60,
+          ),
+          Text(text, style: const TextStyle(fontSize: 16)),
+        ],
+      ),
+    );
+  }
+
+  Widget get advertDesc {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.black),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Açıklama',
+                style: TextStyle(fontSize: 15, color: Colors.white54),
+              ),
+            ),
+            const SizedBox(height: 5),
+            Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  model.description,
+                  style: const TextStyle(fontSize: 16),
+                )),
+          ],
+        ),
+      ),
     );
   }
 
@@ -69,47 +204,99 @@ class StoreDetailView extends StatelessWidget {
           ),
         ),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        child: bottomContent());
+        child: bottomContent(context));
   }
 
-  Widget bottomContent() => SafeArea(
-        child: Row(
-          children: [
-            Expanded(
-                child: FloatingActionButton.extended(
-              heroTag: null,
-              backgroundColor: Colors.black,
-              label: Text(
-                '${model.price} ₺',
-                style: const TextStyle(color: Colors.white, fontSize: 22),
-              ),
-              onPressed: null,
-              // onPressed: data.geoPoint == null ? null : viewModel.getDirections,
-            )),
-            const SizedBox(width: 10),
-            FloatingActionButton(
-                heroTag: '<default FloatingActionButton tag>',
-                elevation: model.phone == '' ? 0 : null,
-                onPressed: model.phone == '' ? null : vm.call,
-                child: Icon(
-                  Icons.call_rounded,
-                  color: model.phone == '' ? Colors.grey : Colors.greenAccent,
-                )),
-            ...CurrentUser.id == ''
-                ? []
-                : [
-                    const SizedBox(width: 10),
-                    FloatingActionButton(
-                        heroTag: null,
-                        onPressed: () {},
-                        child: const Icon(
-                          Icons.message_rounded,
-                          color: Colors.orangeAccent,
-                        ))
-                  ],
-          ],
-        ),
-      );
+  Widget bottomContent(BuildContext _) {
+    return SafeArea(
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                if (model.userId == CurrentUser.id)
+                  Expanded(
+                    child: FloatingActionButton.extended(
+                      heroTag: null,
+                      backgroundColor: Colors.grey.shade800,
+                      label: Text(
+                        model.isSold ? 'Satılık Mı?' : 'Satıldı Mı?',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                      onPressed: () {
+                        vm.changeSold(!model.isSold, _);
+                      },
+                    ),
+                  ),
+                if (model.userId == CurrentUser.id) const SizedBox(width: 10),
+                Expanded(
+                  child: FloatingActionButton.extended(
+                    heroTag: null,
+                    backgroundColor: Colors.black,
+                    label: Text(
+                      '${model.price} ₺',
+                      style: const TextStyle(color: Colors.white, fontSize: 22),
+                    ),
+                    onPressed: null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 10),
+          FloatingActionButton(
+              elevation: model.phone == '' ? 0 : null,
+              onPressed: model.phone == '' ? null : vm.call,
+              child: Icon(
+                Icons.call_rounded,
+                color: model.phone == '' ? Colors.grey : Colors.greenAccent,
+              )),
+          ...CurrentUser.id == model.userId
+              ? [
+                  const SizedBox(width: 10),
+                  FloatingActionButton(
+                      heroTag: null,
+                      onPressed: () {
+                        vm.editModel(model, _);
+                      },
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.orangeAccent,
+                      ))
+                ]
+              : [
+                  const SizedBox(width: 10),
+                  FloatingActionButton(
+                      heroTag: null,
+                      onPressed: () {},
+                      child: const Icon(
+                        Icons.message_rounded,
+                        color: Colors.orangeAccent,
+                      ))
+                ],
+        ],
+      ),
+    );
+  }
+
+  Widget title() {
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(5),
+      width: double.infinity,
+      height: 50,
+      decoration: BoxDecoration(
+          color: colorPalette['primary'],
+          borderRadius:
+              const BorderRadius.vertical(bottom: Radius.circular(15))),
+      child: Text(
+        model.title,
+        style: const TextStyle(
+            fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
 
   Widget gallery(BuildContext context) {
     return Stack(
@@ -127,7 +314,6 @@ class StoreDetailView extends StatelessWidget {
             ),
           ],
         ),
-        // Align(alignment: Alignment.bottomCenter, child: imageCounter()),
       ],
     );
   }
@@ -157,13 +343,6 @@ class StoreDetailView extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       title: const Text('İlan Detayları'),
-    );
-  }
-
-  Widget buildFab() {
-    return FloatingActionButton(
-      onPressed: () {},
-      child: Icon(model.userId == CurrentUser.id ? Icons.edit : Icons.call),
     );
   }
 }

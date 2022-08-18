@@ -49,6 +49,14 @@ mixin _$StorePictureViewModel on StorePictureViewModelBase, Store {
     return _$imagePickAsyncAction.run(() => super.imagePick());
   }
 
+  late final _$setAdvertAsyncAction =
+      AsyncAction('StorePictureViewModelBase.setAdvert', context: context);
+
+  @override
+  Future<dynamic> setAdvert(StoreAdvertModel model) {
+    return _$setAdvertAsyncAction.run(() => super.setAdvert(model));
+  }
+
   late final _$saveAdvertAsyncAction =
       AsyncAction('StorePictureViewModelBase.saveAdvert', context: context);
 
@@ -59,17 +67,6 @@ mixin _$StorePictureViewModel on StorePictureViewModelBase, Store {
 
   late final _$StorePictureViewModelBaseActionController =
       ActionController(name: 'StorePictureViewModelBase', context: context);
-
-  @override
-  void setAdvert(StoreAdvertModel model) {
-    final _$actionInfo = _$StorePictureViewModelBaseActionController
-        .startAction(name: 'StorePictureViewModelBase.setAdvert');
-    try {
-      return super.setAdvert(model);
-    } finally {
-      _$StorePictureViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void error(BuildContext _) {

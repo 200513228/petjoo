@@ -4,7 +4,6 @@ import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
 import 'package:petjoo/modules/store/view/store_add_view.dart';
 import 'package:petjoo/modules/store/view/store_detail_view.dart';
-import 'package:petjoo/modules/user/model/user_model.dart';
 part 'store_userlist_viewmodel.g.dart';
 
 class StoreUserListViewModel = StoreUserListViewModelBase
@@ -17,7 +16,7 @@ abstract class StoreUserListViewModelBase with Store {
   @action
   Future getUserAdverts() async {
     List<StoreAdvertModel> temp = [];
-    var data = await StoreService.getUserAdverts(CurrentUser.id);
+    var data = await StoreService.getAdverts(isUser: true);
     for (var element in data.docs) {
       temp.add(StoreAdvertModel.fromQDS(element));
     }
@@ -28,7 +27,8 @@ abstract class StoreUserListViewModelBase with Store {
 
   @action
   Future newAdvert(BuildContext _) async {
-    Navigator.push(_, MaterialPageRoute(builder: (context) => StoreAddView()));
+    Navigator.push(
+        _, MaterialPageRoute(builder: (context) => StoreAddView(model: null)));
   }
 
   @action

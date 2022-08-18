@@ -25,6 +25,62 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
     });
   }
 
+  late final _$userImageAtom =
+      Atom(name: 'StoreDetailViewModelBase.userImage', context: context);
+
+  @override
+  String? get userImage {
+    _$userImageAtom.reportRead();
+    return super.userImage;
+  }
+
+  @override
+  set userImage(String? value) {
+    _$userImageAtom.reportWrite(value, super.userImage, () {
+      super.userImage = value;
+    });
+  }
+
+  late final _$userNameAtom =
+      Atom(name: 'StoreDetailViewModelBase.userName', context: context);
+
+  @override
+  String? get userName {
+    _$userNameAtom.reportRead();
+    return super.userName;
+  }
+
+  @override
+  set userName(String? value) {
+    _$userNameAtom.reportWrite(value, super.userName, () {
+      super.userName = value;
+    });
+  }
+
+  late final _$userInfoAsyncAction =
+      AsyncAction('StoreDetailViewModelBase.userInfo', context: context);
+
+  @override
+  Future<dynamic> userInfo(String uid) {
+    return _$userInfoAsyncAction.run(() => super.userInfo(uid));
+  }
+
+  late final _$changeSoldAsyncAction =
+      AsyncAction('StoreDetailViewModelBase.changeSold', context: context);
+
+  @override
+  Future<dynamic> changeSold(bool isSold, BuildContext _) {
+    return _$changeSoldAsyncAction.run(() => super.changeSold(isSold, _));
+  }
+
+  late final _$callAsyncAction =
+      AsyncAction('StoreDetailViewModelBase.call', context: context);
+
+  @override
+  Future<dynamic> call() {
+    return _$callAsyncAction.run(() => super.call());
+  }
+
   late final _$StoreDetailViewModelBaseActionController =
       ActionController(name: 'StoreDetailViewModelBase', context: context);
 
@@ -40,11 +96,33 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
   }
 
   @override
-  void call() {
+  void editModel(StoreAdvertModel model, BuildContext _) {
     final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
-        name: 'StoreDetailViewModelBase.call');
+        name: 'StoreDetailViewModelBase.editModel');
     try {
-      return super.call();
+      return super.editModel(model, _);
+    } finally {
+      _$StoreDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void error(BuildContext _) {
+    final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
+        name: 'StoreDetailViewModelBase.error');
+    try {
+      return super.error(_);
+    } finally {
+      _$StoreDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void successfull(BuildContext context) {
+    final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
+        name: 'StoreDetailViewModelBase.successfull');
+    try {
+      return super.successfull(context);
     } finally {
       _$StoreDetailViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -53,7 +131,9 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
   @override
   String toString() {
     return '''
-advert: ${advert}
+advert: ${advert},
+userImage: ${userImage},
+userName: ${userName}
     ''';
   }
 }

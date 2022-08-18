@@ -30,7 +30,7 @@ abstract class StorePictureViewModelBase with Store {
   }
 
   @action
-  void setAdvert(StoreAdvertModel model) {
+  Future setAdvert(StoreAdvertModel model) async {
     advert = model;
   }
 

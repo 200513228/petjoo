@@ -4,6 +4,7 @@ import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/home/viewmodel/welcome_viewmodel.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/user/model/user_model.dart';
+import 'package:petjoo/presentation/auth/view/auth_view.dart';
 
 class WelcomeView extends StatelessWidget {
   final WelcomeViewModel vm = WelcomeViewModel();
@@ -52,11 +53,16 @@ class WelcomeView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 19),
         child: ListTile(
             onTap: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => SettingsView()),
-                (route) => true,
-              );
+              vm.userLog
+                  ? Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => SettingsView()),
+                      (route) => true,
+                    )
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AuthView()));
             },
             leading: vm.userLog
                 ? CircleAvatar(

@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_list_viewmodel.dart';
 import 'package:petjoo/product/constants/images.dart';
@@ -74,14 +75,27 @@ class PetListView extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.clip,
                               softWrap: false,
-                              style: const TextStyle(fontSize: 17)),
+                              style: const TextStyle(fontSize: 16)),
                           const SizedBox(height: 5),
                           Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Flexible(
-                                    child: Text(typeToString(model.type),
-                                        maxLines: 1)),
+                                    child: Row(
+                                  children: [
+                                    Text(
+                                      animalTypeToString(model.animalType),
+                                      maxLines: 1,
+                                      style: const TextStyle(
+                                          fontSize: 14, color: Colors.white54),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Icon(
+                                      animalTypeToIcon(model.animalType),
+                                      size: 15,
+                                    )
+                                  ],
+                                )),
                                 const SizedBox(width: 5),
                               ]),
                           const SizedBox(height: 5),
@@ -89,18 +103,20 @@ class PetListView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  dateToString(model.date),
-                                  maxLines: 1,
-                                ),
+                                Text(dateToString(model.date),
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        fontSize: 14, color: Colors.white54)),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        'Teslimat: ${deliveryToString(model.infertility)}',
+                                        typeToString(model.type),
                                         textAlign: TextAlign.end,
                                         maxLines: 1,
+                                        style: TextStyle(
+                                            color: typeToColor(model.type)),
                                       ),
                                     ],
                                   ),
@@ -113,56 +129,91 @@ class PetListView extends StatelessWidget {
     );
   }
 
-  String dateToString(Timestamp date) {
-    var d = date.toDate();
-
-    return '${d.day}.${d.month}.${d.year}';
-  }
-
   String typeToString(int type) {
     switch (type) {
       case 0:
         return 'Diğer';
       case 1:
-        return 'Kermes';
+        return 'Acil';
       case 2:
-        return 'Pet Gıda';
+        return 'Kayıp';
       case 3:
-        return 'Pet Aksesuar';
+        return 'Yavru';
       case 4:
-        return 'Kişisel';
+        return 'Engelsiz';
+      case 5:
+        return 'Geçici Yuva';
+      case 6:
+        return 'Kalıcı Yuva';
+      case 7:
+        return 'Süt Anne';
       default:
-        return 'Hepsi';
+        return 'Diğer';
     }
   }
 
-  String deliveryToString(int delivery) {
+  Color typeToColor(int type) {
+    switch (type) {
+      case 0:
+        return Colors.orangeAccent;
+      case 1:
+        return Colors.redAccent;
+      case 2:
+        return Colors.redAccent;
+      case 3:
+        return Colors.blueAccent;
+      case 4:
+        return Colors.greenAccent;
+      case 5:
+        return Colors.orangeAccent;
+      case 6:
+        return Colors.orangeAccent;
+      case 7:
+        return Colors.blueAccent;
+      default:
+        return Colors.orangeAccent;
+    }
+  }
+
+  String animalTypeToString(int delivery) {
     switch (delivery) {
       case 0:
         return 'Diğer';
       case 1:
-        return 'Gel Al';
+        return 'Diğer';
       case 2:
-        return 'Şehir İçi';
+        return 'Köpek';
       case 3:
-        return 'Kargo';
+        return 'Kedi';
+      case 4:
+        return 'Kuş';
+      case 5:
+        return 'Akvaryum';
+      case 6:
+        return 'Kemirgen';
       default:
-        return 'Hepsi';
+        return 'Diğer';
     }
   }
 
-  String statusToString(int status) {
+  IconData animalTypeToIcon(int status) {
     switch (status) {
       case 0:
-        return 'Diğer';
+        return Icons.more_horiz_rounded;
       case 1:
-        return 'Sıfır';
+        return Icons.more_horiz_rounded;
       case 2:
-        return 'İkinci El';
+        return FontAwesomeIcons.dog;
       case 3:
-        return 'El Yapımı';
+        return FontAwesomeIcons.cat;
+      case 4:
+        return FontAwesomeIcons.kiwiBird;
+      case 5:
+        return FontAwesomeIcons.fish;
+      case 6:
+        return FontAwesomeIcons.bug;
       default:
-        return 'Hepsi';
+        return Icons.more_horiz_rounded;
     }
   }
 }

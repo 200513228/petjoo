@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/product/constants/routes.dart';
 import 'package:petjoo/product/ui/themes/classic_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,10 +26,10 @@ class _AppState extends State<App> {
           locale: provider.locale,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          // home: const WelcomeView(),
-          initialRoute: FirebaseAuth.instance.currentUser == null
-              ? Routes.auth
-              : Routes.navigation,
+          home: WelcomeView(),
+          // initialRoute: FirebaseAuth.instance.currentUser == null
+          //     ? Routes.auth
+          //     : Routes.navigation,
           onGenerateRoute: Routes.onGenerateRoute,
         );
       });

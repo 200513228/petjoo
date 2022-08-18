@@ -33,6 +33,20 @@ mixin _$PetListViewModel on PetListViewModelBase, Store {
     return _$getAdvertsAsyncAction.run(() => super.getAdverts());
   }
 
+  late final _$PetListViewModelBaseActionController =
+      ActionController(name: 'PetListViewModelBase', context: context);
+
+  @override
+  void pickAdvert(PetAdvertModel model, BuildContext _) {
+    final _$actionInfo = _$PetListViewModelBaseActionController.startAction(
+        name: 'PetListViewModelBase.pickAdvert');
+    try {
+      return super.pickAdvert(model, _);
+    } finally {
+      _$PetListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

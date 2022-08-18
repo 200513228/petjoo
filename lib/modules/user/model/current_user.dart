@@ -25,4 +25,17 @@ class CurrentUser {
     hasTransport = data['hasTransport'] ?? false;
     hasVeterinary = data['hasVeterinary'] ?? false;
   }
+
+  CurrentUser.clear() {
+    id = '';
+    image = '';
+    name = '';
+    surname = '';
+    dialCode = '';
+    phone = '';
+    email = '';
+    fcmToken = '';
+    hasTransport = false;
+    hasVeterinary = false;
+  }
 }

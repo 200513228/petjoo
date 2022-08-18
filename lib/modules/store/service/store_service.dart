@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
-import 'package:petjoo/modules/user/model/user_model.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 
 class StoreService {
   static var db = FirebaseFirestore.instance;

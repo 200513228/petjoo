@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:petjoo/modules/user/model/user_model.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 
 class StoreAdvertModel {
   String id = '';

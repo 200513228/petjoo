@@ -6,6 +6,7 @@ import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_list_viewmodel.dart';
 import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/product/ui/widgets/nothing_to_see_here_widget.dart';
 
 class StoreListView extends StatelessWidget {
   final StoreListViewModel vm = StoreListViewModel();
@@ -15,16 +16,18 @@ class StoreListView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.getAdverts();
     return Observer(builder: (_) {
-      return GridView(
-        padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: .65,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-        ),
-        children: [...vm.advertList.map((e) => advertTile(e, _))],
-      );
+      return vm.advertList.isEmpty
+          ? const NothingToSeeHereWidget()
+          : GridView(
+              padding: const EdgeInsets.all(10),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: .65,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              children: [...vm.advertList.map((e) => advertTile(e, _))],
+            );
     });
   }
 

@@ -3,8 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/home/viewmodel/welcome_viewmodel.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
-import 'package:petjoo/modules/user/model/user_model.dart';
-import 'package:petjoo/presentation/auth/view/auth_view.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
+import 'package:petjoo/modules/user/view/login_view.dart';
 
 class WelcomeView extends StatelessWidget {
   final WelcomeViewModel vm = WelcomeViewModel();
@@ -59,10 +59,8 @@ class WelcomeView extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => SettingsView()),
                       (route) => true,
                     )
-                  : Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AuthView()));
+                  : Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginView()));
             },
             leading: vm.userLog
                 ? CircleAvatar(

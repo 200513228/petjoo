@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
-import 'package:petjoo/modules/base/string_converters.dart';
-import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
-import 'package:petjoo/modules/store/model/store_advert_model.dart';
-import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
-import 'package:petjoo/modules/store/model/store_adverts_types.dart';
-import 'package:petjoo/modules/store/viewmodel/store_detail_viewmodel.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_genders.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_habits.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_infertilities.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_sizes.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_toilets.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_vaccines.dart';
+import 'package:petjoo/modules/pet/viewmodel/pet_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
 
-class StoreDetailView extends StatelessWidget {
-  final StoreDetailViewModel vm = StoreDetailViewModel();
-  final StoreAdvertModel model;
-  StoreDetailView({Key? key, required this.model}) : super(key: key);
+class PetDetailView extends StatelessWidget {
+  final PetDetailViewModel vm = PetDetailViewModel();
+  final PetAdvertModel model;
+  PetDetailView({required this.model, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,10 @@ class StoreDetailView extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              Expanded(flex: 3, child: gallery(context)),
+              Expanded(
+                flex: 3,
+                child: gallery(context),
+              ),
               Expanded(
                 flex: 7,
                 child: Container(
@@ -62,18 +68,55 @@ class StoreDetailView extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: advertInfoCard(storeAdvertTypes[model.type] as String,
-                  Icons.dataset_outlined, 'Kategori'),
-            ),
-            Expanded(
-              child: advertInfoCard(storeAdvertStatuses[model.status] as String,
-                  Icons.store_rounded, 'Durum'),
+              child: advertInfoCard(
+                  petAdvertAnimals[model.animalType] as String,
+                  FontAwesomeIcons.dog,
+                  Colors.orangeAccent,
+                  'Tür'),
             ),
             Expanded(
               child: advertInfoCard(
-                  storeAdvertDeliveries[model.delivery] as String,
-                  Icons.delivery_dining_rounded,
-                  'Teslimat'),
+                  petAdvertGenders[model.animalGender] as String,
+                  Icons.male_rounded,
+                  Colors.blueAccent,
+                  'Cins'),
+            ),
+            Expanded(
+              child: advertInfoCard(petAdvertSizes[model.animalSize] as String,
+                  Icons.scale_rounded, Colors.cyanAccent, 'Boyut'),
+            ),
+            Expanded(
+              child: advertInfoCard(model.animalAge, Icons.cake_rounded,
+                  Colors.yellowAccent, 'Yaş'),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: advertInfoCard(
+                  petAdvertHabits[model.animalHabit] as String,
+                  Icons.heart_broken_rounded,
+                  Colors.pinkAccent,
+                  'Huy'),
+            ),
+            Expanded(
+              child: advertInfoCard(
+                  petAdvertInfertilities[model.infertility] as String,
+                  FontAwesomeIcons.neuter,
+                  Colors.deepOrangeAccent,
+                  'Kısırlık'),
+            ),
+            Expanded(
+              child: advertInfoCard(
+                  petAdvertToilets[model.animalSize] as String,
+                  FontAwesomeIcons.toilet,
+                  Colors.greenAccent,
+                  'Tuvalet Eğt.'),
+            ),
+            Expanded(
+              child: advertInfoCard(petAdvertVaccines[model.vaccine] as String,
+                  Icons.vaccines_rounded, Colors.purpleAccent, 'Aşı'),
             ),
           ],
         ),
@@ -82,82 +125,23 @@ class StoreDetailView extends StatelessWidget {
     );
   }
 
-  Widget userCard() {
+  Widget advertInfoCard(String text, IconData icon, Color color, String title) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.all(Radius.circular(8))),
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Observer(builder: (_) {
-                  if (vm.userImage != null || vm.userImage != '') {
-                    return Container(
-                      width: 50,
-                      height: 50,
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
-                        child: Image.network(
-                          vm.userImage!,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    );
-                  }
-                  return Container(
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: const Icon(
-                      Icons.person,
-                      color: Colors.black,
-                    ),
-                  );
-                }),
-                const SizedBox(width: 15),
-                Observer(builder: (_) {
-                  return vm.userName != null
-                      ? Text(
-                          vm.userName!,
-                          style: const TextStyle(fontSize: 18),
-                        )
-                      : const Text(
-                          'Kullanıcı Bulunamadı',
-                          style: TextStyle(fontSize: 18),
-                        );
-                }),
-              ],
-            ),
-          ),
-          Text(dateToString(model.date)),
-          const SizedBox(width: 10),
-        ],
-      ),
-    );
-  }
-
-  Widget advertInfoCard(String text, IconData icon, String title) {
-    return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 7.5),
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
           color: Color.fromARGB(78, 235, 228, 100),
-          borderRadius: BorderRadius.all(Radius.circular(8))),
+          borderRadius: BorderRadius.all(Radius.circular(16))),
       child: Column(
         children: [
-          Padding(padding: const EdgeInsets.all(3), child: Text(title)),
-          Icon(icon, size: 35, color: Colors.white60),
-          Text(text, style: const TextStyle(fontSize: 16)),
+          Text(title,
+              maxLines: 1,
+              style: const TextStyle(fontSize: 11, color: Colors.white54)),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Icon(icon, size: 20, color: color),
+          ),
+          Text(text, maxLines: 1, style: const TextStyle(fontSize: 14)),
         ],
       ),
     );
@@ -211,30 +195,30 @@ class StoreDetailView extends StatelessWidget {
         children: [
           Expanded(
             child: Row(
-              children: [
-                if (model.userId == CurrentUser.id)
-                  Expanded(
-                    child: FloatingActionButton.extended(
-                      heroTag: null,
-                      backgroundColor: Colors.grey.shade800,
-                      label: Text(
-                        model.isSold ? 'Satılık Mı?' : 'Satıldı Mı?',
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 22),
-                      ),
-                      onPressed: () {
-                        vm.changeSold(!model.isSold, _);
-                      },
-                    ),
-                  ),
-                if (model.userId == CurrentUser.id) const SizedBox(width: 10),
+              children: const [
+                // if (model.userId == CurrentUser.id)
+                //   Expanded(
+                //     child: FloatingActionButton.extended(
+                //       heroTag: null,
+                //       backgroundColor: Colors.grey.shade800,
+                //       label: Text(
+                //         model.isSold ? 'Satılık Mı?' : 'Satıldı Mı?',
+                //         style:
+                //             const TextStyle(color: Colors.white, fontSize: 22),
+                //       ),
+                //       onPressed: () {
+                //         vm.changeSold(!model.isSold, _);
+                //       },
+                //     ),
+                //   ),
+                // if (model.userId == CurrentUser.id) const SizedBox(width: 10),
                 Expanded(
                   child: FloatingActionButton.extended(
                     heroTag: null,
                     backgroundColor: Colors.black,
                     label: Text(
-                      '${model.price} ₺',
-                      style: const TextStyle(color: Colors.white, fontSize: 22),
+                      '',
+                      style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
                     onPressed: null,
                   ),
@@ -256,7 +240,7 @@ class StoreDetailView extends StatelessWidget {
                   FloatingActionButton(
                       heroTag: null,
                       onPressed: () {
-                        vm.editModel(model, _);
+                        // vm.editModel(model, _);
                       },
                       child: const Icon(
                         Icons.edit,

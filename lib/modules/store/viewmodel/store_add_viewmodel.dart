@@ -5,7 +5,7 @@ import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
 import 'package:petjoo/modules/store/view/store_picture_view.dart';
-import 'package:petjoo/modules/user/model/user_model.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 part 'store_add_viewmodel.g.dart';
 
 class StoreAddViewModel = StoreAddViewModelBase with _$StoreAddViewModel;

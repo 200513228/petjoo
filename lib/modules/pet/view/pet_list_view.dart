@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_list_viewmodel.dart';
 import 'package:petjoo/product/constants/images.dart';
 import 'package:petjoo/product/ui/widgets/nothing_to_see_here_widget.dart';
@@ -38,7 +40,7 @@ class PetListView extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        // onTap: () => vm.pickAdvert(model, _),
+        onTap: () => vm.pickAdvert(model, _),
         child: Column(
           children: [
             AspectRatio(
@@ -84,7 +86,8 @@ class PetListView extends StatelessWidget {
                                     child: Row(
                                   children: [
                                     Text(
-                                      animalTypeToString(model.animalType),
+                                      petAdvertAnimals[model.animalType]
+                                          as String,
                                       maxLines: 1,
                                       style: const TextStyle(
                                           fontSize: 14, color: Colors.white54),
@@ -112,7 +115,7 @@ class PetListView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        typeToString(model.type),
+                                        petAdvertTypes[model.type] as String,
                                         textAlign: TextAlign.end,
                                         maxLines: 1,
                                         style: TextStyle(

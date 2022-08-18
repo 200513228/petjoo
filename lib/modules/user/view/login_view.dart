@@ -13,15 +13,16 @@ class LoginView extends StatelessWidget {
       appBar: buildAppBar(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          children: [
-            logo,
-            Expanded(
-              child: buildForm(context),
-            ),
-            createAccount(context),
-            const SizedBox(height: 20),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              logo,
+              const SizedBox(height: 50),
+              buildForm(context),
+              const SizedBox(height: 50),
+              createAccount(context),
+            ],
+          ),
         ),
       ),
     );

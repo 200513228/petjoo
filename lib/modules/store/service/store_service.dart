@@ -113,7 +113,7 @@ class StoreService {
     var result = await db.collection('users').doc(userId).get();
     var data = result.data() as dynamic;
     String? userName = data['name'] + ' ' + data['surname'];
-    String? userImage = data['image'];
+    String? userImage = data['image'] == '' ? null : data['image'];
     return [userName, userImage];
   }
 }

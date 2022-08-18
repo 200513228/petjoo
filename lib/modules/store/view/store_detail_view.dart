@@ -59,20 +59,23 @@ class StoreDetailView extends StatelessWidget {
   Widget get advertInfo {
     return Column(
       children: [
+        userCard(),
+        advertAdress,
         Row(
           children: [
             Expanded(
               child: advertInfoCard(storeAdvertTypes[model.type] as String,
-                  Icons.dataset_outlined, 'Kategori'),
+                  Icons.dataset_outlined, Colors.orangeAccent, 'Kategori'),
             ),
             Expanded(
               child: advertInfoCard(storeAdvertStatuses[model.status] as String,
-                  Icons.store_rounded, 'Durum'),
+                  Icons.store_rounded, Colors.blueAccent, 'Durum'),
             ),
             Expanded(
               child: advertInfoCard(
                   storeAdvertDeliveries[model.delivery] as String,
                   Icons.delivery_dining_rounded,
+                  Colors.greenAccent,
                   'Teslimat'),
             ),
           ],
@@ -83,70 +86,51 @@ class StoreDetailView extends StatelessWidget {
   }
 
   Widget userCard() {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.all(Radius.circular(8))),
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Observer(builder: (_) {
-                  if (vm.userImage != null || vm.userImage != '') {
-                    return Container(
-                      width: 50,
-                      height: 50,
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
-                        child: Image.network(
-                          vm.userImage!,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    );
-                  }
-                  return Container(
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: const Icon(
-                      Icons.person,
-                      color: Colors.black,
-                    ),
-                  );
-                }),
-                const SizedBox(width: 15),
-                Observer(builder: (_) {
-                  return vm.userName != null
-                      ? Text(
-                          vm.userName!,
-                          style: const TextStyle(fontSize: 18),
-                        )
-                      : const Text(
-                          'Kullanıcı Bulunamadı',
-                          style: TextStyle(fontSize: 18),
-                        );
-                }),
-              ],
-            ),
+    return Observer(builder: (_) {
+      return Container(
+        margin: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
+        child: ListTile(
+          leading: vm.userImage != null
+              ? Container(
+                  width: 50,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(25))),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(25)),
+                    child: CurrentUser.image != ''
+                        ? Image.network(
+                            CurrentUser.image,
+                            fit: BoxFit.fitWidth,
+                          )
+                        : Image.asset(Images.noImage),
+                  ))
+              : CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.person,
+                    color: colorPalette['primary'],
+                  )),
+          trailing: Text(
+            dateToString(model.date),
+            style: const TextStyle(fontSize: 14),
           ),
-          Text(dateToString(model.date)),
-          const SizedBox(width: 10),
-        ],
-      ),
-    );
+          title: vm.userName != null
+              ? Text(
+                  vm.userName!,
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                )
+              : const Text('Kullanıcı Bulunamadı',
+                  style: TextStyle(color: Colors.black, fontSize: 16)),
+        ),
+      );
+    });
   }
 
-  Widget advertInfoCard(String text, IconData icon, String title) {
+  Widget advertInfoCard(String text, IconData icon, Color color, String title) {
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
@@ -155,8 +139,13 @@ class StoreDetailView extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(8))),
       child: Column(
         children: [
-          Padding(padding: const EdgeInsets.all(3), child: Text(title)),
-          Icon(icon, size: 35, color: Colors.white60),
+          Padding(
+              padding: const EdgeInsets.all(3),
+              child: Text(
+                title,
+                style: const TextStyle(color: Colors.white54),
+              )),
+          Icon(icon, size: 35, color: color),
           Text(text, style: const TextStyle(fontSize: 16)),
         ],
       ),
@@ -189,6 +178,34 @@ class StoreDetailView extends StatelessWidget {
                 )),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget get advertAdress {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.black),
+      child: Column(
+        children: [
+          const Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'Adres',
+              style: TextStyle(fontSize: 15, color: Colors.white54),
+            ),
+          ),
+          const SizedBox(height: 5),
+          Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                model.address,
+                style: const TextStyle(fontSize: 16),
+              )),
+        ],
       ),
     );
   }

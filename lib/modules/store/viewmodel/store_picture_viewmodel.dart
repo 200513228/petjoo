@@ -47,8 +47,7 @@ abstract class StorePictureViewModelBase with Store {
   void successfull(BuildContext context) {
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(
-            builder: (context) => HomeView(title: 'Pazar İlanları')),
+        MaterialPageRoute(builder: (context) => HomeView(title: 'PAZAR')),
         (route) => false);
   }
 }

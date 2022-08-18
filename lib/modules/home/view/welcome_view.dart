@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
-import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/home/viewmodel/welcome_viewmodel.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/modules/user/view/login_view.dart';
+import 'package:petjoo/product/constants/images.dart';
 
 class WelcomeView extends StatelessWidget {
   final WelcomeViewModel vm = WelcomeViewModel();
@@ -18,13 +18,12 @@ class WelcomeView extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => Navigator.canPop(context),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: colorPalette['secondary'],
         body: Column(
           children: [
             Expanded(flex: 6, child: slider()),
             Expanded(flex: 4, child: selector(context)),
             userCard(context),
-            const SizedBox(height: 0)
           ],
         ),
       ),
@@ -33,9 +32,14 @@ class WelcomeView extends StatelessWidget {
 
   Widget slider() {
     return Container(
-      decoration: const BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(40))),
+      decoration: BoxDecoration(
+        color: colorPalette['primary'],
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(40)),
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(40)),
+        child: Image.asset(Images.logo),
+      ),
     );
   }
 
@@ -152,30 +156,52 @@ class WelcomeView extends StatelessWidget {
   Widget userCard(BuildContext context) {
     return Observer(builder: (_) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 19),
+        padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
         child: ListTile(
-          tileColor: const Color(0xffFFE427),
-          onTap: () {
-            vm.userLog
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => SettingsView()),
-                    (route) => true,
+            tileColor: colorPalette['primary'],
+            onTap: () {
+              vm.userLog
+                  ? Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => SettingsView()),
+                      (route) => true,
+                    )
+                  : Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginView()));
+            },
+            leading: vm.userLog
+                ? Container(
+                    width: 50,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
+                      child: CurrentUser.image != ''
+                          ? Image.network(
+                              CurrentUser.image,
+                              fit: BoxFit.fitWidth,
+                            )
+                          : Image.asset(Images.noImage),
+                    ))
+                : const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.black,
+                    )),
+            title: vm.userLog
+                ? Text(
+                    'Hoşgeldin, ${CurrentUser.name}',
+                    style: const TextStyle(color: Colors.black, fontSize: 16),
                   )
-                : Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginView()));
-          },
-          leading: vm.userLog
-              ? CircleAvatar(
-                  child:
-                      Text(CurrentUser.name != '' ? CurrentUser.name[0] : ''),
-                )
-              : const CircleAvatar(),
-          title: vm.userLog
-              ? Text(CurrentUser.name)
-              : const Text('Giriş Yapmak İçin Tıklayınız'),
-          trailing: Image.asset('assets/images/logo.png'),
-        ),
+                : const Text('Giriş Yapmak İçin Tıklayınız',
+                    style: TextStyle(color: Colors.black, fontSize: 16)),
+            trailing: const Icon(
+              Icons.settings,
+              size: 28,
+              color: Colors.black,
+            )),
       );
     });
   }

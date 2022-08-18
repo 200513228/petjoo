@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
@@ -95,8 +94,7 @@ abstract class StoreAddViewModelBase with Store {
   void successfull(BuildContext context) {
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(
-            builder: (context) => HomeView(title: 'Pazar İlanları')),
+        MaterialPageRoute(builder: (context) => HomeView(title: 'PAZAR')),
         (route) => false);
   }
 }

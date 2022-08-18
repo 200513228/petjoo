@@ -33,7 +33,6 @@ abstract class LoginViewModelBase with Store {
   @action
   void error(String value) {
     isLoading = !isLoading;
-    print(value);
   }
 
   @action

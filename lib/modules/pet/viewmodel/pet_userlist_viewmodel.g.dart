@@ -48,6 +48,17 @@ mixin _$PetUserListViewModel on PetUserListViewModelBase, Store {
   }
 
   @override
+  void newAdvert(BuildContext _) {
+    final _$actionInfo = _$PetUserListViewModelBaseActionController.startAction(
+        name: 'PetUserListViewModelBase.newAdvert');
+    try {
+      return super.newAdvert(_);
+    } finally {
+      _$PetUserListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 advertList: ${advertList}

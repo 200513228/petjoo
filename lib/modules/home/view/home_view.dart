@@ -102,11 +102,11 @@ class HomeView extends StatelessWidget {
 
   Widget pageSwitch(int id) {
     switch (title) {
-      case 'Pazar İlanları':
+      case 'PAZAR':
         return id == 1 ? StoreListView() : StoreUserListView();
-      case 'Pet İlanları':
+      case 'PET':
         return id == 1 ? PetListView() : PetUserList();
-      case 'Pet Nakil İlanları':
+      case 'PET NAKİL':
         return id == 1
             ? const TransportAdvertListView()
             : const TransportReservationListView();
@@ -117,11 +117,11 @@ class HomeView extends StatelessWidget {
 
   String get toCustom1Title {
     switch (title) {
-      case 'Pazar İlanları':
+      case 'PAZAR':
         return 'Tüm İlanlar';
-      case 'Pet İlanları':
+      case 'PET':
         return 'Tüm İlanlar';
-      case 'Pet Nakil İlanları':
+      case 'PET NAKİL':
         return 'Tüm İlanlar';
       default:
         return 'Tüm İlanlar';
@@ -130,12 +130,12 @@ class HomeView extends StatelessWidget {
 
   String get toCustom2Title {
     switch (title) {
-      case 'Pazar İlanları':
+      case 'PAZAR':
         return 'İlanlarım';
-      case 'Pet İlanları':
+      case 'PET':
         return 'İlanlarım';
-      case 'Pet Nakil İlanları':
-        return 'Rezervasyonlarım';
+      case 'PET NAKİL':
+        return 'Rezervasyonlar';
       default:
         return 'İlanlarım';
     }
@@ -143,11 +143,11 @@ class HomeView extends StatelessWidget {
 
   IconData get toCustom1Icon {
     switch (title) {
-      case 'Pazar İlanları':
+      case 'PAZAR':
         return Icons.book;
-      case 'Pet İlanları':
+      case 'PET':
         return Icons.book;
-      case 'Pet Nakil İlanları':
+      case 'PET NAKİL':
         return Icons.book;
       default:
         return Icons.book;
@@ -156,9 +156,11 @@ class HomeView extends StatelessWidget {
 
   IconData get toCustom2Icon {
     switch (title) {
-      case 'Pazar İlanları':
+      case 'PAZAR':
         return Icons.list;
-      case 'Pet İlanları':
+      case 'PET':
+        return Icons.list;
+      case 'PET NAKİL':
         return Icons.list;
       default:
         return Icons.list;
@@ -168,13 +170,13 @@ class HomeView extends StatelessWidget {
   void titleToPage() {
     Widget page = Container();
     switch (title) {
-      case 'Pazar İlanları':
+      case 'PAZAR':
         page = StoreListView();
         break;
-      case 'Pet İlanları':
+      case 'PET':
         page = PetListView();
         break;
-      case 'Pet Nakil İlanları':
+      case 'PET NAKİL':
         page = const TransportAdvertListView();
         break;
       default:

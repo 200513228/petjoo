@@ -38,23 +38,23 @@ class StoreAdvertModel {
     isSold = data['isSold'] ?? true;
   }
 
-  StoreAdvertModel.fromManuel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.userId,
-    required this.dialCode,
-    required this.phone,
-    required this.address,
-    required this.images,
-    required this.date,
-    required this.geoPoint,
-    required this.type,
-    required this.delivery,
-    required this.status,
-    required this.isSold,
-  });
+  StoreAdvertModel.empty() {
+    id = '';
+    title = '';
+    description = '';
+    price = 0;
+    userId = '';
+    dialCode = '';
+    phone = '';
+    address = '';
+    images = [];
+    date = Timestamp.now();
+    geoPoint = const GeoPoint(0, 0);
+    type = 0;
+    delivery = 0;
+    status = 0;
+    isSold = false;
+  }
 
   static Map<String, dynamic> modelToJson(StoreAdvertModel model) {
     return {

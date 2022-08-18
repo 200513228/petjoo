@@ -37,7 +37,7 @@ class PetUserList extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        // onTap: () => vm.newAdvert(_),
+        onTap: () => vm.newAdvert(_),
         child: Column(
           children: [
             AspectRatio(

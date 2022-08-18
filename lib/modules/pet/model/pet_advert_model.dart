@@ -20,11 +20,12 @@ class PetAdvertModel {
   int type = 0;
   String userId = '';
   int vaccine = 0;
+  String address = '';
 
   PetAdvertModel.fromQDS(QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
     var data = snapshot.data() as dynamic;
     id = snapshot.id;
-    animalAge = data['animalAge'] ?? '';
+    animalAge = data['animalAge'] ?? '0';
     animalGender = data['animalGender'] ?? 0;
     animalHabit = data['animalHabit'] ?? 0;
     animalSize = data['animalSize'] ?? 0;
@@ -42,5 +43,29 @@ class PetAdvertModel {
     type = data['type'] ?? 0;
     userId = data['userId'] ?? '';
     vaccine = data['vaccine'] ?? 0;
+    address = data['address'] ?? '';
+  }
+
+  PetAdvertModel.empty() {
+    id = '';
+    title = '';
+    description = '';
+    type = 0;
+    dialCode = '';
+    phone = '';
+    animalAge = '0';
+    animalGender = 0;
+    animalHabit = 0;
+    animalSize = 0;
+    animalType = 0;
+    toiletTraining = 0;
+    vaccine = 0;
+    infertility = 0;
+    date = Timestamp.now();
+    geoPoint = const GeoPoint(0, 0);
+    images = [];
+    isAdopted = false;
+    userId = '';
+    address = '';
   }
 }

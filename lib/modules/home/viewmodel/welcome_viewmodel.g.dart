@@ -33,6 +33,20 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
     return _$userLoginAsyncAction.run(() => super.userLogin());
   }
 
+  late final _$WelcomeViewModelBaseActionController =
+      ActionController(name: 'WelcomeViewModelBase', context: context);
+
+  @override
+  void goModule(BuildContext _, String title) {
+    final _$actionInfo = _$WelcomeViewModelBaseActionController.startAction(
+        name: 'WelcomeViewModelBase.goModule');
+    try {
+      return super.goModule(_, title);
+    } finally {
+      _$WelcomeViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

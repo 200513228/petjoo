@@ -12,55 +12,28 @@ class StoreAddViewModel = StoreAddViewModelBase with _$StoreAddViewModel;
 
 abstract class StoreAddViewModelBase with Store {
   @observable
-  StoreAdvertModel advert = StoreAdvertModel.fromManuel(
-    id: '',
-    title: '',
-    description: '',
-    price: 0,
-    userId: '',
-    dialCode: '',
-    phone: '',
-    address: '',
-    images: [],
-    date: Timestamp.now(),
-    geoPoint: const GeoPoint(0, 0),
-    type: 0,
-    delivery: 0,
-    status: 0,
-    isSold: false,
-  );
-
+  StoreAdvertModel advert = StoreAdvertModel.empty();
   @observable
   GlobalKey<FormState> formKey = GlobalKey();
-
   @observable
   TextEditingController titleCont = TextEditingController();
-
   @observable
   TextEditingController descCont = TextEditingController();
-
   @observable
   TextEditingController phoneCont =
       TextEditingController(text: CurrentUser.phone);
-
   @observable
   TextEditingController priceCont = TextEditingController();
-
   @observable
   TextEditingController addressCont = TextEditingController();
-
   @observable
   String? dialCode = CurrentUser.dialCode != '' ? CurrentUser.dialCode : null;
-
   @observable
   num? price;
-
   @observable
   int? type;
-
   @observable
   int? delivery;
-
   @observable
   int? status;
 

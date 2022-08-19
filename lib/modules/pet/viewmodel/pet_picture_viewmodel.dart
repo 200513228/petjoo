@@ -45,7 +45,7 @@ abstract class PetPictureViewModelBase with Store {
   void successfull(BuildContext context) {
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => HomeView(title: 'PET')),
+        MaterialPageRoute(builder: (context) => HomeView(title: 'İLANLAR')),
         (route) => false);
   }
 }

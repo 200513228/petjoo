@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/modules/chat/view/chat_list_view.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/home/viewmodel/home_viewmodel.dart';
 import 'package:petjoo/modules/pet/view/pet_list_view.dart';
@@ -8,7 +9,6 @@ import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
 import 'package:petjoo/presentation/animal_transport/view/transport_advert_list_view.dart';
-import 'package:petjoo/presentation/chat/view/chat_list_view.dart';
 import 'package:petjoo/presentation/transport_reservation/view/transport_reservation_list_view.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
@@ -39,7 +39,7 @@ class HomeView extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () {
-              vm.navigate(_, const ChatListView(), true);
+              vm.navigate(_, ChatListView(), true);
             },
             icon: const Icon(Icons.message_rounded))
       ],
@@ -104,7 +104,7 @@ class HomeView extends StatelessWidget {
     switch (title) {
       case 'PAZAR':
         return id == 1 ? StoreListView() : StoreUserListView();
-      case 'PET':
+      case 'İLANLAR':
         return id == 1 ? PetListView() : PetUserList();
       case 'PET NAKİL':
         return id == 1
@@ -119,7 +119,7 @@ class HomeView extends StatelessWidget {
     switch (title) {
       case 'PAZAR':
         return 'Tüm İlanlar';
-      case 'PET':
+      case 'İLANLAR':
         return 'Tüm İlanlar';
       case 'PET NAKİL':
         return 'Tüm İlanlar';
@@ -132,7 +132,7 @@ class HomeView extends StatelessWidget {
     switch (title) {
       case 'PAZAR':
         return 'İlanlarım';
-      case 'PET':
+      case 'İLANLAR':
         return 'İlanlarım';
       case 'PET NAKİL':
         return 'Rezervasyonlar';
@@ -145,7 +145,7 @@ class HomeView extends StatelessWidget {
     switch (title) {
       case 'PAZAR':
         return Icons.book;
-      case 'PET':
+      case 'İLANLAR':
         return Icons.book;
       case 'PET NAKİL':
         return Icons.book;
@@ -158,7 +158,7 @@ class HomeView extends StatelessWidget {
     switch (title) {
       case 'PAZAR':
         return Icons.list;
-      case 'PET':
+      case 'İLANLAR':
         return Icons.list;
       case 'PET NAKİL':
         return Icons.list;
@@ -173,7 +173,7 @@ class HomeView extends StatelessWidget {
       case 'PAZAR':
         page = StoreListView();
         break;
-      case 'PET':
+      case 'İLANLAR':
         page = PetListView();
         break;
       case 'PET NAKİL':

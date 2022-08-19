@@ -53,11 +53,12 @@ class WelcomeView extends StatelessWidget {
             children: [
               Expanded(
                 flex: 10,
-                child: bigButton(_, Icons.pets, 'PET'),
+                child: bigButton(_, Icons.pets, 'İLANLAR'),
               ),
               Expanded(
                 flex: 6,
-                child: smallButton(_, FontAwesomeIcons.userDoctor, 'VETERİNER'),
+                child:
+                    smallButton(_, FontAwesomeIcons.compassDrafting, 'YAKINDA'),
               ),
             ],
           )),
@@ -117,7 +118,7 @@ class WelcomeView extends StatelessWidget {
 
   Widget smallButton(BuildContext _, IconData icon, String title) {
     return InkWell(
-      onTap: title == 'VETERİNER'
+      onTap: title == 'YAKINDA'
           ? null
           : () {
               vm.goModule(_, title);

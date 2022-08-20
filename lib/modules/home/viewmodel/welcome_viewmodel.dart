@@ -10,11 +10,16 @@ abstract class WelcomeViewModelBase with Store {
   @observable
   bool userLog = false;
 
+  @observable
+  bool isLoading = false;
+
   @action
   Future userLogin() async {
     if (UserService.auth.currentUser != null) {
+      isLoading = !isLoading;
       await UserService.currentUser();
       userLog = !userLog;
+      isLoading = !isLoading;
     }
   }
 

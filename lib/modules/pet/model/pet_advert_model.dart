@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 
 class PetAdvertModel {
   String id = '';
@@ -67,5 +68,29 @@ class PetAdvertModel {
     isAdopted = false;
     userId = '';
     address = '';
+  }
+
+  static Map<String, dynamic> modelToJson(PetAdvertModel model) {
+    return {
+      'title': model.title,
+      'description': model.description,
+      'type': model.type,
+      'dialCode': model.dialCode,
+      'phone': model.phone,
+      'animalAge': model.animalAge,
+      'animalGender': model.animalGender,
+      'animalHabit': model.animalHabit,
+      'animalSize': model.animalSize,
+      'animalType': model.animalType,
+      'toiletTraining': model.toiletTraining,
+      'vaccine': model.vaccine,
+      'infertility': model.infertility,
+      'isAdopted': false,
+      'userId': CurrentUser.id,
+      'address': model.address,
+      'images': [],
+      'date': Timestamp.now(),
+      'geoPoint': const GeoPoint(0, 0),
+    };
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/core/widgets/loading.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/viewmodel/store_picture_viewmodel.dart';
 
@@ -20,12 +21,14 @@ class StorePictureView extends StatelessWidget {
 
   Widget buildBody() {
     return Observer(builder: (_) {
-      return GridView(
-        padding: const EdgeInsets.all(15),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
-        children: images,
-      );
+      return vm.isLoading
+          ? loading()
+          : GridView(
+              padding: const EdgeInsets.all(15),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
+              children: images,
+            );
     });
   }
 
@@ -53,6 +56,13 @@ class StorePictureView extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       title: const Text('Fotoğraf Seçimi'),
+    );
+  }
+
+  Widget loading() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [Loading()],
     );
   }
 

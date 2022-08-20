@@ -22,7 +22,7 @@ abstract class PetAddViewModelBase with Store {
   TextEditingController phoneCont =
       TextEditingController(text: CurrentUser.phone);
   @observable
-  String? dialCode = CurrentUser.dialCode != '' ? CurrentUser.dialCode : null;
+  String? dialCode = CurrentUser.dialCode != '' ? CurrentUser.dialCode : '+90';
   @observable
   TextEditingController ageCont = TextEditingController();
   @observable

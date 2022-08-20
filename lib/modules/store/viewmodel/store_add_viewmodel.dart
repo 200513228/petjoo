@@ -26,7 +26,7 @@ abstract class StoreAddViewModelBase with Store {
   @observable
   TextEditingController addressCont = TextEditingController();
   @observable
-  String? dialCode = CurrentUser.dialCode != '' ? CurrentUser.dialCode : null;
+  String? dialCode = CurrentUser.dialCode != '' ? CurrentUser.dialCode : '+90';
   @observable
   num? price;
   @observable

@@ -41,6 +41,22 @@ mixin _$StorePictureViewModel on StorePictureViewModelBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: 'StorePictureViewModelBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$imagePickAsyncAction =
       AsyncAction('StorePictureViewModelBase.imagePick', context: context);
 
@@ -94,7 +110,8 @@ mixin _$StorePictureViewModel on StorePictureViewModelBase, Store {
   String toString() {
     return '''
 advert: ${advert},
-imageList: ${imageList}
+imageList: ${imageList},
+isLoading: ${isLoading}
     ''';
   }
 }

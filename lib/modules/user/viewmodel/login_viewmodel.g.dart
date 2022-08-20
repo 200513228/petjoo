@@ -80,11 +80,11 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
   }
 
   @override
-  void error(String value) {
+  void error(BuildContext context, String value) {
     final _$actionInfo = _$LoginViewModelBaseActionController.startAction(
         name: 'LoginViewModelBase.error');
     try {
-      return super.error(value);
+      return super.error(context, value);
     } finally {
       _$LoginViewModelBaseActionController.endAction(_$actionInfo);
     }

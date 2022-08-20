@@ -12,7 +12,7 @@ class Loading extends StatefulWidget {
     Key? key,
     this.dotOneColor = const Color(0xFF0095D2),
     this.dotTwoColor = const Color(0xFF008375),
-    this.dotThreeColor = const Color(0xFFFFC011),
+    this.dotThreeColor = Colors.red,
     this.dotRadius = 10,
     this.background,
     this.duration = const Duration(milliseconds: 1000),
@@ -84,7 +84,8 @@ class _Loading extends State<Loading> with SingleTickerProviderStateMixin {
                                 : 1.0 - animation_1.value),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 8),
                         child: Dot(
                           radius: widget.dotRadius,
                           color: widget.dotOneColor,

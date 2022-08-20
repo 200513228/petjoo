@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:petjoo/core/widgets/loading.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
 import 'package:petjoo/modules/home/viewmodel/welcome_viewmodel.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
@@ -191,13 +192,16 @@ class WelcomeView extends StatelessWidget {
                       Icons.person,
                       color: Colors.black,
                     )),
-            title: vm.userLog
-                ? Text(
-                    'Hoşgeldin, ${CurrentUser.name}',
-                    style: const TextStyle(color: Colors.black, fontSize: 16),
-                  )
-                : const Text('Giriş Yapmak İçin Tıklayınız',
-                    style: TextStyle(color: Colors.black, fontSize: 16)),
+            title: vm.isLoading
+                ? const Loading()
+                : vm.userLog
+                    ? Text(
+                        'Hoşgeldin, ${CurrentUser.name}',
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 16),
+                      )
+                    : const Text('Giriş Yapmak İçin Tıklayınız',
+                        style: TextStyle(color: Colors.black, fontSize: 16)),
             trailing: const Icon(
               Icons.settings,
               size: 28,

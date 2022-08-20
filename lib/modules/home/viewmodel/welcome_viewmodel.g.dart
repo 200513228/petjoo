@@ -25,6 +25,22 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: 'WelcomeViewModelBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$userLoginAsyncAction =
       AsyncAction('WelcomeViewModelBase.userLogin', context: context);
 
@@ -50,7 +66,8 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
   @override
   String toString() {
     return '''
-userLog: ${userLog}
+userLog: ${userLog},
+isLoading: ${isLoading}
     ''';
   }
 }

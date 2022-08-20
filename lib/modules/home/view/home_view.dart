@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/modules/base/please_auth.dart';
 import 'package:petjoo/modules/chat/view/chat_list_view.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/home/viewmodel/home_viewmodel.dart';
@@ -8,6 +9,7 @@ import 'package:petjoo/modules/pet/view/pet_userlist_view.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/presentation/animal_transport/view/transport_advert_list_view.dart';
 import 'package:petjoo/presentation/transport_reservation/view/transport_reservation_list_view.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
@@ -39,7 +41,12 @@ class HomeView extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () {
-              vm.navigate(_, ChatListView(), true);
+              if (CurrentUser.id == '') {
+                showDialog(
+                    context: _, builder: (context) => const PleaseAuth());
+              } else {
+                vm.navigate(_, ChatListView(), true);
+              }
             },
             icon: const Icon(Icons.message_rounded))
       ],
@@ -86,7 +93,12 @@ class HomeView extends StatelessWidget {
         fabLocation: StylishBarFabLocation.center,
         onTap: (id) {
           id == 0 ? vm.navigate(_, WelcomeView(), false) : null;
-          id == 3 ? vm.navigate(_, SettingsView(), true) : null;
+          id == 3
+              ? CurrentUser.id == ''
+                  ? showDialog(
+                      context: _, builder: (context) => const PleaseAuth())
+                  : vm.navigate(_, SettingsView(), true)
+              : null;
           id == 1 || id == 2 ? vm.swithPage(pageSwitch(id!), id) : null;
         },
       );

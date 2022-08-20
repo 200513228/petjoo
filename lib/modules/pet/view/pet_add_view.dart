@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
 import 'package:petjoo/core/widgets/dropdown_x.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
@@ -28,12 +27,11 @@ class PetAddView extends StatelessWidget {
     // if (model != null) vm.preEdit(model!);
     return Scaffold(
       appBar: buildAppBar(),
-      floatingActionButton: buildFab(context),
-      body: buildBody(),
+      body: buildBody(context),
     );
   }
 
-  Widget buildBody() {
+  Widget buildBody(BuildContext context) {
     return Observer(builder: (_) {
       return Padding(
         padding: const EdgeInsets.all(10),
@@ -45,6 +43,7 @@ class PetAddView extends StatelessWidget {
                 ...advertTiles,
                 const SizedBox(height: 20),
                 ...petTiles,
+                nextStepButton(context),
               ],
             ),
           ),
@@ -307,12 +306,20 @@ class PetAddView extends StatelessWidget {
     ];
   }
 
-  Widget buildFab(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        model != null ? vm.update(context) : vm.nextStep(context);
-      },
-      child: Icon(model != null ? Icons.done : FontAwesomeIcons.photoFilm),
+  Widget nextStepButton(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            child: ElevatedButton(
+                onPressed: () {
+                  model != null ? vm.update(context) : vm.nextStep(context);
+                },
+                child: const Text('Sonraki Adım')),
+          ),
+        )
+      ],
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/modules/base/ui_snackbar.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/user/service/user_service.dart';
 import 'package:petjoo/modules/user/view/register_view.dart';
@@ -19,11 +20,12 @@ abstract class LoginViewModelBase with Store {
   Future login(BuildContext _) async {
     isLoading = !isLoading;
     UserService.login(emailCont.text, passCont.text)
-        .then((value) => value == 'LOGIN' ? succesful(_) : error(value));
+        .then((value) => value == 'LOGIN' ? succesful(_) : error(_, value));
   }
 
   @action
   void succesful(BuildContext _) {
+    isLoading = !isLoading;
     Navigator.pushAndRemoveUntil(
         _,
         MaterialPageRoute(builder: (context) => WelcomeView()),
@@ -31,8 +33,9 @@ abstract class LoginViewModelBase with Store {
   }
 
   @action
-  void error(String value) {
+  void error(BuildContext context, String value) {
     isLoading = !isLoading;
+    ScaffoldMessenger.of(context).showSnackBar(uiSnackBar(value));
   }
 
   @action

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/core/widgets/loading.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_picture_viewmodel.dart';
 
@@ -19,19 +20,21 @@ class PetPictureView extends StatelessWidget {
 
   Widget buildBody() {
     return Observer(builder: (_) {
-      return GridView(
-        padding: const EdgeInsets.all(15),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
-        children: images,
-      );
+      return vm.isLoading
+          ? loading()
+          : GridView(
+              padding: const EdgeInsets.all(15),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
+              children: images,
+            );
     });
   }
 
   List<Widget> get images {
     return [
       if (vm.imageList.length < 2) pickerButton,
-      ...vm.imageList.map((e) => Image.file(e)),
+      ...vm.imageList.map((e) => Image.file(e!)),
     ];
   }
 
@@ -59,6 +62,13 @@ class PetPictureView extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () async => await vm.saveAdvert(context),
       child: const Icon(Icons.done_rounded),
+    );
+  }
+
+  Widget loading() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [Loading()],
     );
   }
 }

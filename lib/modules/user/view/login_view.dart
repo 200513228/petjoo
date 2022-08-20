@@ -37,9 +37,9 @@ class LoginView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  textField(vm.emailCont, 'E-Posta'),
+                  textField(vm.emailCont, 'E-Posta', false),
                   const SizedBox(height: 20),
-                  textField(vm.passCont, 'Şifre'),
+                  textField(vm.passCont, 'Şifre', true),
                   const SizedBox(height: 5),
                   Container(
                     margin: const EdgeInsets.only(right: 10),
@@ -55,9 +55,11 @@ class LoginView extends StatelessWidget {
     });
   }
 
-  Widget textField(TextEditingController cont, String label) {
+  Widget textField(TextEditingController cont, String label, bool isPass) {
     return TextFormField(
+      keyboardType: isPass ? TextInputType.text : TextInputType.emailAddress,
       controller: cont,
+      obscureText: isPass,
       decoration: InputDecoration(labelText: label),
     );
   }
@@ -66,11 +68,14 @@ class LoginView extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: ElevatedButton(
-            onPressed: () async {
-              await vm.login(context);
-            },
-            child: const Text('Giriş Yap'),
+          child: Hero(
+            tag: 'button',
+            child: ElevatedButton(
+              onPressed: () async {
+                await vm.login(context);
+              },
+              child: const Text('Giriş Yap'),
+            ),
           ),
         ),
       ],

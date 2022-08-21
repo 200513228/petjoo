@@ -17,34 +17,36 @@ class ChatTileView extends StatelessWidget {
     List findUser = model.userIds;
     findUser.remove(CurrentUser.id);
     vm.getUserInfo(findUser.first);
-    return Observer(builder: (_) {
-      return vm.isLoading
-          ? const ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              title: Loading(),
-              subtitle: Text(''),
-            )
-          : ListTile(
-              onTap: () {
-                model.lastMessage.senderId != CurrentUser.id
-                    ? vm.readChat(model.id)
-                    : null;
-                vm.openChat(context, model);
-              },
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              leading: image(),
-              title: Hero(
-                  tag: 'name',
-                  child: Material(
-                      type: MaterialType.transparency,
-                      child: Text(
-                        vm.name,
-                        style: const TextStyle(fontSize: 16),
-                      ))),
-              subtitle: Text(model.lastMessage.content),
-              trailing: Text(dateToString(model.lastMessage.date)));
-    });
+    return Container(
+      margin: const EdgeInsets.all(10),
+      child: Observer(builder: (_) {
+        return vm.isLoading
+            ? const ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                title: Loading(),
+                subtitle: Text(''),
+              )
+            : ListTile(
+                onTap: () {
+                  model.lastMessage.senderId != CurrentUser.id
+                      ? vm.readChat(model.id)
+                      : null;
+                  vm.openChat(context, model);
+                },
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                leading: image(),
+                title: Material(
+                    type: MaterialType.transparency,
+                    child: Text(
+                      vm.name,
+                      style: const TextStyle(fontSize: 16),
+                    )),
+                subtitle: Text(model.lastMessage.content),
+                trailing: Text(dateToString(model.lastMessage.date)));
+      }),
+    );
   }
 
   Widget image() {

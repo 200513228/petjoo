@@ -65,6 +65,22 @@ mixin _$PetDetailViewModel on PetDetailViewModelBase, Store {
     return _$userInfoAsyncAction.run(() => super.userInfo(uid));
   }
 
+  late final _$changeAdoptAsyncAction =
+      AsyncAction('PetDetailViewModelBase.changeAdopt', context: context);
+
+  @override
+  Future<dynamic> changeAdopt(bool isAdopt, BuildContext _) {
+    return _$changeAdoptAsyncAction.run(() => super.changeAdopt(isAdopt, _));
+  }
+
+  late final _$callAsyncAction =
+      AsyncAction('PetDetailViewModelBase.call', context: context);
+
+  @override
+  Future<dynamic> call() {
+    return _$callAsyncAction.run(() => super.call());
+  }
+
   late final _$PetDetailViewModelBaseActionController =
       ActionController(name: 'PetDetailViewModelBase', context: context);
 
@@ -80,11 +96,22 @@ mixin _$PetDetailViewModel on PetDetailViewModelBase, Store {
   }
 
   @override
-  void call() {
+  void error(BuildContext _) {
     final _$actionInfo = _$PetDetailViewModelBaseActionController.startAction(
-        name: 'PetDetailViewModelBase.call');
+        name: 'PetDetailViewModelBase.error');
     try {
-      return super.call();
+      return super.error(_);
+    } finally {
+      _$PetDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void successfull(BuildContext context) {
+    final _$actionInfo = _$PetDetailViewModelBaseActionController.startAction(
+        name: 'PetDetailViewModelBase.successfull');
+    try {
+      return super.successfull(context);
     } finally {
       _$PetDetailViewModelBaseActionController.endAction(_$actionInfo);
     }

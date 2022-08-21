@@ -19,6 +19,7 @@ final chatProvider = ChangeNotifierProvider((ref) => ChatProvider());
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   NotificationService.instance.initialize(_firebaseMessagingBackgroundHandler);

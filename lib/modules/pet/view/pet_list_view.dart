@@ -132,29 +132,6 @@ class PetListView extends StatelessWidget {
     );
   }
 
-  String typeToString(int type) {
-    switch (type) {
-      case 0:
-        return 'Diğer';
-      case 1:
-        return 'Acil';
-      case 2:
-        return 'Kayıp';
-      case 3:
-        return 'Yavru';
-      case 4:
-        return 'Engelsiz';
-      case 5:
-        return 'Geçici Yuva';
-      case 6:
-        return 'Kalıcı Yuva';
-      case 7:
-        return 'Süt Anne';
-      default:
-        return 'Diğer';
-    }
-  }
-
   Color typeToColor(int type) {
     switch (type) {
       case 0:
@@ -175,27 +152,6 @@ class PetListView extends StatelessWidget {
         return Colors.blueAccent;
       default:
         return Colors.orangeAccent;
-    }
-  }
-
-  String animalTypeToString(int delivery) {
-    switch (delivery) {
-      case 0:
-        return 'Diğer';
-      case 1:
-        return 'Diğer';
-      case 2:
-        return 'Köpek';
-      case 3:
-        return 'Kedi';
-      case 4:
-        return 'Kuş';
-      case 5:
-        return 'Akvaryum';
-      case 6:
-        return 'Kemirgen';
-      default:
-        return 'Diğer';
     }
   }
 

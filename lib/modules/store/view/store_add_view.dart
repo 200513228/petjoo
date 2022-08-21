@@ -204,7 +204,7 @@ class StoreAddView extends StatelessWidget {
           controller: vm.addressCont,
           keyboardType: TextInputType.streetAddress,
           textInputAction: TextInputAction.next,
-          maxLength: 500,
+          maxLength: 50,
           maxLines: 4,
           decoration: const InputDecoration(
             label: Text('Adres'),

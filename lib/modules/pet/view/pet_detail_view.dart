@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
+import 'package:petjoo/modules/base/please_auth.dart';
+import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_genders.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_habits.dart';
@@ -8,6 +11,7 @@ import 'package:petjoo/modules/pet/model/pet_advert_infertilities.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_sizes.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_toilets.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_vaccines.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
@@ -35,22 +39,20 @@ class PetDetailView extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              Expanded(
-                flex: 3,
-                child: gallery(context),
-              ),
+              Expanded(flex: 3, child: gallery(context)),
               Expanded(
                 flex: 7,
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
                   color: colorPalette['secondary'],
-                  child: Column(
-                    children: [
-                      title(),
-                      // userCard(),
-                      Expanded(child: advertInfo),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        title(),
+                        advertInfo,
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -70,15 +72,15 @@ class PetDetailView extends StatelessWidget {
             Expanded(
               child: advertInfoCard(
                   petAdvertAnimals[model.animalType] as String,
-                  FontAwesomeIcons.dog,
+                  animalTypeToIcon(model.animalType),
                   Colors.orangeAccent,
                   'Tür'),
             ),
             Expanded(
               child: advertInfoCard(
                   petAdvertGenders[model.animalGender] as String,
-                  Icons.male_rounded,
-                  Colors.blueAccent,
+                  genderToIcon(model.animalGender),
+                  genderToColor(model.animalGender),
                   'Cins'),
             ),
             Expanded(
@@ -120,7 +122,8 @@ class PetDetailView extends StatelessWidget {
             ),
           ],
         ),
-        Expanded(child: advertDesc)
+        advertDesc,
+        advertAdress,
       ],
     );
   }
@@ -130,7 +133,7 @@ class PetDetailView extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 7.5),
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
-          color: Color.fromARGB(78, 235, 228, 100),
+          color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(16))),
       child: Column(
         children: [
@@ -177,6 +180,74 @@ class PetDetailView extends StatelessWidget {
     );
   }
 
+  Widget get advertAdress {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.black),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Adres',
+                      style: TextStyle(fontSize: 15, color: Colors.white54),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        model.address,
+                        maxLines: 1,
+                        style: const TextStyle(fontSize: 16),
+                      )),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            flex: 2,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.black),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      dateToString(model.date),
+                      style:
+                          const TextStyle(fontSize: 15, color: Colors.white54),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${petAdvertTypes[model.type]}',
+                        style: TextStyle(
+                            fontSize: 16, color: typeToColor(model.type)),
+                      )),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget bottomBar(BuildContext context) {
     return Container(
         decoration: const BoxDecoration(
@@ -190,76 +261,94 @@ class PetDetailView extends StatelessWidget {
   }
 
   Widget bottomContent(BuildContext _) {
-    return SafeArea(
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              children: const [
-                // if (model.userId == CurrentUser.id)
-                //   Expanded(
-                //     child: FloatingActionButton.extended(
-                //       heroTag: null,
-                //       backgroundColor: Colors.grey.shade800,
-                //       label: Text(
-                //         model.isSold ? 'Satılık Mı?' : 'Satıldı Mı?',
-                //         style:
-                //             const TextStyle(color: Colors.white, fontSize: 22),
-                //       ),
-                //       onPressed: () {
-                //         vm.changeSold(!model.isSold, _);
-                //       },
-                //     ),
-                //   ),
-                // if (model.userId == CurrentUser.id) const SizedBox(width: 10),
-                Expanded(
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    backgroundColor: Colors.black,
-                    label: Text(
-                      '',
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+    return Observer(builder: (_) {
+      return SafeArea(
+        child: Row(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  if (model.userId == CurrentUser.id)
+                    Expanded(
+                      child: FloatingActionButton.extended(
+                        heroTag: null,
+                        backgroundColor: Colors.grey.shade800,
+                        label: Text(
+                          model.isAdopted
+                              ? 'Sahiplendirme Formu'
+                              : 'Sahiplendirildi Mi?',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 22),
+                        ),
+                        onPressed: () {
+                          vm.changeAdopt(!model.isAdopted, _);
+                        },
+                      ),
                     ),
-                    onPressed: null,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-          FloatingActionButton(
-              elevation: model.phone == '' ? 0 : null,
-              onPressed: model.phone == '' ? null : vm.call,
-              child: Icon(
-                Icons.call_rounded,
-                color: model.phone == '' ? Colors.grey : Colors.greenAccent,
-              )),
-          ...CurrentUser.id == model.userId
-              ? [
-                  const SizedBox(width: 10),
-                  FloatingActionButton(
-                      heroTag: null,
-                      onPressed: () {
-                        // vm.editModel(model, _);
-                      },
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.orangeAccent,
-                      ))
-                ]
-              : [
-                  const SizedBox(width: 10),
-                  FloatingActionButton(
-                      heroTag: null,
-                      onPressed: () {},
-                      child: const Icon(
-                        Icons.message_rounded,
-                        color: Colors.orangeAccent,
-                      ))
+                  if (model.userId != CurrentUser.id)
+                    Expanded(
+                      child: FloatingActionButton.extended(
+                        heroTag: null,
+                        backgroundColor: Colors.black,
+                        label: Text(
+                          vm.userName ?? 'Kullanıcı Bulunamadı',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
+                        ),
+                        onPressed: null,
+                      ),
+                    ),
                 ],
-        ],
-      ),
-    );
+              ),
+            ),
+            const SizedBox(width: 10),
+            FloatingActionButton(
+                elevation: model.phone == '' ? 0 : null,
+                onPressed: () {
+                  if (CurrentUser.id == '') {
+                    showDialog(
+                        context: _, builder: (context) => const PleaseAuth());
+                  } else {
+                    model.phone == '' ? null : vm.call();
+                  }
+                },
+                child: Icon(
+                  Icons.call_rounded,
+                  color: model.phone == '' ? Colors.grey : Colors.greenAccent,
+                )),
+            ...CurrentUser.id == model.userId
+                ? [
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
+                        heroTag: null,
+                        onPressed: () {},
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.orangeAccent,
+                        ))
+                  ]
+                : [
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
+                        heroTag: null,
+                        onPressed: () {
+                          if (CurrentUser.id == '') {
+                            showDialog(
+                                context: _,
+                                builder: (context) => const PleaseAuth());
+                          } else {
+                            model.phone == '' ? null : vm.call();
+                          }
+                        },
+                        child: const Icon(
+                          Icons.message_rounded,
+                          color: Colors.orangeAccent,
+                        ))
+                  ],
+          ],
+        ),
+      );
+    });
   }
 
   Widget title() {
@@ -326,5 +415,75 @@ class PetDetailView extends StatelessWidget {
       centerTitle: true,
       title: const Text('İlan Detayları'),
     );
+  }
+
+  Color typeToColor(int type) {
+    switch (type) {
+      case 0:
+        return Colors.orangeAccent;
+      case 1:
+        return Colors.redAccent;
+      case 2:
+        return Colors.redAccent;
+      case 3:
+        return Colors.blueAccent;
+      case 4:
+        return Colors.greenAccent;
+      case 5:
+        return Colors.orangeAccent;
+      case 6:
+        return Colors.orangeAccent;
+      case 7:
+        return Colors.blueAccent;
+      default:
+        return Colors.orangeAccent;
+    }
+  }
+
+  Color genderToColor(int type) {
+    switch (type) {
+      case 0:
+        return Colors.greenAccent;
+      case 1:
+        return Colors.blueAccent;
+      case 2:
+        return Colors.pinkAccent;
+      default:
+        return Colors.greenAccent;
+    }
+  }
+
+  IconData genderToIcon(int status) {
+    switch (status) {
+      case 0:
+        return Icons.question_mark;
+      case 1:
+        return Icons.male_rounded;
+      case 2:
+        return Icons.female_rounded;
+      default:
+        return Icons.male_rounded;
+    }
+  }
+
+  IconData animalTypeToIcon(int status) {
+    switch (status) {
+      case 0:
+        return Icons.more_horiz_rounded;
+      case 1:
+        return Icons.more_horiz_rounded;
+      case 2:
+        return FontAwesomeIcons.dog;
+      case 3:
+        return FontAwesomeIcons.cat;
+      case 4:
+        return FontAwesomeIcons.kiwiBird;
+      case 5:
+        return FontAwesomeIcons.fish;
+      case 6:
+        return FontAwesomeIcons.bug;
+      default:
+        return Icons.more_horiz_rounded;
+    }
   }
 }

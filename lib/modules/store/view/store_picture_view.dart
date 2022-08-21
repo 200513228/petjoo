@@ -67,9 +67,13 @@ class StorePictureView extends StatelessWidget {
   }
 
   Widget buildFab(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () async => await vm.saveAdvert(context),
-      child: const Icon(Icons.done_rounded),
-    );
+    return Observer(builder: (_) {
+      return vm.isLoading
+          ? Container()
+          : FloatingActionButton(
+              onPressed: () async => await vm.saveAdvert(context),
+              child: const Icon(Icons.done_rounded),
+            );
+    });
   }
 }

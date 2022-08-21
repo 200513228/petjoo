@@ -39,12 +39,13 @@ class StoreDetailView extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                   color: colorPalette['secondary'],
-                  child: Column(
-                    children: [
-                      title(),
-                      // userCard(),
-                      Expanded(child: advertInfo),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        title(),
+                        advertInfo,
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -59,8 +60,6 @@ class StoreDetailView extends StatelessWidget {
   Widget get advertInfo {
     return Column(
       children: [
-        userCard(),
-        advertAdress,
         Row(
           children: [
             Expanded(
@@ -80,7 +79,8 @@ class StoreDetailView extends StatelessWidget {
             ),
           ],
         ),
-        Expanded(child: advertDesc)
+        advertDesc,
+        advertAdress,
       ],
     );
   }
@@ -184,27 +184,66 @@ class StoreDetailView extends StatelessWidget {
 
   Widget get advertAdress {
     return Container(
-      padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: Colors.black),
-      child: Column(
+      child: Row(
         children: [
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'Adres',
-              style: TextStyle(fontSize: 15, color: Colors.white54),
+          Expanded(
+            flex: 5,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.black),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Adres',
+                      style: TextStyle(fontSize: 15, color: Colors.white54),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        model.address,
+                        maxLines: 1,
+                        style: const TextStyle(fontSize: 16),
+                      )),
+                ],
+              ),
             ),
           ),
-          const SizedBox(height: 5),
-          Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                model.address,
-                style: const TextStyle(fontSize: 16),
-              )),
+          const SizedBox(width: 10),
+          Expanded(
+            flex: 2,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.black),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      dateToString(model.date),
+                      style:
+                          const TextStyle(fontSize: 15, color: Colors.white54),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${model.price}₺',
+                        style: const TextStyle(fontSize: 16),
+                      )),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -223,76 +262,79 @@ class StoreDetailView extends StatelessWidget {
   }
 
   Widget bottomContent(BuildContext _) {
-    return SafeArea(
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                if (model.userId == CurrentUser.id)
-                  Expanded(
-                    child: FloatingActionButton.extended(
-                      heroTag: null,
-                      backgroundColor: Colors.grey.shade800,
-                      label: Text(
-                        model.isSold ? 'Satılık Mı?' : 'Satıldı Mı?',
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 22),
+    return Observer(builder: (_) {
+      return SafeArea(
+        child: Row(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  if (vm.advert!.userId == CurrentUser.id)
+                    Expanded(
+                      child: FloatingActionButton.extended(
+                        heroTag: null,
+                        backgroundColor: Colors.grey.shade800,
+                        label: Text(
+                          model.isSold ? 'Satılık Mı?' : 'Satıldı Mı?',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 22),
+                        ),
+                        onPressed: () {
+                          vm.changeSold(!model.isSold, _);
+                        },
                       ),
-                      onPressed: () {
-                        vm.changeSold(!model.isSold, _);
-                      },
                     ),
-                  ),
-                if (model.userId == CurrentUser.id) const SizedBox(width: 10),
-                Expanded(
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    backgroundColor: Colors.black,
-                    label: Text(
-                      '${model.price} ₺',
-                      style: const TextStyle(color: Colors.white, fontSize: 22),
+                  if (vm.advert!.userId != CurrentUser.id)
+                    Expanded(
+                      child: FloatingActionButton.extended(
+                        heroTag: null,
+                        backgroundColor: Colors.black,
+                        label: Text(
+                          vm.userName ?? 'Kullanıcı Bulunamadı',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
+                        ),
+                        onPressed: null,
+                      ),
                     ),
-                    onPressed: null,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-          FloatingActionButton(
-              elevation: model.phone == '' ? 0 : null,
-              onPressed: model.phone == '' ? null : vm.call,
-              child: Icon(
-                Icons.call_rounded,
-                color: model.phone == '' ? Colors.grey : Colors.greenAccent,
-              )),
-          ...CurrentUser.id == model.userId
-              ? [
-                  const SizedBox(width: 10),
-                  FloatingActionButton(
-                      heroTag: null,
-                      onPressed: () {
-                        vm.editModel(model, _);
-                      },
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.orangeAccent,
-                      ))
-                ]
-              : [
-                  const SizedBox(width: 10),
-                  FloatingActionButton(
-                      heroTag: null,
-                      onPressed: () {},
-                      child: const Icon(
-                        Icons.message_rounded,
-                        color: Colors.orangeAccent,
-                      ))
                 ],
-        ],
-      ),
-    );
+              ),
+            ),
+            const SizedBox(width: 10),
+            FloatingActionButton(
+                elevation: model.phone == '' ? 0 : null,
+                onPressed: model.phone == '' ? null : vm.call,
+                child: Icon(
+                  Icons.call_rounded,
+                  color: model.phone == '' ? Colors.grey : Colors.greenAccent,
+                )),
+            ...CurrentUser.id == model.userId
+                ? [
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
+                        heroTag: null,
+                        onPressed: () {
+                          vm.editModel(model, _);
+                        },
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.orangeAccent,
+                        ))
+                  ]
+                : [
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
+                        heroTag: null,
+                        onPressed: () {},
+                        child: const Icon(
+                          Icons.message_rounded,
+                          color: Colors.orangeAccent,
+                        ))
+                  ],
+          ],
+        ),
+      );
+    });
   }
 
   Widget title() {

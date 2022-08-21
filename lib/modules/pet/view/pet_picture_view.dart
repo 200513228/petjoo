@@ -60,10 +60,14 @@ class PetPictureView extends StatelessWidget {
   }
 
   Widget buildFab(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => vm.saveAdvert(context),
-      child: const Icon(Icons.done_rounded),
-    );
+    return Observer(builder: (_) {
+      return vm.isLoading
+          ? Container()
+          : FloatingActionButton(
+              onPressed: () => vm.saveAdvert(context),
+              child: const Icon(Icons.done_rounded),
+            );
+    });
   }
 
   Widget loading() {

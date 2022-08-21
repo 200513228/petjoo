@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/modules/base/please_auth.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_userlist_viewmodel.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
 
 class StoreUserListView extends StatelessWidget {
@@ -147,7 +149,13 @@ class StoreUserListView extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () => vm.newAdvert(_),
+        onTap: () {
+          if (CurrentUser.id == '') {
+            showDialog(context: _, builder: (context) => const PleaseAuth());
+          } else {
+            vm.newAdvert(_);
+          }
+        },
         child: Column(
           children: [
             AspectRatio(

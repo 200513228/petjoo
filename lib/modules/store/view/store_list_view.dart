@@ -10,11 +10,12 @@ import 'package:petjoo/product/ui/widgets/nothing_to_see_here_widget.dart';
 
 class StoreListView extends StatelessWidget {
   final StoreListViewModel vm = StoreListViewModel();
-  StoreListView({super.key});
+  StoreListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     vm.getAdverts();
+
     return Observer(builder: (_) {
       return vm.advertList.isEmpty
           ? const NothingToSeeHereWidget()

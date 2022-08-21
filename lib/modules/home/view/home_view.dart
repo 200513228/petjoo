@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/modules/base/color_palette.dart';
 import 'package:petjoo/modules/base/please_auth.dart';
 import 'package:petjoo/modules/chat/view/chat_list_view.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/home/viewmodel/home_viewmodel.dart';
+import 'package:petjoo/modules/pet/view/pet_filter_view.dart';
 import 'package:petjoo/modules/pet/view/pet_list_view.dart';
 import 'package:petjoo/modules/pet/view/pet_userlist_view.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
+import 'package:petjoo/modules/store/view/store_filter_view.dart';
 import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
@@ -28,7 +31,7 @@ class HomeView extends StatelessWidget {
         appBar: buildAppBar(context),
         body: buildBody(),
         bottomNavigationBar: buildBottomBar(context),
-        floatingActionButton: buildFab(),
+        floatingActionButton: buildFab(context),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
@@ -105,11 +108,32 @@ class HomeView extends StatelessWidget {
     });
   }
 
-  Widget buildFab() {
+  Widget buildFab(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: colorPalette['primary'],
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+            builder: (context) {
+              return titleToModalSheet();
+            });
+      },
       child: const Icon(Icons.filter_alt_rounded),
     );
+  }
+
+  Widget titleToModalSheet() {
+    switch (title) {
+      case 'PAZAR':
+        return StoreFilterView();
+      case 'İLANLAR':
+        return PetFilterView();
+      default:
+        return Column(mainAxisSize: MainAxisSize.min, children: const []);
+    }
   }
 
   Widget pageSwitch(int id) {

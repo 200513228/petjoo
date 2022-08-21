@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/modules/base/please_auth.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_userlist_viewmodel.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
 
 class PetUserList extends StatelessWidget {
@@ -37,7 +39,13 @@ class PetUserList extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () => vm.newAdvert(_),
+        onTap: () {
+          if (CurrentUser.id == '') {
+            showDialog(context: _, builder: (context) => const PleaseAuth());
+          } else {
+            vm.newAdvert(_);
+          }
+        },
         child: Column(
           children: [
             AspectRatio(

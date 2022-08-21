@@ -16,26 +16,32 @@ class TransportReservationListView extends ConsumerStatefulWidget {
   const TransportReservationListView({Key? key}) : super(key: key);
 
   @override
-  ConsumerStateX<TransportReservationListView> createState() => _TransportReservationListViewState();
+  ConsumerStateX<TransportReservationListView> createState() =>
+      _TransportReservationListViewState();
 }
 
-class _TransportReservationListViewState extends ConsumerStateX<TransportReservationListView> {
-  late final transportReservationListViewModel = ChangeNotifierProvider.autoDispose((ref) => TransportReservationListViewModel(context, TransportReservationRepositoryImpl()));
+class _TransportReservationListViewState
+    extends ConsumerStateX<TransportReservationListView> {
+  late final transportReservationListViewModel =
+      ChangeNotifierProvider.autoDispose((ref) =>
+          TransportReservationListViewModel(
+              context, TransportReservationRepositoryImpl()));
   late final viewModel = ref.read(transportReservationListViewModel);
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(onRefresh: viewModel.refreshReservations, child: listview());
+    return RefreshIndicator(
+        onRefresh: viewModel.refreshReservations, child: listview());
   }
 
   Widget listview() => AnnotatedRegion<SystemUiOverlayStyle>(
-        value: OverlayStyles.toAll(theme.scaffoldBackgroundColor, Brightness.dark),
+        value:
+            OverlayStyles.toAll(theme.scaffoldBackgroundColor, Brightness.dark),
         child: Consumer(builder: (context, ref, _) {
-          final reservationListLength = ref.watch(transportReservationListViewModel.select((provider) => provider.reservationList.length));
+          final reservationListLength = ref.watch(
+              transportReservationListViewModel
+                  .select((provider) => provider.reservationList.length));
           return Scaffold(
-            appBar: AppBar(
-              title: Text(localization.myReservations),
-            ),
             body: reservationListLength == 0
                 ? const NothingToSeeHereWidget()
                 : ListView.separated(
@@ -48,7 +54,8 @@ class _TransportReservationListViewState extends ConsumerStateX<TransportReserva
                       final data = viewModel.reservationList[index];
                       return TransportReservationTile(
                         data,
-                        onTap: () => context.pushNamed(Routes.reservationDetail, arguments: data),
+                        onTap: () => context.pushNamed(Routes.reservationDetail,
+                            arguments: data),
                       );
                     }),
           );

@@ -25,6 +25,22 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
     });
   }
 
+  late final _$filterAtom =
+      Atom(name: 'StoreListViewModelBase.filter', context: context);
+
+  @override
+  StoreFilterModel get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(StoreFilterModel value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   late final _$getAdvertsAsyncAction =
       AsyncAction('StoreListViewModelBase.getAdverts', context: context);
 
@@ -35,6 +51,28 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
 
   late final _$StoreListViewModelBaseActionController =
       ActionController(name: 'StoreListViewModelBase', context: context);
+
+  @override
+  void filterList() {
+    final _$actionInfo = _$StoreListViewModelBaseActionController.startAction(
+        name: 'StoreListViewModelBase.filterList');
+    try {
+      return super.filterList();
+    } finally {
+      _$StoreListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeFilter(StoreFilterModel filterModel) {
+    final _$actionInfo = _$StoreListViewModelBaseActionController.startAction(
+        name: 'StoreListViewModelBase.changeFilter');
+    try {
+      return super.changeFilter(filterModel);
+    } finally {
+      _$StoreListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void pickAdvert(StoreAdvertModel model, BuildContext _) {
@@ -50,7 +88,8 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
   @override
   String toString() {
     return '''
-advertList: ${advertList}
+advertList: ${advertList},
+filter: ${filter}
     ''';
   }
 }

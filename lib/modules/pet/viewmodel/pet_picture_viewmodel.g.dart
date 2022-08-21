@@ -45,13 +45,13 @@ mixin _$PetPictureViewModel on PetPictureViewModelBase, Store {
       Atom(name: 'PetPictureViewModelBase.imageList', context: context);
 
   @override
-  List<File?> get imageList {
+  List<File> get imageList {
     _$imageListAtom.reportRead();
     return super.imageList;
   }
 
   @override
-  set imageList(List<File?> value) {
+  set imageList(List<File> value) {
     _$imageListAtom.reportWrite(value, super.imageList, () {
       super.imageList = value;
     });

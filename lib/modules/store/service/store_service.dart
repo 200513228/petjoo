@@ -15,16 +15,14 @@ class StoreService {
         ? db
             .collection('store_adverts')
             .where('userId', isEqualTo: CurrentUser.id)
-            .limit(5)
             .get()
         : db
             .collection('store_adverts')
             .where('isSold', isEqualTo: false)
-            .limit(5)
             .get();
   }
 
-  static Future<bool> addAdverts(
+  static Future<String> addAdverts(
       StoreAdvertModel model, File? img1, File? img2) async {
     try {
       var doc = await db
@@ -54,13 +52,13 @@ class StoreService {
           if (img2 != null) url2!,
         ]
       });
-      return true;
-    } on Exception {
-      return false;
+      return 'ADD';
+    } on Exception catch (e) {
+      return e.toString();
     }
   }
 
-  static Future<bool> updateAdvert(StoreAdvertModel model) async {
+  static Future<String> updateAdvert(StoreAdvertModel model) async {
     try {
       var doc = db.collection('store_adverts').doc(model.id);
       List tempList =
@@ -91,21 +89,30 @@ class StoreService {
       //   ]
       // });
       await doc.update({'images': tempList});
-      return true;
-    } on Exception {
-      return false;
+      return 'UPDATE';
+    } on Exception catch (e) {
+      return e.toString();
     }
   }
 
-  static Future<bool> changeSold(String docid, bool isSold) async {
+  static Future<String> changeSold(String docid, bool isSold) async {
     try {
       await db
           .collection('store_adverts')
           .doc(docid)
           .update({'isSold': isSold});
-      return true;
-    } on Exception {
-      return false;
+      return 'SOLD';
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> deleteAdvert(String docid) async {
+    try {
+      await db.collection('store_adverts').doc(docid).delete();
+      return 'DELETE';
+    } on Exception catch (e) {
+      return e.toString();
     }
   }
 

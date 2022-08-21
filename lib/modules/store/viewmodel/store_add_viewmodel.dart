@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/modules/base/ui_snackbar.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
@@ -35,6 +36,8 @@ abstract class StoreAddViewModelBase with Store {
   int? delivery;
   @observable
   int? status;
+  @observable
+  bool isLoading = false;
 
   @action
   void preEdit(StoreAdvertModel model) {
@@ -53,6 +56,7 @@ abstract class StoreAddViewModelBase with Store {
 
   @action
   Future update(BuildContext _) async {
+    isLoading = !isLoading;
     advert.title = titleCont.text;
     advert.description = descCont.text;
     advert.price = num.tryParse(priceCont.text) ?? 0;
@@ -64,8 +68,8 @@ abstract class StoreAddViewModelBase with Store {
     advert.status = status ?? 0;
     advert.address = addressCont.text;
     if (formKey.currentState?.validate() ?? false) {
-      StoreService.updateAdvert(advert)
-          .then((value) => value ? successfull(_) : error(_));
+      StoreService.updateAdvert(advert).then(
+          (value) => value == 'UPDATE' ? successfull(_) : error(_, value));
     }
   }
 
@@ -88,10 +92,14 @@ abstract class StoreAddViewModelBase with Store {
   }
 
   @action
-  void error(BuildContext _) {}
+  void error(BuildContext _, String data) {
+    isLoading = !isLoading;
+    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar(data));
+  }
 
   @action
   void successfull(BuildContext context) {
+    isLoading = !isLoading;
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => HomeView(title: 'PAZAR')),

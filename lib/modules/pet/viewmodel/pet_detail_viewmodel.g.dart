@@ -73,12 +73,36 @@ mixin _$PetDetailViewModel on PetDetailViewModelBase, Store {
     return _$changeAdoptAsyncAction.run(() => super.changeAdopt(isAdopt, _));
   }
 
+  late final _$deleteAsyncAction =
+      AsyncAction('PetDetailViewModelBase.delete', context: context);
+
+  @override
+  Future<dynamic> delete(BuildContext _) {
+    return _$deleteAsyncAction.run(() => super.delete(_));
+  }
+
   late final _$callAsyncAction =
       AsyncAction('PetDetailViewModelBase.call', context: context);
 
   @override
   Future<dynamic> call() {
     return _$callAsyncAction.run(() => super.call());
+  }
+
+  late final _$messageAsyncAction =
+      AsyncAction('PetDetailViewModelBase.message', context: context);
+
+  @override
+  Future<dynamic> message(BuildContext _) {
+    return _$messageAsyncAction.run(() => super.message(_));
+  }
+
+  late final _$openCurrentChatAsyncAction =
+      AsyncAction('PetDetailViewModelBase.openCurrentChat', context: context);
+
+  @override
+  Future<dynamic> openCurrentChat(BuildContext _, String id) {
+    return _$openCurrentChatAsyncAction.run(() => super.openCurrentChat(_, id));
   }
 
   late final _$PetDetailViewModelBaseActionController =
@@ -96,11 +120,22 @@ mixin _$PetDetailViewModel on PetDetailViewModelBase, Store {
   }
 
   @override
-  void error(BuildContext _) {
+  void editModel(PetAdvertModel model, BuildContext _) {
+    final _$actionInfo = _$PetDetailViewModelBaseActionController.startAction(
+        name: 'PetDetailViewModelBase.editModel');
+    try {
+      return super.editModel(model, _);
+    } finally {
+      _$PetDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void error(BuildContext _, String data) {
     final _$actionInfo = _$PetDetailViewModelBaseActionController.startAction(
         name: 'PetDetailViewModelBase.error');
     try {
-      return super.error(_);
+      return super.error(_, data);
     } finally {
       _$PetDetailViewModelBaseActionController.endAction(_$actionInfo);
     }

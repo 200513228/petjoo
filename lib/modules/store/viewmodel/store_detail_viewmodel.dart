@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/modules/base/ui_snackbar.dart';
+import 'package:petjoo/modules/chat/model/chat_model.dart';
+import 'package:petjoo/modules/chat/service/chat_service.dart';
+import 'package:petjoo/modules/chat/view/chat_detail_view.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
 import 'package:petjoo/modules/store/view/store_add_view.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'store_detail_viewmodel.g.dart';
 
@@ -39,7 +44,13 @@ abstract class StoreDetailViewModelBase with Store {
   @action
   Future changeSold(bool isSold, BuildContext _) async {
     StoreService.changeSold(advert!.id, isSold)
-        .then((value) => value ? successfull(_) : error(_));
+        .then((value) => value == 'SOLD' ? successfull(_) : error(_, value));
+  }
+
+  @action
+  Future delete(BuildContext _) async {
+    StoreService.deleteAdvert(advert!.id)
+        .then((value) => value == 'DELETE' ? successfull(_) : error(_, value));
   }
 
   @action
@@ -49,7 +60,32 @@ abstract class StoreDetailViewModelBase with Store {
   }
 
   @action
-  void error(BuildContext _) {}
+  Future message(BuildContext _) async {
+    await ChatService.findChat(advert!.userId).then((value) {
+      value == null
+          ? Navigator.push(
+              _,
+              MaterialPageRoute(
+                  builder: (builder) => ChatDetailView(
+                      model: ChatModel.fromUser(CurrentUser.id, advert!.userId),
+                      name: userName ?? '')))
+          : openCurrentChat(_, value);
+    });
+  }
+
+  @action
+  Future openCurrentChat(BuildContext _, String id) async {
+    await ChatService.getOnes(id).then((value) => Navigator.push(
+        _,
+        MaterialPageRoute(
+            builder: (builder) =>
+                ChatDetailView(model: value, name: userName ?? ''))));
+  }
+
+  @action
+  void error(BuildContext _, String data) {
+    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar(data));
+  }
 
   @action
   void successfull(BuildContext context) {

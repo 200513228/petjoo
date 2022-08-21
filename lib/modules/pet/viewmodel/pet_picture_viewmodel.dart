@@ -17,11 +17,11 @@ abstract class PetPictureViewModelBase with Store {
   @observable
   PetAdvertModel? advert;
   @observable
-  List<File?> imageList = [];
+  List<File> imageList = [];
 
   @action
   Future imagePick() async {
-    List<File?> tempList = imageList;
+    List<File> tempList = imageList;
     XFile? tempImage;
     tempImage = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 20);
@@ -39,8 +39,10 @@ abstract class PetPictureViewModelBase with Store {
   @action
   Future saveAdvert(BuildContext _) async {
     isLoading = !isLoading;
-    await PetService.addAdverts(advert!, imageList[0], imageList[1])
-        .then((value) => value ? successfull(_) : error(_));
+    File? img0 = imageList.isNotEmpty ? imageList[0] : null;
+    File? img1 = (imageList.length > 1) ? imageList[1] : null;
+    await PetService.addAdverts(advert!, img0, img1)
+        .then((value) => value == 'ADD' ? successfull(_) : error(_));
   }
 
   @action

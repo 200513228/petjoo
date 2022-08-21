@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
 import 'package:petjoo/core/widgets/dropdown_x.dart';
+import 'package:petjoo/core/widgets/loading.dart';
 import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
@@ -30,19 +31,21 @@ class StoreAddView extends StatelessWidget {
     return Observer(builder: (_) {
       return Padding(
         padding: const EdgeInsets.all(10),
-        child: Form(
-          key: vm.formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ...advertTiles,
-                const SizedBox(height: 20),
-                ...storeTiles,
-                nextStepButton(context)
-              ],
-            ),
-          ),
-        ),
+        child: vm.isLoading
+            ? const Center(child: Loading())
+            : Form(
+                key: vm.formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ...advertTiles,
+                      const SizedBox(height: 20),
+                      ...storeTiles,
+                      nextStepButton(context)
+                    ],
+                  ),
+                ),
+              ),
       );
     });
   }

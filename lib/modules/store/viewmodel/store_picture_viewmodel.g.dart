@@ -85,11 +85,11 @@ mixin _$StorePictureViewModel on StorePictureViewModelBase, Store {
       ActionController(name: 'StorePictureViewModelBase', context: context);
 
   @override
-  void error(BuildContext _) {
+  void error(BuildContext _, String data) {
     final _$actionInfo = _$StorePictureViewModelBaseActionController
         .startAction(name: 'StorePictureViewModelBase.error');
     try {
-      return super.error(_);
+      return super.error(_, data);
     } finally {
       _$StorePictureViewModelBaseActionController.endAction(_$actionInfo);
     }

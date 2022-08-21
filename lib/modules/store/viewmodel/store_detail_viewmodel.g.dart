@@ -73,12 +73,36 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
     return _$changeSoldAsyncAction.run(() => super.changeSold(isSold, _));
   }
 
+  late final _$deleteAsyncAction =
+      AsyncAction('StoreDetailViewModelBase.delete', context: context);
+
+  @override
+  Future<dynamic> delete(BuildContext _) {
+    return _$deleteAsyncAction.run(() => super.delete(_));
+  }
+
   late final _$callAsyncAction =
       AsyncAction('StoreDetailViewModelBase.call', context: context);
 
   @override
   Future<dynamic> call() {
     return _$callAsyncAction.run(() => super.call());
+  }
+
+  late final _$messageAsyncAction =
+      AsyncAction('StoreDetailViewModelBase.message', context: context);
+
+  @override
+  Future<dynamic> message(BuildContext _) {
+    return _$messageAsyncAction.run(() => super.message(_));
+  }
+
+  late final _$openCurrentChatAsyncAction =
+      AsyncAction('StoreDetailViewModelBase.openCurrentChat', context: context);
+
+  @override
+  Future<dynamic> openCurrentChat(BuildContext _, String id) {
+    return _$openCurrentChatAsyncAction.run(() => super.openCurrentChat(_, id));
   }
 
   late final _$StoreDetailViewModelBaseActionController =
@@ -107,11 +131,11 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
   }
 
   @override
-  void error(BuildContext _) {
+  void error(BuildContext _, String data) {
     final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
         name: 'StoreDetailViewModelBase.error');
     try {
-      return super.error(_);
+      return super.error(_, data);
     } finally {
       _$StoreDetailViewModelBaseActionController.endAction(_$actionInfo);
     }

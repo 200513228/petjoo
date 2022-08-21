@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/modules/base/ui_snackbar.dart';
+import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
+import 'package:petjoo/modules/pet/service/pet_service.dart';
 import 'package:petjoo/modules/pet/view/pet_picture_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 part 'pet_add_viewmodel.g.dart';
@@ -41,14 +44,50 @@ abstract class PetAddViewModelBase with Store {
   int? toilet;
   @observable
   int? vaccine;
+  @observable
+  bool isLoading = false;
 
   @action
-  void setAdvert(PetAdvertModel model) {
+  void preEdit(PetAdvertModel model) {
     advert = model;
+    titleCont.text = model.title;
+    descCont.text = model.description;
+    addressCont.text = model.address;
+    phoneCont.text = model.phone;
+    dialCode = model.dialCode;
+    ageCont.text = model.animalAge;
+    type = model.type;
+    animal = model.animalType;
+    gender = model.animalGender;
+    size = model.animalSize;
+    habit = model.animalHabit;
+    infertility = model.infertility;
+    toilet = model.toiletTraining;
+    vaccine = model.vaccine;
   }
 
   @action
-  update(BuildContext _) {}
+  Future update(BuildContext _) async {
+    isLoading = !isLoading;
+    advert.title = titleCont.text;
+    advert.description = descCont.text;
+    advert.dialCode = dialCode ?? '';
+    advert.phone = phoneCont.text;
+    advert.address = addressCont.text;
+    advert.type = type ?? 0;
+    advert.animalAge = ageCont.text;
+    advert.animalType = animal ?? 0;
+    advert.animalGender = gender ?? 0;
+    advert.animalSize = size ?? 0;
+    advert.animalHabit = habit ?? 0;
+    advert.infertility = infertility ?? 0;
+    advert.toiletTraining = toilet ?? 0;
+    advert.vaccine = vaccine ?? 0;
+    if (formKey.currentState?.validate() ?? false) {
+      PetService.updateAdvert(advert).then(
+          (value) => value == 'UPDATE' ? successfull(_) : error(_, value));
+    }
+  }
 
   @action
   Future nextStep(BuildContext context) async {
@@ -70,5 +109,20 @@ abstract class PetAddViewModelBase with Store {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => PetPictureView(model: advert)));
     }
+  }
+
+  @action
+  void error(BuildContext _, String data) {
+    isLoading = !isLoading;
+    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar(data));
+  }
+
+  @action
+  void successfull(BuildContext context) {
+    isLoading = !isLoading;
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomeView(title: 'İLANLAR')),
+        (route) => false);
   }
 }

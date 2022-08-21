@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
+import 'package:petjoo/modules/base/please_auth.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
@@ -135,7 +136,7 @@ class StoreDetailView extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
-          color: Color.fromARGB(78, 235, 228, 100),
+          color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(8))),
       child: Column(
         children: [
@@ -291,6 +292,7 @@ class StoreDetailView extends StatelessWidget {
                         backgroundColor: Colors.black,
                         label: Text(
                           vm.userName ?? 'Kullanıcı Bulunamadı',
+                          maxLines: 1,
                           style: const TextStyle(
                               color: Colors.white, fontSize: 18),
                         ),
@@ -300,22 +302,20 @@ class StoreDetailView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 10),
-            FloatingActionButton(
-                elevation: model.phone == '' ? 0 : null,
-                onPressed: model.phone == '' ? null : vm.call,
-                child: Icon(
-                  Icons.call_rounded,
-                  color: model.phone == '' ? Colors.grey : Colors.greenAccent,
-                )),
             ...CurrentUser.id == model.userId
                 ? [
                     const SizedBox(width: 10),
                     FloatingActionButton(
+                        elevation: 0,
+                        onPressed: () => vm.delete(_),
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.redAccent,
+                        )),
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
                         heroTag: null,
-                        onPressed: () {
-                          vm.editModel(model, _);
-                        },
+                        onPressed: () => vm.editModel(model, _),
                         child: const Icon(
                           Icons.edit,
                           color: Colors.orangeAccent,
@@ -324,8 +324,32 @@ class StoreDetailView extends StatelessWidget {
                 : [
                     const SizedBox(width: 10),
                     FloatingActionButton(
+                        elevation: model.phone == '' ? 0 : null,
+                        onPressed: () {
+                          CurrentUser.id == ''
+                              ? showDialog(
+                                  context: _,
+                                  builder: (context) => const PleaseAuth())
+                              : null;
+                          model.phone == '' ? null : vm.call();
+                        },
+                        child: Icon(
+                          Icons.call_rounded,
+                          color: model.phone == ''
+                              ? Colors.grey
+                              : Colors.greenAccent,
+                        )),
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
                         heroTag: null,
-                        onPressed: () {},
+                        onPressed: () {
+                          CurrentUser.id == ''
+                              ? showDialog(
+                                  context: _,
+                                  builder: (context) => const PleaseAuth())
+                              : null;
+                          model.phone == '' ? null : vm.message(_);
+                        },
                         child: const Icon(
                           Icons.message_rounded,
                           color: Colors.orangeAccent,

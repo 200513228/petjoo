@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 
 class ChatService {
@@ -36,5 +37,24 @@ class ChatService {
     Map map = result.data()!['lastMessage'];
     map['isReaded'] = true;
     await db.collection('chats').doc(doc).update({'lastMessage': map});
+  }
+
+  static Future<String?> findChat(String userid) async {
+    var result = await db
+        .collection('chats')
+        .where('userIds', isEqualTo: [CurrentUser.id, userid]).get();
+    if (result.docs.isNotEmpty) {
+      return result.docs.first.id;
+    } else {
+      var result2 = await db
+          .collection('chats')
+          .where('userIds', isEqualTo: [userid, CurrentUser.id]).get();
+      return result2.docs.isEmpty ? null : result.docs.first.id;
+    }
+  }
+
+  static Future<ChatModel> getOnes(String docid) async {
+    var result = await db.collection('chats').doc(docid).get();
+    return ChatModel.fromDS(result);
   }
 }

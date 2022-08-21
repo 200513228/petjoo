@@ -11,6 +11,7 @@ class PetPictureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    vm.setAdvert(model);
     return Scaffold(
       appBar: buildAppBar(),
       body: buildBody(),
@@ -34,7 +35,7 @@ class PetPictureView extends StatelessWidget {
   List<Widget> get images {
     return [
       if (vm.imageList.length < 2) pickerButton,
-      ...vm.imageList.map((e) => Image.file(e!)),
+      ...vm.imageList.map((e) => Image.file(e)),
     ];
   }
 

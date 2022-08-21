@@ -268,7 +268,7 @@ class PetDetailView extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  if (model.userId == CurrentUser.id)
+                  if (vm.advert!.userId == CurrentUser.id)
                     Expanded(
                       child: FloatingActionButton.extended(
                         heroTag: null,
@@ -281,11 +281,13 @@ class PetDetailView extends StatelessWidget {
                               color: Colors.white, fontSize: 22),
                         ),
                         onPressed: () {
-                          vm.changeAdopt(!model.isAdopted, _);
+                          if (!model.isAdopted) {
+                            vm.changeAdopt(!model.isAdopted, _);
+                          } else {}
                         },
                       ),
                     ),
-                  if (model.userId != CurrentUser.id)
+                  if (vm.advert!.userId != CurrentUser.id)
                     Expanded(
                       child: FloatingActionButton.extended(
                         heroTag: null,
@@ -301,27 +303,20 @@ class PetDetailView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 10),
-            FloatingActionButton(
-                elevation: model.phone == '' ? 0 : null,
-                onPressed: () {
-                  if (CurrentUser.id == '') {
-                    showDialog(
-                        context: _, builder: (context) => const PleaseAuth());
-                  } else {
-                    model.phone == '' ? null : vm.call();
-                  }
-                },
-                child: Icon(
-                  Icons.call_rounded,
-                  color: model.phone == '' ? Colors.grey : Colors.greenAccent,
-                )),
             ...CurrentUser.id == model.userId
                 ? [
                     const SizedBox(width: 10),
                     FloatingActionButton(
+                        elevation: 0,
+                        onPressed: () => vm.delete(_),
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.redAccent,
+                        )),
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
                         heroTag: null,
-                        onPressed: () {},
+                        onPressed: () => vm.editModel(model, _),
                         child: const Icon(
                           Icons.edit,
                           color: Colors.orangeAccent,
@@ -330,15 +325,31 @@ class PetDetailView extends StatelessWidget {
                 : [
                     const SizedBox(width: 10),
                     FloatingActionButton(
+                        elevation: model.phone == '' ? 0 : null,
+                        onPressed: () {
+                          CurrentUser.id == ''
+                              ? showDialog(
+                                  context: _,
+                                  builder: (context) => const PleaseAuth())
+                              : null;
+                          model.phone == '' ? null : vm.call();
+                        },
+                        child: Icon(
+                          Icons.call_rounded,
+                          color: model.phone == ''
+                              ? Colors.grey
+                              : Colors.greenAccent,
+                        )),
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
                         heroTag: null,
                         onPressed: () {
-                          if (CurrentUser.id == '') {
-                            showDialog(
-                                context: _,
-                                builder: (context) => const PleaseAuth());
-                          } else {
-                            model.phone == '' ? null : vm.call();
-                          }
+                          CurrentUser.id == ''
+                              ? showDialog(
+                                  context: _,
+                                  builder: (context) => const PleaseAuth())
+                              : null;
+                          model.phone == '' ? null : vm.message(_);
                         },
                         child: const Icon(
                           Icons.message_rounded,

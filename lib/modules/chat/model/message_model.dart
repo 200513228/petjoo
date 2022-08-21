@@ -25,6 +25,14 @@ class MessageModel {
     date = map['date'] ?? Timestamp.now();
   }
 
+  MessageModel.empty() {
+    id = '';
+    content = '';
+    senderId = '';
+    isReaded = false;
+    date = Timestamp.now();
+  }
+
   static Map<String, dynamic> toMap(String content) {
     return {
       'content': content,

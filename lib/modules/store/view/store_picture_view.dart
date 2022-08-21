@@ -71,7 +71,7 @@ class StorePictureView extends StatelessWidget {
       return vm.isLoading
           ? Container()
           : FloatingActionButton(
-              onPressed: () async => await vm.saveAdvert(context),
+              onPressed: () => vm.saveAdvert(context),
               child: const Icon(Icons.done_rounded),
             );
     });

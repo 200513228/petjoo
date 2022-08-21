@@ -265,6 +265,30 @@ mixin _$PetAddViewModel on PetAddViewModelBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: 'PetAddViewModelBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$updateAsyncAction =
+      AsyncAction('PetAddViewModelBase.update', context: context);
+
+  @override
+  Future<dynamic> update(BuildContext _) {
+    return _$updateAsyncAction.run(() => super.update(_));
+  }
+
   late final _$nextStepAsyncAction =
       AsyncAction('PetAddViewModelBase.nextStep', context: context);
 
@@ -277,22 +301,33 @@ mixin _$PetAddViewModel on PetAddViewModelBase, Store {
       ActionController(name: 'PetAddViewModelBase', context: context);
 
   @override
-  void setAdvert(PetAdvertModel model) {
+  void preEdit(PetAdvertModel model) {
     final _$actionInfo = _$PetAddViewModelBaseActionController.startAction(
-        name: 'PetAddViewModelBase.setAdvert');
+        name: 'PetAddViewModelBase.preEdit');
     try {
-      return super.setAdvert(model);
+      return super.preEdit(model);
     } finally {
       _$PetAddViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic update(BuildContext _) {
+  void error(BuildContext _, String data) {
     final _$actionInfo = _$PetAddViewModelBaseActionController.startAction(
-        name: 'PetAddViewModelBase.update');
+        name: 'PetAddViewModelBase.error');
     try {
-      return super.update(_);
+      return super.error(_, data);
+    } finally {
+      _$PetAddViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void successfull(BuildContext context) {
+    final _$actionInfo = _$PetAddViewModelBaseActionController.startAction(
+        name: 'PetAddViewModelBase.successfull');
+    try {
+      return super.successfull(context);
     } finally {
       _$PetAddViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -316,7 +351,8 @@ size: ${size},
 habit: ${habit},
 infertility: ${infertility},
 toilet: ${toilet},
-vaccine: ${vaccine}
+vaccine: ${vaccine},
+isLoading: ${isLoading}
     ''';
   }
 }

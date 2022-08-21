@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/modules/base/ui_snackbar.dart';
+import 'package:petjoo/modules/chat/model/chat_model.dart';
+import 'package:petjoo/modules/chat/service/chat_service.dart';
+import 'package:petjoo/modules/chat/view/chat_detail_view.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/service/pet_service.dart';
+import 'package:petjoo/modules/pet/view/pet_add_view.dart';
+import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'pet_detail_viewmodel.g.dart';
 
@@ -29,9 +35,21 @@ abstract class PetDetailViewModelBase with Store {
   }
 
   @action
+  void editModel(PetAdvertModel model, BuildContext _) {
+    Navigator.push(
+        _, MaterialPageRoute(builder: (context) => PetAddView(model: model)));
+  }
+
+  @action
   Future changeAdopt(bool isAdopt, BuildContext _) async {
-    // StoreService.changeSold(advert!.id, isSold)
-    //     .then((value) => value ? successfull(_) : error(_));
+    PetService.changeAdopt(advert!.id, isAdopt)
+        .then((value) => value == 'ADOPT' ? successfull(_) : error(_, value));
+  }
+
+  @action
+  Future delete(BuildContext _) async {
+    PetService.deleteAdvert(advert!.id)
+        .then((value) => value == 'DELETE' ? successfull(_) : error(_, value));
   }
 
   @action
@@ -41,7 +59,32 @@ abstract class PetDetailViewModelBase with Store {
   }
 
   @action
-  void error(BuildContext _) {}
+  Future message(BuildContext _) async {
+    await ChatService.findChat(advert!.userId).then((value) {
+      value == null
+          ? Navigator.push(
+              _,
+              MaterialPageRoute(
+                  builder: (builder) => ChatDetailView(
+                      model: ChatModel.fromUser(CurrentUser.id, advert!.userId),
+                      name: userName ?? '')))
+          : openCurrentChat(_, value);
+    });
+  }
+
+  @action
+  Future openCurrentChat(BuildContext _, String id) async {
+    await ChatService.getOnes(id).then((value) => Navigator.push(
+        _,
+        MaterialPageRoute(
+            builder: (builder) =>
+                ChatDetailView(model: value, name: userName ?? ''))));
+  }
+
+  @action
+  void error(BuildContext _, String data) {
+    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar(data));
+  }
 
   @action
   void successfull(BuildContext context) {

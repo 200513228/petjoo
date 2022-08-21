@@ -37,11 +37,11 @@ mixin _$PetUserListViewModel on PetUserListViewModelBase, Store {
       ActionController(name: 'PetUserListViewModelBase', context: context);
 
   @override
-  void selectAdvert() {
+  void selectAdvert(BuildContext _, PetAdvertModel model) {
     final _$actionInfo = _$PetUserListViewModelBaseActionController.startAction(
         name: 'PetUserListViewModelBase.selectAdvert');
     try {
-      return super.selectAdvert();
+      return super.selectAdvert(_, model);
     } finally {
       _$PetUserListViewModelBaseActionController.endAction(_$actionInfo);
     }

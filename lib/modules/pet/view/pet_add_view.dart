@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
 import 'package:petjoo/core/widgets/dropdown_x.dart';
+import 'package:petjoo/core/widgets/loading.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_genders.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_habits.dart';
@@ -24,7 +25,7 @@ class PetAddView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (model != null) vm.preEdit(model!);
+    if (model != null) vm.preEdit(model!);
     return Scaffold(
       appBar: buildAppBar(),
       body: buildBody(context),
@@ -35,19 +36,21 @@ class PetAddView extends StatelessWidget {
     return Observer(builder: (_) {
       return Padding(
         padding: const EdgeInsets.all(10),
-        child: Form(
-          key: vm.formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ...advertTiles,
-                const SizedBox(height: 20),
-                ...petTiles,
-                nextStepButton(context),
-              ],
-            ),
-          ),
-        ),
+        child: vm.isLoading
+            ? const Center(child: Loading())
+            : Form(
+                key: vm.formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ...advertTiles,
+                      const SizedBox(height: 20),
+                      ...petTiles,
+                      nextStepButton(context),
+                    ],
+                  ),
+                ),
+              ),
       );
     });
   }
@@ -316,7 +319,7 @@ class PetAddView extends StatelessWidget {
                 onPressed: () {
                   model != null ? vm.update(context) : vm.nextStep(context);
                 },
-                child: const Text('Sonraki Adım')),
+                child: Text(model != null ? 'Kaydet' : 'Sonraki Adım')),
           ),
         )
       ],

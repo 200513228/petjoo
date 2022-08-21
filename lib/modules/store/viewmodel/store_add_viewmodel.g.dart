@@ -201,6 +201,22 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: 'StoreAddViewModelBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$updateAsyncAction =
       AsyncAction('StoreAddViewModelBase.update', context: context);
 
@@ -232,11 +248,11 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
   }
 
   @override
-  void error(BuildContext _) {
+  void error(BuildContext _, String data) {
     final _$actionInfo = _$StoreAddViewModelBaseActionController.startAction(
         name: 'StoreAddViewModelBase.error');
     try {
-      return super.error(_);
+      return super.error(_, data);
     } finally {
       _$StoreAddViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -267,7 +283,8 @@ dialCode: ${dialCode},
 price: ${price},
 type: ${type},
 delivery: ${delivery},
-status: ${status}
+status: ${status},
+isLoading: ${isLoading}
     ''';
   }
 }

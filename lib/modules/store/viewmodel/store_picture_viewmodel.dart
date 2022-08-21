@@ -39,12 +39,14 @@ abstract class StorePictureViewModelBase with Store {
   @action
   Future saveAdvert(BuildContext _) async {
     isLoading = !isLoading;
-    await StoreService.addAdverts(advert!, imageList[0], imageList[1])
-        .then((value) => value ? successfull(_) : error(_));
+    File? img0 = imageList.isNotEmpty ? imageList[0] : null;
+    File? img1 = (imageList.length > 1) ? imageList[1] : null;
+    await StoreService.addAdverts(advert!, img0, img1)
+        .then((value) => value == 'ADD' ? successfull(_) : error(_, value));
   }
 
   @action
-  void error(BuildContext _) {
+  void error(BuildContext _, String data) {
     isLoading = !isLoading;
     ScaffoldMessenger.of(_).showSnackBar(uiSnackBar('Bir Hata Oluştu'));
   }
@@ -52,7 +54,6 @@ abstract class StorePictureViewModelBase with Store {
   @action
   void successfull(BuildContext context) {
     isLoading = !isLoading;
-
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => HomeView(title: 'PAZAR')),

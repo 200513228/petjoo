@@ -11,7 +11,7 @@ abstract class SettingsViewModelBase with Store {
   Future logout(BuildContext _) async {
     UserService.logout().then((value) => Navigator.pushAndRemoveUntil(
         _,
-        MaterialPageRoute(builder: (context) => WelcomeView()),
+        MaterialPageRoute(builder: (context) => const WelcomeView()),
         (route) => false));
   }
 }

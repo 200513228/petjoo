@@ -10,8 +10,8 @@ import 'package:petjoo/modules/user/view/login_view.dart';
 import 'package:petjoo/product/constants/images.dart';
 
 class WelcomeView extends StatelessWidget {
-  final WelcomeViewModel vm = WelcomeViewModel();
-  WelcomeView({Key? key}) : super(key: key);
+  static final WelcomeViewModel vm = WelcomeViewModel();
+  const WelcomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,106 +51,33 @@ class WelcomeView extends StatelessWidget {
         children: [
           Expanded(
               child: Column(
-            children: [
+            children: const [
               Expanded(
                 flex: 10,
-                child: bigButton(_, Icons.pets, 'İLANLAR'),
+                child: BigModule(icon: Icons.pets, title: 'İLANLAR'),
               ),
               Expanded(
                 flex: 6,
-                child:
-                    smallButton(_, FontAwesomeIcons.compassDrafting, 'YAKINDA'),
+                child: SmallModule(
+                    icon: FontAwesomeIcons.compassDrafting, title: 'YAKINDA'),
               ),
             ],
           )),
           Expanded(
               child: Column(
-            children: [
+            children: const [
               Expanded(
                 flex: 6,
-                child: smallButton(_, FontAwesomeIcons.truck, 'PET NAKİL'),
+                child: SmallModule(
+                    icon: FontAwesomeIcons.truck, title: 'PET NAKİL'),
               ),
               Expanded(
                 flex: 10,
-                child: bigButton(_, Icons.store, 'PAZAR'),
+                child: BigModule(icon: Icons.store, title: 'PAZAR'),
               ),
             ],
           )),
         ],
-      ),
-    );
-  }
-
-  Widget bigButton(BuildContext _, IconData icon, String title) {
-    return InkWell(
-      radius: 25,
-      onTap: () {
-        vm.goModule(_, title);
-      },
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-          color: Color(0xffFFE427),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: Colors.black,
-              size: 64,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 28,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget smallButton(BuildContext _, IconData icon, String title) {
-    return InkWell(
-      onTap: title == 'YAKINDA'
-          ? null
-          : () {
-              vm.goModule(_, title);
-            },
-      radius: 25,
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-          color: Color(0xffFFE427),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: Colors.black,
-              size: 32,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
-        ),
       ),
     );
   }
@@ -209,5 +136,101 @@ class WelcomeView extends StatelessWidget {
             )),
       );
     });
+  }
+}
+
+class BigModule extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  const BigModule({required this.icon, required this.title, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size.height / 14;
+    return InkWell(
+      radius: 25,
+      onTap: () {
+        WelcomeView.vm.goModule(context, title);
+      },
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(25)),
+          color: Color(0xffFFE427),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: Colors.black,
+              size: size,
+            ),
+            Text(
+              title,
+              maxLines: 1,
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SmallModule extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  const SmallModule({required this.icon, required this.title, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size.height / 32;
+    return InkWell(
+      onTap: title == 'YAKINDA'
+          ? null
+          : () {
+              WelcomeView.vm.goModule(context, title);
+            },
+      radius: 25,
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(25)),
+          color: Color(0xffFFE427),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: Colors.black,
+              size: size,
+            ),
+            Text(
+              title,
+              maxLines: 1,
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1.5,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -4,3 +4,9 @@ Map<int, String> petAdvertVaccines = {
   2: 'Aşılı',
   3: 'Aşısız',
 };
+
+Map<int, String> petFilterVaccines = {
+  0: 'Tümü',
+  2: 'Aşılı',
+  3: 'Aşısız',
+};

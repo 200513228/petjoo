@@ -10,6 +10,7 @@ class DropdownX<T> extends StatelessWidget {
   final String? Function(T?)? validator;
   final Function(T?)? onChanged;
   final EdgeInsetsGeometry? contentPadding;
+  final String? label;
   final Color? color;
 
   const DropdownX(
@@ -23,7 +24,8 @@ class DropdownX<T> extends StatelessWidget {
       this.value,
       this.validator,
       this.color,
-      this.onChanged})
+      this.onChanged,
+      this.label})
       : super(key: key);
 
   @override
@@ -32,7 +34,9 @@ class DropdownX<T> extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       margin: margin,
-      decoration: BoxDecoration(color: color ?? theme.colorScheme.surface, borderRadius: borderRadius ?? BorderRadius.circular(15)),
+      decoration: BoxDecoration(
+          color: color ?? theme.colorScheme.surface,
+          borderRadius: borderRadius ?? BorderRadius.circular(15)),
       child: DropdownButtonFormField<T>(
           dropdownColor: color ?? theme.colorScheme.surface,
           elevation: 0,
@@ -42,8 +46,11 @@ class DropdownX<T> extends StatelessWidget {
             style: theme.inputDecorationTheme.labelStyle,
           ),
           decoration: InputDecoration(
-              fillColor: color ?? theme.colorScheme.surface,
-              contentPadding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 20)),
+            fillColor: color ?? theme.colorScheme.surface,
+            contentPadding: contentPadding ??
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+            label: label != null ? Text(label!) : null,
+          ),
           value: value == hintValue ? null : value,
           items: items,
           isExpanded: true,

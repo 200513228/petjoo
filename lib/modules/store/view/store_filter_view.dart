@@ -14,22 +14,22 @@ class StoreFilterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    vm.setCurrent();
     return Observer(
       builder: (context) => Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // queryText(),
-            // const SizedBox(height: 20),
             DropdownX<int>(
               value: vm.type,
               hint: 'Kategori',
+              label: 'Kategori',
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: storeAdvertTypes.keys
+              items: storeFilterTypes.keys
                   .map((e) => DropdownMenuItem(
                         value: e,
-                        child: Text(storeAdvertTypes[e]!),
+                        child: Text(storeFilterTypes[e]!),
                       ))
                   .toList(),
               onChanged: (value) => vm.type = value,
@@ -38,11 +38,12 @@ class StoreFilterView extends StatelessWidget {
             DropdownX<int>(
               value: vm.delivery,
               hint: 'Teslimat',
+              label: 'Teslimat',
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: storeAdvertDeliveries.keys
+              items: storeFilterDeliveries.keys
                   .map((e) => DropdownMenuItem(
                         value: e,
-                        child: Text(storeAdvertDeliveries[e]!),
+                        child: Text(storeFilterDeliveries[e]!),
                       ))
                   .toList(),
               onChanged: (value) => vm.delivery = value,
@@ -51,47 +52,30 @@ class StoreFilterView extends StatelessWidget {
             DropdownX<int>(
               value: vm.status,
               hint: 'Durum',
+              label: 'Durum',
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: storeAdvertStatuses.keys
+              items: storeFilterStatuses.keys
                   .map((e) => DropdownMenuItem(
                         value: e,
-                        child: Text(storeAdvertStatuses[e]!),
+                        child: Text(storeFilterStatuses[e]!),
                       ))
                   .toList(),
               onChanged: (value) => vm.status = value,
             ),
             const SizedBox(height: 20),
-            buildButtons(),
+            buildButtons(context),
           ],
         ),
       ),
     );
   }
 
-  Widget queryText() {
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-            controller: vm.cont,
-            decoration: const InputDecoration(
-                hintText: 'Ne Aramıştınız?',
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                )),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildButtons() {
+  Widget buildButtons(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: ElevatedButton(
-            onPressed: () => vm.resetFilter(),
+            onPressed: () => vm.resetFilter(context),
             child: const Text('Sıfırla',
                 style: TextStyle(color: Colors.redAccent)),
           ),
@@ -99,7 +83,7 @@ class StoreFilterView extends StatelessWidget {
         const SizedBox(width: 20),
         Expanded(
           child: ElevatedButton(
-            onPressed: () => vm.setFilter(),
+            onPressed: () => vm.setFilter(context),
             child: const Text('Uygula'),
           ),
         )

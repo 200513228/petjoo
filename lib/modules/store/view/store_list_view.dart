@@ -9,30 +9,38 @@ import 'package:petjoo/product/constants/images.dart';
 import 'package:petjoo/product/ui/widgets/nothing_to_see_here_widget.dart';
 
 class StoreListView extends StatelessWidget {
-  final StoreListViewModel vm = StoreListViewModel();
-  StoreListView({Key? key}) : super(key: key);
+  static final StoreListViewModel vm = StoreListViewModel();
+  const StoreListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     vm.getAdverts();
-
     return Observer(builder: (_) {
-      return vm.advertList.isEmpty
-          ? const NothingToSeeHereWidget()
-          : GridView(
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: .65,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-              ),
-              children: [...vm.advertList.map((e) => advertTile(e, _))],
-            );
+      return Column(
+        children: [
+          queryText(),
+          vm.advertList.isEmpty
+              ? const Expanded(child: NothingToSeeHereWidget())
+              : Expanded(
+                  child: GridView(
+                    padding: const EdgeInsets.all(10),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: .65,
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
+                    ),
+                    children: [...vm.advertList.map((e) => advertTile(e, _))],
+                  ),
+                ),
+        ],
+      );
     });
   }
 
   Widget advertTile(StoreAdvertModel model, BuildContext _) {
+    TextStyle textStyle = const TextStyle(fontSize: 13, color: Colors.white54);
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xff202020),
@@ -130,7 +138,28 @@ class StoreListView extends StatelessWidget {
     );
   }
 
-  TextStyle get textStyle {
-    return const TextStyle(fontSize: 13, color: Colors.white54);
+  Widget queryText() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: vm.cont,
+              autofocus: false,
+              onChanged: (value) {
+                vm.query(value);
+              },
+              decoration: const InputDecoration(
+                  hintText: 'Ne Aramıştınız?',
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  )),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

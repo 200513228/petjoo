@@ -25,6 +25,22 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
     });
   }
 
+  late final _$recoveryListAtom =
+      Atom(name: 'StoreListViewModelBase.recoveryList', context: context);
+
+  @override
+  List<StoreAdvertModel> get recoveryList {
+    _$recoveryListAtom.reportRead();
+    return super.recoveryList;
+  }
+
+  @override
+  set recoveryList(List<StoreAdvertModel> value) {
+    _$recoveryListAtom.reportWrite(value, super.recoveryList, () {
+      super.recoveryList = value;
+    });
+  }
+
   late final _$filterAtom =
       Atom(name: 'StoreListViewModelBase.filter', context: context);
 
@@ -41,6 +57,22 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
     });
   }
 
+  late final _$contAtom =
+      Atom(name: 'StoreListViewModelBase.cont', context: context);
+
+  @override
+  TextEditingController get cont {
+    _$contAtom.reportRead();
+    return super.cont;
+  }
+
+  @override
+  set cont(TextEditingController value) {
+    _$contAtom.reportWrite(value, super.cont, () {
+      super.cont = value;
+    });
+  }
+
   late final _$getAdvertsAsyncAction =
       AsyncAction('StoreListViewModelBase.getAdverts', context: context);
 
@@ -53,22 +85,33 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
       ActionController(name: 'StoreListViewModelBase', context: context);
 
   @override
-  void filterList() {
+  void query(String query) {
     final _$actionInfo = _$StoreListViewModelBaseActionController.startAction(
-        name: 'StoreListViewModelBase.filterList');
+        name: 'StoreListViewModelBase.query');
     try {
-      return super.filterList();
+      return super.query(query);
     } finally {
       _$StoreListViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void changeFilter(StoreFilterModel filterModel) {
+  void resetFilter() {
     final _$actionInfo = _$StoreListViewModelBaseActionController.startAction(
-        name: 'StoreListViewModelBase.changeFilter');
+        name: 'StoreListViewModelBase.resetFilter');
     try {
-      return super.changeFilter(filterModel);
+      return super.resetFilter();
+    } finally {
+      _$StoreListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setFilter(StoreFilterModel model) {
+    final _$actionInfo = _$StoreListViewModelBaseActionController.startAction(
+        name: 'StoreListViewModelBase.setFilter');
+    try {
+      return super.setFilter(model);
     } finally {
       _$StoreListViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -89,7 +132,9 @@ mixin _$StoreListViewModel on StoreListViewModelBase, Store {
   String toString() {
     return '''
 advertList: ${advertList},
-filter: ${filter}
+recoveryList: ${recoveryList},
+filter: ${filter},
+cont: ${cont}
     ''';
   }
 }

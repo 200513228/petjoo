@@ -114,6 +114,7 @@ class HomeView extends StatelessWidget {
         showModalBottomSheet(
             context: context,
             isScrollControlled: true,
+            enableDrag: true,
             backgroundColor: colorPalette['primary'],
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
@@ -139,9 +140,9 @@ class HomeView extends StatelessWidget {
   Widget pageSwitch(int id) {
     switch (title) {
       case 'PAZAR':
-        return id == 1 ? StoreListView() : StoreUserListView();
+        return id == 1 ? const StoreListView() : StoreUserListView();
       case 'İLANLAR':
-        return id == 1 ? PetListView() : PetUserList();
+        return id == 1 ? const PetListView() : PetUserList();
       case 'PET NAKİL':
         return id == 1
             ? const TransportAdvertListView()
@@ -207,10 +208,10 @@ class HomeView extends StatelessWidget {
     Widget page = Container();
     switch (title) {
       case 'PAZAR':
-        page = StoreListView();
+        page = const StoreListView();
         break;
       case 'İLANLAR':
-        page = PetListView();
+        page = const PetListView();
         break;
       case 'PET NAKİL':
         page = const TransportAdvertListView();

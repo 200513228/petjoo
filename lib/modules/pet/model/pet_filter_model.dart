@@ -1,5 +1,4 @@
 class PetFilterModel {
-  String query = '';
   int advertType = 0;
   int animalType = 0;
   int animalGender = 0;
@@ -10,7 +9,6 @@ class PetFilterModel {
   int toiletTraining = 0;
 
   PetFilterModel.filter({
-    required this.query,
     required this.advertType,
     required this.animalType,
     required this.animalSize,

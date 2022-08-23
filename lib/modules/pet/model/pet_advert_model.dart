@@ -22,6 +22,7 @@ class PetAdvertModel {
   String userId = '';
   int vaccine = 0;
   String address = '';
+  String oldUserId = '';
 
   PetAdvertModel.fromQDS(QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
     var data = snapshot.data() as dynamic;
@@ -45,6 +46,11 @@ class PetAdvertModel {
     userId = data['userId'] ?? '';
     vaccine = data['vaccine'] ?? 0;
     address = data['address'] ?? '';
+    oldUserId =
+        (data['user'] as Map<String, dynamic>? ?? {'id': ''})['id'] ?? '';
+    if (userId == '') {
+      userId = oldUserId;
+    }
   }
 
   PetAdvertModel.empty() {

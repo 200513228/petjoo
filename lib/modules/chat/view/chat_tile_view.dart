@@ -66,8 +66,14 @@ class ChatTileView extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         child: vm.image == ''
-            ? Image.asset(Images.noImage)
-            : Image.network(vm.image),
+            ? Image.asset(
+                Images.noImage,
+                fit: BoxFit.cover,
+              )
+            : Image.network(
+                vm.image,
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

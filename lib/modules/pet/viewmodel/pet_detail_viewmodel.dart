@@ -18,15 +18,20 @@ abstract class PetDetailViewModelBase with Store {
   @observable
   PetAdvertModel? advert;
   @observable
-  String? userImage;
+  String userImage = '';
   @observable
   String? userName;
+  @observable
+  bool isLoading = false;
 
   @action
   Future userInfo(String uid) async {
-    var data = await PetService.getUserInfo(uid);
-    userName = data[0];
-    userImage = data[1];
+    isLoading = !isLoading;
+    var result = await ChatService.getUserInfo(uid);
+    var data = result.data() as dynamic;
+    userName = data['name'] + ' ' + data['surname'];
+    userImage = data['image'] ?? '';
+    isLoading = !isLoading;
   }
 
   @action

@@ -40,7 +40,8 @@ abstract class StoreListViewModelBase with Store {
     } else {
       advertList = temp
           .where((element) =>
-              ('${element.title} ${element.description}').contains(query))
+              ('${element.title.toLowerCase()} ${element.description.toLowerCase()}')
+                  .contains(query.toLowerCase()))
           .toList();
     }
   }

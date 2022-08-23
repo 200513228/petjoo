@@ -50,8 +50,8 @@ abstract class PetListViewModelBase with Store {
     } else {
       advertList = temp
           .where((element) =>
-              ('${element.title} ${element.description} ${element.type}')
-                  .contains(query))
+              ('${element.title.toLowerCase()} ${element.description.toLowerCase()} ${element.type.toString().toLowerCase()} ')
+                  .contains(query.toLowerCase()))
           .toList();
     }
   }

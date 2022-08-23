@@ -290,11 +290,17 @@ class StoreDetailView extends StatelessWidget {
                       child: FloatingActionButton.extended(
                         heroTag: null,
                         backgroundColor: Colors.black,
-                        label: Text(
-                          vm.userName ?? 'Kullanıcı Bulunamadı',
-                          maxLines: 1,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 18),
+                        label: Row(
+                          children: [
+                            image(),
+                            const SizedBox(width: 5),
+                            Text(
+                              vm.userName ?? 'Kullanıcı Bulunamadı',
+                              maxLines: 1,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
+                            ),
+                          ],
                         ),
                         onPressed: null,
                       ),
@@ -330,8 +336,9 @@ class StoreDetailView extends StatelessWidget {
                               ? showDialog(
                                   context: _,
                                   builder: (context) => const PleaseAuth())
-                              : null;
-                          model.phone == '' ? null : vm.call();
+                              : model.phone == ''
+                                  ? null
+                                  : vm.call();
                         },
                         child: Icon(
                           Icons.call_rounded,
@@ -347,8 +354,7 @@ class StoreDetailView extends StatelessWidget {
                               ? showDialog(
                                   context: _,
                                   builder: (context) => const PleaseAuth())
-                              : null;
-                          model.phone == '' ? null : vm.message(_);
+                              : vm.message(_);
                         },
                         child: const Icon(
                           Icons.message_rounded,
@@ -359,6 +365,25 @@ class StoreDetailView extends StatelessWidget {
         ),
       );
     });
+  }
+
+  Widget image() {
+    return Container(
+      width: 35,
+      height: 35,
+      decoration: const BoxDecoration(
+          color: Colors.yellowAccent,
+          borderRadius: BorderRadius.all(Radius.circular(15))),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(15)),
+        child: vm.userImage == ''
+            ? Image.asset(Images.noImage)
+            : Image.network(
+                vm.userImage,
+                fit: BoxFit.cover,
+              ),
+      ),
+    );
   }
 
   Widget title() {
@@ -404,12 +429,15 @@ class StoreDetailView extends StatelessWidget {
         context: context,
         builder: (_) => Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.yellow.shade600,
+              backgroundColor: Colors.black,
               leading: IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.clear_rounded)),
+                  icon: const Icon(
+                    Icons.clear_rounded,
+                    color: Colors.white,
+                  )),
             ),
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.black,
             body: PageView(
               children: [
                 if (model.images.isEmpty) Image.asset(Images.noImage),

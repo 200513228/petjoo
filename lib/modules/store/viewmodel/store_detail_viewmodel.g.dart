@@ -29,13 +29,13 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
       Atom(name: 'StoreDetailViewModelBase.userImage', context: context);
 
   @override
-  String? get userImage {
+  String get userImage {
     _$userImageAtom.reportRead();
     return super.userImage;
   }
 
   @override
-  set userImage(String? value) {
+  set userImage(String value) {
     _$userImageAtom.reportWrite(value, super.userImage, () {
       super.userImage = value;
     });
@@ -54,6 +54,22 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
   set userName(String? value) {
     _$userNameAtom.reportWrite(value, super.userName, () {
       super.userName = value;
+    });
+  }
+
+  late final _$isLoadingAtom =
+      Atom(name: 'StoreDetailViewModelBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
     });
   }
 
@@ -157,7 +173,8 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
     return '''
 advert: ${advert},
 userImage: ${userImage},
-userName: ${userName}
+userName: ${userName},
+isLoading: ${isLoading}
     ''';
   }
 }

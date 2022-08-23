@@ -17,6 +17,20 @@ mixin _$SettingsViewModel on SettingsViewModelBase, Store {
     return _$logoutAsyncAction.run(() => super.logout(_));
   }
 
+  late final _$SettingsViewModelBaseActionController =
+      ActionController(name: 'SettingsViewModelBase', context: context);
+
+  @override
+  void navigate(BuildContext _, Widget page) {
+    final _$actionInfo = _$SettingsViewModelBaseActionController.startAction(
+        name: 'SettingsViewModelBase.navigate');
+    try {
+      return super.navigate(_, page);
+    } finally {
+      _$SettingsViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

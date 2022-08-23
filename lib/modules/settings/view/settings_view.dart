@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:petjoo/modules/settings/view/documents_view.dart';
+import 'package:petjoo/modules/settings/view/profile_view.dart';
 import 'package:petjoo/modules/settings/viewmodel/settings_viewmode.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
@@ -15,11 +18,14 @@ class SettingsView extends StatelessWidget {
         appBar: buildAppBar(),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              Expanded(flex: 3, child: userCard()),
-              Expanded(flex: 5, child: settingsTiles(context)),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                userCard(),
+                const SizedBox(height: 20),
+                settingsTiles(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -29,9 +35,13 @@ class SettingsView extends StatelessWidget {
   Widget settingsTiles(BuildContext _) {
     return Column(
       children: [
-        settingTile('Profil', Icons.person, Container(), () {}),
+        settingTile('Profil', Icons.person, Container(),
+            () => vm.navigate(_, ProfileView())),
         const SizedBox(height: 10),
-        settingTile('Ayarlar', Icons.settings, Container(), () {}),
+        settingTile('Belgeler', Icons.file_open, Container(),
+            () => vm.navigate(_, const DocumentsView())),
+        // const SizedBox(height: 10),
+        // settingTile('Ayarlar', Icons.settings, Container(), () {}),
         const SizedBox(height: 10),
         settingTile('Çıkış Yap', Icons.power_settings_new_rounded, Container(),
             () {
@@ -61,34 +71,45 @@ class SettingsView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Builder(builder: (context) {
-            if (CurrentUser.image != '') {
-              return Container(
-                  clipBehavior: Clip.hardEdge,
-                  width: 200,
-                  height: 200,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(100)),
-                  child: Image.network(
-                    CurrentUser.image,
-                    fit: BoxFit.fitWidth,
-                  ));
-            } else {
-              return Container(
-                  clipBehavior: Clip.hardEdge,
-                  width: 200,
-                  height: 200,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(100)),
-                  child: Image.asset(
-                    Images.noImage,
-                    fit: BoxFit.fitWidth,
-                  ));
-            }
-          }),
+          Badge(
+            badgeContent: const Icon(Icons.camera_alt),
+            position: BadgePosition.bottomEnd(end: 16, bottom: 10),
+            badgeColor: Colors.black54,
+            child: InkWell(
+              child: Builder(builder: (context) {
+                if (CurrentUser.image != '') {
+                  return Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100)),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(
+                          CurrentUser.image,
+                          fit: BoxFit.cover,
+                        ),
+                      ));
+                } else {
+                  return Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100)),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset(
+                          Images.noImage,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ));
+                }
+              }),
+            ),
+          ),
           Text(
             '${CurrentUser.name} ${CurrentUser.surname}',
-            style: const TextStyle(fontSize: 30, color: Colors.black),
+            style: const TextStyle(fontSize: 23, color: Colors.black),
           )
         ],
       ),

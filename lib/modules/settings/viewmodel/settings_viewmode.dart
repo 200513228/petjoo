@@ -14,4 +14,9 @@ abstract class SettingsViewModelBase with Store {
         MaterialPageRoute(builder: (context) => WelcomeView()),
         (route) => false));
   }
+
+  @action
+  void navigate(BuildContext _, Widget page) {
+    Navigator.push(_, MaterialPageRoute(builder: (context) => page));
+  }
 }

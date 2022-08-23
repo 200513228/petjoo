@@ -86,51 +86,6 @@ class StoreDetailView extends StatelessWidget {
     );
   }
 
-  Widget userCard() {
-    return Observer(builder: (_) {
-      return Container(
-        margin: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: ListTile(
-          leading: vm.userImage != null
-              ? Container(
-                  width: 50,
-                  height: 50,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(25))),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                    child: CurrentUser.image != ''
-                        ? Image.network(
-                            CurrentUser.image,
-                            fit: BoxFit.fitWidth,
-                          )
-                        : Image.asset(Images.noImage),
-                  ))
-              : CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.person,
-                    color: colorPalette['primary'],
-                  )),
-          trailing: Text(
-            dateToString(model.date),
-            style: const TextStyle(fontSize: 14),
-          ),
-          title: vm.userName != null
-              ? Text(
-                  vm.userName!,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                )
-              : const Text('Kullanıcı Bulunamadı',
-                  style: TextStyle(color: Colors.black, fontSize: 16)),
-        ),
-      );
-    });
-  }
-
   Widget advertInfoCard(String text, IconData icon, Color color, String title) {
     return Container(
       margin: const EdgeInsets.all(10),

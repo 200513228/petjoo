@@ -47,6 +47,18 @@ class UserService {
     }
   }
 
+  static Future<String> update(Map<String, dynamic> map) async {
+    try {
+      await db.collection('users').doc(auth.currentUser!.uid).update(map);
+      var result =
+          await db.collection('users').doc(auth.currentUser!.uid).get();
+      CurrentUser.fromDS(result);
+      return 'UPDATE';
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
   static Future logout() async {
     await auth.signOut();
     CurrentUser.clear();

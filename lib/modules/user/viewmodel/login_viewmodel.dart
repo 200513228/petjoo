@@ -28,7 +28,7 @@ abstract class LoginViewModelBase with Store {
     isLoading = !isLoading;
     Navigator.pushAndRemoveUntil(
         _,
-        MaterialPageRoute(builder: (context) => const WelcomeView()),
+        MaterialPageRoute(builder: (context) => WelcomeView()),
         (route) => false);
   }
 

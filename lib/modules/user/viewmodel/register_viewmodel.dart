@@ -70,7 +70,7 @@ abstract class RegisterViewModelBase with Store {
     isLoading = !isLoading;
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const WelcomeView()),
+        MaterialPageRoute(builder: (context) => WelcomeView()),
         (route) => false);
   }
 

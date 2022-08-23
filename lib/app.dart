@@ -26,7 +26,7 @@ class _AppState extends State<App> {
           locale: provider.locale,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          home: const WelcomeView(),
+          home: WelcomeView(),
           // initialRoute: FirebaseAuth.instance.currentUser == null
           //     ? Routes.auth
           //     : Routes.navigation,

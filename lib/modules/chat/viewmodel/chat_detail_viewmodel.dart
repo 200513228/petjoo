@@ -15,12 +15,10 @@ abstract class ChatDetailViewModelBase with Store {
 
   @action
   Future getMessages(String id) async {
-    List<MessageModel> temp = [];
-    var data = await ChatService.getMessages(id);
-    for (var element in data.docs) {
-      temp.add(MessageModel.fromQDS(element));
-    }
-    messageList = temp;
+    var stream = ChatService.getMessages(id);
+    stream.listen((event) {
+      messageList = event.docs.map((e) => MessageModel.fromQDS(e)).toList();
+    });
   }
 
   @action
@@ -28,10 +26,7 @@ abstract class ChatDetailViewModelBase with Store {
     String text = cont.text;
     cont.clear();
     if (text != '') {
-      List<MessageModel> temp = messageList;
       await ChatService.sendMessage(MessageModel.toMap(text), doc);
-      temp.add(MessageModel.fromMap(MessageModel.toMap(text)));
-      messageList = temp;
     }
   }
 }

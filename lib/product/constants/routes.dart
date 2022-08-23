@@ -101,7 +101,7 @@ class Routes {
         break;
       case navigation:
         // page = const NavigationView();
-        page = const WelcomeView();
+        page = WelcomeView();
         break;
       case reservationList:
         page = const TransportReservationListView();

@@ -95,7 +95,7 @@ class HomeView extends StatelessWidget {
         ],
         fabLocation: StylishBarFabLocation.center,
         onTap: (id) {
-          id == 0 ? vm.navigate(_, const WelcomeView(), false) : null;
+          id == 0 ? vm.navigate(_, WelcomeView(), false) : null;
           id == 3
               ? CurrentUser.id == ''
                   ? showDialog(

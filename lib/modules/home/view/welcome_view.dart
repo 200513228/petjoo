@@ -10,8 +10,8 @@ import 'package:petjoo/modules/user/view/login_view.dart';
 import 'package:petjoo/product/constants/images.dart';
 
 class WelcomeView extends StatelessWidget {
-  static final WelcomeViewModel vm = WelcomeViewModel();
-  const WelcomeView({Key? key}) : super(key: key);
+  final WelcomeViewModel vm = WelcomeViewModel();
+  WelcomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,29 +51,43 @@ class WelcomeView extends StatelessWidget {
         children: [
           Expanded(
               child: Column(
-            children: const [
+            children: [
               Expanded(
                 flex: 10,
-                child: BigModule(icon: Icons.pets, title: 'İLANLAR'),
+                child: BigModule(
+                  icon: Icons.pets,
+                  title: 'İLANLAR',
+                  onTap: () => vm.goModule(_, 'İLANLAR'),
+                ),
               ),
               Expanded(
                 flex: 6,
                 child: SmallModule(
-                    icon: FontAwesomeIcons.compassDrafting, title: 'YAKINDA'),
+                  icon: FontAwesomeIcons.compassDrafting,
+                  title: 'YAKINDA',
+                  onTap: () => vm.goModule(_, 'YAKINDA'),
+                ),
               ),
             ],
           )),
           Expanded(
               child: Column(
-            children: const [
+            children: [
               Expanded(
                 flex: 6,
                 child: SmallModule(
-                    icon: FontAwesomeIcons.truck, title: 'PET NAKİL'),
+                  icon: FontAwesomeIcons.truck,
+                  title: 'PET NAKİL',
+                  onTap: () => vm.goModule(_, 'PET NAKİL'),
+                ),
               ),
               Expanded(
                 flex: 10,
-                child: BigModule(icon: Icons.store, title: 'PAZAR'),
+                child: BigModule(
+                  icon: Icons.store,
+                  title: 'PAZAR',
+                  onTap: () => vm.goModule(_, 'PAZAR'),
+                ),
               ),
             ],
           )),
@@ -142,7 +156,9 @@ class WelcomeView extends StatelessWidget {
 class BigModule extends StatelessWidget {
   final IconData icon;
   final String title;
-  const BigModule({required this.icon, required this.title, Key? key})
+  final Function onTap;
+  const BigModule(
+      {required this.icon, required this.title, required this.onTap, Key? key})
       : super(key: key);
 
   @override
@@ -151,7 +167,7 @@ class BigModule extends StatelessWidget {
     return InkWell(
       radius: 25,
       onTap: () {
-        WelcomeView.vm.goModule(context, title);
+        onTap();
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -189,7 +205,9 @@ class BigModule extends StatelessWidget {
 class SmallModule extends StatelessWidget {
   final IconData icon;
   final String title;
-  const SmallModule({required this.icon, required this.title, Key? key})
+  final Function onTap;
+  const SmallModule(
+      {required this.icon, required this.title, required this.onTap, Key? key})
       : super(key: key);
 
   @override
@@ -199,7 +217,7 @@ class SmallModule extends StatelessWidget {
       onTap: title == 'YAKINDA'
           ? null
           : () {
-              WelcomeView.vm.goModule(context, title);
+              onTap();
             },
       radius: 25,
       child: Container(

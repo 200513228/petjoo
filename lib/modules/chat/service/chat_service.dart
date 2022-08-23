@@ -12,14 +12,13 @@ class ChatService {
         .get();
   }
 
-  static Future<QuerySnapshot<Map<String, dynamic>>> getMessages(
-      String doc) async {
-    return await db
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getMessages(String doc) {
+    return db
         .collection('chats')
         .doc(doc)
         .collection('messages')
         .orderBy('date', descending: true)
-        .get();
+        .snapshots();
   }
 
   static Future<DocumentSnapshot<Map<String, dynamic>>> getUserInfo(

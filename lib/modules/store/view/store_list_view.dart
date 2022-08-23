@@ -15,6 +15,7 @@ class StoreListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.getAdverts();
+    vm.resetFilter();
     return Observer(builder: (_) {
       return Column(
         children: [

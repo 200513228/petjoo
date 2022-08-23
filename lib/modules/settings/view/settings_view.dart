@@ -1,8 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/core/widgets/loading.dart';
 import 'package:petjoo/modules/settings/view/documents_view.dart';
 import 'package:petjoo/modules/settings/view/profile_view.dart';
-import 'package:petjoo/modules/settings/viewmodel/settings_viewmode.dart';
+import 'package:petjoo/modules/settings/viewmodel/settings_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
 
@@ -21,7 +23,7 @@ class SettingsView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                userCard(),
+                userCard(context),
                 const SizedBox(height: 20),
                 settingsTiles(context),
               ],
@@ -65,54 +67,61 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  Widget userCard() {
+  Widget userCard(BuildContext _) {
     return Align(
       alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Badge(
-            badgeContent: const Icon(Icons.camera_alt),
-            position: BadgePosition.bottomEnd(end: 16, bottom: 10),
-            badgeColor: Colors.black54,
-            child: InkWell(
-              child: Builder(builder: (context) {
-                if (CurrentUser.image != '') {
-                  return Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100)),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.network(
-                          CurrentUser.image,
-                          fit: BoxFit.cover,
-                        ),
-                      ));
-                } else {
-                  return Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100)),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.asset(
-                          Images.noImage,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ));
-                }
-              }),
-            ),
-          ),
-          Text(
-            '${CurrentUser.name} ${CurrentUser.surname}',
-            style: const TextStyle(fontSize: 23, color: Colors.black),
-          )
-        ],
-      ),
+      child: Observer(builder: (_) {
+        return vm.isLoading
+            ? const Loading()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Badge(
+                    badgeContent: const Icon(Icons.camera_alt),
+                    position: BadgePosition.bottomEnd(end: 16, bottom: 10),
+                    badgeColor: Colors.black54,
+                    child: InkWell(
+                      onTap: () {
+                        vm.profilePic(_);
+                      },
+                      child: Builder(builder: (context) {
+                        if (CurrentUser.image != '') {
+                          return Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  CurrentUser.image,
+                                  fit: BoxFit.cover,
+                                ),
+                              ));
+                        } else {
+                          return Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.asset(
+                                  Images.noImage,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ));
+                        }
+                      }),
+                    ),
+                  ),
+                  Text(
+                    '${CurrentUser.name} ${CurrentUser.surname}',
+                    style: const TextStyle(fontSize: 23, color: Colors.black),
+                  )
+                ],
+              );
+      }),
     );
   }
 

@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/please_auth.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
+import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_userlist_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
@@ -129,7 +131,9 @@ class PetUserList extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Flexible(
-                                    child: Text(typeToString(model.type),
+                                    child: Text(
+                                        petAdvertAnimals[model.animalType]
+                                            .toString(),
                                         maxLines: 1)),
                                 const SizedBox(width: 5),
                               ]),
@@ -147,7 +151,7 @@ class PetUserList extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        'Teslimat: ${deliveryToString(model.infertility)}',
+                                        petAdvertTypes[model.type].toString(),
                                         textAlign: TextAlign.end,
                                         maxLines: 1,
                                       ),
@@ -166,52 +170,5 @@ class PetUserList extends StatelessWidget {
     var d = date.toDate();
 
     return '${d.day}.${d.month}.${d.year}';
-  }
-
-  String typeToString(int type) {
-    switch (type) {
-      case 0:
-        return 'Diğer';
-      case 1:
-        return 'Kermes';
-      case 2:
-        return 'Pet Gıda';
-      case 3:
-        return 'Pet Aksesuar';
-      case 4:
-        return 'Kişisel';
-      default:
-        return 'Hepsi';
-    }
-  }
-
-  String deliveryToString(int delivery) {
-    switch (delivery) {
-      case 0:
-        return 'Diğer';
-      case 1:
-        return 'Gel Al';
-      case 2:
-        return 'Şehir İçi';
-      case 3:
-        return 'Kargo';
-      default:
-        return 'Hepsi';
-    }
-  }
-
-  String statusToString(int status) {
-    switch (status) {
-      case 0:
-        return 'Diğer';
-      case 1:
-        return 'Sıfır';
-      case 2:
-        return 'İkinci El';
-      case 3:
-        return 'El Yapımı';
-      default:
-        return 'Hepsi';
-    }
   }
 }

@@ -16,6 +16,7 @@ import 'package:petjoo/modules/pet/model/pet_advert_vaccines.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class PetDetailView extends StatelessWidget {
   final PetDetailViewModel vm = PetDetailViewModel();
@@ -111,7 +112,7 @@ class PetDetailView extends StatelessWidget {
             ),
             Expanded(
               child: advertInfoCard(
-                  petAdvertToilets[model.animalSize] as String,
+                  petAdvertToilets[model.toiletTraining] as String,
                   FontAwesomeIcons.toilet,
                   Colors.greenAccent,
                   'Tuvalet Eğt.'),
@@ -275,15 +276,42 @@ class PetDetailView extends StatelessWidget {
                         backgroundColor: Colors.grey.shade800,
                         label: Text(
                           model.isAdopted
-                              ? 'Sahiplendirme Formu'
-                              : 'Sahiplendirildi Mi?',
+                              ? 'Tekrar Sahiplendir'
+                              : 'Sahiplendirildi',
+                          maxLines: 2,
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 22),
+                              color: Colors.white, fontSize: 18),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (!model.isAdopted) {
+                            await showDialog(
+                                context: _,
+                                builder: (context) => AlertDialog(
+                                      title: const Text('Sahiplendirme Formu'),
+                                      content: const Text(
+                                          'Sahiplendirme Formunu indirip imzalamanızı tavsiye ederiz. İstediğiniz zaman ayarlardan erişebilirsiniz.'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              launchUrlString(
+                                                'https://firebasestorage.googleapis.com/v0/b/petjoo-129db.appspot.com/o/docs%2Fsahiplendirme%20formu.docx?alt=media&token=0d6d5ff7-812f-4274-beb9-75bf26f86b43',
+                                                mode: LaunchMode
+                                                    .externalApplication,
+                                              );
+                                            },
+                                            child: const Text('Formu İndir')),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Kapat')),
+                                      ],
+                                    )).then(
+                                (value) => vm.changeAdopt(!model.isAdopted, _));
+                          } else {
                             vm.changeAdopt(!model.isAdopted, _);
-                          } else {}
+                          }
                         },
                       ),
                     ),

@@ -26,116 +26,148 @@ class PetFilterView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DropdownX<int>(
-              value: vm.advertType,
-              hint: 'Kategori',
-              label: 'Kategori',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterTypes.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterTypes[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.advertType = value,
+            Row(
+              children: [
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.advertType,
+                    hint: 'Kategori',
+                    label: 'Kategori',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterTypes.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterTypes[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.advertType = value,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.animalType,
+                    hint: 'Tür',
+                    label: 'Tür',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterAnimals.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterAnimals[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.animalType = value,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
-            DropdownX<int>(
-              value: vm.animalType,
-              hint: 'Tür',
-              label: 'Tür',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterAnimals.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterAnimals[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.animalType = value,
+            Row(
+              children: [
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.animalGender,
+                    hint: 'Cinsiyet',
+                    label: 'Cinsiyet',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterGenders.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterGenders[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.animalGender = value,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.animalHabit,
+                    hint: 'Huy',
+                    label: 'Huy',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterHabits.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterHabits[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.animalHabit = value,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
-            DropdownX<int>(
-              value: vm.animalGender,
-              hint: 'Cinsiyet',
-              label: 'Cinsiyet',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterGenders.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterGenders[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.animalGender = value,
+            Row(
+              children: [
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.animalSize,
+                    hint: 'Boyut',
+                    label: 'Boyut',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterSizes.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterSizes[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.animalSize = value,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.vaccine,
+                    hint: 'Aşı',
+                    label: 'Aşı',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterVaccines.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterVaccines[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.vaccine = value,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
-            DropdownX<int>(
-              value: vm.animalHabit,
-              hint: 'Huy',
-              label: 'Huy',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterHabits.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterHabits[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.animalHabit = value,
-            ),
-            const SizedBox(height: 10),
-            DropdownX<int>(
-              value: vm.animalSize,
-              hint: 'Boyut',
-              label: 'Boyut',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterSizes.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterSizes[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.animalSize = value,
-            ),
-            const SizedBox(height: 10),
-            DropdownX<int>(
-              value: vm.vaccine,
-              hint: 'Aşı',
-              label: 'Aşı',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterVaccines.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterVaccines[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.vaccine = value,
-            ),
-            const SizedBox(height: 10),
-            DropdownX<int>(
-              value: vm.infertility,
-              hint: 'Kısırlık',
-              label: 'Kısırlık',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterInfertilities.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterInfertilities[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.infertility = value,
-            ),
-            const SizedBox(height: 10),
-            DropdownX<int>(
-              value: vm.toilet,
-              hint: 'Tuvalet Eğitimi',
-              label: 'Tuvalet Eğitimi',
-              borderRadius: Dimens.radiusSmall.toBorderRadius(),
-              items: petFilterToilets.keys
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(petFilterToilets[e]!),
-                      ))
-                  .toList(),
-              onChanged: (value) => vm.toilet = value,
+            Row(
+              children: [
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.infertility,
+                    hint: 'Kısırlık',
+                    label: 'Kısırlık',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterInfertilities.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterInfertilities[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.infertility = value,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DropdownX<int>(
+                    value: vm.toilet,
+                    hint: 'Tuvalet Eğitimi',
+                    label: 'Tuvalet Eğitimi',
+                    borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                    items: petFilterToilets.keys
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(petFilterToilets[e]!),
+                            ))
+                        .toList(),
+                    onChanged: (value) => vm.toilet = value,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             buildButtons(context),
@@ -155,7 +187,7 @@ class PetFilterView extends StatelessWidget {
                 style: TextStyle(color: Colors.redAccent)),
           ),
         ),
-        const SizedBox(width: 20),
+        const SizedBox(width: 5),
         Expanded(
           child: ElevatedButton(
             onPressed: () => vm.setFilter(context),

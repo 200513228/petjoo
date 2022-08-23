@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/widgets/loading.dart';
@@ -27,24 +28,30 @@ class ChatTileView extends StatelessWidget {
                 title: Loading(),
                 subtitle: Text(''),
               )
-            : ListTile(
-                onTap: () {
-                  model.lastMessage.senderId != CurrentUser.id
-                      ? vm.readChat(model.id)
-                      : null;
-                  vm.openChat(context, model);
-                },
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                leading: image(),
-                title: Material(
-                    type: MaterialType.transparency,
-                    child: Text(
-                      vm.name,
-                      style: const TextStyle(fontSize: 16),
-                    )),
-                subtitle: Text(model.lastMessage.content),
-                trailing: Text(dateToString(model.lastMessage.date)));
+            : Badge(
+                badgeContent: const Text(''),
+                showBadge: model.lastMessage.senderId == CurrentUser.id
+                    ? false
+                    : !model.lastMessage.isReaded,
+                child: ListTile(
+                    onTap: () {
+                      model.lastMessage.senderId != CurrentUser.id
+                          ? vm.readChat(model.id)
+                          : null;
+                      vm.openChat(context, model);
+                    },
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    leading: image(),
+                    title: Material(
+                        type: MaterialType.transparency,
+                        child: Text(
+                          vm.name,
+                          style: const TextStyle(fontSize: 16),
+                        )),
+                    subtitle: Text(model.lastMessage.content),
+                    trailing: Text(dateToString(model.lastMessage.date))),
+              );
       }),
     );
   }

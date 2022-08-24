@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/base/ui_snackbar.dart';
+import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/modules/user/service/user_service.dart';
 part 'profile_viewmodel.g.dart';
@@ -35,6 +36,12 @@ abstract class ProfileViewModelBase with Store {
   }
 
   @action
+  Future delete(BuildContext _) async {
+    await UserService.deleteAccount().then(
+        (value) => value == 'DELETE' ? accountDeleted(_) : error(_, value));
+  }
+
+  @action
   void error(BuildContext _, String data) {
     isLoading = !isLoading;
     ScaffoldMessenger.of(_).showSnackBar(uiSnackBar(data));
@@ -44,5 +51,12 @@ abstract class ProfileViewModelBase with Store {
   void successfull(BuildContext context) {
     isLoading = !isLoading;
     Navigator.pop(context);
+  }
+
+  void accountDeleted(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomeView()),
+        (route) => false);
   }
 }

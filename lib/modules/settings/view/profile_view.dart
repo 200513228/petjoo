@@ -39,6 +39,7 @@ class ProfileView extends StatelessWidget {
                     textField(vm.surnameCont, 'Soyisim'),
                     buildPhone,
                     saveButton(context),
+                    deleteButton(context),
                   ],
                 ),
               ),
@@ -123,6 +124,47 @@ class ProfileView extends StatelessWidget {
             },
             child: const Text('Kaydet'),
           ))
+        ],
+      ),
+    );
+  }
+
+  Widget deleteButton(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      child: Row(
+        children: [
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: const Text('Hesabı Sil'),
+                          content: const Text(
+                              'Bu işlem geri alınamaz. Devam etmek istiyor musunuz?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                vm.delete(context);
+                              },
+                              child: const Text('Hesabı Sil',
+                                  style: TextStyle(color: Colors.red)),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Vazgeç'),
+                            )
+                          ],
+                        ));
+              },
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red)),
+              child: const Text('Hesabımı Sil'),
+            ),
+          )
         ],
       ),
     );

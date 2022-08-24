@@ -97,6 +97,14 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
     return _$saveAsyncAction.run(() => super.save(context));
   }
 
+  late final _$deleteAsyncAction =
+      AsyncAction('ProfileViewModelBase.delete', context: context);
+
+  @override
+  Future<dynamic> delete(BuildContext _) {
+    return _$deleteAsyncAction.run(() => super.delete(_));
+  }
+
   late final _$ProfileViewModelBaseActionController =
       ActionController(name: 'ProfileViewModelBase', context: context);
 

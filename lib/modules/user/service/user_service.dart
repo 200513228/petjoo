@@ -81,6 +81,16 @@ class UserService {
     }
   }
 
+  static Future<String> deleteAccount() async {
+    try {
+      await auth.currentUser!.delete();
+      await logout();
+      return 'DELETE';
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
   static Future logout() async {
     await auth.signOut();
     CurrentUser.clear();

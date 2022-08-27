@@ -36,6 +36,11 @@ class UserService {
     CurrentUser.fromDS(result);
   }
 
+  static Future<DocumentSnapshot<Map<String, dynamic>>> getUserInfo(
+      String userId) async {
+    return await db.collection('users').doc(userId).get();
+  }
+
   static Future<String> register(
       String email, String pass, Map<String, dynamic> map) async {
     try {
@@ -86,6 +91,15 @@ class UserService {
       await auth.currentUser!.delete();
       await logout();
       return 'DELETE';
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> forgotPass(String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      return 'FORGOT';
     } on Exception catch (e) {
       return e.toString();
     }

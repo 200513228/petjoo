@@ -281,14 +281,6 @@ mixin _$PetAddViewModel on PetAddViewModelBase, Store {
     });
   }
 
-  late final _$updateAsyncAction =
-      AsyncAction('PetAddViewModelBase.update', context: context);
-
-  @override
-  Future<dynamic> update(BuildContext _) {
-    return _$updateAsyncAction.run(() => super.update(_));
-  }
-
   late final _$nextStepAsyncAction =
       AsyncAction('PetAddViewModelBase.nextStep', context: context);
 

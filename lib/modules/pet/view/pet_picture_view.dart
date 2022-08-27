@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/widgets/loading.dart';
@@ -27,16 +30,23 @@ class PetPictureView extends StatelessWidget {
               padding: const EdgeInsets.all(15),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
-              children: images,
+              children: [
+                if (vm.imageList.length < 2) pickerButton,
+                ...vm.imageList.map((e) => imageTile(e)),
+              ],
             );
     });
   }
 
-  List<Widget> get images {
-    return [
-      if (vm.imageList.length < 2) pickerButton,
-      ...vm.imageList.map((e) => Image.file(e)),
-    ];
+  Widget imageTile(File e) {
+    return Badge(
+      badgeContent: IconButton(
+          onPressed: () {
+            vm.imageDelete(e);
+          },
+          icon: const Icon(Icons.delete)),
+      child: Image.file(e),
+    );
   }
 
   Widget get pickerButton {
@@ -63,9 +73,17 @@ class PetPictureView extends StatelessWidget {
     return Observer(builder: (_) {
       return vm.isLoading
           ? Container()
-          : FloatingActionButton(
-              onPressed: () => vm.saveAdvert(context),
-              child: const Icon(Icons.done_rounded),
+          : FloatingActionButton.extended(
+              onPressed: () {
+                model.id != '' ? vm.updateAdvert(_) : vm.saveAdvert(context);
+              },
+              label: Row(
+                children: const [
+                  Icon(Icons.done_rounded),
+                  SizedBox(width: 10),
+                  Text('Tamamla'),
+                ],
+              ),
             );
     });
   }

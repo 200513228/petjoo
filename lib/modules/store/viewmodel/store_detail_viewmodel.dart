@@ -9,6 +9,7 @@ import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
 import 'package:petjoo/modules/store/view/store_add_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
+import 'package:petjoo/modules/user/service/user_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'store_detail_viewmodel.g.dart';
 
@@ -28,7 +29,7 @@ abstract class StoreDetailViewModelBase with Store {
   @action
   Future userInfo(String uid) async {
     isLoading = !isLoading;
-    var result = await ChatService.getUserInfo(uid);
+    var result = await UserService.getUserInfo(uid);
     var data = result.data() as dynamic;
     userName = data['name'] + ' ' + data['surname'];
     userImage = data['image'] ?? '';

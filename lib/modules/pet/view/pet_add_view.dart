@@ -316,10 +316,8 @@ class PetAddView extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(12),
             child: ElevatedButton(
-                onPressed: () {
-                  model != null ? vm.update(context) : vm.nextStep(context);
-                },
-                child: Text(model != null ? 'Kaydet' : 'Sonraki Adım')),
+                onPressed: () => vm.nextStep(context),
+                child: const Text('Sonraki Adım')),
           ),
         )
       ],

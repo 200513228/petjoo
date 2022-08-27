@@ -217,14 +217,6 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
     });
   }
 
-  late final _$updateAsyncAction =
-      AsyncAction('StoreAddViewModelBase.update', context: context);
-
-  @override
-  Future<dynamic> update(BuildContext _) {
-    return _$updateAsyncAction.run(() => super.update(_));
-  }
-
   late final _$nextStepAsyncAction =
       AsyncAction('StoreAddViewModelBase.nextStep', context: context);
 

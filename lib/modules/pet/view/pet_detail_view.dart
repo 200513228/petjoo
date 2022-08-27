@@ -386,11 +386,15 @@ class PetDetailView extends StatelessWidget {
                               ? showDialog(
                                   context: _,
                                   builder: (context) => const PleaseAuth())
-                              : vm.message(_);
+                              : vm.userName == null
+                                  ? null
+                                  : vm.message(_);
                         },
-                        child: const Icon(
+                        child: Icon(
                           Icons.message_rounded,
-                          color: Colors.orangeAccent,
+                          color: vm.userName == null
+                              ? Colors.grey
+                              : Colors.orangeAccent,
                         ))
                   ],
           ],

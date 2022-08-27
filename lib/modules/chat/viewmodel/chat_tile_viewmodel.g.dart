@@ -65,6 +65,14 @@ mixin _$ChatTileViewModel on ChatTileViewModelBase, Store {
     return _$getUserInfoAsyncAction.run(() => super.getUserInfo(userId));
   }
 
+  late final _$readChatAsyncAction =
+      AsyncAction('ChatTileViewModelBase.readChat', context: context);
+
+  @override
+  Future<dynamic> readChat(String doc) {
+    return _$readChatAsyncAction.run(() => super.readChat(doc));
+  }
+
   late final _$ChatTileViewModelBaseActionController =
       ActionController(name: 'ChatTileViewModelBase', context: context);
 
@@ -74,17 +82,6 @@ mixin _$ChatTileViewModel on ChatTileViewModelBase, Store {
         name: 'ChatTileViewModelBase.openChat');
     try {
       return super.openChat(context, model);
-    } finally {
-      _$ChatTileViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void readChat(String doc) {
-    final _$actionInfo = _$ChatTileViewModelBaseActionController.startAction(
-        name: 'ChatTileViewModelBase.readChat');
-    try {
-      return super.readChat(doc);
     } finally {
       _$ChatTileViewModelBaseActionController.endAction(_$actionInfo);
     }

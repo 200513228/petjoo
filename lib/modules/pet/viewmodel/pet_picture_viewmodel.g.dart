@@ -73,6 +73,14 @@ mixin _$PetPictureViewModel on PetPictureViewModelBase, Store {
     return _$setAdvertAsyncAction.run(() => super.setAdvert(model));
   }
 
+  late final _$downloadFileAsyncAction =
+      AsyncAction('PetPictureViewModelBase.downloadFile', context: context);
+
+  @override
+  Future<File?> downloadFile(String url) {
+    return _$downloadFileAsyncAction.run(() => super.downloadFile(url));
+  }
+
   late final _$saveAdvertAsyncAction =
       AsyncAction('PetPictureViewModelBase.saveAdvert', context: context);
 
@@ -81,8 +89,27 @@ mixin _$PetPictureViewModel on PetPictureViewModelBase, Store {
     return _$saveAdvertAsyncAction.run(() => super.saveAdvert(_));
   }
 
+  late final _$updateAdvertAsyncAction =
+      AsyncAction('PetPictureViewModelBase.updateAdvert', context: context);
+
+  @override
+  Future<dynamic> updateAdvert(BuildContext _) {
+    return _$updateAdvertAsyncAction.run(() => super.updateAdvert(_));
+  }
+
   late final _$PetPictureViewModelBaseActionController =
       ActionController(name: 'PetPictureViewModelBase', context: context);
+
+  @override
+  void imageDelete(File e) {
+    final _$actionInfo = _$PetPictureViewModelBaseActionController.startAction(
+        name: 'PetPictureViewModelBase.imageDelete');
+    try {
+      return super.imageDelete(e);
+    } finally {
+      _$PetPictureViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void error(BuildContext _) {

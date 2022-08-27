@@ -21,11 +21,6 @@ class ChatService {
         .snapshots();
   }
 
-  static Future<DocumentSnapshot<Map<String, dynamic>>> getUserInfo(
-      String userId) async {
-    return await db.collection('users').doc(userId).get();
-  }
-
   static Future<bool> sendMessage(Map<String, dynamic> map, String doc) async {
     await db.collection('chats').doc(doc).collection('messages').add(map);
     return false;

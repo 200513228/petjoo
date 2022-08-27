@@ -30,9 +30,8 @@ class ChatTileView extends StatelessWidget {
               )
             : Badge(
                 badgeContent: const Text(''),
-                showBadge: model.lastMessage.senderId == CurrentUser.id
-                    ? false
-                    : !model.lastMessage.isReaded,
+                showBadge: (model.lastMessage.senderId != CurrentUser.id &&
+                    !model.lastMessage.isReaded),
                 child: ListTile(
                     onTap: () {
                       model.lastMessage.senderId != CurrentUser.id

@@ -65,6 +65,14 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
     return _$loginAsyncAction.run(() => super.login(_));
   }
 
+  late final _$forgotPassAsyncAction =
+      AsyncAction('LoginViewModelBase.forgotPass', context: context);
+
+  @override
+  Future<dynamic> forgotPass(BuildContext _) {
+    return _$forgotPassAsyncAction.run(() => super.forgotPass(_));
+  }
+
   late final _$LoginViewModelBaseActionController =
       ActionController(name: 'LoginViewModelBase', context: context);
 
@@ -80,11 +88,33 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
   }
 
   @override
+  void succesfulPass(BuildContext _) {
+    final _$actionInfo = _$LoginViewModelBaseActionController.startAction(
+        name: 'LoginViewModelBase.succesfulPass');
+    try {
+      return super.succesfulPass(_);
+    } finally {
+      _$LoginViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void error(BuildContext context, String value) {
     final _$actionInfo = _$LoginViewModelBaseActionController.startAction(
         name: 'LoginViewModelBase.error');
     try {
       return super.error(context, value);
+    } finally {
+      _$LoginViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void errorPass(BuildContext context, String value) {
+    final _$actionInfo = _$LoginViewModelBaseActionController.startAction(
+        name: 'LoginViewModelBase.errorPass');
+    try {
+      return super.errorPass(context, value);
     } finally {
       _$LoginViewModelBaseActionController.endAction(_$actionInfo);
     }

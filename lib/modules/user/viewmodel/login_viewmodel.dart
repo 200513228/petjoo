@@ -24,6 +24,12 @@ abstract class LoginViewModelBase with Store {
   }
 
   @action
+  Future forgotPass(BuildContext _) async {
+    await UserService.forgotPass(emailCont.text).then(
+        (value) => value == 'FORGOT' ? succesfulPass(_) : errorPass(_, value));
+  }
+
+  @action
   void succesful(BuildContext _) {
     isLoading = !isLoading;
     Navigator.pushAndRemoveUntil(
@@ -33,8 +39,21 @@ abstract class LoginViewModelBase with Store {
   }
 
   @action
+  void succesfulPass(BuildContext _) {
+    Navigator.pop(_);
+    ScaffoldMessenger.of(_)
+        .showSnackBar(uiSnackBar('Sıfırlama Maili Gönderildi.'));
+  }
+
+  @action
   void error(BuildContext context, String value) {
     isLoading = !isLoading;
+    ScaffoldMessenger.of(context).showSnackBar(uiSnackBar(value));
+  }
+
+  @action
+  void errorPass(BuildContext context, String value) {
+    Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(uiSnackBar(value));
   }
 

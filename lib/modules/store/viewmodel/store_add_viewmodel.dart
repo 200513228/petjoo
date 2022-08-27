@@ -3,7 +3,6 @@ import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/base/ui_snackbar.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
-import 'package:petjoo/modules/store/service/store_service.dart';
 import 'package:petjoo/modules/store/view/store_picture_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 part 'store_add_viewmodel.g.dart';
@@ -52,25 +51,6 @@ abstract class StoreAddViewModelBase with Store {
     delivery = model.delivery;
     status = model.status;
     addressCont.text = model.address;
-  }
-
-  @action
-  Future update(BuildContext _) async {
-    isLoading = !isLoading;
-    advert.title = titleCont.text;
-    advert.description = descCont.text;
-    advert.price = num.tryParse(priceCont.text) ?? 0;
-    advert.dialCode = dialCode ?? '';
-    advert.phone = phoneCont.text;
-    advert.address = addressCont.text;
-    advert.type = type ?? 0;
-    advert.delivery = delivery ?? 0;
-    advert.status = status ?? 0;
-    advert.address = addressCont.text;
-    if (formKey.currentState?.validate() ?? false) {
-      StoreService.updateAdvert(advert).then(
-          (value) => value == 'UPDATE' ? successfull(_) : error(_, value));
-    }
   }
 
   @action

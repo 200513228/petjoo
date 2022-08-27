@@ -3,6 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/service/chat_service.dart';
 import 'package:petjoo/modules/chat/view/chat_detail_view.dart';
+import 'package:petjoo/modules/user/service/user_service.dart';
 part 'chat_tile_viewmodel.g.dart';
 
 class ChatTileViewModel = ChatTileViewModelBase with _$ChatTileViewModel;
@@ -18,7 +19,7 @@ abstract class ChatTileViewModelBase with Store {
   @action
   Future getUserInfo(String userId) async {
     isLoading = !isLoading;
-    var result = await ChatService.getUserInfo(userId);
+    var result = await UserService.getUserInfo(userId);
     var data = result.data() as dynamic;
     name = data['name'] + ' ' + data['surname'];
     image = data['image'];
@@ -34,5 +35,7 @@ abstract class ChatTileViewModelBase with Store {
   }
 
   @action
-  void readChat(String doc) {}
+  Future readChat(String doc) async {
+    await ChatService.readChat(doc);
+  }
 }

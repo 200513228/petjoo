@@ -59,37 +59,35 @@ class PetService {
     }
   }
 
-  static Future<String> updateAdvert(PetAdvertModel model) async {
+  static Future<String> updateAdvert(
+      PetAdvertModel model, File? img1, File? img2) async {
     try {
       var doc = db.collection('adverts').doc(model.id);
-      List tempList =
-          await doc.get().then((value) => value.data()!['images'] ?? []);
       await doc.update(PetAdvertModel.modelToJson(model));
-      // String? url1;
-      // String? url2;
-      // if (img1 != null) {
-      //   var result = storage
-      //       .child('store_advert_images')
-      //       .child(doc.id)
-      //       .child(DateTime.now().toString());
-      //   await result.putFile(img1);
-      //   url1 = await result.getDownloadURL();
-      // }
-      // if (img2 != null) {
-      //   var result = storage
-      //       .child('store_advert_images')
-      //       .child(doc.id)
-      //       .child(DateTime.now().toString());
-      //   await result.putFile(img2);
-      //   url2 = await result.getDownloadURL();
-      // }
-      // await doc.update({
-      //   'images': [
-      //     if (img1 != null) url1!,
-      //     if (img2 != null) url2!,
-      //   ]
-      // });
-      await doc.update({'images': tempList});
+      String? url1;
+      String? url2;
+      if (img1 != null) {
+        var result = storage
+            .child('advert_images')
+            .child(doc.id)
+            .child(DateTime.now().toString());
+        await result.putFile(img1);
+        url1 = await result.getDownloadURL();
+      }
+      if (img2 != null) {
+        var result = storage
+            .child('advert_images')
+            .child(doc.id)
+            .child(DateTime.now().toString());
+        await result.putFile(img2);
+        url2 = await result.getDownloadURL();
+      }
+      await doc.update({
+        'images': [
+          if (img1 != null) url1!,
+          if (img2 != null) url2!,
+        ]
+      });
       return 'UPDATE';
     } on Exception catch (e) {
       return e.toString();
@@ -112,13 +110,5 @@ class PetService {
     } on Exception catch (e) {
       return e.toString();
     }
-  }
-
-  static Future<List<String?>> getUserInfo(String userId) async {
-    var result = await db.collection('users').doc(userId).get();
-    var data = result.data() as dynamic;
-    String? userName = data['name'] + ' ' + data['surname'];
-    String? userImage = data['image'];
-    return [userName, userImage];
   }
 }

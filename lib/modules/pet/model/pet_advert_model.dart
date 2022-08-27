@@ -46,8 +46,11 @@ class PetAdvertModel {
     userId = data['userId'] ?? '';
     vaccine = data['vaccine'] ?? 0;
     address = data['address'] ?? '';
-    oldUserId =
-        (data['user'] as Map<String, dynamic>? ?? {'id': ''})['id'] ?? '';
+    // oldUserId =
+    //     (data['user'] as Map<String, dynamic>? ?? {'id': ''})['id'] ?? '';
+    var usermap = data['user'] as Map<String, dynamic>?;
+    oldUserId = usermap?['id'] ?? '';
+
     if (userId == '') {
       userId = oldUserId;
     }

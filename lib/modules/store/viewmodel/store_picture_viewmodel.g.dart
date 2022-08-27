@@ -73,6 +73,14 @@ mixin _$StorePictureViewModel on StorePictureViewModelBase, Store {
     return _$setAdvertAsyncAction.run(() => super.setAdvert(model));
   }
 
+  late final _$downloadFileAsyncAction =
+      AsyncAction('StorePictureViewModelBase.downloadFile', context: context);
+
+  @override
+  Future<File?> downloadFile(String url) {
+    return _$downloadFileAsyncAction.run(() => super.downloadFile(url));
+  }
+
   late final _$saveAdvertAsyncAction =
       AsyncAction('StorePictureViewModelBase.saveAdvert', context: context);
 
@@ -81,8 +89,27 @@ mixin _$StorePictureViewModel on StorePictureViewModelBase, Store {
     return _$saveAdvertAsyncAction.run(() => super.saveAdvert(_));
   }
 
+  late final _$updateAdvertAsyncAction =
+      AsyncAction('StorePictureViewModelBase.updateAdvert', context: context);
+
+  @override
+  Future<dynamic> updateAdvert(BuildContext _) {
+    return _$updateAdvertAsyncAction.run(() => super.updateAdvert(_));
+  }
+
   late final _$StorePictureViewModelBaseActionController =
       ActionController(name: 'StorePictureViewModelBase', context: context);
+
+  @override
+  void imageDelete(File e) {
+    final _$actionInfo = _$StorePictureViewModelBaseActionController
+        .startAction(name: 'StorePictureViewModelBase.imageDelete');
+    try {
+      return super.imageDelete(e);
+    } finally {
+      _$StorePictureViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void error(BuildContext _, String data) {

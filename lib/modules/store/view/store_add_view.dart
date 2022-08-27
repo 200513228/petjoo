@@ -225,9 +225,9 @@ class StoreAddView extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: ElevatedButton(
                 onPressed: () {
-                  model != null ? vm.update(context) : vm.nextStep(context);
+                  vm.nextStep(context);
                 },
-                child: Text(model != null ? 'Tamamla' : 'Sonraki Adım')),
+                child: const Text('Sonraki Adım')),
           ),
         )
       ],

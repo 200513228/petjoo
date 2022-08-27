@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/widgets/loading.dart';
+import 'package:petjoo/modules/base/color_palette.dart';
 import 'package:petjoo/modules/user/viewmodel/login_viewmodel.dart';
 
 class LoginView extends StatelessWidget {
@@ -41,18 +42,46 @@ class LoginView extends StatelessWidget {
                   const SizedBox(height: 20),
                   textField(vm.passCont, 'Şifre', true),
                   const SizedBox(height: 5),
-                  Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    alignment: Alignment.centerRight,
-                    child: const Text('Şifremi Unuttum',
-                        style: TextStyle(color: Colors.black87)),
-                  ),
+                  forgotPass(context),
                   const SizedBox(height: 20),
                   signButton(context),
                 ],
               ),
             );
     });
+  }
+
+  Widget forgotPass(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(right: 10),
+      alignment: Alignment.centerRight,
+      child: TextButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              backgroundColor: colorPalette['primary'],
+              title: const Text(
+                'Şifremi Unuttum',
+                style: TextStyle(color: Colors.black),
+              ),
+              content: Row(
+                children: [
+                  Expanded(child: textField(vm.emailCont, 'E-Posta', false))
+                ],
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: () async => await vm.forgotPass(context),
+                    child: const Text('Gönder'))
+              ],
+            ),
+          );
+        },
+        child: const Text('Şifremi Unuttum',
+            style: TextStyle(color: Colors.black87)),
+      ),
+    );
   }
 
   Widget textField(TextEditingController cont, String label, bool isPass) {

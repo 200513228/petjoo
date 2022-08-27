@@ -17,25 +17,28 @@ class StoreListView extends StatelessWidget {
     vm.getAdverts();
     vm.resetFilter();
     return Observer(builder: (_) {
-      return Column(
-        children: [
-          queryText(),
-          vm.advertList.isEmpty
-              ? const Expanded(child: NothingToSeeHereWidget())
-              : Expanded(
-                  child: GridView(
-                    padding: const EdgeInsets.all(10),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: .65,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 15,
+      return RefreshIndicator(
+        onRefresh: () => vm.getAdverts(),
+        child: Column(
+          children: [
+            queryText(),
+            vm.advertList.isEmpty
+                ? const Expanded(child: NothingToSeeHereWidget())
+                : Expanded(
+                    child: GridView(
+                      padding: const EdgeInsets.all(10),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: .65,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
+                      ),
+                      children: [...vm.advertList.map((e) => advertTile(e, _))],
                     ),
-                    children: [...vm.advertList.map((e) => advertTile(e, _))],
                   ),
-                ),
-        ],
+          ],
+        ),
       );
     });
   }

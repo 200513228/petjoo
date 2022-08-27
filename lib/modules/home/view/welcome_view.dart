@@ -22,7 +22,7 @@ class WelcomeView extends StatelessWidget {
         backgroundColor: colorPalette['secondary'],
         body: Column(
           children: [
-            Expanded(flex: 6, child: slider()),
+            Expanded(flex: 5, child: slider()),
             Expanded(flex: 4, child: selector(context)),
             userCard(context),
           ],

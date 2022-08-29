@@ -44,7 +44,7 @@ exports.userUpdateFunction = functions
         }
     });
 
-    exports.userCreateFunction = functions
+exports.userCreateFunction = functions
     .region('europe-west6')
     .firestore
     .document("users/{userId}")

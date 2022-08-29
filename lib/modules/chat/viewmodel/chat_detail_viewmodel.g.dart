@@ -53,8 +53,8 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
       AsyncAction('ChatDetailViewModelBase.sendMessage', context: context);
 
   @override
-  Future<dynamic> sendMessage(String doc) {
-    return _$sendMessageAsyncAction.run(() => super.sendMessage(doc));
+  Future<dynamic> sendMessage(ChatModel model) {
+    return _$sendMessageAsyncAction.run(() => super.sendMessage(model));
   }
 
   @override

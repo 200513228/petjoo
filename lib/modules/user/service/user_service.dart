@@ -22,6 +22,10 @@ class UserService {
   static Future<String> login(String email, String pass) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: pass);
+      await db
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .update({'fcmToken': await token});
       var result =
           await db.collection('users').doc(auth.currentUser!.uid).get();
       CurrentUser.fromDS(result);

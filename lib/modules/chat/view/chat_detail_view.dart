@@ -92,7 +92,7 @@ class ChatDetailView extends StatelessWidget {
           const SizedBox(width: 15),
           IconButton(
               onPressed: () {
-                vm.sendMessage(model.id);
+                vm.sendMessage(model);
               },
               icon: const Icon(Icons.send),
               color: Colors.black),

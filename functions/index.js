@@ -44,7 +44,7 @@ exports.userUpdateFunction = functions
         }
     });
 
-exports.userCreateFunction = functions
+    exports.userCreateFunction = functions
     .region('europe-west6')
     .firestore
     .document("users/{userId}")
@@ -136,7 +136,7 @@ exports.chatNotificationFunction = functions
         const chat = chatDoc.data();
         message.id = snap.id;
         chatRef.update({
-            lastMessage: message
+            lastMessage: message,
         });
         const receiverId = chat.userIds[0] == message.senderId ? chat.userIds[1] : chat.userIds[0];
         const sender = (await db.collection("users").doc(message.senderId).get()).data();

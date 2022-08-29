@@ -208,7 +208,7 @@ class PetDetailView extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: Text(
                         model.address,
-                        maxLines: 1,
+                        maxLines: 5,
                         style: const TextStyle(fontSize: 16),
                       )),
                 ],

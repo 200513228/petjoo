@@ -21,8 +21,16 @@ class ChatService {
         .snapshots();
   }
 
-  static Future<bool> sendMessage(Map<String, dynamic> map, String doc) async {
-    await db.collection('chats').doc(doc).collection('messages').add(map);
+  static Future<bool> sendMessage(
+      Map<String, dynamic> map, ChatModel model) async {
+    await db.collection('chats').doc(model.id).get().then((value) async =>
+        value.exists == false
+            ? await db
+                .collection('chats')
+                .doc(model.id)
+                .set({'id': model.id, 'userIds': model.userIds})
+            : null);
+    await db.collection('chats').doc(model.id).collection('messages').add(map);
     return false;
   }
 

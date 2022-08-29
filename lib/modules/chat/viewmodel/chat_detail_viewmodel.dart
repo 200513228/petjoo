@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/model/message_model.dart';
 import 'package:petjoo/modules/chat/service/chat_service.dart';
+
 part 'chat_detail_viewmodel.g.dart';
 
 class ChatDetailViewModel = ChatDetailViewModelBase with _$ChatDetailViewModel;
@@ -22,11 +24,11 @@ abstract class ChatDetailViewModelBase with Store {
   }
 
   @action
-  Future sendMessage(String doc) async {
+  Future sendMessage(ChatModel model) async {
     String text = cont.text;
     cont.clear();
     if (text != '') {
-      await ChatService.sendMessage(MessageModel.toMap(text), doc);
+      await ChatService.sendMessage(MessageModel.toMap(text), model);
     }
   }
 }

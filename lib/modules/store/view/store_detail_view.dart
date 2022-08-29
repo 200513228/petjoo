@@ -164,7 +164,6 @@ class StoreDetailView extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: Text(
                         model.address,
-                        maxLines: 1,
                         style: const TextStyle(fontSize: 16),
                       )),
                 ],

@@ -16,17 +16,14 @@ class WelcomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.userLogin();
-    return WillPopScope(
-      onWillPop: () async => Navigator.canPop(context),
-      child: Scaffold(
-        backgroundColor: colorPalette['secondary'],
-        body: Column(
-          children: [
-            Expanded(flex: 5, child: slider()),
-            Expanded(flex: 4, child: selector(context)),
-            userCard(context),
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: colorPalette['secondary'],
+      body: Column(
+        children: [
+          Expanded(flex: 5, child: slider()),
+          Expanded(flex: 4, child: selector(context)),
+          userCard(context),
+        ],
       ),
     );
   }

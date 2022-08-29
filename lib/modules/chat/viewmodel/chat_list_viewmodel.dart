@@ -16,6 +16,8 @@ abstract class ChatListViewModelBase with Store {
     for (var element in data.docs) {
       tempList.add(ChatModel.fromQDS(element));
     }
+    tempList.sort((b, a) => a.lastMessage.date.microsecondsSinceEpoch
+        .compareTo(b.lastMessage.date.microsecondsSinceEpoch));
     chatList = tempList;
   }
 }

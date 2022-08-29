@@ -48,7 +48,7 @@ class ChatDetailView extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: isUser ? Colors.black : Colors.white,
             borderRadius: BorderRadius.only(
                 topLeft: const Radius.circular(20),
                 topRight: const Radius.circular(20),
@@ -64,12 +64,14 @@ class ChatDetailView extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(5, 10, 10, 10),
                         child: Text(
                           model.content,
-                          style: const TextStyle(
-                              fontSize: 15, color: Colors.black),
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: isUser ? Colors.white : Colors.black),
                         ))),
                 Text(
                   dateToTime(model.date),
-                  style: const TextStyle(color: Colors.black54),
+                  style: TextStyle(
+                      color: isUser ? Colors.white54 : Colors.black54),
                 )
               ]),
         ));

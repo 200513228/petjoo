@@ -41,6 +41,30 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
     });
   }
 
+  late final _$chatCountAtom =
+      Atom(name: 'HomeViewModelBase.chatCount', context: context);
+
+  @override
+  int get chatCount {
+    _$chatCountAtom.reportRead();
+    return super.chatCount;
+  }
+
+  @override
+  set chatCount(int value) {
+    _$chatCountAtom.reportWrite(value, super.chatCount, () {
+      super.chatCount = value;
+    });
+  }
+
+  late final _$getChatCountAsyncAction =
+      AsyncAction('HomeViewModelBase.getChatCount', context: context);
+
+  @override
+  Future<dynamic> getChatCount() {
+    return _$getChatCountAsyncAction.run(() => super.getChatCount());
+  }
+
   late final _$HomeViewModelBaseActionController =
       ActionController(name: 'HomeViewModelBase', context: context);
 
@@ -70,7 +94,8 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
   String toString() {
     return '''
 currentPage: ${currentPage},
-currentIndex: ${currentIndex}
+currentIndex: ${currentIndex},
+chatCount: ${chatCount}
     ''';
   }
 }

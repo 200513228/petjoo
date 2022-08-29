@@ -14,18 +14,16 @@ class ChatListView extends StatelessWidget {
       appBar: buildAppBar(),
       body: Container(
         padding: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Observer(builder: (_) {
-            return RefreshIndicator(
-              onRefresh: () => vm.getChats(),
-              child: Column(
-                children: [
-                  ...vm.chatList.map((e) => ChatTileView(model: e)),
-                ],
-              ),
-            );
-          }),
-        ),
+        child: Observer(builder: (_) {
+          return RefreshIndicator(
+            onRefresh: () => vm.getChats(),
+            child: ListView(
+              children: [
+                ...vm.chatList.map((e) => ChatTileView(model: e)),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
@@ -25,6 +26,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     titleToPage();
+    vm.getChatCount();
     return WillPopScope(
       onWillPop: () async => Navigator.canPop(context),
       child: Scaffold(
@@ -42,16 +44,18 @@ class HomeView extends StatelessWidget {
       centerTitle: true,
       title: Text(title),
       actions: [
-        IconButton(
-            onPressed: () {
-              if (CurrentUser.id == '') {
-                showDialog(
-                    context: _, builder: (context) => const PleaseAuth());
-              } else {
-                vm.navigate(_, ChatListView(), true);
-              }
-            },
-            icon: const Icon(Icons.message_rounded))
+        IconButton(onPressed: () {
+          if (CurrentUser.id == '') {
+            showDialog(context: _, builder: (context) => const PleaseAuth());
+          } else {
+            vm.navigate(_, ChatListView(), true);
+          }
+        }, icon: Observer(builder: (_) {
+          return Badge(
+              badgeContent: Text(vm.chatCount.toString()),
+              showBadge: vm.chatCount != 0,
+              child: const Icon(Icons.message_rounded));
+        }))
       ],
     );
   }

@@ -43,7 +43,7 @@ dependencies:
   stylish_bottom_bar: ^0.1.4
   path_provider: ^2.0.11
   badges: ^2.0.2
-  # url_launcher_ios:
+  url_launcher_ios:
 dev_dependencies:
   flutter_test:
     sdk: flutter

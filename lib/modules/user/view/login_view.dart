@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/widgets/loading.dart';
@@ -11,7 +12,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: SingleChildScrollView(
@@ -38,9 +39,9 @@ class LoginView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  textField(vm.emailCont, 'E-Posta', false),
+                  textField(vm.emailCont, 'login_email'.tr(), false),
                   const SizedBox(height: 20),
-                  textField(vm.passCont, 'Şifre', true),
+                  textField(vm.passCont, 'login_password'.tr(), true),
                   const SizedBox(height: 5),
                   forgotPass(context),
                   const SizedBox(height: 20),
@@ -61,25 +62,26 @@ class LoginView extends StatelessWidget {
             context: context,
             builder: (context) => AlertDialog(
               backgroundColor: colorPalette['primary'],
-              title: const Text(
-                'Şifremi Unuttum',
-                style: TextStyle(color: Colors.black),
+              title: Text(
+                'login_forgot'.tr(),
+                style: const TextStyle(color: Colors.black),
               ),
               content: Row(
                 children: [
-                  Expanded(child: textField(vm.emailCont, 'E-Posta', false))
+                  Expanded(
+                      child: textField(vm.emailCont, 'login_email'.tr(), false))
                 ],
               ),
               actions: [
                 ElevatedButton(
                     onPressed: () async => await vm.forgotPass(context),
-                    child: const Text('Gönder'))
+                    child: Text('login_send'.tr()))
               ],
             ),
           );
         },
-        child: const Text('Şifremi Unuttum',
-            style: TextStyle(color: Colors.black87)),
+        child: Text('login_forgot'.tr(),
+            style: const TextStyle(color: Colors.black87)),
       ),
     );
   }
@@ -103,7 +105,7 @@ class LoginView extends StatelessWidget {
               onPressed: () async {
                 await vm.login(context);
               },
-              child: const Text('Giriş Yap'),
+              child: Text('login_title'.tr()),
             ),
           ),
         ),
@@ -116,9 +118,9 @@ class LoginView extends StatelessWidget {
       onTap: () {
         vm.createAcc(context);
       },
-      child: const Text(
-        'Hesabınız Yok Mu?  Bir Hesap Oluşturun.',
-        style: TextStyle(fontSize: 16, color: Colors.black),
+      child: Text(
+        'login_no_account'.tr(),
+        style: const TextStyle(fontSize: 16, color: Colors.black),
       ),
     );
   }
@@ -130,10 +132,16 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          )),
       centerTitle: true,
-      title: const Text('Giriş Yap'),
+      title: Text('login_title'.tr()),
     );
   }
 }

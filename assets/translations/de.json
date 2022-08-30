@@ -3,9 +3,15 @@
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
     "welcome_hello": "Willkommen,",
-    "welcome_login_tap": "Zum Anmelden tippen",
+    "welcome_login_tap": "Zum Anmelden Tippen",
     "welcome_advert": "ANZEIGEN",
     "welcome_store": "MARKT",
     "welcome_transport": "PET TRANSP.",
-    "welcome_soon": "DEMNÄCHST"
+    "welcome_soon": "DEMNÄCHST",
+    "login_title": "Einloggen",
+    "login_no_account": "Sie haben kein Konto? Ein Konto erstellen.",
+    "login_password": "Passwort",
+    "login_email": "E-Mail",
+    "login_forgot": "Ich habe mein Passwort vergessen",
+    "login_send": "Senden"
 }

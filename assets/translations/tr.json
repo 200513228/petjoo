@@ -3,9 +3,15 @@
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
     "welcome_hello": "Hoşgeldin,",
-    "welcome_login_tap": "Giriş Yapmak İçin Tıklayın.",
+    "welcome_login_tap": "Giriş Yapmak İçin Tıklayın",
     "welcome_advert": "İLANLAR",
     "welcome_store": "PAZAR",
     "welcome_transport": "PET NAKİL",
-    "welcome_soon": "YAKINDA"
+    "welcome_soon": "YAKINDA",
+    "login_title": "Giriş Yap",
+    "login_no_account": "Hesabınız Yok Mu? Bir Hesap Oluşturun.",
+    "login_password": "Şifre",
+    "login_email": "E-Posta",
+    "login_forgot": "Şifremi Unuttum",
+    "login_send": "Gönder"
 }

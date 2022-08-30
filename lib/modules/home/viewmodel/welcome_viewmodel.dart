@@ -40,34 +40,38 @@ abstract class WelcomeViewModelBase with Store {
 
   @action
   Future navDLink(BuildContext context) async {
-    switch (DLinkService.type) {
-      case 'pet':
-        await PetService.db
-            .collection('adverts')
-            .doc(DLinkService.docid)
-            .get()
-            .then((value) {
-          PetAdvertModel model = PetAdvertModel.fromDS(value);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PetDetailView(model: model)));
-        });
-        break;
-      case 'store':
-        await StoreService.db
-            .collection('store_adverts')
-            .doc(DLinkService.docid)
-            .get()
-            .then((value) {
-          StoreAdvertModel model = StoreAdvertModel.fromDS(value);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => StoreDetailView(model: model)));
-        });
-        break;
-      default:
+    if (DLinkService.isGo) {
+      switch (DLinkService.type) {
+        case 'pet':
+          await PetService.db
+              .collection('adverts')
+              .doc(DLinkService.docid)
+              .get()
+              .then((value) {
+            PetAdvertModel model = PetAdvertModel.fromDS(value);
+            DLinkService.isGo = false;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PetDetailView(model: model)));
+          });
+          break;
+        case 'store':
+          await StoreService.db
+              .collection('store_adverts')
+              .doc(DLinkService.docid)
+              .get()
+              .then((value) {
+            StoreAdvertModel model = StoreAdvertModel.fromDS(value);
+            DLinkService.isGo = false;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => StoreDetailView(model: model)));
+          });
+          break;
+        default:
+      }
     }
   }
 }

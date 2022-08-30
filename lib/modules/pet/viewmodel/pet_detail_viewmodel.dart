@@ -4,12 +4,14 @@ import 'package:petjoo/modules/base/ui_snackbar.dart';
 import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/service/chat_service.dart';
 import 'package:petjoo/modules/chat/view/chat_detail_view.dart';
+import 'package:petjoo/modules/home/service/dlink_service.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/service/pet_service.dart';
 import 'package:petjoo/modules/pet/view/pet_add_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/modules/user/service/user_service.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'pet_detail_viewmodel.g.dart';
 
@@ -44,6 +46,12 @@ abstract class PetDetailViewModelBase with Store {
   void editModel(PetAdvertModel model, BuildContext _) {
     Navigator.push(
         _, MaterialPageRoute(builder: (context) => PetAddView(model: model)));
+  }
+
+  @action
+  Future publish(BuildContext context) async {
+    Uri link = await DLinkService.createPetLink(advert!.id);
+    Share.share(link.toString());
   }
 
   @action

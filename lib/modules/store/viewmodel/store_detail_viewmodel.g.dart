@@ -81,6 +81,14 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
     return _$userInfoAsyncAction.run(() => super.userInfo(uid));
   }
 
+  late final _$publishAsyncAction =
+      AsyncAction('StoreDetailViewModelBase.publish', context: context);
+
+  @override
+  Future<dynamic> publish(BuildContext context) {
+    return _$publishAsyncAction.run(() => super.publish(context));
+  }
+
   late final _$changeSoldAsyncAction =
       AsyncAction('StoreDetailViewModelBase.changeSold', context: context);
 

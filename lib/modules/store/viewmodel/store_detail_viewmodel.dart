@@ -4,12 +4,14 @@ import 'package:petjoo/modules/base/ui_snackbar.dart';
 import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/service/chat_service.dart';
 import 'package:petjoo/modules/chat/view/chat_detail_view.dart';
+import 'package:petjoo/modules/home/service/dlink_service.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/service/store_service.dart';
 import 'package:petjoo/modules/store/view/store_add_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/modules/user/service/user_service.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'store_detail_viewmodel.g.dart';
 
@@ -45,6 +47,12 @@ abstract class StoreDetailViewModelBase with Store {
   void editModel(StoreAdvertModel model, BuildContext _) {
     Navigator.push(
         _, MaterialPageRoute(builder: (context) => StoreAddView(model: model)));
+  }
+
+  @action
+  Future publish(BuildContext context) async {
+    Uri link = await DLinkService.createStoreLink(advert!.id);
+    Share.share(link.toString());
   }
 
   @action

@@ -406,6 +406,18 @@ class StoreDetailView extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       title: const Text('İlan Detayları'),
+      actions: [
+        PopupMenuButton(
+            itemBuilder: (context) => [
+                  PopupMenuItem(
+                    onTap: () => vm.publish(context),
+                    child: const Text(
+                      'Paylaş',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ])
+      ],
     );
   }
 }

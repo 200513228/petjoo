@@ -4,6 +4,7 @@ class DLinkService {
   static String? type;
   static String? docid;
   static bool isGo = false;
+
   static void instance(PendingDynamicLinkData? initial) {
     final PendingDynamicLinkData? data = initial;
     if (data == null) {
@@ -14,4 +15,29 @@ class DLinkService {
       docid = data.link.queryParameters['doc'];
     }
   }
+
+  static Future<Uri> createLink(String type, String doc,
+      {SocialMetaTagParameters? metaTagParameters}) async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+        uriPrefix: 'https://petjoo.app',
+        link: Uri.parse('https://petjoo.app?type=$type&doc=$doc'),
+        androidParameters: const AndroidParameters(
+          packageName: "com.petjoo.android",
+          minimumVersion: 30,
+        ),
+        iosParameters: const IOSParameters(
+          appStoreId: "1614267680",
+          bundleId: "com.petjoo.ios",
+          minimumVersion: '1.2.3',
+        ),
+        socialMetaTagParameters: metaTagParameters);
+
+    final ShortDynamicLink shortDynamicLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+    return shortDynamicLink.shortUrl;
+  }
+
+  static Future<Uri> createPetLink(String doc) async => createLink('pet', doc);
+  static Future<Uri> createStoreLink(String doc) async =>
+      createLink('store', doc);
 }

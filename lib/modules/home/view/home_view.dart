@@ -43,6 +43,12 @@ class HomeView extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       title: Text(title),
+      leading: IconButton(
+          onPressed: () => Navigator.pop(_),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          )),
       actions: [
         IconButton(onPressed: () {
           if (CurrentUser.id == '') {
@@ -54,7 +60,10 @@ class HomeView extends StatelessWidget {
           return Badge(
               badgeContent: Text(vm.chatCount.toString()),
               showBadge: vm.chatCount != 0,
-              child: const Icon(Icons.message_rounded));
+              child: const Icon(
+                Icons.message_rounded,
+                color: Colors.black,
+              ));
         }))
       ],
     );

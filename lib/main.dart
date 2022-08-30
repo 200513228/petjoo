@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:petjoo/modules/home/service/dlink_service.dart';
 import 'package:petjoo/product/providers/chat_provider.dart';
 import 'package:petjoo/product/providers/settings_provider.dart';
@@ -26,13 +25,13 @@ void main() async {
   // DynamicLinkService.instance
   //     .initialize(await FirebaseDynamicLinks.instance.getInitialLink());
   DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
-  await initHive();
+  // await initHive();
   runApp(const ProviderScope(child: App()));
 }
 
-Future<void> initHive() async {
-  await Hive.initFlutter("petjoo");
-  await SettingsProvider.init();
-}
+// Future<void> initHive() async {
+//   await Hive.initFlutter("petjoo");
+//   await SettingsProvider.init();
+// }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}

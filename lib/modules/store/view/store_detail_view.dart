@@ -88,8 +88,8 @@ class StoreDetailView extends StatelessWidget {
 
   Widget advertInfoCard(String text, IconData icon, Color color, String title) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -102,7 +102,11 @@ class StoreDetailView extends StatelessWidget {
                 style: const TextStyle(color: Colors.white54),
               )),
           Icon(icon, size: 35, color: color),
-          Text(text, style: const TextStyle(fontSize: 16)),
+          Text(
+            text,
+            style: const TextStyle(fontSize: 13),
+            maxLines: 1,
+          ),
         ],
       ),
     );
@@ -413,6 +417,13 @@ class StoreDetailView extends StatelessWidget {
                     onTap: () => vm.publish(context),
                     child: const Text(
                       'Paylaş',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    onTap: null,
+                    child: Text(
+                      'Bildir',
                       style: TextStyle(color: Colors.black),
                     ),
                   ),

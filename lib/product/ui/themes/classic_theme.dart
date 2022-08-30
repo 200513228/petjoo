@@ -28,18 +28,20 @@ class ClassicTheme {
         iconTheme: IconThemeData(color: colorScheme.onSurface.withOpacity(.7)),
         textTheme: _textTheme(colorScheme),
         appBarTheme: AppBarTheme(
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.black,
-            elevation: 0,
-            centerTitle: true,
-            systemOverlayStyle:
-                OverlayStyles.toAll(colorScheme.background, Brightness.dark),
-            iconTheme: const IconThemeData(color: Colors.black),
-            actionsIconTheme: const IconThemeData(color: Colors.black),
-            titleTextStyle: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onBackground)),
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+          surfaceTintColor: Colors.black,
+          elevation: 0,
+          centerTitle: true,
+          systemOverlayStyle:
+              OverlayStyles.toAll(colorScheme.background, Brightness.light),
+          iconTheme: const IconThemeData(color: Colors.black),
+          actionsIconTheme: const IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: colorScheme.onBackground),
+        ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             selectedItemColor: colorScheme.primary,
             backgroundColor: colorScheme.surface,

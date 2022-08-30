@@ -110,17 +110,9 @@ class ChatDetailView extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      title: Hero(
-          tag: 'name',
-          child: Material(
-              type: MaterialType.transparency,
-              child: Text(
-                name,
-                style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ))),
+      title: Text(name,
+          style: const TextStyle(
+              fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
     );
   }
 }

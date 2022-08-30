@@ -80,9 +80,17 @@ class StorePictureView extends StatelessWidget {
     return Observer(builder: (_) {
       return vm.isLoading
           ? Container()
-          : FloatingActionButton(
-              onPressed: () => vm.saveAdvert(context),
-              child: const Icon(Icons.done_rounded),
+          : FloatingActionButton.extended(
+              onPressed: () {
+                model.id != '' ? vm.updateAdvert(_) : vm.saveAdvert(context);
+              },
+              label: Row(
+                children: const [
+                  Icon(Icons.done_rounded),
+                  SizedBox(width: 10),
+                  Text('Tamamla'),
+                ],
+              ),
             );
     });
   }

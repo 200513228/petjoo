@@ -22,7 +22,7 @@ class _AppState extends State<App> {
           debugShowCheckedModeBanner: false,
           title: 'Petjoo',
           themeMode: provider.themeMode,
-          theme: ClassicTheme.light,
+          theme: ClassicTheme.myTheme(),
           locale: provider.locale,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,

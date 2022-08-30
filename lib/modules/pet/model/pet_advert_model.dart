@@ -56,6 +56,38 @@ class PetAdvertModel {
     }
   }
 
+  PetAdvertModel.fromDS(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    var data = snapshot.data() as dynamic;
+    id = snapshot.id;
+    animalAge = data['animalAge'] ?? '0';
+    animalGender = data['animalGender'] ?? 0;
+    animalHabit = data['animalHabit'] ?? 0;
+    animalSize = data['animalSize'] ?? 0;
+    animalType = data['animalType'] ?? 0;
+    date = data['date'] ?? Timestamp.now();
+    description = data['description'] ?? '';
+    dialCode = data['dialCode'] ?? '';
+    geoPoint = data['geoPoint'] ?? const GeoPoint(0, 0);
+    images = data['images'] ?? [];
+    infertility = data['infertility'] ?? 0;
+    isAdopted = data['isAdopted'] ?? false;
+    phone = data['phone'] ?? '';
+    title = data['title'] ?? '';
+    toiletTraining = data['toiletTraining'] ?? 0;
+    type = data['type'] ?? 0;
+    userId = data['userId'] ?? '';
+    vaccine = data['vaccine'] ?? 0;
+    address = data['address'] ?? '';
+    // oldUserId =
+    //     (data['user'] as Map<String, dynamic>? ?? {'id': ''})['id'] ?? '';
+    var usermap = data['user'] as Map<String, dynamic>?;
+    oldUserId = usermap?['id'] ?? '';
+
+    if (userId == '') {
+      userId = oldUserId;
+    }
+  }
+
   PetAdvertModel.empty() {
     id = '';
     title = '';

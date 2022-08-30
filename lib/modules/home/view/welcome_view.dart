@@ -15,7 +15,7 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    vm.userLogin();
+    vm.userLogin(context);
     return Scaffold(
       backgroundColor: colorPalette['secondary'],
       body: Column(

@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:petjoo/modules/home/service/dlink_service.dart';
 import 'package:petjoo/product/providers/chat_provider.dart';
 import 'package:petjoo/product/providers/settings_provider.dart';
-import 'package:petjoo/product/services/dynamic_link_service.dart';
 import 'app.dart';
 import 'firebase_options.dart';
 import 'product/providers/user_provider.dart';
@@ -23,8 +23,9 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   NotificationService.instance.initialize(_firebaseMessagingBackgroundHandler);
-  DynamicLinkService.instance
-      .initialize(await FirebaseDynamicLinks.instance.getInitialLink());
+  // DynamicLinkService.instance
+  //     .initialize(await FirebaseDynamicLinks.instance.getInitialLink());
+  DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
   await initHive();
   runApp(const ProviderScope(child: App()));
 }

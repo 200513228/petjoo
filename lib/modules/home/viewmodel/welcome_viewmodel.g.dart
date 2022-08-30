@@ -45,8 +45,16 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
       AsyncAction('WelcomeViewModelBase.userLogin', context: context);
 
   @override
-  Future<dynamic> userLogin() {
-    return _$userLoginAsyncAction.run(() => super.userLogin());
+  Future<dynamic> userLogin(BuildContext context) {
+    return _$userLoginAsyncAction.run(() => super.userLogin(context));
+  }
+
+  late final _$navDLinkAsyncAction =
+      AsyncAction('WelcomeViewModelBase.navDLink', context: context);
+
+  @override
+  Future<dynamic> navDLink(BuildContext context) {
+    return _$navDLinkAsyncAction.run(() => super.navDLink(context));
   }
 
   late final _$WelcomeViewModelBaseActionController =

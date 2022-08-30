@@ -38,6 +38,25 @@ class StoreAdvertModel {
     isSold = data['isSold'] ?? true;
   }
 
+  StoreAdvertModel.fromDS(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    var data = snapshot.data() as dynamic;
+    id = snapshot.id;
+    title = data['title'] ?? '';
+    description = data['description'] ?? '';
+    price = data['price'] ?? 0;
+    userId = data['userId'] ?? '';
+    dialCode = data['dialCode'] ?? '';
+    phone = data['phone'] ?? '';
+    address = data['address'] ?? '';
+    images = data['images'] ?? [];
+    date = data['date'] ?? Timestamp.now();
+    geoPoint = data['geoPoint'] ?? const GeoPoint(0, 0);
+    type = data['type'] ?? 0;
+    delivery = data['delivery'] ?? 0;
+    status = data['status'] ?? 0;
+    isSold = data['isSold'] ?? true;
+  }
+
   StoreAdvertModel.empty() {
     id = '';
     title = '';

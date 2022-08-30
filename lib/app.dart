@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/product/ui/themes/classic_theme.dart';
 
@@ -31,26 +31,29 @@ class _AppState extends State<App> {
     //     );
     //   });
 
+    // return EasyLocalization(
+    //   path: 'assets/translations',
+    //   supportedLocales: const [Locale('tr'), Locale('en'), Locale('de')],
+    //   fallbackLocale: const Locale('tr'),
+    //   child: MaterialApp(
+    //     debugShowCheckedModeBanner: false,
+    //     title: 'Petjoo',
+    //     theme: ClassicTheme.myTheme(),
+    //     locale: context.locale,
+    //     supportedLocales: context.supportedLocales,
+    //     localizationsDelegates: context.localizationDelegates,
+    //     home: WelcomeView(),
+    //   ),
+    // );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Petjoo',
       theme: ClassicTheme.myTheme(),
-      locale: const Locale('tr'),
-      supportedLocales: const [
-        Locale('tr', ''),
-        Locale('en', ''),
-        Locale('de', ''),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
       home: WelcomeView(),
-      // initialRoute: FirebaseAuth.instance.currentUser == null
-      //     ? Routes.auth
-      //     : Routes.navigation,
-      // onGenerateRoute: Routes.onGenerateRoute,
     );
   }
 }

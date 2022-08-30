@@ -8,6 +8,7 @@ import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/modules/user/view/login_view.dart';
 import 'package:petjoo/product/constants/images.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class WelcomeView extends StatelessWidget {
   final WelcomeViewModel vm = WelcomeViewModel();
@@ -17,11 +18,24 @@ class WelcomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.userLogin(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colorPalette['primary'],
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.setLocale(const Locale('en'));
+              },
+              icon: const Icon(
+                Icons.translate,
+                color: Colors.black,
+              ))
+        ],
+      ),
       backgroundColor: colorPalette['secondary'],
       body: Column(
         children: [
-          Expanded(flex: 5, child: slider()),
-          Expanded(flex: 4, child: selector(context)),
+          Expanded(flex: 4, child: slider()),
+          Expanded(flex: 5, child: selector(context)),
           userCard(context),
         ],
       ),
@@ -53,7 +67,7 @@ class WelcomeView extends StatelessWidget {
                 flex: 10,
                 child: BigModule(
                   icon: Icons.pets,
-                  title: 'İLANLAR',
+                  title: 'welcome_advert'.tr(),
                   onTap: () => vm.goModule(_, 'İLANLAR'),
                 ),
               ),
@@ -61,7 +75,7 @@ class WelcomeView extends StatelessWidget {
                 flex: 6,
                 child: SmallModule(
                   icon: FontAwesomeIcons.compassDrafting,
-                  title: 'YAKINDA',
+                  title: 'welcome_soon'.tr(),
                   onTap: () => vm.goModule(_, 'YAKINDA'),
                 ),
               ),
@@ -74,7 +88,7 @@ class WelcomeView extends StatelessWidget {
                 flex: 6,
                 child: SmallModule(
                   icon: FontAwesomeIcons.truck,
-                  title: 'PET NAKİL',
+                  title: 'welcome_transport'.tr(),
                   onTap: () => vm.goModule(_, 'PET NAKİL'),
                 ),
               ),
@@ -82,7 +96,7 @@ class WelcomeView extends StatelessWidget {
                 flex: 10,
                 child: BigModule(
                   icon: Icons.store,
-                  title: 'PAZAR',
+                  title: 'welcome_store'.tr(),
                   onTap: () => vm.goModule(_, 'PAZAR'),
                 ),
               ),

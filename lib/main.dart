@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:petjoo/modules/home/service/dlink_service.dart';
 import 'package:petjoo/product/providers/chat_provider.dart';
 import 'package:petjoo/product/providers/settings_provider.dart';
@@ -28,12 +29,12 @@ void main() async {
   DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
   // await initHive();
   runApp(
-    ProviderScope(
-      child: EasyLocalization(
-        path: 'assets/translations',
-        supportedLocales: const [Locale('tr'), Locale('en'), Locale('de')],
-        fallbackLocale: const Locale('tr'),
-        child: const App(),
+    EasyLocalization(
+      path: 'assets/translations',
+      supportedLocales: const [Locale('tr'), Locale('en'), Locale('de')],
+      fallbackLocale: const Locale('tr'),
+      child: const ProviderScope(
+        child: App(),
       ),
     ),
   );

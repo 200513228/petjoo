@@ -15,12 +15,13 @@ class TransportTile extends StatelessWidget {
   final void Function()? onCallTap;
   final void Function()? onMessageTap;
 
-  const TransportTile(this.data, {Key? key, this.onTap, this.onCallTap, this.onMessageTap}) : super(key: key);
+  const TransportTile(this.data,
+      {Key? key, this.onTap, this.onCallTap, this.onMessageTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final localization = context.localization;
     const height = 90.0;
     final isAnonymous = FirebaseAuth.instance.currentUser?.isAnonymous == true;
     return SizedBox(
@@ -54,17 +55,22 @@ class TransportTile extends StatelessWidget {
                         maxLines: 1,
                       ),
                       Text(
-                        "${localization.turkishCurrency}${data.pricePerKm}/${localization.km}",
-                        style: context.theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.onSurface),
+                        "₺${data.pricePerKm}/KM",
+                        style: context.theme.textTheme.labelSmall
+                            ?.copyWith(color: theme.colorScheme.onSurface),
                         maxLines: 1,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _featureIcon(context, FontAwesomeIcons.earthAmericas, data.isIntercity),
-                          _featureIcon(context, FontAwesomeIcons.shieldDog, data.hasCage),
-                          _featureIcon(context, Icons.circle_outlined, data.hasCollar),
-                          _featureIcon(context, FontAwesomeIcons.personRunning, data.canCatch),
+                          _featureIcon(context, FontAwesomeIcons.earthAmericas,
+                              data.isIntercity),
+                          _featureIcon(context, FontAwesomeIcons.shieldDog,
+                              data.hasCage),
+                          _featureIcon(
+                              context, Icons.circle_outlined, data.hasCollar),
+                          _featureIcon(context, FontAwesomeIcons.personRunning,
+                              data.canCatch),
                         ],
                       )
                     ],
@@ -99,15 +105,18 @@ class TransportTile extends StatelessWidget {
   Widget _featureIcon(BuildContext context, IconData icon, bool active) => Icon(
         icon,
         size: 16,
-        color: active ? null : context.theme.colorScheme.onSurface.withOpacity(.3),
+        color:
+            active ? null : context.theme.colorScheme.onSurface.withOpacity(.3),
       );
 
-  Widget _actionButton(BuildContext context, Icon icon, void Function()? onTap) => MaterialButton(
-      color: context.theme.colorScheme.onBackground,
-      minWidth: 40,
-      height: 40,
-      elevation: 0,
-      shape: const CircleBorder(),
-      onPressed: onTap,
-      child: icon);
+  Widget _actionButton(
+          BuildContext context, Icon icon, void Function()? onTap) =>
+      MaterialButton(
+          color: context.theme.colorScheme.onBackground,
+          minWidth: 40,
+          height: 40,
+          elevation: 0,
+          shape: const CircleBorder(),
+          onPressed: onTap,
+          child: icon);
 }

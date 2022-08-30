@@ -14,37 +14,21 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     // return Consumer(builder: (context, ref, child) {
-    //     final provider = ref.watch(settingsProvider);
-    //     return MaterialApp(
-    //       debugShowCheckedModeBanner: false,
-    //       title: 'Petjoo',
-    //       themeMode: provider.themeMode,
-    //       theme: ClassicTheme.myTheme(),
-    //       locale: provider.locale,
-    //       supportedLocales: AppLocalizations.supportedLocales,
-    //       localizationsDelegates: AppLocalizations.localizationsDelegates,
-    //       home: WelcomeView(),
-    //       // initialRoute: FirebaseAuth.instance.currentUser == null
-    //       //     ? Routes.auth
-    //       //     : Routes.navigation,
-    //       onGenerateRoute: Routes.onGenerateRoute,
-    //     );
-    //   });
-
-    // return EasyLocalization(
-    //   path: 'assets/translations',
-    //   supportedLocales: const [Locale('tr'), Locale('en'), Locale('de')],
-    //   fallbackLocale: const Locale('tr'),
-    //   child: MaterialApp(
+    //   // final provider = ref.watch(settingsProvider);
+    //   return MaterialApp(
     //     debugShowCheckedModeBanner: false,
     //     title: 'Petjoo',
     //     theme: ClassicTheme.myTheme(),
-    //     locale: context.locale,
-    //     supportedLocales: context.supportedLocales,
-    //     localizationsDelegates: context.localizationDelegates,
+    //     locale: _.locale,
+    //     supportedLocales: _.supportedLocales,
+    //     localizationsDelegates: _.localizationDelegates,
     //     home: WelcomeView(),
-    //   ),
-    // );
+    //     // initialRoute: FirebaseAuth.instance.currentUser == null
+    //     //     ? Routes.auth
+    //     //     : Routes.navigation,
+    //     // onGenerateRoute: Routes.onGenerateRoute,
+    //   );
+    // });
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

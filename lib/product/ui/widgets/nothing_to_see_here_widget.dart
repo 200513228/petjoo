@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:petjoo/core/extensions/build_context_extension.dart';
 import 'package:petjoo/product/constants/images.dart';
 import 'separator.dart';
 
@@ -8,8 +7,6 @@ class NothingToSeeHereWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = context.localization;
-    final theme = context.theme;
     return LayoutBuilder(
       builder: (context, constraints) => SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -21,9 +18,9 @@ class NothingToSeeHereWidget extends StatelessWidget {
             children: [
               Image.asset(Images.emptyBox),
               const Separator(),
-              Text(
-                localization.nothingToSeeHere,
-                style: theme.textTheme.caption?.copyWith(fontSize: 14, color: theme.colorScheme.onBackground),
+              const Text(
+                'Burada Görülecek Bir Şey Yok.',
+                style: TextStyle(fontSize: 14, color: Colors.black),
                 textAlign: TextAlign.center,
               )
             ],

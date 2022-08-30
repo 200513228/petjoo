@@ -20,16 +20,7 @@ class WelcomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorPalette['primary'],
-        actions: [
-          IconButton(
-              onPressed: () {
-                context.setLocale(const Locale('en'));
-              },
-              icon: const Icon(
-                Icons.translate,
-                color: Colors.black,
-              ))
-        ],
+        actions: [appbarLocal(context)],
       ),
       backgroundColor: colorPalette['secondary'],
       body: Column(
@@ -148,7 +139,7 @@ class WelcomeView extends StatelessWidget {
                 ? const Loading()
                 : vm.userLog
                     ? Text(
-                        'Hoşgeldin, ${CurrentUser.name}',
+                        '${'welcome_hello'.tr()} ${CurrentUser.name}',
                         style:
                             const TextStyle(color: Colors.black, fontSize: 16),
                       )
@@ -161,6 +152,32 @@ class WelcomeView extends StatelessWidget {
             )),
       );
     });
+  }
+
+  Widget appbarLocal(BuildContext context) {
+    return PopupMenuButton(
+        color: Colors.black,
+        itemBuilder: (context) => [
+              PopupMenuItem(
+                onTap: () => context.setLocale(const Locale('tr')),
+                child: Text('welcome_lang_tr'.tr()),
+              ),
+              PopupMenuItem(
+                onTap: () => context.setLocale(const Locale('en')),
+                child: Text('welcome_lang_en'.tr()),
+              ),
+              PopupMenuItem(
+                onTap: () => context.setLocale(const Locale('de')),
+                child: Text('welcome_lang_de'.tr()),
+              ),
+            ],
+        child: const Padding(
+          padding: EdgeInsets.all(12),
+          child: Icon(
+            Icons.translate,
+            color: Colors.black,
+          ),
+        ));
   }
 }
 

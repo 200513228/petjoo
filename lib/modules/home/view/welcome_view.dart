@@ -143,8 +143,9 @@ class WelcomeView extends StatelessWidget {
                         style:
                             const TextStyle(color: Colors.black, fontSize: 16),
                       )
-                    : const Text('Giriş Yapmak İçin Tıklayınız',
-                        style: TextStyle(color: Colors.black, fontSize: 16)),
+                    : Text('welcome_login_tap'.tr(),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 16)),
             trailing: const Icon(
               Icons.settings,
               size: 28,

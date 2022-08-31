@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:badges/badges.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/widgets/loading.dart';
@@ -16,7 +17,7 @@ class PetPictureView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.setAdvert(model);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: buildBody(),
       floatingActionButton: buildFab(context),
     );
@@ -62,10 +63,13 @@ class PetPictureView extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
       centerTitle: true,
-      title: const Text('Fotoğraf Seçimi'),
+      title: Text('pick_photo'.tr()),
     );
   }
 
@@ -78,10 +82,10 @@ class PetPictureView extends StatelessWidget {
                 model.id != '' ? vm.updateAdvert(_) : vm.saveAdvert(context);
               },
               label: Row(
-                children: const [
-                  Icon(Icons.done_rounded),
-                  SizedBox(width: 10),
-                  Text('Tamamla'),
+                children: [
+                  const Icon(Icons.done_rounded),
+                  const SizedBox(width: 10),
+                  Text('complete'.tr()),
                 ],
               ),
             );

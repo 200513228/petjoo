@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -27,7 +28,7 @@ class PetAddView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (model != null) vm.preEdit(model!);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: buildBody(context),
     );
   }
@@ -64,10 +65,10 @@ class PetAddView extends StatelessWidget {
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           maxLength: 30,
-          validator: Validators.title('Başlık En Az 3 harfli olmalıdır.'),
-          decoration: const InputDecoration(
+          validator: Validators.title('title_min3'.tr()),
+          decoration: InputDecoration(
             counterText: '',
-            label: Text('Başlık'),
+            label: Text('title'.tr()),
           ),
         ),
       ),
@@ -79,10 +80,9 @@ class PetAddView extends StatelessWidget {
           textInputAction: TextInputAction.next,
           maxLength: 500,
           maxLines: 5,
-          validator:
-              Validators.description('Açıklama En Az 4 harfli olmalıdır.'),
-          decoration: const InputDecoration(
-            label: Text('Açıklama'),
+          validator: Validators.description('desc_min4'.tr()),
+          decoration: InputDecoration(
+            label: Text('description'.tr()),
           ),
         ),
       ),
@@ -112,10 +112,9 @@ class PetAddView extends StatelessWidget {
               maxLength: 10,
               textInputAction: TextInputAction.next,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              validator:
-                  Validators.phone('Geçerli Bir Telefon No Giriniz', true),
+              validator: Validators.phone('register_phone_valid'.tr(), true),
               decoration: InputDecoration(
-                  label: const Text('Telefon'),
+                  label: Text('phone'.tr()),
                   hintText: '5xx xxx xx xx',
                   counterText: '',
                   border: UnderlineInputBorder(
@@ -140,7 +139,7 @@ class PetAddView extends StatelessWidget {
           Expanded(
             child: DropdownX<int>(
               value: vm.type,
-              hint: 'İlan Türü',
+              hint: 'advert_type'.tr(),
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
               items: petAdvertTypes.keys
                   .map((e) => DropdownMenuItem(
@@ -162,9 +161,9 @@ class PetAddView extends StatelessWidget {
               maxLength: 9,
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 counterText: '',
-                label: Text('Yaş'),
+                label: Text('age'.tr()),
               ),
             ),
           ),
@@ -172,7 +171,7 @@ class PetAddView extends StatelessWidget {
           Expanded(
             child: DropdownX<int>(
               value: vm.animal,
-              hint: 'Tür',
+              hint: 'type'.tr(),
               borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
               items: petAdvertAnimals.keys
                   .map((e) => DropdownMenuItem(
@@ -192,7 +191,7 @@ class PetAddView extends StatelessWidget {
             Expanded(
               child: DropdownX<int>(
                 value: vm.gender,
-                hint: 'Cinsiyet',
+                hint: 'gender'.tr(),
                 borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
                 items: petAdvertGenders.keys
                     .map((e) => DropdownMenuItem(
@@ -207,7 +206,7 @@ class PetAddView extends StatelessWidget {
             Expanded(
               child: DropdownX<int>(
                 value: vm.size,
-                hint: 'Boyut',
+                hint: 'size'.tr(),
                 borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
                 items: petAdvertSizes.keys
                     .map((e) => DropdownMenuItem(
@@ -228,7 +227,7 @@ class PetAddView extends StatelessWidget {
             Expanded(
               child: DropdownX<int>(
                 value: vm.habit,
-                hint: 'Huy',
+                hint: 'habit'.tr(),
                 borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
                 items: petAdvertHabits.keys
                     .map((e) => DropdownMenuItem(
@@ -243,7 +242,7 @@ class PetAddView extends StatelessWidget {
             Expanded(
               child: DropdownX<int>(
                 value: vm.infertility,
-                hint: 'Kısırlık',
+                hint: 'infertility'.tr(),
                 borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
                 items: petAdvertInfertilities.keys
                     .map((e) => DropdownMenuItem(
@@ -264,7 +263,7 @@ class PetAddView extends StatelessWidget {
             Expanded(
               child: DropdownX<int>(
                 value: vm.toilet,
-                hint: 'Tuvalet Eğitimi',
+                hint: 'toilet'.tr(),
                 borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
                 items: petAdvertToilets.keys
                     .map((e) => DropdownMenuItem(
@@ -279,7 +278,7 @@ class PetAddView extends StatelessWidget {
             Expanded(
               child: DropdownX<int>(
                 value: vm.vaccine,
-                hint: 'Aşı Durumu',
+                hint: 'vaccine'.tr(),
                 borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
                 items: petAdvertVaccines.keys
                     .map((e) => DropdownMenuItem(
@@ -301,8 +300,8 @@ class PetAddView extends StatelessWidget {
           textInputAction: TextInputAction.next,
           maxLength: 500,
           maxLines: 4,
-          decoration: const InputDecoration(
-            label: Text('Adres'),
+          decoration: InputDecoration(
+            label: Text('address'.tr()),
           ),
         ),
       ),
@@ -317,17 +316,21 @@ class PetAddView extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: ElevatedButton(
                 onPressed: () => vm.nextStep(context),
-                child: const Text('Sonraki Adım')),
+                child: Text('next_step'.tr())),
           ),
         )
       ],
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
       centerTitle: true,
-      title: Text(model != null ? 'İlan Düzenle' : 'Yeni İlan'),
+      title: Text(
+          model != null ? 'edit_advert_title'.tr() : 'new_advert_title'.tr()),
     );
   }
 }

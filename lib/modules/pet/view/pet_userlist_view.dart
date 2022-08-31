@@ -1,7 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/please_auth.dart';
+import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
@@ -66,13 +67,13 @@ class PetUserList extends StatelessWidget {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: const [
-                          Text('YENİ İLAN VER',
+                        children: [
+                          Text('new_advert'.tr(),
                               maxLines: 1,
                               overflow: TextOverflow.clip,
                               softWrap: false,
-                              style: TextStyle(fontSize: 17)),
-                          SizedBox(height: 5),
+                              style: const TextStyle(fontSize: 17)),
+                          const SizedBox(height: 5),
                         ])))
           ],
         ),
@@ -164,11 +165,5 @@ class PetUserList extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String dateToString(Timestamp date) {
-    var d = date.toDate();
-
-    return '${d.day}.${d.month}.${d.year}';
   }
 }

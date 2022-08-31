@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -28,7 +29,7 @@ class PetDetailView extends StatelessWidget {
     vm.setModel(model);
     vm.userInfo(model.userId);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: buildBody(context),
       backgroundColor: colorPalette['primary'],
     );
@@ -77,22 +78,22 @@ class PetDetailView extends StatelessWidget {
                   petAdvertAnimals[model.animalType] as String,
                   animalTypeToIcon(model.animalType),
                   Colors.orangeAccent,
-                  'Tür'),
+                  'type'.tr()),
             ),
             Expanded(
               child: advertInfoCard(
                   petAdvertGenders[model.animalGender] as String,
                   genderToIcon(model.animalGender),
                   genderToColor(model.animalGender),
-                  'Cins'),
+                  'gender'.tr()),
             ),
             Expanded(
               child: advertInfoCard(petAdvertSizes[model.animalSize] as String,
-                  Icons.scale_rounded, Colors.cyanAccent, 'Boyut'),
+                  Icons.scale_rounded, Colors.cyanAccent, 'size'.tr()),
             ),
             Expanded(
               child: advertInfoCard(model.animalAge, Icons.cake_rounded,
-                  Colors.yellowAccent, 'Yaş'),
+                  Colors.yellowAccent, 'age'.tr()),
             ),
           ],
         ),
@@ -103,25 +104,25 @@ class PetDetailView extends StatelessWidget {
                   petAdvertHabits[model.animalHabit] as String,
                   Icons.heart_broken_rounded,
                   Colors.pinkAccent,
-                  'Huy'),
+                  'habit'.tr()),
             ),
             Expanded(
               child: advertInfoCard(
                   petAdvertInfertilities[model.infertility] as String,
                   FontAwesomeIcons.neuter,
                   Colors.deepOrangeAccent,
-                  'Kısırlık'),
+                  'infertility'.tr()),
             ),
             Expanded(
               child: advertInfoCard(
                   petAdvertToilets[model.toiletTraining] as String,
                   FontAwesomeIcons.toilet,
                   Colors.greenAccent,
-                  'Tuvalet Eğt.'),
+                  'toilet'.tr()),
             ),
             Expanded(
               child: advertInfoCard(petAdvertVaccines[model.vaccine] as String,
-                  Icons.vaccines_rounded, Colors.purpleAccent, 'Aşı'),
+                  Icons.vaccines_rounded, Colors.purpleAccent, 'vaccine'.tr()),
             ),
           ],
         ),
@@ -162,11 +163,11 @@ class PetDetailView extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const Align(
+            Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'Açıklama',
-                style: TextStyle(fontSize: 15, color: Colors.white54),
+                'description'.tr(),
+                style: const TextStyle(fontSize: 15, color: Colors.white54),
               ),
             ),
             const SizedBox(height: 5),
@@ -196,11 +197,12 @@ class PetDetailView extends StatelessWidget {
                   color: Colors.black),
               child: Column(
                 children: [
-                  const Align(
+                  Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      'Adres',
-                      style: TextStyle(fontSize: 15, color: Colors.white54),
+                      'address'.tr(),
+                      style:
+                          const TextStyle(fontSize: 15, color: Colors.white54),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -238,6 +240,8 @@ class PetDetailView extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(
                         '${petAdvertTypes[model.type]}',
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 16, color: typeToColor(model.type)),
                       )),
@@ -276,9 +280,7 @@ class PetDetailView extends StatelessWidget {
                         heroTag: null,
                         backgroundColor: Colors.grey.shade800,
                         label: Text(
-                          model.isAdopted
-                              ? 'Tekrar Sahiplendir'
-                              : 'Sahiplendirildi',
+                          model.isAdopted ? 'readopt'.tr() : 'adopted'.tr(),
                           maxLines: 2,
                           style: const TextStyle(
                               color: Colors.white, fontSize: 18),
@@ -288,9 +290,8 @@ class PetDetailView extends StatelessWidget {
                             await showDialog(
                                 context: _,
                                 builder: (context) => AlertDialog(
-                                      title: const Text('Sahiplendirme Formu'),
-                                      content: const Text(
-                                          'Sahiplendirme Formunu indirip imzalamanızı tavsiye ederiz. İstediğiniz zaman ayarlardan erişebilirsiniz.'),
+                                      title: Text('adoption_form'.tr()),
+                                      content: Text('content_form'.tr()),
                                       actions: [
                                         TextButton(
                                             onPressed: () {
@@ -301,12 +302,12 @@ class PetDetailView extends StatelessWidget {
                                                     .externalApplication,
                                               );
                                             },
-                                            child: const Text('Formu İndir')),
+                                            child: Text('download_form'.tr())),
                                         TextButton(
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            child: const Text('Kapat')),
+                                            child: Text('close'.tr())),
                                       ],
                                     )).then(
                                 (value) => vm.changeAdopt(!model.isAdopted, _));
@@ -328,7 +329,7 @@ class PetDetailView extends StatelessWidget {
                             image(),
                             const SizedBox(width: 5),
                             Text(
-                              vm.userName ?? 'Kullanıcı Bulunamadı',
+                              vm.userName ?? 'user_not_found'.tr(),
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 16),
                             ),
@@ -484,18 +485,25 @@ class PetDetailView extends StatelessWidget {
             )));
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
       centerTitle: true,
-      title: const Text('İlan Detayları'),
+      title: Text('advert_details'.tr()),
       actions: [
         PopupMenuButton(
+            icon: const Icon(
+              Icons.more_horiz,
+              color: Colors.black,
+            ),
+            color: Colors.black,
             itemBuilder: (context) => [
                   PopupMenuItem(
                     onTap: () => vm.publish(context),
-                    child: const Text(
-                      'Paylaş',
-                      style: TextStyle(color: Colors.black),
+                    child: Text(
+                      'publish'.tr(),
                     ),
                   ),
                 ])

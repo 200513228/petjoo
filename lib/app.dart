@@ -13,23 +13,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    // return Consumer(builder: (context, ref, child) {
-    //   // final provider = ref.watch(settingsProvider);
-    //   return MaterialApp(
-    //     debugShowCheckedModeBanner: false,
-    //     title: 'Petjoo',
-    //     theme: ClassicTheme.myTheme(),
-    //     locale: _.locale,
-    //     supportedLocales: _.supportedLocales,
-    //     localizationsDelegates: _.localizationDelegates,
-    //     home: WelcomeView(),
-    //     // initialRoute: FirebaseAuth.instance.currentUser == null
-    //     //     ? Routes.auth
-    //     //     : Routes.navigation,
-    //     // onGenerateRoute: Routes.onGenerateRoute,
-    //   );
-    // });
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Petjoo',
@@ -40,4 +23,22 @@ class _AppState extends State<App> {
       home: WelcomeView(),
     );
   }
+
+  // return Consumer(builder: (context, ref, child) {
+  //   // final provider = ref.watch(settingsProvider);
+  //   return MaterialApp(
+  //     debugShowCheckedModeBanner: false,
+  //     title: 'Petjoo',
+  //     theme: ClassicTheme.myTheme(),
+  //     locale: _.locale,
+  //     supportedLocales: _.supportedLocales,
+  //     localizationsDelegates: _.localizationDelegates,
+  //     home: WelcomeView(),
+  //     // initialRoute: FirebaseAuth.instance.currentUser == null
+  //     //     ? Routes.auth
+  //     //     : Routes.navigation,
+  //     // onGenerateRoute: Routes.onGenerateRoute,
+  //   );
+  // });
+
 }

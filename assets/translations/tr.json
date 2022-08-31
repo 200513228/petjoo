@@ -128,5 +128,8 @@
     "blockuser_content": "Bu kullanıcıyı engellediniz. Artık ondan mesaj almayacaksınız.",
     "blockuser_content2": "Bu kullanıcı sizi engelledi. Artık ona mesaj gönderemezsiniz.",
     "sold_alert_title": "Dikkat",
-    "sold_alert_content": "Petjoo bir alışveriş platformu değildir. Yalnızca alıcı ve satıcıyı bir araya getirir. Yapmış olduğunuz alışverişlerinizde problem yaşamamak için dikkatli olmanızı tavsiye ederiz."
+    "sold_alert_content": "Petjoo bir alışveriş platformu değildir. Yalnızca alıcı ve satıcıyı bir araya getirir. Yapmış olduğunuz alışverişlerinizde problem yaşamamak için dikkatli olmanızı tavsiye ederiz.",
+    "update_alert_title": "Yeni Sürüm Yayında",
+    "update_alert_content": "Uygulamayı kullanmaya devam edebilmek için lütfen yeni sürümü indirin.",
+    "update_alert_action": "İndir"
 }

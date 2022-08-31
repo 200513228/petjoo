@@ -29,12 +29,10 @@ class ClassicTheme {
         textTheme: _textTheme(colorScheme),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.transparent,
-          foregroundColor: Colors.black,
-          surfaceTintColor: Colors.black,
           elevation: 0,
           centerTitle: true,
           systemOverlayStyle:
-              OverlayStyles.toAll(colorScheme.background, Brightness.light),
+              OverlayStyles.toAll(colorScheme.background, Brightness.dark),
           iconTheme: const IconThemeData(color: Colors.black),
           actionsIconTheme: const IconThemeData(color: Colors.black),
           titleTextStyle: TextStyle(

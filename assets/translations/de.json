@@ -128,5 +128,8 @@
     "blockuser_content": "Sie haben diesen Benutzer blockiert. Sie erhalten keine Nachrichten mehr vom Benutzer.",
     "blockuser_content2": "Dieser Benutzer hat Sie blockiert. Sie können keine Nachrichten mehr an senden.",
     "sold_alert_title": "Vorsicht",
-    "sold_alert_content": "Petjoo ist keine Shopping-Plattform. Es bringt nur Käufer und Verkäufer zusammen. Wir raten Ihnen, vorsichtig zu sein, um keine Probleme mit Ihren Einkäufen zu haben."
+    "sold_alert_content": "Petjoo ist keine Shopping-Plattform. Es bringt nur Käufer und Verkäufer zusammen. Wir raten Ihnen, vorsichtig zu sein, um keine Probleme mit Ihren Einkäufen zu haben.",
+    "update_alert_title": "Neue Version verfügbar",
+    "update_alert_content": "Bitte laden Sie die neue Version herunter, um die Anwendung weiterhin zu verwenden.",
+    "update_alert_action": "Download"
 }

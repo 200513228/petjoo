@@ -19,16 +19,16 @@ class DLinkService {
   static Future<Uri> createLink(String type, String doc,
       {SocialMetaTagParameters? metaTagParameters}) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
-        uriPrefix: 'https://petjoo.app',
-        link: Uri.parse('https://petjoo.app?type=$type&doc=$doc'),
+        uriPrefix: 'https://url.petjoo.app',
+        link: Uri.parse('https://url.petjoo.app?type=$type&doc=$doc'),
         androidParameters: const AndroidParameters(
           packageName: "com.petjoo.android",
-          minimumVersion: 30,
+          minimumVersion: 33,
         ),
         iosParameters: const IOSParameters(
           appStoreId: "1614267680",
           bundleId: "com.petjoo.ios",
-          minimumVersion: '1.2.3',
+          minimumVersion: '1.3.3',
         ),
         socialMetaTagParameters: metaTagParameters);
 

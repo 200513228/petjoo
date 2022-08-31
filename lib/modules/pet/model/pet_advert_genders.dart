@@ -1,11 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
+
 Map<int, String> petAdvertGenders = {
-  0: 'Diğer',
-  1: 'Erkek',
-  2: 'Dişi',
+  0: 'other'.tr(),
+  1: 'male'.tr(),
+  2: 'female'.tr(),
 };
 
 Map<int, String> petFilterGenders = {
-  0: 'Tümü',
-  1: 'Erkek',
-  2: 'Dişi',
+  0: 'all'.tr(),
+  1: 'male'.tr(),
+  2: 'female'.tr(),
 };

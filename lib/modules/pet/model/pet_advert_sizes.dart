@@ -1,13 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
+
 Map<int, String> petAdvertSizes = {
-  0: 'Diğer',
-  1: 'Küçük',
-  2: 'Orta',
-  3: 'Büyük',
+  0: 'other'.tr(),
+  1: 'small'.tr(),
+  2: 'medium'.tr(),
+  3: 'large'.tr(),
 };
 
 Map<int, String> petFilterSizes = {
-  0: 'Tümü',
-  1: 'Küçük',
-  2: 'Orta',
-  3: 'Büyük',
+  0: 'all'.tr(),
+  1: 'small'.tr(),
+  2: 'medium'.tr(),
+  3: 'large'.tr(),
 };

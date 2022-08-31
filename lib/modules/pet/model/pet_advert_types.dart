@@ -1,21 +1,23 @@
+import 'package:easy_localization/easy_localization.dart';
+
 Map<int, String> petAdvertTypes = {
-  0: 'Diğer',
-  1: 'Acil',
-  2: 'Kayıp',
-  3: 'Yavru',
-  4: 'Engelsiz',
-  5: 'Geçici Yuva',
-  6: 'Kalıcı Yuva',
-  7: 'Süt Anne',
+  0: 'other'.tr(),
+  1: 'emergency'.tr(),
+  2: 'lost'.tr(),
+  3: 'baby'.tr(),
+  4: 'handicapped'.tr(),
+  5: 'temphome'.tr(),
+  6: 'permahome'.tr(),
+  7: 'fostermom'.tr(),
 };
 
 Map<int, String> petFilterTypes = {
-  0: 'Tümü',
-  1: 'Acil',
-  2: 'Kayıp',
-  3: 'Yavru',
-  4: 'Engelsiz',
-  5: 'Geçici Yuva',
-  6: 'Kalıcı Yuva',
-  7: 'Süt Anne',
+  0: 'all'.tr(),
+  1: 'emergency'.tr(),
+  2: 'lost'.tr(),
+  3: 'baby'.tr(),
+  4: 'handicapped'.tr(),
+  5: 'temphome'.tr(),
+  6: 'permahome'.tr(),
+  7: 'fostermom'.tr(),
 };

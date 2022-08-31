@@ -1,12 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
+
 Map<int, String> petAdvertVaccines = {
-  0: 'Diğer',
-  1: 'Bilinmiyor',
-  2: 'Aşılı',
-  3: 'Aşısız',
+  0: 'other'.tr(),
+  1: 'unknown'.tr(),
+  2: 'vaccinated'.tr(),
+  3: 'unvaccinated'.tr(),
 };
 
 Map<int, String> petFilterVaccines = {
-  0: 'Tümü',
-  2: 'Aşılı',
-  3: 'Aşısız',
+  0: 'all'.tr(),
+  2: 'vaccinated'.tr(),
+  3: 'unvaccinated'.tr(),
 };

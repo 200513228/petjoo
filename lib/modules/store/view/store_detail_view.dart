@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
@@ -21,7 +22,7 @@ class StoreDetailView extends StatelessWidget {
     vm.setModel(model);
     vm.userInfo(model.userId);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: buildBody(context),
       backgroundColor: colorPalette['primary'],
     );
@@ -65,18 +66,18 @@ class StoreDetailView extends StatelessWidget {
           children: [
             Expanded(
               child: advertInfoCard(storeAdvertTypes[model.type] as String,
-                  Icons.dataset_outlined, Colors.orangeAccent, 'Kategori'),
+                  Icons.dataset_outlined, Colors.orangeAccent, 'category'.tr()),
             ),
             Expanded(
               child: advertInfoCard(storeAdvertStatuses[model.status] as String,
-                  Icons.store_rounded, Colors.blueAccent, 'Durum'),
+                  Icons.store_rounded, Colors.blueAccent, 'status'.tr()),
             ),
             Expanded(
               child: advertInfoCard(
                   storeAdvertDeliveries[model.delivery] as String,
                   Icons.delivery_dining_rounded,
                   Colors.greenAccent,
-                  'Teslimat'),
+                  'delivery'.tr()),
             ),
           ],
         ),
@@ -122,11 +123,11 @@ class StoreDetailView extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const Align(
+            Align(
               alignment: Alignment.topLeft,
               child: Text(
-                'Açıklama',
-                style: TextStyle(fontSize: 15, color: Colors.white54),
+                'description'.tr(),
+                style: const TextStyle(fontSize: 15, color: Colors.white54),
               ),
             ),
             const SizedBox(height: 5),
@@ -156,11 +157,12 @@ class StoreDetailView extends StatelessWidget {
                   color: Colors.black),
               child: Column(
                 children: [
-                  const Align(
+                  Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      'Adres',
-                      style: TextStyle(fontSize: 15, color: Colors.white54),
+                      'address'.tr(),
+                      style:
+                          const TextStyle(fontSize: 15, color: Colors.white54),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -168,6 +170,7 @@ class StoreDetailView extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: Text(
                         model.address,
+                        maxLines: 5,
                         style: const TextStyle(fontSize: 16),
                       )),
                 ],
@@ -234,7 +237,7 @@ class StoreDetailView extends StatelessWidget {
                         heroTag: null,
                         backgroundColor: Colors.grey.shade800,
                         label: Text(
-                          model.isSold ? 'Satılık Mı?' : 'Satıldı Mı?',
+                          model.isSold ? 'isforsale'.tr() : 'isnotsale'.tr(),
                           style: const TextStyle(
                               color: Colors.white, fontSize: 22),
                         ),
@@ -253,7 +256,7 @@ class StoreDetailView extends StatelessWidget {
                             image(),
                             const SizedBox(width: 5),
                             Text(
-                              vm.userName ?? 'Kullanıcı Bulunamadı',
+                              vm.userName ?? 'user_not_found'.tr(),
                               maxLines: 1,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 18),
@@ -406,25 +409,22 @@ class StoreDetailView extends StatelessWidget {
             )));
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
       centerTitle: true,
-      title: const Text('İlan Detayları'),
+      title: Text('advert_details'.tr()),
       actions: [
         PopupMenuButton(
+            color: Colors.black,
+            icon: const Icon(Icons.more_horiz, color: Colors.black),
             itemBuilder: (context) => [
                   PopupMenuItem(
                     onTap: () => vm.publish(context),
-                    child: const Text(
-                      'Paylaş',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  const PopupMenuItem(
-                    onTap: null,
                     child: Text(
-                      'Bildir',
-                      style: TextStyle(color: Colors.black),
+                      'publish'.tr(),
                     ),
                   ),
                 ])

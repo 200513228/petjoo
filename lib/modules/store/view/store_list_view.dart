@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
@@ -120,13 +121,13 @@ class StoreListView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        'Fiyat: ${model.price} ₺',
+                                        '${'price'.tr()}: ${model.price} ₺',
                                         textAlign: TextAlign.end,
                                         maxLines: 1,
                                         style: textStyle,
                                       ),
                                       Text(
-                                        'Durum: ${storeAdvertStatuses[model.status] as String}',
+                                        '${storeAdvertStatuses[model.status]}',
                                         textAlign: TextAlign.end,
                                         maxLines: 1,
                                         style: textStyle,
@@ -154,9 +155,9 @@ class StoreListView extends StatelessWidget {
               onChanged: (value) {
                 vm.query(value);
               },
-              decoration: const InputDecoration(
-                  hintText: 'Ne Aramıştınız?',
-                  prefixIcon: Icon(
+              decoration: InputDecoration(
+                  hintText: 'home_search'.tr(),
+                  prefixIcon: const Icon(
                     Icons.search,
                     color: Colors.white,
                   )),

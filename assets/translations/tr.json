@@ -106,5 +106,20 @@
     "edit_advert_title": "İlan Düzenle",
     "new_advert_title": "Yeni İlan",
     "pick_photo": "Fotoğraf Seçimi",
-    "complete": "Tamamla"
+    "complete": "Tamamla",
+    "comegetit": "Gel Al",
+    "incity": "Şehir İçi",
+    "cargo": "Kargo",
+    "new": "Sıfır",
+    "used": "İkinci El",
+    "handmade": "El Yapımı",
+    "kermis": "Kermes",
+    "food": "Gıda",
+    "accessory": "Aksesuar",
+    "personal": "Kişisel",
+    "delivery": "Teslimat",
+    "status": "Durum",
+    "price": "Fiyat",
+    "isforsale": "Satılık Mı?",
+    "isnotsale": "Satıldı Mı?"
 }

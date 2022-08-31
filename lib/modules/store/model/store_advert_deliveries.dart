@@ -1,13 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
+
 Map<int, String> storeAdvertDeliveries = {
-  0: 'Diğer',
-  1: 'Gel Al',
-  2: 'Şehir İçi',
-  3: 'Kargo',
+  0: 'other'.tr(),
+  1: 'comegetit'.tr(),
+  2: 'incity'.tr(),
+  3: 'cargo'.tr(),
 };
 
 Map<int, String> storeFilterDeliveries = {
-  0: 'Tümü',
-  1: 'Gel Al',
-  2: 'Şehir İçi',
-  3: 'Kargo',
+  0: 'all'.tr(),
+  1: 'comegetit'.tr(),
+  2: 'incity'.tr(),
+  3: 'cargo'.tr(),
 };

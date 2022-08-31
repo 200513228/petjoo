@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/please_auth.dart';
@@ -115,13 +116,13 @@ class StoreUserListView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        'Fiyat: ${model.price} ₺',
+                                        '${'price'.tr()}: ${model.price} ₺',
                                         textAlign: TextAlign.end,
                                         maxLines: 1,
                                         style: textStyle,
                                       ),
                                       Text(
-                                        'Durum: ${storeAdvertStatuses[model.status] as String}',
+                                        '${storeAdvertStatuses[model.status]}',
                                         textAlign: TextAlign.end,
                                         maxLines: 1,
                                         style: textStyle,
@@ -174,13 +175,13 @@ class StoreUserListView extends StatelessWidget {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: const [
-                          Text('YENİ İLAN VER',
+                        children: [
+                          Text('new_advert'.tr(),
                               maxLines: 1,
                               overflow: TextOverflow.clip,
                               softWrap: false,
-                              style: TextStyle(fontSize: 17)),
-                          SizedBox(height: 5),
+                              style: const TextStyle(fontSize: 17)),
+                          const SizedBox(height: 5),
                         ])))
           ],
         ),

@@ -106,5 +106,20 @@
     "edit_advert_title": "Edit Advert",
     "new_advert_title": "New Advert",
     "pick_photo": "Pick Photo",
-    "complete": "Complete"
+    "complete": "Complete",
+    "comegetit": "Come Get It",
+    "incity": "In City",
+    "cargo": "Cargo",
+    "new": "New",
+    "used": "Used",
+    "handmade": "Handmade",
+    "kermis": "Kermis",
+    "food": "Food",
+    "accessory": "Accessory",
+    "personal": "Personal",
+    "delivery": "Delivery",
+    "status": "Status",
+    "price": "Price",
+    "isforsale": "Is It For Sale?",
+    "isnotsale": "Is It Sold?"
 }

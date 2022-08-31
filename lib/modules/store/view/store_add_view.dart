@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -22,7 +23,7 @@ class StoreAddView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (model != null) vm.preEdit(model!);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: buildBody(context),
     );
   }
@@ -59,10 +60,10 @@ class StoreAddView extends StatelessWidget {
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           maxLength: 30,
-          validator: Validators.title('Başlık En Az 3 harfli olmalıdır.'),
-          decoration: const InputDecoration(
+          validator: Validators.title('title_min3'.tr()),
+          decoration: InputDecoration(
             counterText: '',
-            label: Text('Başlık'),
+            label: Text('title'.tr()),
           ),
         ),
       ),
@@ -74,10 +75,9 @@ class StoreAddView extends StatelessWidget {
           textInputAction: TextInputAction.next,
           maxLength: 500,
           maxLines: 5,
-          validator:
-              Validators.description('Açıklama En Az 4 harfli olmalıdır.'),
-          decoration: const InputDecoration(
-            label: Text('Açıklama'),
+          validator: Validators.description('desc_min4'.tr()),
+          decoration: InputDecoration(
+            label: Text('description'.tr()),
           ),
         ),
       ),
@@ -107,10 +107,9 @@ class StoreAddView extends StatelessWidget {
               maxLength: 10,
               textInputAction: TextInputAction.next,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              validator:
-                  Validators.phone('Geçerli Bir Telefon No Giriniz', true),
+              validator: Validators.phone('register_phone_valid'.tr(), true),
               decoration: InputDecoration(
-                  label: const Text('Telefon'),
+                  label: Text('phone'.tr()),
                   hintText: '5xx xxx xx xx',
                   counterText: '',
                   border: UnderlineInputBorder(
@@ -135,7 +134,7 @@ class StoreAddView extends StatelessWidget {
           Expanded(
             child: DropdownX<int>(
               value: vm.type,
-              hint: 'Kategori',
+              hint: 'category'.tr(),
               borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
               items: storeAdvertTypes.keys
                   .map((e) => DropdownMenuItem(
@@ -150,7 +149,7 @@ class StoreAddView extends StatelessWidget {
           Expanded(
             child: DropdownX<int>(
               value: vm.delivery,
-              hint: 'Teslimat',
+              hint: 'delivery'.tr(),
               borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
               items: storeAdvertDeliveries.keys
                   .map((e) => DropdownMenuItem(
@@ -176,10 +175,10 @@ class StoreAddView extends StatelessWidget {
                 ],
                 textInputAction: TextInputAction.next,
                 maxLength: 50,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   counterText: '',
                   prefixText: '₺',
-                  label: Text('Fiyat'),
+                  label: Text('price'.tr()),
                 ),
               ),
             ),
@@ -187,7 +186,7 @@ class StoreAddView extends StatelessWidget {
             Expanded(
               child: DropdownX<int>(
                 value: vm.status,
-                hint: 'Durum',
+                hint: 'status'.tr(),
                 borderRadius: Dimens.radiusSmall.toRightBorderRadius(),
                 items: storeAdvertStatuses.keys
                     .map((e) => DropdownMenuItem(
@@ -209,8 +208,8 @@ class StoreAddView extends StatelessWidget {
           textInputAction: TextInputAction.next,
           maxLength: 50,
           maxLines: 4,
-          decoration: const InputDecoration(
-            label: Text('Adres'),
+          decoration: InputDecoration(
+            label: Text('address'.tr()),
           ),
         ),
       ),
@@ -227,17 +226,21 @@ class StoreAddView extends StatelessWidget {
                 onPressed: () {
                   vm.nextStep(context);
                 },
-                child: const Text('Sonraki Adım')),
+                child: Text('next_step'.tr())),
           ),
         )
       ],
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
       centerTitle: true,
-      title: Text(model != null ? 'İlan Düzenle' : 'Yeni İlan'),
+      title: Text(
+          model != null ? 'edit_advert_title'.tr() : 'new_advert_title'.tr()),
     );
   }
 }

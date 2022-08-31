@@ -83,7 +83,7 @@ abstract class StorePictureViewModelBase with Store {
   @action
   void error(BuildContext _, String data) {
     isLoading = !isLoading;
-    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar('Bir Hata Oluştu'));
+    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar('error'));
   }
 
   @action

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
@@ -23,8 +24,8 @@ class StoreFilterView extends StatelessWidget {
           children: [
             DropdownX<int>(
               value: vm.type,
-              hint: 'Kategori',
-              label: 'Kategori',
+              hint: 'category'.tr(),
+              label: 'category'.tr(),
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
               items: storeFilterTypes.keys
                   .map((e) => DropdownMenuItem(
@@ -37,8 +38,8 @@ class StoreFilterView extends StatelessWidget {
             const SizedBox(height: 20),
             DropdownX<int>(
               value: vm.delivery,
-              hint: 'Teslimat',
-              label: 'Teslimat',
+              hint: 'delivery'.tr(),
+              label: 'delivery'.tr(),
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
               items: storeFilterDeliveries.keys
                   .map((e) => DropdownMenuItem(
@@ -51,8 +52,8 @@ class StoreFilterView extends StatelessWidget {
             const SizedBox(height: 20),
             DropdownX<int>(
               value: vm.status,
-              hint: 'Durum',
-              label: 'Durum',
+              hint: 'status'.tr(),
+              label: 'status'.tr(),
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
               items: storeFilterStatuses.keys
                   .map((e) => DropdownMenuItem(
@@ -76,15 +77,15 @@ class StoreFilterView extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () => vm.resetFilter(context),
-            child: const Text('Sıfırla',
-                style: TextStyle(color: Colors.redAccent)),
+            child: Text('reset'.tr(),
+                style: const TextStyle(color: Colors.redAccent)),
           ),
         ),
         const SizedBox(width: 20),
         Expanded(
           child: ElevatedButton(
             onPressed: () => vm.setFilter(context),
-            child: const Text('Uygula'),
+            child: Text('apply'.tr()),
           ),
         )
       ],

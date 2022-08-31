@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/extensions/num_extension.dart';
@@ -31,8 +32,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.advertType,
-                    hint: 'Kategori',
-                    label: 'Kategori',
+                    hint: 'category'.tr(),
+                    label: 'category'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterTypes.keys
                         .map((e) => DropdownMenuItem(
@@ -47,8 +48,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.animalType,
-                    hint: 'Tür',
-                    label: 'Tür',
+                    hint: 'type'.tr(),
+                    label: 'type'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterAnimals.keys
                         .map((e) => DropdownMenuItem(
@@ -67,8 +68,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.animalGender,
-                    hint: 'Cinsiyet',
-                    label: 'Cinsiyet',
+                    hint: 'gender'.tr(),
+                    label: 'gender'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterGenders.keys
                         .map((e) => DropdownMenuItem(
@@ -83,8 +84,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.animalHabit,
-                    hint: 'Huy',
-                    label: 'Huy',
+                    hint: 'habit'.tr(),
+                    label: 'habit'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterHabits.keys
                         .map((e) => DropdownMenuItem(
@@ -103,8 +104,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.animalSize,
-                    hint: 'Boyut',
-                    label: 'Boyut',
+                    hint: 'size'.tr(),
+                    label: 'size'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterSizes.keys
                         .map((e) => DropdownMenuItem(
@@ -119,8 +120,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.vaccine,
-                    hint: 'Aşı',
-                    label: 'Aşı',
+                    hint: 'vaccine'.tr(),
+                    label: 'vaccine'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterVaccines.keys
                         .map((e) => DropdownMenuItem(
@@ -139,8 +140,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.infertility,
-                    hint: 'Kısırlık',
-                    label: 'Kısırlık',
+                    hint: 'infertility'.tr(),
+                    label: 'infertility'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterInfertilities.keys
                         .map((e) => DropdownMenuItem(
@@ -155,8 +156,8 @@ class PetFilterView extends StatelessWidget {
                 Expanded(
                   child: DropdownX<int>(
                     value: vm.toilet,
-                    hint: 'Tuvalet Eğitimi',
-                    label: 'Tuvalet Eğitimi',
+                    hint: 'toilet'.tr(),
+                    label: 'toilet'.tr(),
                     borderRadius: Dimens.radiusSmall.toBorderRadius(),
                     items: petFilterToilets.keys
                         .map((e) => DropdownMenuItem(
@@ -183,15 +184,15 @@ class PetFilterView extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () => vm.resetFilter(context),
-            child: const Text('Sıfırla',
-                style: TextStyle(color: Colors.redAccent)),
+            child: Text('reset'.tr(),
+                style: const TextStyle(color: Colors.redAccent)),
           ),
         ),
         const SizedBox(width: 5),
         Expanded(
           child: ElevatedButton(
             onPressed: () => vm.setFilter(context),
-            child: const Text('Uygula'),
+            child: Text('apply'.tr()),
           ),
         )
       ],

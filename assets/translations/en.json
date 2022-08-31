@@ -52,6 +52,8 @@
     "unknown": "Unknown",
     "yes": "Yes",
     "no": "No",
+    "apply": "Apply",
+    "reset": "Reset",
     "dog": "Dog",
     "cat": "Cat",
     "bird": "Bird",
@@ -76,5 +78,13 @@
     "permahome": "Permanent Home",
     "fostermom": "Foster Mother",
     "vaccinated": "Vaccinated",
-    "unvaccinated": "Unvaccinated"
+    "unvaccinated": "Unvaccinated",
+    "category": "Category",
+    "type": "Type",
+    "gender": "Gender",
+    "habit": "Habit",
+    "vaccine": "Vaccine",
+    "size": "Size",
+    "infertility": "Infertility",
+    "toilet": "Toilet Edu."
 }

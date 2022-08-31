@@ -52,6 +52,8 @@
     "unknown": "Unbekannt",
     "yes": "Ja",
     "no": "Nein",
+    "apply": "Bewerben",
+    "reset": "Zurücksetzen",
     "dog": "Hund",
     "cat": "Katze",
     "bird": "Vogel",
@@ -76,5 +78,13 @@
     "permahome": "Festes Zuhause",
     "fostermom": "Pflegemutter",
     "vaccinated": "Geimpft",
-    "unvaccinated": "Ungeimpft"
+    "unvaccinated": "Ungeimpft",
+    "category": "Kategorie",
+    "type": "Typ",
+    "gender": "Geschlecht",
+    "habit": "Gewohnheit",
+    "vaccine": "Impfung",
+    "size": "Größe",
+    "infertility": "Unfruchtbarkeit",
+    "toilet": "Toilettenerziehung"
 }

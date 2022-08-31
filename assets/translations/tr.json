@@ -52,6 +52,8 @@
     "unknown": "Bilinmiyor",
     "yes": "Evet",
     "no": "Hayır",
+    "apply": "Uygula",
+    "reset": "Sıfırla",
     "dog": "Köpek",
     "cat": "Kedi",
     "bird": "Kuş",
@@ -76,5 +78,13 @@
     "permahome": "Kalıcı Yuva",
     "fostermom": "Süt Anne",
     "vaccinated": "Aşılı",
-    "unvaccinated": "Aşısız"
+    "unvaccinated": "Aşısız",
+    "category": "Kategori",
+    "type": "Tür",
+    "gender": "Cinsiyer",
+    "habit": "Huy",
+    "vaccine": "Aşı",
+    "size": "Boyut",
+    "infertility": "Kısırlık",
+    "toilet": "Tuvalet Eğt."
 }

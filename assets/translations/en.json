@@ -121,5 +121,6 @@
     "status": "Status",
     "price": "Price",
     "isforsale": "Is It For Sale?",
-    "isnotsale": "Is It Sold?"
+    "isnotsale": "Is It Sold?",
+    "toseehere": "There is nothing to see here."
 }

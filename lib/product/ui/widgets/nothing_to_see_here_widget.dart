@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:petjoo/product/constants/images.dart';
 import 'separator.dart';
@@ -18,9 +19,9 @@ class NothingToSeeHereWidget extends StatelessWidget {
             children: [
               Image.asset(Images.emptyBox),
               const Separator(),
-              const Text(
-                'Burada Görülecek Bir Şey Yok.',
-                style: TextStyle(fontSize: 14, color: Colors.black),
+              Text(
+                'toseehere'.tr(),
+                style: const TextStyle(fontSize: 14, color: Colors.black),
                 textAlign: TextAlign.center,
               )
             ],

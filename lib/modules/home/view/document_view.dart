@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -49,8 +50,8 @@ class _DocumentViewState extends State<DocumentView> {
     return AppBar(
       centerTitle: true,
       title: widget.assetName == 'privacy_policy.txt'
-          ? const Text('Gizlilik Sözleşmesi')
-          : const Text('Kullanım Koşulları'),
+          ? Text('privacypolicy'.tr())
+          : Text('termsofuse'.tr()),
     );
   }
 }

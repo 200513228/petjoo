@@ -1,4 +1,10 @@
 {
+    "name": "Name",
+    "surname": "Surname",
+    "phone": "Phone",
+    "password": "Password",
+    "email": "E-Mail",
+    "and": "and",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -10,8 +16,13 @@
     "welcome_soon": "SOON",
     "login_title": "Log In",
     "login_no_account": "Don't Have an Account? Create an account.",
-    "login_password": "Password",
-    "login_email": "E-Mail",
     "login_forgot": "I Forgot My Password",
-    "login_send": "Send"
+    "login_send": "Send",
+    "login_mail_sended": "Password recovery mail has been sent.",
+    "register_title": "Create Account",
+    "register_info": "By using our application, you accept the following agreements.",
+    "register_phone_valid": "Enter a Valid Phone Number",
+    "register_valid": "This field cannot be left blank.",
+    "privacypolicy": "Privacy Policy",
+    "termsofuse": "Terms Of Use"
 }

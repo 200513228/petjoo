@@ -1,4 +1,10 @@
 {
+    "name": "İsim",
+    "surname": "Soyisim",
+    "phone": "Telefon",
+    "password": "Şifre",
+    "email": "E-Posta",
+    "and": "ve",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -10,8 +16,13 @@
     "welcome_soon": "YAKINDA",
     "login_title": "Giriş Yap",
     "login_no_account": "Hesabınız Yok Mu? Bir Hesap Oluşturun.",
-    "login_password": "Şifre",
-    "login_email": "E-Posta",
     "login_forgot": "Şifremi Unuttum",
-    "login_send": "Gönder"
+    "login_send": "Gönder",
+    "login_mail_sended": "Şifre Sıfırlama Maili Gönderildi.",
+    "register_title": "Hesap Oluştur",
+    "register_info": "Uygulamamızı kullanarak aşağıdaki sözleşmeleri kabul etmiş olursunuz.",
+    "register_phone_valid": "Geçerli bir Telefon Numarası Girin",
+    "register_valid": "Bu alan boş bırakılamaz",
+    "privacypolicy": "Gizlilik Sözleşmesi",
+    "termsofuse": "Kullanım Koşulları"
 }

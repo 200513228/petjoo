@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/base/ui_snackbar.dart';
@@ -41,8 +42,7 @@ abstract class LoginViewModelBase with Store {
   @action
   void succesfulPass(BuildContext _) {
     Navigator.pop(_);
-    ScaffoldMessenger.of(_)
-        .showSnackBar(uiSnackBar('Sıfırlama Maili Gönderildi.'));
+    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar('login_mail_sended'.tr()));
   }
 
   @action

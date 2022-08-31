@@ -1,4 +1,10 @@
 {
+    "name": "Name",
+    "surname": "Nachname",
+    "phone": "Telefon",
+    "password": "Passwort",
+    "email": "E-Mail",
+    "and": "und",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -10,8 +16,13 @@
     "welcome_soon": "DEMNÄCHST",
     "login_title": "Einloggen",
     "login_no_account": "Sie haben kein Konto? Ein Konto erstellen.",
-    "login_password": "Passwort",
-    "login_email": "E-Mail",
     "login_forgot": "Ich habe mein Passwort vergessen",
-    "login_send": "Senden"
+    "login_send": "Senden",
+    "login_mail_sended": "E-Mail zur Kennwortwiederherstellung wurde gesendet.",
+    "register_title": "Konto Anlegen",
+    "register_info": "Durch die Nutzung unserer Anwendung akzeptieren Sie die folgenden Vereinbarungen.",
+    "register_phone_valid": "Geben Sie eine gültige Telefonnummer ein",
+    "register_valid": "Dieses Feld darf nicht leer gelassen werden.",
+    "privacypolicy": "Datenschutzrichtlinie",
+    "termsofuse": "Nutzungsbedingungen"
 }

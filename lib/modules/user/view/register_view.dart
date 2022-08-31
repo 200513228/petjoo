@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -16,7 +17,7 @@ class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: Observer(builder: (_) {
         return Column(
           children: [
@@ -36,11 +37,11 @@ class RegisterView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              textField(vm.emailCont, 'E-Posta'),
-              textField(vm.nameCont, 'İsim'),
-              textField(vm.surNameCont, 'Soyisim'),
+              textField(vm.emailCont, 'email'.tr()),
+              textField(vm.nameCont, 'name'.tr()),
+              textField(vm.surNameCont, 'surname'.tr()),
               buildPhone,
-              textField(vm.passCont, 'Şifre'),
+              textField(vm.passCont, 'password'.tr()),
               info(context),
               registerButton(context),
             ],
@@ -55,8 +56,8 @@ class RegisterView extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         controller: cont,
-        obscureText: label == 'Şifre',
-        validator: ((value) => value == '' ? 'Bu alan boş bırakılamaz' : null),
+        obscureText: label == 'password'.tr(),
+        validator: ((value) => value == '' ? 'register_valid'.tr() : null),
         maxLength: 70,
         maxLines: 1,
         minLines: 1,
@@ -74,7 +75,7 @@ class RegisterView extends StatelessWidget {
           Expanded(
             flex: 2,
             child: DropdownX<String>(
-              hint: 'Ülke Kodu',
+              hint: 'Dial Code',
               value: vm.dialCode,
               borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
               items: dialCodes.values
@@ -94,10 +95,9 @@ class RegisterView extends StatelessWidget {
               maxLength: 10,
               textInputAction: TextInputAction.next,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              validator:
-                  Validators.phone('Geçerli Bir Telefon No Giriniz', true),
+              validator: Validators.phone('register_phone_valid'.tr(), true),
               decoration: InputDecoration(
-                  label: const Text('Telefon'),
+                  label: Text('phone'.tr()),
                   hintText: '5xx xxx xx xx',
                   counterText: '',
                   border: UnderlineInputBorder(
@@ -127,7 +127,7 @@ class RegisterView extends StatelessWidget {
               onPressed: () {
                 vm.register(context);
               },
-              child: const Text('Kayıt Ol'),
+              child: Text('register_title'.tr()),
             ),
           ))
         ],
@@ -149,7 +149,7 @@ class RegisterView extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   child: Text(
-                    'Uygulamamızı kullanarak aşağıdaki sözleşmeleri kabul etmiş olursunuz.',
+                    'register_info'.tr(),
                     style: style,
                     maxLines: 2,
                   ),
@@ -166,15 +166,14 @@ class RegisterView extends StatelessWidget {
                     onTap: () {
                       vm.navigate(context, 'privacy_policy.txt');
                     },
-                    child: Text('Gizlilik Sözleşmesi',
-                        style: style2, maxLines: 1)),
-                Text(' ve ', style: style, maxLines: 1),
+                    child:
+                        Text('privacypolicy'.tr(), style: style2, maxLines: 1)),
+                Text(' ${'and'.tr()} ', style: style, maxLines: 1),
                 InkWell(
                     onTap: () {
                       vm.navigate(context, 'terms_of_use.txt');
                     },
-                    child:
-                        Text('Kullanım Koşulları', style: style2, maxLines: 1)),
+                    child: Text('termsofuse'.tr(), style: style2, maxLines: 1)),
               ],
             ),
           ),
@@ -183,10 +182,16 @@ class RegisterView extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          )),
       centerTitle: true,
-      title: const Text('Hesap Oluştur'),
+      title: Text('register_title'.tr()),
     );
   }
 

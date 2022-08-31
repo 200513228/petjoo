@@ -39,9 +39,9 @@ class LoginView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  textField(vm.emailCont, 'login_email'.tr(), false),
+                  textField(vm.emailCont, 'email'.tr(), false),
                   const SizedBox(height: 20),
-                  textField(vm.passCont, 'login_password'.tr(), true),
+                  textField(vm.passCont, 'password'.tr(), true),
                   const SizedBox(height: 5),
                   forgotPass(context),
                   const SizedBox(height: 20),
@@ -68,8 +68,7 @@ class LoginView extends StatelessWidget {
               ),
               content: Row(
                 children: [
-                  Expanded(
-                      child: textField(vm.emailCont, 'login_email'.tr(), false))
+                  Expanded(child: textField(vm.emailCont, 'email'.tr(), false))
                 ],
               ),
               actions: [

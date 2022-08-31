@@ -5,6 +5,9 @@
     "password": "Passwort",
     "email": "E-Mail",
     "and": "und",
+    "advert": "ANZEIGEN",
+    "store": "MARKT",
+    "transport": "PET TRANSPORT",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -24,5 +27,10 @@
     "register_phone_valid": "Geben Sie eine gültige Telefonnummer ein",
     "register_valid": "Dieses Feld darf nicht leer gelassen werden.",
     "privacypolicy": "Datenschutzrichtlinie",
-    "termsofuse": "Nutzungsbedingungen"
+    "termsofuse": "Nutzungsbedingungen",
+    "home_home": "Startseite",
+    "home_settings": "Einstellungen",
+    "home_all": "Alle Anz.",
+    "home_my": "Meine Anz.",
+    "home_search": "Wonach suchst du?"
 }

@@ -5,6 +5,9 @@
     "password": "Password",
     "email": "E-Mail",
     "and": "and",
+    "advert": "ADVERTS",
+    "store": "STORE",
+    "transport": "PET TRANSPORT",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -24,5 +27,10 @@
     "register_phone_valid": "Enter a Valid Phone Number",
     "register_valid": "This field cannot be left blank.",
     "privacypolicy": "Privacy Policy",
-    "termsofuse": "Terms Of Use"
+    "termsofuse": "Terms Of Use",
+    "home_home": "Homepage",
+    "home_settings": "Settings",
+    "home_all": "All Advs.",
+    "home_my": "My Advs.",
+    "home_search": "What are you looking for?"
 }

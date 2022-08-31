@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
@@ -42,7 +43,7 @@ class HomeView extends StatelessWidget {
   AppBar buildAppBar(BuildContext _) {
     return AppBar(
       centerTitle: true,
-      title: Text(title),
+      title: Text(titleToAppBar),
       leading: IconButton(
           onPressed: () => Navigator.pop(_),
           icon: const Icon(
@@ -83,25 +84,25 @@ class HomeView extends StatelessWidget {
         items: [
           AnimatedBarItems(
             icon: const Icon(Icons.home),
-            title: const Text('Anasayfa'),
+            title: Text('home_home'.tr()),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white,
           ),
           AnimatedBarItems(
             icon: Icon(toCustom1Icon),
-            title: Text(toCustom1Title),
+            title: Text('home_all'.tr()),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white54,
           ),
           AnimatedBarItems(
             icon: Icon(toCustom2Icon),
-            title: Text(toCustom2Title),
+            title: Text('home_my'.tr()),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white54,
           ),
           AnimatedBarItems(
             icon: const Icon(Icons.settings),
-            title: const Text('Ayarlar'),
+            title: Text('home_settings'.tr()),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white,
           )
@@ -119,6 +120,19 @@ class HomeView extends StatelessWidget {
         },
       );
     });
+  }
+
+  String get titleToAppBar {
+    switch (title) {
+      case 'PAZAR':
+        return 'store'.tr();
+      case 'İLANLAR':
+        return 'advert'.tr();
+      case 'PET NAKİL':
+        return 'transport'.tr();
+      default:
+        return ' ';
+    }
   }
 
   Widget buildFab(BuildContext context) {
@@ -162,32 +176,6 @@ class HomeView extends StatelessWidget {
             : const TransportReservationListView();
       default:
         return Container();
-    }
-  }
-
-  String get toCustom1Title {
-    switch (title) {
-      case 'PAZAR':
-        return 'Tüm İlanlar';
-      case 'İLANLAR':
-        return 'Tüm İlanlar';
-      case 'PET NAKİL':
-        return 'Tüm İlanlar';
-      default:
-        return 'Tüm İlanlar';
-    }
-  }
-
-  String get toCustom2Title {
-    switch (title) {
-      case 'PAZAR':
-        return 'İlanlarım';
-      case 'İLANLAR':
-        return 'İlanlarım';
-      case 'PET NAKİL':
-        return 'Rezervasyonlar';
-      default:
-        return 'İlanlarım';
     }
   }
 

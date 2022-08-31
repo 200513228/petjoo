@@ -5,6 +5,9 @@
     "password": "Şifre",
     "email": "E-Posta",
     "and": "ve",
+    "advert": "İLANLAR",
+    "store": "PAZAR",
+    "transport": "PET NAKİL",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -24,5 +27,10 @@
     "register_phone_valid": "Geçerli bir Telefon Numarası Girin",
     "register_valid": "Bu alan boş bırakılamaz",
     "privacypolicy": "Gizlilik Sözleşmesi",
-    "termsofuse": "Kullanım Koşulları"
+    "termsofuse": "Kullanım Koşulları",
+    "home_home": "Anasayfa",
+    "home_settings": "Ayarlar",
+    "home_all": "Tüm İlanlar",
+    "home_my": "İlanlarım",
+    "home_search": "Ne Aramıştınız?"
 }

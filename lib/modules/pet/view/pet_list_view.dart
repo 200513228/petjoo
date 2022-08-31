@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -56,9 +57,9 @@ class PetListView extends StatelessWidget {
               onChanged: (value) {
                 vm.query(value);
               },
-              decoration: const InputDecoration(
-                  hintText: 'Ne Aramıştınız?',
-                  prefixIcon: Icon(
+              decoration: InputDecoration(
+                  hintText: 'home_search'.tr(),
+                  prefixIcon: const Icon(
                     Icons.search,
                     color: Colors.white,
                   )),

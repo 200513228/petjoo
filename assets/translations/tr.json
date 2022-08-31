@@ -8,6 +8,8 @@
     "advert": "İLANLAR",
     "store": "PAZAR",
     "transport": "PET NAKİL",
+    "close": "Kapat",
+    "block": "Engelle",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -32,5 +34,9 @@
     "home_settings": "Ayarlar",
     "home_all": "Tüm İlanlar",
     "home_my": "İlanlarım",
-    "home_search": "Ne Aramıştınız?"
+    "home_search": "Ne Aramıştınız?",
+    "auth_title": "Oturum Açın",
+    "auth_content": "Please sign in for use this features.",
+    "chat_title": "Gelen Kutusu",
+    "chat_message": "Mesaj"
 }

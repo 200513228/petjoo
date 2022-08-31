@@ -8,6 +8,8 @@
     "advert": "ADVERTS",
     "store": "STORE",
     "transport": "PET TRANSPORT",
+    "close": "Close",
+    "block": "Block",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -32,5 +34,9 @@
     "home_settings": "Settings",
     "home_all": "All Advs.",
     "home_my": "My Advs.",
-    "home_search": "What are you looking for?"
+    "home_search": "What are you looking for?",
+    "auth_title": "Sign In",
+    "auth_content": "Please sign in to use this feature.",
+    "chat_title": "Inbox",
+    "chat_message": "Message"
 }

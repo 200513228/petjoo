@@ -8,6 +8,8 @@
     "advert": "ANZEIGEN",
     "store": "MARKT",
     "transport": "PET TRANSPORT",
+    "close": "Nah",
+    "block": "Block",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -32,5 +34,9 @@
     "home_settings": "Einstellungen",
     "home_all": "Alle Anz.",
     "home_my": "Meine Anz.",
-    "home_search": "Wonach suchst du?"
+    "home_search": "Wonach suchst du?",
+    "auth_title": "Einloggen",
+    "auth_content": "Bitte melden Sie sich an, um diese Funktion zu nutzen.",
+    "chat_title": "Posteingang",
+    "chat_message": "Nachricht"
 }

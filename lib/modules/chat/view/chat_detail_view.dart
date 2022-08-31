@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/chat/model/chat_model.dart';
@@ -17,7 +18,7 @@ class ChatDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.getMessages(model.id);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: buildBody(),
     );
   }
@@ -89,7 +90,7 @@ class ChatDetailView extends StatelessWidget {
             maxLines: 3,
             minLines: 1,
             decoration:
-                const InputDecoration(hintText: 'Mesaj', counterText: ''),
+                InputDecoration(hintText: 'chat_message'.tr(), counterText: ''),
           )),
           const SizedBox(width: 15),
           IconButton(
@@ -108,8 +109,24 @@ class ChatDetailView extends StatelessWidget {
     return '${d.hour}:${d.minute}';
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
+      actions: [
+        PopupMenuButton(
+          icon: const Icon(Icons.more_horiz, color: Colors.black),
+          color: Colors.black,
+          itemBuilder: (context) => [
+            PopupMenuItem(
+                child: Text(
+              'block'.tr(),
+              style: const TextStyle(color: Colors.red),
+            ))
+          ],
+        )
+      ],
       title: Text(name,
           style: const TextStyle(
               fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),

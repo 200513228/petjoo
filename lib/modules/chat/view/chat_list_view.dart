@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/chat/view/chat_tile_view.dart';
@@ -11,7 +12,7 @@ class ChatListView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.getChats();
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Observer(builder: (_) {
@@ -28,10 +29,13 @@ class ChatListView extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
       centerTitle: true,
-      title: const Text('Gelen Kutusu'),
+      title: Text('chat_title'.tr()),
     );
   }
 }

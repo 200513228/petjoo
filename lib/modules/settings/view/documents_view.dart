@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:petjoo/modules/home/view/document_view.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -9,8 +10,11 @@ class DocumentsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
         centerTitle: true,
-        title: const Text('Belgeler'),
+        title: Text('settings_docs'.tr()),
       ),
       body: settingsTiles(context),
     );
@@ -22,12 +26,12 @@ class DocumentsView extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            settingTile('Gizlilik Sözleşmesi', Icons.privacy_tip_rounded,
+            settingTile('privacypolicy'.tr(), Icons.privacy_tip_rounded,
                 () => navigate(_, 'privacy_policy.txt')),
-            settingTile('Kullanım Koşulları', Icons.description_rounded,
+            settingTile('termsofuse'.tr(), Icons.description_rounded,
                 () => navigate(_, 'privacy_policy.txt')),
             settingTile(
-                'Sahiplendirme Formu',
+                'adoption_form'.tr(),
                 Icons.details_rounded,
                 () => launchUrlString(
                       'https://firebasestorage.googleapis.com/v0/b/petjoo-129db.appspot.com/o/docs%2Fsahiplendirme%20formu.docx?alt=media&token=0d6d5ff7-812f-4274-beb9-75bf26f86b43',

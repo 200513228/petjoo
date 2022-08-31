@@ -10,6 +10,7 @@
     "transport": "PET NAKİL",
     "close": "Kapat",
     "block": "Engelle",
+    "save": "Kaydet",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -38,5 +39,12 @@
     "auth_title": "Oturum Açın",
     "auth_content": "Please sign in for use this features.",
     "chat_title": "Gelen Kutusu",
-    "chat_message": "Mesaj"
+    "chat_message": "Mesaj",
+    "settings_title": "Ayarlar",
+    "settings_profile": "Profil",
+    "settings_docs": "Belgeler",
+    "settings_out": "Çıkış Yap",
+    "profile_remove": "Hesabı Sil",
+    "profile_remove_content": "Bu işlem geri alınamaz. Devam etmek istiyor musunuz?",
+    "adoption_form": "Sahiplendirme Formu"
 }

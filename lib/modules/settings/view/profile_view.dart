@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -17,7 +18,11 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Profil'),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          ),
+          title: Text('settings_profile'.tr()),
           centerTitle: true,
         ),
         body: buildBody(context));
@@ -35,8 +40,8 @@ class ProfileView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    textField(vm.nameCont, 'İsim'),
-                    textField(vm.surnameCont, 'Soyisim'),
+                    textField(vm.nameCont, 'name'.tr()),
+                    textField(vm.surnameCont, 'surname'.tr()),
                     buildPhone,
                     saveButton(context),
                     deleteButton(context),
@@ -52,8 +57,8 @@ class ProfileView extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextFormField(
         controller: cont,
-        obscureText: label == 'Şifre',
-        validator: ((value) => value == '' ? 'Bu alan boş bırakılamaz' : null),
+        obscureText: label == 'password'.tr(),
+        validator: ((value) => value == '' ? 'register_valid'.tr() : null),
         maxLength: 70,
         maxLines: 1,
         minLines: 1,
@@ -71,7 +76,7 @@ class ProfileView extends StatelessWidget {
           Expanded(
             flex: 2,
             child: DropdownX<String>(
-              hint: 'Ülke Kodu',
+              hint: 'Dial Code',
               value: vm.dialCode,
               borderRadius: Dimens.radiusSmall.toLeftBorderRadius(),
               items: dialCodes.values
@@ -91,10 +96,9 @@ class ProfileView extends StatelessWidget {
               maxLength: 10,
               textInputAction: TextInputAction.next,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              validator:
-                  Validators.phone('Geçerli Bir Telefon No Giriniz', true),
+              validator: Validators.phone('register_phone_valid'.tr(), true),
               decoration: InputDecoration(
-                  label: const Text('Telefon'),
+                  label: Text('phone'.tr()),
                   hintText: '5xx xxx xx xx',
                   counterText: '',
                   border: UnderlineInputBorder(
@@ -122,7 +126,7 @@ class ProfileView extends StatelessWidget {
             onPressed: () {
               vm.save(context);
             },
-            child: const Text('Kaydet'),
+            child: Text('save'.tr()),
           ))
         ],
       ),
@@ -140,29 +144,28 @@ class ProfileView extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                          title: const Text('Hesabı Sil'),
-                          content: const Text(
-                              'Bu işlem geri alınamaz. Devam etmek istiyor musunuz?'),
+                          title: Text('profile_remove'.tr()),
+                          content: Text('profile_remove_content'.tr()),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 vm.delete(context);
                               },
-                              child: const Text('Hesabı Sil',
-                                  style: TextStyle(color: Colors.red)),
+                              child: Text('profile_remove'.tr(),
+                                  style: const TextStyle(color: Colors.red)),
                             ),
                             TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('Vazgeç'),
+                              child: Text('close'.tr()),
                             )
                           ],
                         ));
               },
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red)),
-              child: const Text('Hesabımı Sil'),
+              child: Text('profile_remove'.tr()),
             ),
           )
         ],

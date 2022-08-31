@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/core/widgets/loading.dart';
@@ -17,7 +18,7 @@ class SettingsView extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => Navigator.canPop(context),
       child: Scaffold(
-        appBar: buildAppBar(),
+        appBar: buildAppBar(context),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SingleChildScrollView(
@@ -37,15 +38,16 @@ class SettingsView extends StatelessWidget {
   Widget settingsTiles(BuildContext _) {
     return Column(
       children: [
-        settingTile('Profil', Icons.person, Container(),
+        settingTile('settings_profile'.tr(), Icons.person, Container(),
             () => vm.navigate(_, ProfileView())),
         const SizedBox(height: 10),
-        settingTile('Belgeler', Icons.file_open, Container(),
+        settingTile('settings_docs'.tr(), Icons.file_open, Container(),
             () => vm.navigate(_, const DocumentsView())),
         // const SizedBox(height: 10),
         // settingTile('Ayarlar', Icons.settings, Container(), () {}),
         const SizedBox(height: 10),
-        settingTile('Çıkış Yap', Icons.power_settings_new_rounded, Container(),
+        settingTile(
+            'settings_out'.tr(), Icons.power_settings_new_rounded, Container(),
             () {
           vm.logout(_);
         }),
@@ -125,9 +127,12 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      title: const Text('AYARLAR'),
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
+      title: Text('settings_title'.tr()),
       centerTitle: true,
     );
   }

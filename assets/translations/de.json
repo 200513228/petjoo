@@ -10,6 +10,7 @@
     "transport": "PET TRANSPORT",
     "close": "Nah",
     "block": "Block",
+    "save": "Speichern",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -38,5 +39,12 @@
     "auth_title": "Einloggen",
     "auth_content": "Bitte melden Sie sich an, um diese Funktion zu nutzen.",
     "chat_title": "Posteingang",
-    "chat_message": "Nachricht"
+    "chat_message": "Nachricht",
+    "settings_title": "Einstellungen",
+    "settings_profile": "Profil",
+    "settings_docs": "Dokumente",
+    "settings_out": "Abmelden",
+    "profile_remove": "Konto Löschen",
+    "profile_remove_content": "Diese Aktion kann nicht rückgängig gemacht werden. Möchtest du weiter machen?",
+    "adoption_form": "Adoptionsformular"
 }

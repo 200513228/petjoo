@@ -10,6 +10,7 @@
     "transport": "PET TRANSPORT",
     "close": "Close",
     "block": "Block",
+    "save": "Save",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
     "welcome_lang_de": "Deutsch",
@@ -38,5 +39,12 @@
     "auth_title": "Sign In",
     "auth_content": "Please sign in to use this feature.",
     "chat_title": "Inbox",
-    "chat_message": "Message"
+    "chat_message": "Message",
+    "settings_title": "Settings",
+    "settings_profile": "Profile",
+    "settings_docs": "Documents",
+    "settings_out": "Sign Out",
+    "profile_remove": "Delete Account",
+    "profile_remove_content": "This action cannot be undone. Do you want to continue?",
+    "adoption_form": "Adoption Form"
 }

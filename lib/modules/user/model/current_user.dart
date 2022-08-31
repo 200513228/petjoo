@@ -11,6 +11,7 @@ class CurrentUser {
   static String fcmToken = '';
   static bool hasTransport = false;
   static bool hasVeterinary = false;
+  static List blocks = [];
 
   CurrentUser.fromDS(DocumentSnapshot snapshot) {
     var data = snapshot.data() as dynamic;
@@ -24,6 +25,7 @@ class CurrentUser {
     fcmToken = data['fcmToken'] ?? '';
     hasTransport = data['hasTransport'] ?? false;
     hasVeterinary = data['hasVeterinary'] ?? false;
+    blocks = data['blocks'] ?? [];
   }
 
   CurrentUser.clear() {
@@ -37,5 +39,6 @@ class CurrentUser {
     fcmToken = '';
     hasTransport = false;
     hasVeterinary = false;
+    blocks = [];
   }
 }

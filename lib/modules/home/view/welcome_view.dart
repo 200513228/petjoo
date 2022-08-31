@@ -243,7 +243,7 @@ class SmallModule extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.height / 32;
     return InkWell(
-      onTap: title == 'YAKINDA'
+      onTap: title == 'welcome_soon'.tr()
           ? null
           : () {
               onTap();

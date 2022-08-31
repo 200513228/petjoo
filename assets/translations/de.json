@@ -10,6 +10,7 @@
     "transport": "PET TRANSPORT",
     "close": "Nah",
     "block": "Block",
+    "unblock": "Unblock",
     "save": "Speichern",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
@@ -97,6 +98,7 @@
     "user_not_found": "Benutzer Nicht Gefunden",
     "advert_details": "Anzeigendetails",
     "publish": "Publizieren",
+    "report": "Report",
     "new_advert": "Neue Anzeige Erstellen",
     "title": "Titel",
     "title_min3": "Der Titel muss mindestens 3 Buchstaben lang sein",
@@ -122,5 +124,8 @@
     "price": "Preis",
     "isforsale": "Steht es Verkauf?",
     "isnotsale": "Ist es verkauft?",
-    "toseehere": "Hier gibt es nichts zu sehen."
+    "toseehere": "Hier gibt es nichts zu sehen.",
+    "blockuser_content": "Sie haben diesen Benutzer blockiert. Sie erhalten keine Nachrichten mehr vom Benutzer.",
+    "sold_alert_title": "Vorsicht",
+    "sold_alert_content": "Petjoo ist keine Shopping-Plattform. Es bringt nur Käufer und Verkäufer zusammen. Wir raten Ihnen, vorsichtig zu sein, um keine Probleme mit Ihren Einkäufen zu haben."
 }

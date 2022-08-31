@@ -16,10 +16,14 @@ class ChatDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String otherUser = model.userIds[0] == CurrentUser.id
+        ? model.userIds[1]
+        : model.userIds[0];
     vm.getMessages(model.id);
+    vm.checkBlock(otherUser);
     return Scaffold(
-      appBar: buildAppBar(context),
-      body: buildBody(),
+      appBar: buildAppBar(context, otherUser),
+      body: vm.isBlocked ? blockBody() : buildBody(),
     );
   }
 
@@ -29,6 +33,23 @@ class ChatDetailView extends StatelessWidget {
         Expanded(child: messageList()),
         textRow(),
       ],
+    );
+  }
+
+  Widget blockBody() {
+    return Container(
+      padding: const EdgeInsets.all(50),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'blockuser_content'.tr(),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18, color: Colors.black),
+          )
+        ],
+      ),
     );
   }
 
@@ -109,7 +130,7 @@ class ChatDetailView extends StatelessWidget {
     return '${d.hour}:${d.minute}';
   }
 
-  AppBar buildAppBar(BuildContext context) {
+  AppBar buildAppBar(BuildContext context, String uid) {
     return AppBar(
       leading: IconButton(
           onPressed: () => Navigator.pop(context),
@@ -120,10 +141,13 @@ class ChatDetailView extends StatelessWidget {
           color: Colors.black,
           itemBuilder: (context) => [
             PopupMenuItem(
+                onTap: () => vm.isBlocked
+                    ? vm.unblockUser(context, uid)
+                    : vm.blockUser(context, uid),
                 child: Text(
-              'block'.tr(),
-              style: const TextStyle(color: Colors.red),
-            ))
+                  vm.isBlocked ? 'unblock'.tr() : 'block'.tr(),
+                  style: const TextStyle(color: Colors.red),
+                ))
           ],
         )
       ],

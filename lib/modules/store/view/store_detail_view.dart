@@ -241,8 +241,25 @@ class StoreDetailView extends StatelessWidget {
                           style: const TextStyle(
                               color: Colors.white, fontSize: 22),
                         ),
-                        onPressed: () {
-                          vm.changeSold(!model.isSold, _);
+                        onPressed: () async {
+                          if (!model.isSold) {
+                            await showDialog(
+                                context: _,
+                                builder: (context) => AlertDialog(
+                                      title: Text('sold_alert_title'.tr()),
+                                      content: Text('sold_alert_content'.tr()),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('close'.tr())),
+                                      ],
+                                    )).then(
+                                (value) => vm.changeSold(!model.isSold, _));
+                          } else {
+                            vm.changeSold(!model.isSold, _);
+                          }
                         },
                       ),
                     ),
@@ -427,7 +444,13 @@ class StoreDetailView extends StatelessWidget {
                       'publish'.tr(),
                     ),
                   ),
-                ])
+                  PopupMenuItem(
+                    onTap: null,
+                    child: Text(
+                      'report'.tr(),
+                    ),
+                  ),
+                ]),
       ],
     );
   }

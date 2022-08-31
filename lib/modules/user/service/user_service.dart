@@ -90,6 +90,32 @@ class UserService {
     }
   }
 
+  static Future<String> blockUser(String uid) async {
+    try {
+      CurrentUser.blocks.add(uid);
+      await db
+          .collection('users')
+          .doc(CurrentUser.id)
+          .update({'blocks': CurrentUser.blocks});
+      return 'BLOCK';
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> unblockUser(String uid) async {
+    try {
+      CurrentUser.blocks.remove(uid);
+      await db
+          .collection('users')
+          .doc(CurrentUser.id)
+          .update({'blocks': CurrentUser.blocks});
+      return 'UNBLOCK';
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
   static Future<String> deleteAccount() async {
     try {
       await auth.currentUser!.delete();

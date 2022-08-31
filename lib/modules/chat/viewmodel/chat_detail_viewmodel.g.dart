@@ -41,6 +41,22 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
     });
   }
 
+  late final _$isBlockedAtom =
+      Atom(name: 'ChatDetailViewModelBase.isBlocked', context: context);
+
+  @override
+  bool get isBlocked {
+    _$isBlockedAtom.reportRead();
+    return super.isBlocked;
+  }
+
+  @override
+  set isBlocked(bool value) {
+    _$isBlockedAtom.reportWrite(value, super.isBlocked, () {
+      super.isBlocked = value;
+    });
+  }
+
   late final _$getMessagesAsyncAction =
       AsyncAction('ChatDetailViewModelBase.getMessages', context: context);
 
@@ -57,11 +73,36 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
     return _$sendMessageAsyncAction.run(() => super.sendMessage(model));
   }
 
+  late final _$checkBlockAsyncAction =
+      AsyncAction('ChatDetailViewModelBase.checkBlock', context: context);
+
+  @override
+  Future<dynamic> checkBlock(String uid) {
+    return _$checkBlockAsyncAction.run(() => super.checkBlock(uid));
+  }
+
+  late final _$blockUserAsyncAction =
+      AsyncAction('ChatDetailViewModelBase.blockUser', context: context);
+
+  @override
+  Future<dynamic> blockUser(BuildContext context, String uid) {
+    return _$blockUserAsyncAction.run(() => super.blockUser(context, uid));
+  }
+
+  late final _$unblockUserAsyncAction =
+      AsyncAction('ChatDetailViewModelBase.unblockUser', context: context);
+
+  @override
+  Future<dynamic> unblockUser(BuildContext context, String uid) {
+    return _$unblockUserAsyncAction.run(() => super.unblockUser(context, uid));
+  }
+
   @override
   String toString() {
     return '''
 messageList: ${messageList},
-cont: ${cont}
+cont: ${cont},
+isBlocked: ${isBlocked}
     ''';
   }
 }

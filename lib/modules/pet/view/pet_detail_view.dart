@@ -506,6 +506,12 @@ class PetDetailView extends StatelessWidget {
                       'publish'.tr(),
                     ),
                   ),
+                  PopupMenuItem(
+                    onTap: null,
+                    child: Text(
+                      'report'.tr(),
+                    ),
+                  ),
                 ])
       ],
     );

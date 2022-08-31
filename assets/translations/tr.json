@@ -10,6 +10,7 @@
     "transport": "PET NAKİL",
     "close": "Kapat",
     "block": "Engelle",
+    "unblock": "Engeli Kaldır",
     "save": "Kaydet",
     "welcome_lang_tr": "Türkçe",
     "welcome_lang_en": "English",
@@ -97,6 +98,7 @@
     "user_not_found": "Kullanıcı Bulunamadı",
     "advert_details": "İlan Detayları",
     "publish": "Paylaş",
+    "report": "Bildir",
     "new_advert": "Yeni İlan Oluştur",
     "title": "Başlık",
     "title_min3": "Başlık en az 3 harfli olmalıdır.",
@@ -122,5 +124,8 @@
     "price": "Fiyat",
     "isforsale": "Satılık Mı?",
     "isnotsale": "Satıldı Mı?",
-    "toseehere": "Burada görülecek bir şey yok."
+    "toseehere": "Burada görülecek bir şey yok.",
+    "blockuser_content": "Bu kullanıcıyı engellediniz. Artık ondan mesaj almayacaksınız.",
+    "sold_alert_title": "Dikkat",
+    "sold_alert_content": "Petjoo bir alışveriş platformu değildir. Yalnızca alıcı ve satıcıyı bir araya getirir. Yapmış olduğunuz alışverişlerinizde problem yaşamamak için dikkatli olmanızı tavsiye ederiz."
 }

@@ -23,7 +23,7 @@ class ChatDetailView extends StatelessWidget {
     vm.checkBlock(otherUser);
     return Scaffold(
       appBar: buildAppBar(context, otherUser),
-      body: vm.isBlocked ? blockBody() : buildBody(),
+      body: vm.isBlocked || vm.isYouBlocked ? blockBody() : buildBody(),
     );
   }
 
@@ -44,7 +44,7 @@ class ChatDetailView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'blockuser_content'.tr(),
+            vm.isBlocked ? 'blockuser_content'.tr() : 'blockuser_content2'.tr(),
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 18, color: Colors.black),
           )

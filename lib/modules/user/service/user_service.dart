@@ -45,6 +45,16 @@ class UserService {
     return await db.collection('users').doc(userId).get();
   }
 
+  static Future<List> getUserBlocks(String uid) async {
+    List result = [];
+    result = await db.collection('users').doc(uid).get().then((value) {
+          List? data = value.data()?['blocks'];
+          return data;
+        }) ??
+        [];
+    return result;
+  }
+
   static Future<String> register(
       String email, String pass, Map<String, dynamic> map) async {
     try {

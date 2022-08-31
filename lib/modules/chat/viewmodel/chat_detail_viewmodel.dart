@@ -17,6 +17,8 @@ abstract class ChatDetailViewModelBase with Store {
   TextEditingController cont = TextEditingController();
   @observable
   bool isBlocked = false;
+  @observable
+  bool isYouBlocked = false;
 
   @action
   Future getMessages(String id) async {
@@ -39,6 +41,9 @@ abstract class ChatDetailViewModelBase with Store {
   Future checkBlock(String uid) async {
     var tempList = CurrentUser.blocks.where((element) => element == uid);
     isBlocked = tempList.isNotEmpty;
+    List userBlocks = await UserService.getUserBlocks(uid);
+    var blockList = userBlocks.where((element) => element == CurrentUser.id);
+    isYouBlocked = blockList.isNotEmpty;
   }
 
   @action

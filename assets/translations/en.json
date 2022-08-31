@@ -126,6 +126,7 @@
     "isnotsale": "Is It Sold?",
     "toseehere": "There is nothing to see here.",
     "blockuser_content": "You have blocked this user. You will no longer receive messages from user.",
+    "blockuser_content2": "This user has blocked you. You can no longer send to messages.",
     "sold_alert_title": "Caution",
     "sold_alert_content": "Petjoo is not a shopping platform. It only brings the buyer and seller together. We advise you to be careful in order not to have any problems with your purchases."
 }

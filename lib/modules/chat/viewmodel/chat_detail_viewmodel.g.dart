@@ -57,6 +57,22 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
     });
   }
 
+  late final _$isYouBlockedAtom =
+      Atom(name: 'ChatDetailViewModelBase.isYouBlocked', context: context);
+
+  @override
+  bool get isYouBlocked {
+    _$isYouBlockedAtom.reportRead();
+    return super.isYouBlocked;
+  }
+
+  @override
+  set isYouBlocked(bool value) {
+    _$isYouBlockedAtom.reportWrite(value, super.isYouBlocked, () {
+      super.isYouBlocked = value;
+    });
+  }
+
   late final _$getMessagesAsyncAction =
       AsyncAction('ChatDetailViewModelBase.getMessages', context: context);
 
@@ -102,7 +118,8 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
     return '''
 messageList: ${messageList},
 cont: ${cont},
-isBlocked: ${isBlocked}
+isBlocked: ${isBlocked},
+isYouBlocked: ${isYouBlocked}
     ''';
   }
 }

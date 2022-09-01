@@ -20,7 +20,15 @@ class WelcomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorPalette['primary'],
-        actions: [appbarLocal(context)],
+        actions: [
+          Row(
+            children: [
+              const Text('Language',
+                  style: TextStyle(color: Colors.black, fontSize: 14)),
+              appbarLocal(context),
+            ],
+          )
+        ],
       ),
       backgroundColor: colorPalette['secondary'],
       body: Column(

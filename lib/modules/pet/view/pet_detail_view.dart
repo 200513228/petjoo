@@ -510,6 +510,7 @@ class PetDetailView extends StatelessWidget {
                     onTap: null,
                     child: Text(
                       'report'.tr(),
+                      style: const TextStyle(color: Colors.red),
                     ),
                   ),
                 ])

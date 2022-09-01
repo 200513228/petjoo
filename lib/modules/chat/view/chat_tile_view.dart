@@ -18,6 +18,7 @@ class ChatTileView extends StatelessWidget {
     List findUser = model.userIds;
     findUser.remove(CurrentUser.id);
     vm.getUserInfo(findUser.first);
+    vm.checkBlock(findUser.first);
     return Container(
       margin: const EdgeInsets.all(10),
       child: Observer(builder: (_) {
@@ -48,7 +49,8 @@ class ChatTileView extends StatelessWidget {
                           vm.name,
                           style: const TextStyle(fontSize: 16),
                         )),
-                    subtitle: Text(model.lastMessage.content),
+                    subtitle:
+                        Text(vm.isBlocked ? '' : model.lastMessage.content),
                     trailing: Text(dateToString(model.lastMessage.date))),
               );
       }),

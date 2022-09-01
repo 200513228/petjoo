@@ -57,6 +57,22 @@ mixin _$ChatTileViewModel on ChatTileViewModelBase, Store {
     });
   }
 
+  late final _$isBlockedAtom =
+      Atom(name: 'ChatTileViewModelBase.isBlocked', context: context);
+
+  @override
+  bool get isBlocked {
+    _$isBlockedAtom.reportRead();
+    return super.isBlocked;
+  }
+
+  @override
+  set isBlocked(bool value) {
+    _$isBlockedAtom.reportWrite(value, super.isBlocked, () {
+      super.isBlocked = value;
+    });
+  }
+
   late final _$getUserInfoAsyncAction =
       AsyncAction('ChatTileViewModelBase.getUserInfo', context: context);
 
@@ -77,6 +93,17 @@ mixin _$ChatTileViewModel on ChatTileViewModelBase, Store {
       ActionController(name: 'ChatTileViewModelBase', context: context);
 
   @override
+  void checkBlock(String userId) {
+    final _$actionInfo = _$ChatTileViewModelBaseActionController.startAction(
+        name: 'ChatTileViewModelBase.checkBlock');
+    try {
+      return super.checkBlock(userId);
+    } finally {
+      _$ChatTileViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void openChat(BuildContext context, ChatModel model) {
     final _$actionInfo = _$ChatTileViewModelBaseActionController.startAction(
         name: 'ChatTileViewModelBase.openChat');
@@ -92,7 +119,8 @@ mixin _$ChatTileViewModel on ChatTileViewModelBase, Store {
     return '''
 isLoading: ${isLoading},
 image: ${image},
-name: ${name}
+name: ${name},
+isBlocked: ${isBlocked}
     ''';
   }
 }

@@ -16,15 +16,16 @@ class ChatDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String otherUser = model.userIds[0] == CurrentUser.id
-        ? model.userIds[1]
-        : model.userIds[0];
+    List findUser = model.userIds;
+    findUser.remove(CurrentUser.id);
     vm.getMessages(model.id);
-    vm.checkBlock(otherUser);
-    return Scaffold(
-      appBar: buildAppBar(context, otherUser),
-      body: vm.isBlocked || vm.isYouBlocked ? blockBody() : buildBody(),
-    );
+    vm.checkBlock(findUser.first);
+    return Observer(builder: (_) {
+      return Scaffold(
+        appBar: buildAppBar(context, findUser.first),
+        body: (vm.isBlocked || vm.isYouBlocked) ? blockBody() : buildBody(),
+      );
+    });
   }
 
   Widget buildBody() {

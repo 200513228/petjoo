@@ -93,7 +93,7 @@ class StoreDetailView extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
           color: Colors.black,
-          borderRadius: BorderRadius.all(Radius.circular(8))),
+          borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Column(
         children: [
           Padding(
@@ -151,57 +151,47 @@ class StoreDetailView extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Colors.black),
-              child: Column(
+              child: Row(
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'address'.tr(),
-                      style:
-                          const TextStyle(fontSize: 15, color: Colors.white54),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'address'.tr(),
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.white54),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              model.address,
+                              maxLines: 5,
+                              style: const TextStyle(fontSize: 16),
+                            )),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 5),
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        model.address,
-                        maxLines: 5,
-                        style: const TextStyle(fontSize: 16),
-                      )),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Colors.black),
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      dateToString(model.date),
-                      style:
-                          const TextStyle(fontSize: 15, color: Colors.white54),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.location_on),
+                          Text('Harita'),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 5),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${model.price}₺',
-                        style: const TextStyle(fontSize: 16),
-                      )),
                 ],
               ),
             ),
@@ -374,10 +364,30 @@ class StoreDetailView extends StatelessWidget {
           color: colorPalette['primary'],
           borderRadius:
               const BorderRadius.vertical(bottom: Radius.circular(15))),
-      child: Text(
-        model.title,
-        style: const TextStyle(
-            fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              model.title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            decoration: BoxDecoration(
+                color: colorPalette['secondary'],
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            child: Text(
+              '${model.price} ₺',
+              maxLines: 1,
+              style: const TextStyle(fontSize: 16, color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
   }

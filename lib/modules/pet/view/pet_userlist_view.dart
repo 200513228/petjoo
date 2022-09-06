@@ -10,9 +10,9 @@ import 'package:petjoo/modules/pet/viewmodel/pet_userlist_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/product/constants/images.dart';
 
-class PetUserList extends StatelessWidget {
+class PetUserListView extends StatelessWidget {
   final PetUserListViewModel vm = PetUserListViewModel();
-  PetUserList({Key? key}) : super(key: key);
+  PetUserListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

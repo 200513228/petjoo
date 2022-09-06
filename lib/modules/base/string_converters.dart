@@ -8,3 +8,13 @@ String dateToString(Timestamp date) {
   String year = d.year.toString();
   return '$day.$month.$year';
 }
+
+String hourToString(String hour) {
+  String start = hour.split(':')[0].length == 1
+      ? '0${hour.split(':')[0]}'
+      : hour.split(':')[0];
+  String end = hour.split(':')[1].length == 1
+      ? '${hour.split(':')[1]}0'
+      : hour.split(':')[1];
+  return '$start:$end';
+}

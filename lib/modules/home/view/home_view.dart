@@ -14,6 +14,7 @@ import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/store/view/store_filter_view.dart';
 import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
+import 'package:petjoo/modules/transport/view/transport_list_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/presentation/animal_transport/view/transport_advert_list_view.dart';
 import 'package:petjoo/presentation/transport_reservation/view/transport_reservation_list_view.dart';
@@ -169,7 +170,7 @@ class HomeView extends StatelessWidget {
       case 'PAZAR':
         return id == 1 ? const StoreListView() : StoreUserListView();
       case 'İLANLAR':
-        return id == 1 ? const PetListView() : PetUserList();
+        return id == 1 ? const PetListView() : PetUserListView();
       case 'PET NAKİL':
         return id == 1
             ? const TransportAdvertListView()
@@ -215,7 +216,7 @@ class HomeView extends StatelessWidget {
         page = const PetListView();
         break;
       case 'PET NAKİL':
-        page = const TransportAdvertListView();
+        page = const TransportListView();
         break;
       default:
         page = Container();

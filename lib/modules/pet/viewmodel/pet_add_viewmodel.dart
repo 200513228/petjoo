@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:petjoo/modules/base/ui_snackbar.dart';
-import 'package:petjoo/modules/home/view/home_view.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/view/pet_picture_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
@@ -85,20 +83,5 @@ abstract class PetAddViewModelBase with Store {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => PetPictureView(model: advert)));
     }
-  }
-
-  @action
-  void error(BuildContext _, String data) {
-    isLoading = !isLoading;
-    ScaffoldMessenger.of(_).showSnackBar(uiSnackBar(data));
-  }
-
-  @action
-  void successfull(BuildContext context) {
-    isLoading = !isLoading;
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => HomeView(title: 'İLANLAR')),
-        (route) => false);
   }
 }

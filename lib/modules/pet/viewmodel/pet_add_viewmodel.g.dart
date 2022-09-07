@@ -304,28 +304,6 @@ mixin _$PetAddViewModel on PetAddViewModelBase, Store {
   }
 
   @override
-  void error(BuildContext _, String data) {
-    final _$actionInfo = _$PetAddViewModelBaseActionController.startAction(
-        name: 'PetAddViewModelBase.error');
-    try {
-      return super.error(_, data);
-    } finally {
-      _$PetAddViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void successfull(BuildContext context) {
-    final _$actionInfo = _$PetAddViewModelBaseActionController.startAction(
-        name: 'PetAddViewModelBase.successfull');
-    try {
-      return super.successfull(context);
-    } finally {
-      _$PetAddViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 advert: ${advert},

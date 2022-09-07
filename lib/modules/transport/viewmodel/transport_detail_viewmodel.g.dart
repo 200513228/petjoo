@@ -25,6 +25,40 @@ mixin _$TransportDetailViewModel on TransportDetailViewModelBase, Store {
     });
   }
 
+  late final _$changeActiveAsyncAction = AsyncAction(
+      'TransportDetailViewModelBase.changeActive',
+      context: context);
+
+  @override
+  Future<dynamic> changeActive(BuildContext _) {
+    return _$changeActiveAsyncAction.run(() => super.changeActive(_));
+  }
+
+  late final _$callAsyncAction =
+      AsyncAction('TransportDetailViewModelBase.call', context: context);
+
+  @override
+  Future<dynamic> call() {
+    return _$callAsyncAction.run(() => super.call());
+  }
+
+  late final _$messageAsyncAction =
+      AsyncAction('TransportDetailViewModelBase.message', context: context);
+
+  @override
+  Future<dynamic> message(BuildContext _) {
+    return _$messageAsyncAction.run(() => super.message(_));
+  }
+
+  late final _$openCurrentChatAsyncAction = AsyncAction(
+      'TransportDetailViewModelBase.openCurrentChat',
+      context: context);
+
+  @override
+  Future<dynamic> openCurrentChat(BuildContext _, String id) {
+    return _$openCurrentChatAsyncAction.run(() => super.openCurrentChat(_, id));
+  }
+
   late final _$TransportDetailViewModelBaseActionController =
       ActionController(name: 'TransportDetailViewModelBase', context: context);
 
@@ -34,6 +68,39 @@ mixin _$TransportDetailViewModel on TransportDetailViewModelBase, Store {
         .startAction(name: 'TransportDetailViewModelBase.setModel');
     try {
       return super.setModel(model);
+    } finally {
+      _$TransportDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void edit(BuildContext context) {
+    final _$actionInfo = _$TransportDetailViewModelBaseActionController
+        .startAction(name: 'TransportDetailViewModelBase.edit');
+    try {
+      return super.edit(context);
+    } finally {
+      _$TransportDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void error(BuildContext _, String data) {
+    final _$actionInfo = _$TransportDetailViewModelBaseActionController
+        .startAction(name: 'TransportDetailViewModelBase.error');
+    try {
+      return super.error(_, data);
+    } finally {
+      _$TransportDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void successfull(BuildContext context) {
+    final _$actionInfo = _$TransportDetailViewModelBaseActionController
+        .startAction(name: 'TransportDetailViewModelBase.successfull');
+    try {
+      return super.successfull(context);
     } finally {
       _$TransportDetailViewModelBaseActionController.endAction(_$actionInfo);
     }

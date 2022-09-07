@@ -13,6 +13,7 @@ class TransportTileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    vm.setModel(model);
     return Container(
       margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
@@ -27,7 +28,7 @@ class TransportTileView extends StatelessWidget {
             children: [
               image(),
               Expanded(child: content()),
-              actions(),
+              actions(context),
             ],
           ),
         ),
@@ -69,11 +70,11 @@ class TransportTileView extends StatelessWidget {
     );
   }
 
-  Widget actions() {
+  Widget actions(BuildContext _) {
     return Row(
       children: [
         MaterialButton(
-            onPressed: () {},
+            onPressed: () => vm.call(),
             color: Colors.black,
             minWidth: 45,
             height: 45,
@@ -81,7 +82,7 @@ class TransportTileView extends StatelessWidget {
             shape: const CircleBorder(),
             child: const Icon(Icons.call, color: Colors.greenAccent)),
         MaterialButton(
-            onPressed: () {},
+            onPressed: () => vm.message(_),
             color: Colors.black,
             minWidth: 45,
             height: 45,

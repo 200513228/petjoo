@@ -36,6 +36,7 @@
     "home_settings": "Settings",
     "home_all": "All Advs.",
     "home_my": "My Advs.",
+    "home_myres": "My Res.",
     "home_search": "What are you looking for?",
     "auth_title": "Sign In",
     "auth_content": "Please sign in to use this feature.",
@@ -44,6 +45,7 @@
     "settings_title": "Settings",
     "settings_profile": "Profile",
     "settings_docs": "Documents",
+    "settings_transport": "My Pet Transport Adv.",
     "settings_out": "Sign Out",
     "profile_remove": "Delete Account",
     "profile_remove_content": "This action cannot be undone. Do you want to continue?",
@@ -131,5 +133,14 @@
     "sold_alert_content": "Petjoo is not a shopping platform. It only brings the buyer and seller together. We advise you to be careful in order not to have any problems with your purchases.",
     "update_alert_title": "New Version Available",
     "update_alert_content": "Please download the new version to continue using the application.",
-    "update_alert_action": "Download"
+    "update_alert_action": "Download",
+    "edit_working_hours": "Edit Working Hours",
+    "transport_create": "Pet Transport Advert",
+    "price_per_km": "Price Per Km",
+    "intercity": "Intercity",
+    "cage": "Cage",
+    "collar": "Collar",
+    "catch": "Catch",
+    "start": "Start",
+    "end": "End"
 }

@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/core/widgets/loading.dart';
 import 'package:petjoo/modules/settings/view/documents_view.dart';
 import 'package:petjoo/modules/settings/view/profile_view.dart';
@@ -38,33 +39,33 @@ class SettingsView extends StatelessWidget {
   Widget settingsTiles(BuildContext _) {
     return Column(
       children: [
-        settingTile('settings_profile'.tr(), Icons.person, Container(),
+        settingTile('settings_profile'.tr(), Icons.person,
             () => vm.navigate(_, ProfileView())),
-        const SizedBox(height: 10),
-        settingTile('settings_docs'.tr(), Icons.file_open, Container(),
+        if (CurrentUser.hasTransport)
+          settingTile('settings_transport'.tr(), FontAwesomeIcons.truck,
+              () => vm.transportNavigate(_)),
+        settingTile('settings_docs'.tr(), Icons.file_open,
             () => vm.navigate(_, const DocumentsView())),
-        // const SizedBox(height: 10),
         // settingTile('Ayarlar', Icons.settings, Container(), () {}),
-        const SizedBox(height: 10),
-        settingTile(
-            'settings_out'.tr(), Icons.power_settings_new_rounded, Container(),
-            () {
-          vm.logout(_);
-        }),
+        settingTile('settings_out'.tr(), Icons.power_settings_new_rounded,
+            () => vm.logout(_)),
       ],
     );
   }
 
-  Widget settingTile(String title, IconData icon, Widget page, Function ontap) {
-    return ListTile(
-      style: ListTileStyle.list,
-      visualDensity: VisualDensity.compact,
-      leading: Icon(icon, color: Colors.white, size: 32),
-      title: Text(title, style: const TextStyle(fontSize: 18)),
-      onTap: () => ontap(),
-      trailing: const Icon(
-        Icons.arrow_forward_ios_rounded,
-        color: Colors.white70,
+  Widget settingTile(String title, IconData icon, Function ontap) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        style: ListTileStyle.list,
+        visualDensity: VisualDensity.compact,
+        leading: Icon(icon, color: Colors.white, size: 28),
+        title: Text(title, style: const TextStyle(fontSize: 16)),
+        onTap: () => ontap(),
+        trailing: const Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: Colors.white70,
+        ),
       ),
     );
   }

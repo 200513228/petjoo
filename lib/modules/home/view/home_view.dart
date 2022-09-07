@@ -16,7 +16,6 @@ import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
 import 'package:petjoo/modules/transport/view/transport_list_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/presentation/animal_transport/view/transport_advert_list_view.dart';
 import 'package:petjoo/presentation/transport_reservation/view/transport_reservation_list_view.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
@@ -97,7 +96,7 @@ class HomeView extends StatelessWidget {
           ),
           AnimatedBarItems(
             icon: Icon(toCustom2Icon),
-            title: Text('home_my'.tr()),
+            title: Text(labelToBottom2),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white54,
           ),
@@ -133,6 +132,15 @@ class HomeView extends StatelessWidget {
         return 'transport'.tr();
       default:
         return ' ';
+    }
+  }
+
+  String get labelToBottom2 {
+    switch (title) {
+      case 'PET NAKİL':
+        return 'home_myres'.tr();
+      default:
+        return 'home_my'.tr();
     }
   }
 
@@ -173,7 +181,7 @@ class HomeView extends StatelessWidget {
         return id == 1 ? const PetListView() : PetUserListView();
       case 'PET NAKİL':
         return id == 1
-            ? const TransportAdvertListView()
+            ? const TransportListView()
             : const TransportReservationListView();
       default:
         return Container();

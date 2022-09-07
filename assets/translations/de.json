@@ -36,6 +36,7 @@
     "home_settings": "Einstellungen",
     "home_all": "Alle Anz.",
     "home_my": "Meine Anz.",
+    "home_myres": "Meine Res.",
     "home_search": "Wonach suchst du?",
     "auth_title": "Einloggen",
     "auth_content": "Bitte melden Sie sich an, um diese Funktion zu nutzen.",
@@ -44,6 +45,7 @@
     "settings_title": "Einstellungen",
     "settings_profile": "Profil",
     "settings_docs": "Dokumente",
+    "settings_transport": "Meine Pet Transport Anz.",
     "settings_out": "Abmelden",
     "profile_remove": "Konto Löschen",
     "profile_remove_content": "Diese Aktion kann nicht rückgängig gemacht werden. Möchtest du weiter machen?",
@@ -131,5 +133,14 @@
     "sold_alert_content": "Petjoo ist keine Shopping-Plattform. Es bringt nur Käufer und Verkäufer zusammen. Wir raten Ihnen, vorsichtig zu sein, um keine Probleme mit Ihren Einkäufen zu haben.",
     "update_alert_title": "Neue Version verfügbar",
     "update_alert_content": "Bitte laden Sie die neue Version herunter, um die Anwendung weiterhin zu verwenden.",
-    "update_alert_action": "Download"
+    "update_alert_action": "Download",
+    "edit_workingshours": "Arbeitszeit bearbeiten",
+    "transport_create": "Pet Transport Anzeigen",
+    "price_per_km": "Preis Pro Km",
+    "intercity": "Intercity",
+    "cage": "Käfig",
+    "collar": "Kragen",
+    "catch": "Fang",
+    "start": "Anfang",
+    "end": "Ende"
 }

@@ -4,7 +4,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
 import 'package:petjoo/modules/base/please_auth.dart';
-import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_genders.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_habits.dart';

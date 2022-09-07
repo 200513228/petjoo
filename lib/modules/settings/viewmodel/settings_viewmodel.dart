@@ -5,6 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/modules/base/ui_snackbar.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
+import 'package:petjoo/modules/transport/model/transport_advert_model.dart';
+import 'package:petjoo/modules/transport/service/transport_service.dart';
+import 'package:petjoo/modules/transport/view/transport_detail_view.dart';
 import 'package:petjoo/modules/user/service/user_service.dart';
 part 'settings_viewmodel.g.dart';
 
@@ -25,6 +28,15 @@ abstract class SettingsViewModelBase with Store {
   @action
   void navigate(BuildContext _, Widget page) {
     Navigator.push(_, MaterialPageRoute(builder: (context) => page));
+  }
+
+  @action
+  Future transportNavigate(BuildContext _) async {
+    await TransportService.userAdvert().then((value) => Navigator.push(
+        _,
+        MaterialPageRoute(
+            builder: (context) => TransportDetailView(
+                model: TransportAdvertModel.fromDS(value)))));
   }
 
   @action

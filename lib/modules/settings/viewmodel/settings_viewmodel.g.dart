@@ -33,6 +33,14 @@ mixin _$SettingsViewModel on SettingsViewModelBase, Store {
     return _$logoutAsyncAction.run(() => super.logout(_));
   }
 
+  late final _$transportNavigateAsyncAction =
+      AsyncAction('SettingsViewModelBase.transportNavigate', context: context);
+
+  @override
+  Future<dynamic> transportNavigate(BuildContext _) {
+    return _$transportNavigateAsyncAction.run(() => super.transportNavigate(_));
+  }
+
   late final _$profilePicAsyncAction =
       AsyncAction('SettingsViewModelBase.profilePic', context: context);
 

@@ -36,6 +36,7 @@
     "home_settings": "Ayarlar",
     "home_all": "Tüm İlanlar",
     "home_my": "İlanlarım",
+    "home_myres": "Rezervas.",
     "home_search": "Ne Aramıştınız?",
     "auth_title": "Oturum Açın",
     "auth_content": "Bu özelliği kullanmak için lütfen oturum açın.",
@@ -44,6 +45,7 @@
     "settings_title": "Ayarlar",
     "settings_profile": "Profil",
     "settings_docs": "Belgeler",
+    "settings_transport": "Pet Nakil İlanım",
     "settings_out": "Çıkış Yap",
     "profile_remove": "Hesabı Sil",
     "profile_remove_content": "Bu işlem geri alınamaz. Devam etmek istiyor musunuz?",
@@ -131,5 +133,14 @@
     "sold_alert_content": "Petjoo bir alışveriş platformu değildir. Yalnızca alıcı ve satıcıyı bir araya getirir. Yapmış olduğunuz alışverişlerinizde problem yaşamamak için dikkatli olmanızı tavsiye ederiz.",
     "update_alert_title": "Yeni Sürüm Yayında",
     "update_alert_content": "Uygulamayı kullanmaya devam edebilmek için lütfen yeni sürümü indirin.",
-    "update_alert_action": "İndir"
+    "update_alert_action": "İndir",
+    "edit_working_hours": "Çalışma Saatlerini Düzenle",
+    "transport_create": "Pet Nakil İlanı",
+    "price_per_km": "Km Başı Ücret",
+    "intercity": "Şehirlerarası",
+    "cage": "Kafes",
+    "collar": "Tasma",
+    "catch": "Yakalama",
+    "start": "Başlangıç",
+    "end": "Bitiş"
 }

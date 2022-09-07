@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -174,50 +176,56 @@ class TransportDetailView extends StatelessWidget {
   }
 
   Widget get advertLocation {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: Colors.black),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Konum',
-                    style: TextStyle(fontSize: 15, color: Colors.white54),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    model.address,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: InkWell(
-              onTap: () {},
+    return InkWell(
+      onTap: () {
+        log('message');
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(8),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: Colors.black),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.location_on),
-                  Text('Harita'),
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'address'.tr(),
+                      style:
+                          const TextStyle(fontSize: 15, color: Colors.white54),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      model.address,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: InkWell(
+                onTap: () {},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.location_on),
+                    Text('Harita'),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -276,20 +284,22 @@ class TransportDetailView extends StatelessWidget {
             ),
           ),
           ...CurrentUser.id == model.id
-              ? const [
-                  SizedBox(width: 10),
+              ? [
+                  const SizedBox(width: 10),
                   FloatingActionButton(
                       elevation: 0,
-                      onPressed: null,
+                      onPressed: () => vm.changeActive(_),
                       child: Icon(
-                        Icons.delete,
+                        !model.isActive
+                            ? Icons.visibility_rounded
+                            : Icons.visibility_off_rounded,
                         color: Colors.redAccent,
                       )),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   FloatingActionButton(
                       heroTag: null,
-                      onPressed: null,
-                      child: Icon(
+                      onPressed: () => vm.edit(_),
+                      child: const Icon(
                         Icons.edit,
                         color: Colors.orangeAccent,
                       ))
@@ -305,7 +315,7 @@ class TransportDetailView extends StatelessWidget {
                                 builder: (context) => const PleaseAuth())
                             : model.phone == ''
                                 ? null
-                                : null;
+                                : vm.call();
                       },
                       child: Icon(
                         Icons.call_rounded,
@@ -321,7 +331,7 @@ class TransportDetailView extends StatelessWidget {
                             ? showDialog(
                                 context: _,
                                 builder: (context) => const PleaseAuth())
-                            : null;
+                            : vm.message(_);
                       },
                       child: const Icon(
                         Icons.message_rounded,

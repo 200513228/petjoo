@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:petjoo/modules/user/view/login_view.dart';
+import 'package:petjoo/user/view/login_view.dart';
 
 class PleaseAuth extends StatelessWidget {
   const PleaseAuth({Key? key}) : super(key: key);

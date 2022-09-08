@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:petjoo/modules/base/num_extension.dart';
+import 'package:petjoo/base/num_extension.dart';
 import 'package:petjoo/constants/dimens.dart';
 import 'package:petjoo/ui/overlay_styles.dart';
 

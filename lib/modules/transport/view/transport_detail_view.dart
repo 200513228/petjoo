@@ -279,7 +279,7 @@ class TransportDetailView extends StatelessWidget {
           Expanded(
             child: FloatingActionButton.extended(
               heroTag: null,
-              onPressed: () {},
+              onPressed: () => vm.makeReservation(_),
               label: const Text('Rezervasyon Yap'),
             ),
           ),

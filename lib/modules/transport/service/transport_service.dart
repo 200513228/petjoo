@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -53,10 +52,6 @@ class TransportService {
     }
   }
 
-  static Future delete() async {
-    db.collection('transport_adverts').doc(CurrentUser.id).delete();
-  }
-
   static Future<String> changeVisible(String docid, bool isActive) async {
     try {
       await db
@@ -91,11 +86,11 @@ class TransportService {
     return 'CREATE';
   }
 
-  static Future deleteAdvert() async {
-    try {
-      await db.collection('transport_adverts').doc(CurrentUser.id).delete();
-    } on Exception catch (e) {
-      log(e.toString());
-    }
-  }
+  // static Future deleteAdvert() async {
+  //   try {
+  //     await db.collection('transport_adverts').doc(CurrentUser.id).delete();
+  //   } on Exception catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
 }

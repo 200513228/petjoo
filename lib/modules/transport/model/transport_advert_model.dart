@@ -80,7 +80,6 @@ class TransportAdvertModel {
             'end': '00:00',
           }
         ];
-    ;
   }
 
   TransportAdvertModel.fromDS(DocumentSnapshot snapshot) {

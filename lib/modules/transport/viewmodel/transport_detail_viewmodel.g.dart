@@ -74,6 +74,17 @@ mixin _$TransportDetailViewModel on TransportDetailViewModelBase, Store {
   }
 
   @override
+  void makeReservation(BuildContext context) {
+    final _$actionInfo = _$TransportDetailViewModelBaseActionController
+        .startAction(name: 'TransportDetailViewModelBase.makeReservation');
+    try {
+      return super.makeReservation(context);
+    } finally {
+      _$TransportDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void edit(BuildContext context) {
     final _$actionInfo = _$TransportDetailViewModelBaseActionController
         .startAction(name: 'TransportDetailViewModelBase.edit');

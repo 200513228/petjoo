@@ -4,7 +4,6 @@ import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/service/chat_service.dart';
 import 'package:petjoo/modules/chat/view/chat_detail_view.dart';
 import 'package:petjoo/modules/transport/model/transport_advert_model.dart';
-import 'package:petjoo/modules/transport/service/transport_service.dart';
 import 'package:petjoo/modules/transport/view/transport_detail_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:url_launcher/url_launcher.dart';

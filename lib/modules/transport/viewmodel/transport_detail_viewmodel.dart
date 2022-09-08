@@ -5,6 +5,7 @@ import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/service/chat_service.dart';
 import 'package:petjoo/modules/chat/view/chat_detail_view.dart';
 import 'package:petjoo/modules/home/view/home_view.dart';
+import 'package:petjoo/modules/reservation/view/reservation_shift_view.dart';
 import 'package:petjoo/modules/transport/model/transport_advert_model.dart';
 import 'package:petjoo/modules/transport/service/transport_service.dart';
 import 'package:petjoo/modules/transport/view/transport_create_view.dart';
@@ -22,6 +23,14 @@ abstract class TransportDetailViewModelBase with Store {
   @action
   void setModel(TransportAdvertModel model) {
     advert = model;
+  }
+
+  @action
+  void makeReservation(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ReservationShiftView(model: advert!)));
   }
 
   @action

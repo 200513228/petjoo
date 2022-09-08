@@ -42,6 +42,7 @@ abstract class ReservationCreateViewModelBase with Store {
 
   @action
   Future save(BuildContext context) async {
+    isLoading = !isLoading;
     model!.id = '${CurrentUser.id}_${advertModel!.id}';
     model!.advertId = advertModel!.id;
     model!.userId = CurrentUser.id;
@@ -57,6 +58,7 @@ abstract class ReservationCreateViewModelBase with Store {
     model!.status = 0;
     await ReservationService.createReservation(model!).then((value) =>
         value == 'CREATE' ? successfull(context) : error(context, value));
+    isLoading = !isLoading;
   }
 
   @action

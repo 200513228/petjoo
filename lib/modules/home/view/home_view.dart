@@ -10,13 +10,13 @@ import 'package:petjoo/modules/home/viewmodel/home_viewmodel.dart';
 import 'package:petjoo/modules/pet/view/pet_filter_view.dart';
 import 'package:petjoo/modules/pet/view/pet_list_view.dart';
 import 'package:petjoo/modules/pet/view/pet_userlist_view.dart';
+import 'package:petjoo/modules/reservation/view/reservation_list_view.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/store/view/store_filter_view.dart';
 import 'package:petjoo/modules/store/view/store_list_view.dart';
 import 'package:petjoo/modules/store/view/store_userlist_view.dart';
 import 'package:petjoo/modules/transport/view/transport_list_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/presentation/transport_reservation/view/transport_reservation_list_view.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 class HomeView extends StatelessWidget {
@@ -180,9 +180,7 @@ class HomeView extends StatelessWidget {
       case 'İLANLAR':
         return id == 1 ? const PetListView() : PetUserListView();
       case 'PET NAKİL':
-        return id == 1
-            ? const TransportListView()
-            : const TransportReservationListView();
+        return id == 1 ? const TransportListView() : ReservationListView();
       default:
         return Container();
     }

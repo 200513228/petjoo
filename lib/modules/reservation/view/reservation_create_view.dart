@@ -193,10 +193,7 @@ class ReservationCreateView extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(12),
             child: ElevatedButton(
-                onPressed: () {
-                  vm.save(context);
-                },
-                child: Text('save'.tr())),
+                onPressed: () => vm.save(context), child: Text('save'.tr())),
           ),
         )
       ],

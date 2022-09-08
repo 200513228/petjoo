@@ -9,7 +9,7 @@ import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 
 class StoreDetailView extends StatelessWidget {
   final StoreDetailViewModel vm = StoreDetailViewModel();

@@ -7,7 +7,7 @@ import 'package:petjoo/modules/home/viewmodel/welcome_viewmodel.dart';
 import 'package:petjoo/modules/settings/view/settings_view.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
 import 'package:petjoo/modules/user/view/login_view.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class WelcomeView extends StatelessWidget {

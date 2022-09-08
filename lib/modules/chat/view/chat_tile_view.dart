@@ -6,7 +6,7 @@ import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/viewmodel/chat_tile_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 
 class ChatTileView extends StatelessWidget {
   final ChatTileViewModel vm = ChatTileViewModel();

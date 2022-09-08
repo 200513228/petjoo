@@ -8,7 +8,7 @@ import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_userlist_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 
 class StoreUserListView extends StatelessWidget {
   final StoreUserListViewModel vm = StoreUserListViewModel();

@@ -8,7 +8,7 @@ import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_userlist_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 
 class PetUserListView extends StatelessWidget {
   final PetUserListViewModel vm = PetUserListViewModel();

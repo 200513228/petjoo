@@ -8,7 +8,7 @@ import 'package:petjoo/modules/settings/view/documents_view.dart';
 import 'package:petjoo/modules/settings/view/profile_view.dart';
 import 'package:petjoo/modules/settings/viewmodel/settings_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 
 class SettingsView extends StatelessWidget {
   final SettingsViewModel vm = SettingsViewModel();

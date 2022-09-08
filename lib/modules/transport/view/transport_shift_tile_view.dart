@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:petjoo/core/extensions/num_extension.dart';
+import 'package:petjoo/modules/base/num_extension.dart';
 import 'package:petjoo/modules/base/dropdown_x.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/transport/model/transport_shift_hours.dart';
 import 'package:petjoo/modules/transport/model/transport_shift_model.dart';
 import 'package:petjoo/modules/transport/viewmodel/transport_shift_tile_viewmodel.dart';
-import 'package:petjoo/product/constants/dimens.dart';
+import 'package:petjoo/modules/base/dimens.dart';
 
 class TransportShiftTileView extends StatelessWidget {
   final TransportShiftModel model;

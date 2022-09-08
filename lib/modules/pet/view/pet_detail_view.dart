@@ -15,7 +15,7 @@ import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_vaccines.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class PetDetailView extends StatelessWidget {

@@ -9,8 +9,8 @@ import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/transport/model/transport_advert_model.dart';
 import 'package:petjoo/modules/transport/viewmodel/transport_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/product/constants/images.dart';
-import 'package:petjoo/product/ui/themes/classic_theme.dart';
+import 'package:petjoo/modules/base/images.dart';
+import 'package:petjoo/modules/base/classic_theme.dart';
 
 class TransportDetailView extends StatelessWidget {
   final TransportAdvertModel model;

@@ -7,7 +7,7 @@ import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_list_viewmodel.dart';
-import 'package:petjoo/product/constants/images.dart';
+import 'package:petjoo/modules/base/images.dart';
 import 'package:petjoo/modules/base/nothing_to_see_here_widget.dart';
 
 class PetListView extends StatelessWidget {

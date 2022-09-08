@@ -29,7 +29,13 @@ class HomeView extends StatelessWidget {
     titleToPage();
     vm.getChatCount();
     return WillPopScope(
-      onWillPop: () async => Navigator.canPop(context),
+      onWillPop: () async {
+        Navigator.canPop(context)
+            ? Navigator.pop(context)
+            : Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => WelcomeView()));
+        return true;
+      },
       child: Scaffold(
         appBar: buildAppBar(context),
         body: buildBody(),

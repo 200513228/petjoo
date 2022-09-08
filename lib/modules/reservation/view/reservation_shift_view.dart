@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +75,7 @@ class ReservationShiftView extends StatelessWidget {
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(colorPalette['secondary'])),
-              onPressed: () => vm.pickHour(model),
+              onPressed: () => vm.pickHour(context, model, hour),
               child: Text(
                 hour,
                 style: const TextStyle(color: Colors.white),

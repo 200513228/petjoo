@@ -83,11 +83,12 @@ mixin _$ReservationShiftViewModel on ReservationShiftViewModelBase, Store {
   }
 
   @override
-  void pickHour(TransportAdvertModel model) {
+  void pickHour(
+      BuildContext context, TransportAdvertModel advertModel, String hour) {
     final _$actionInfo = _$ReservationShiftViewModelBaseActionController
         .startAction(name: 'ReservationShiftViewModelBase.pickHour');
     try {
-      return super.pickHour(model);
+      return super.pickHour(context, advertModel, hour);
     } finally {
       _$ReservationShiftViewModelBaseActionController.endAction(_$actionInfo);
     }

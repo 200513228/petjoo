@@ -1,6 +1,6 @@
 # petjoo
 
-A new Flutter project.
+Petjoo is a Flutter project. Programmed in base of mobx techniques.
 
 ## Getting Started
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:petjoo/core/widgets/loading.dart';
+import 'package:petjoo/modules/base/loading.dart';
 import 'package:petjoo/modules/transport/viewmodel/transport_create_viewmodel.dart';
 import 'package:petjoo/product/constants/validators.dart';
 import 'package:petjoo/product/ui/themes/classic_theme.dart';

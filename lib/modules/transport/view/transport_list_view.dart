@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/transport/view/transport_tile_view.dart';
 import 'package:petjoo/modules/transport/viewmodel/transport_list_viewmodel.dart';
-import 'package:petjoo/product/ui/widgets/nothing_to_see_here_widget.dart';
+import 'package:petjoo/modules/base/nothing_to_see_here_widget.dart';
 
 class TransportListView extends StatelessWidget {
   static final TransportListViewModel vm = TransportListViewModel();

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:petjoo/product/constants/images.dart';
-import 'separator.dart';
 
 class NothingToSeeHereWidget extends StatelessWidget {
   const NothingToSeeHereWidget({Key? key}) : super(key: key);
@@ -18,7 +17,6 @@ class NothingToSeeHereWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(Images.emptyBox),
-              const Separator(),
               Text(
                 'toseehere'.tr(),
                 style: const TextStyle(fontSize: 14, color: Colors.black),

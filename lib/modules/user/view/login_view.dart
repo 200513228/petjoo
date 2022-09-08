@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:petjoo/core/widgets/loading.dart';
+import 'package:petjoo/modules/base/loading.dart';
 import 'package:petjoo/modules/base/color_palette.dart';
 import 'package:petjoo/modules/user/viewmodel/login_viewmodel.dart';
 

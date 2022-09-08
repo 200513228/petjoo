@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:petjoo/core/widgets/loading.dart';
+import 'package:petjoo/modules/base/loading.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/viewmodel/chat_tile_viewmodel.dart';

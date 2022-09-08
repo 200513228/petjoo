@@ -4,7 +4,7 @@ import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:petjoo/core/widgets/loading.dart';
+import 'package:petjoo/modules/base/loading.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/viewmodel/store_picture_viewmodel.dart';
 

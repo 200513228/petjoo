@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:petjoo/core/widgets/loading.dart';
+import 'package:petjoo/modules/base/loading.dart';
 import 'package:petjoo/modules/settings/view/documents_view.dart';
 import 'package:petjoo/modules/settings/view/profile_view.dart';
 import 'package:petjoo/modules/settings/viewmodel/settings_viewmodel.dart';

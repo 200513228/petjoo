@@ -9,19 +9,28 @@ class MapArgument {
   static Function(GeoPoint? geoPoint) get goToMap => (geoPoint) {
         if (geoPoint == null) return;
         Platform.isIOS
-            ? _launch('maps://maps.apple.com/?q=${geoPoint.latitude},${geoPoint.longitude}')
-            : _launch('http://maps.google.com/maps?daddr=${geoPoint.latitude},${geoPoint.longitude}');
+            ? _launch(
+                'maps://maps.apple.com/?q=${geoPoint.latitude},${geoPoint.longitude}')
+            : _launch(
+                'http://maps.google.com/maps?daddr=${geoPoint.latitude},${geoPoint.longitude}');
       };
 
-  static Function(String path, int width) get getBytesFromAsset => (path, width) async {
+  static Function(String path, int width) get getBytesFromAsset =>
+      (path, width) async {
         ByteData data = await rootBundle.load(path);
-        ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+        ui.Codec codec = await ui.instantiateImageCodec(
+            data.buffer.asUint8List(),
+            targetWidth: width);
         ui.FrameInfo fi = await codec.getNextFrame();
-        return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+        return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+            .buffer
+            .asUint8List();
       };
 
-  static Function(GeoPoint beginPoint, GeoPoint endPoint) get calculateDistance =>
-      (beginPoint, endPoint) => sqrt(7800 * (pow(endPoint.latitude - beginPoint.latitude, 2) + pow(endPoint.longitude - beginPoint.longitude, 2)));
+  static Function(GeoPoint beginPoint, GeoPoint endPoint)
+      get calculateDistance => (beginPoint, endPoint) => sqrt(7800 *
+          (pow(endPoint.latitude - beginPoint.latitude, 2) +
+              pow(endPoint.longitude - beginPoint.longitude, 2)));
 
   static Future<void> _launch(String url) async {
     if (await canLaunchUrlString(url)) {

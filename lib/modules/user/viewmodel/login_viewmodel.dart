@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:petjoo/modules/base/ui_snackbar.dart';
+import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
 import 'package:petjoo/modules/user/service/user_service.dart';
 import 'package:petjoo/modules/user/view/register_view.dart';

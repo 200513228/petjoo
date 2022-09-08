@@ -3,14 +3,14 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:petjoo/modules/base/color_palette.dart';
-import 'package:petjoo/modules/base/please_auth.dart';
+import 'package:petjoo/ui/color_palette.dart';
+import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/transport/model/transport_advert_model.dart';
 import 'package:petjoo/modules/transport/viewmodel/transport_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/modules/base/images.dart';
-import 'package:petjoo/modules/base/classic_theme.dart';
+import 'package:petjoo/constants/images.dart';
+import 'package:petjoo/ui/classic_theme.dart';
 
 class TransportDetailView extends StatelessWidget {
   final TransportAdvertModel model;

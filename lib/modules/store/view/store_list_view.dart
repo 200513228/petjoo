@@ -6,8 +6,8 @@ import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_list_viewmodel.dart';
-import 'package:petjoo/modules/base/images.dart';
-import 'package:petjoo/modules/base/nothing_to_see_here_widget.dart';
+import 'package:petjoo/constants/images.dart';
+import 'package:petjoo/ui/nothing_to_see_here_widget.dart';
 
 class StoreListView extends StatelessWidget {
   static final StoreListViewModel vm = StoreListViewModel();

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/num_extension.dart';
-import 'package:petjoo/modules/base/dropdown_x.dart';
-import 'package:petjoo/modules/base/loading.dart';
-import 'package:petjoo/modules/base/color_palette.dart';
+import 'package:petjoo/ui/dropdown_x.dart';
+import 'package:petjoo/ui/loading.dart';
+import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/reservation/model/reservation_model.dart';
 import 'package:petjoo/modules/reservation/viewmodel/reservation_create_viewmodel.dart';
 import 'package:petjoo/modules/transport/model/transport_advert_model.dart';
-import 'package:petjoo/modules/base/dial_codes.dart';
-import 'package:petjoo/modules/base/dimens.dart';
+import 'package:petjoo/constants/dial_codes.dart';
+import 'package:petjoo/constants/dimens.dart';
 import 'package:petjoo/modules/base/validators.dart';
 
 class ReservationCreateView extends StatelessWidget {

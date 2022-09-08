@@ -39,3 +39,7 @@ String dayToString(int day) {
       return 'Pazartesi';
   }
 }
+
+extension StringExtension on String {
+  bool isNumeric() => double.tryParse(this) != null;
+}

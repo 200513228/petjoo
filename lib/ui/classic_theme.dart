@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petjoo/modules/base/num_extension.dart';
-import 'package:petjoo/modules/base/dimens.dart';
-import 'package:petjoo/modules/base/overlay_styles.dart';
+import 'package:petjoo/constants/dimens.dart';
+import 'package:petjoo/ui/overlay_styles.dart';
 
 class ClassicTheme {
   static ThemeData myTheme() {

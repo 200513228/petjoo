@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:petjoo/modules/home/view/welcome_view.dart';
-import 'package:petjoo/modules/base/classic_theme.dart';
+import 'package:petjoo/ui/classic_theme.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

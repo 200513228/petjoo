@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:petjoo/modules/base/images.dart';
+import 'package:petjoo/constants/images.dart';
 
 class NothingToSeeHereWidget extends StatelessWidget {
   const NothingToSeeHereWidget({Key? key}) : super(key: key);

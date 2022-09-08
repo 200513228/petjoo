@@ -1,4 +1,4 @@
-import 'package:petjoo/modules/base/string_extension.dart';
+import 'package:petjoo/modules/base/string_converters.dart';
 
 typedef ValidatorFunc = String? Function(String?);
 

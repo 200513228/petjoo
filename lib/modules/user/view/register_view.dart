@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/num_extension.dart';
-import 'package:petjoo/modules/base/dropdown_x.dart';
-import 'package:petjoo/modules/base/loading.dart';
+import 'package:petjoo/ui/dropdown_x.dart';
+import 'package:petjoo/ui/loading.dart';
 import 'package:petjoo/modules/user/viewmodel/register_viewmodel.dart';
-import 'package:petjoo/modules/base/dial_codes.dart';
-import 'package:petjoo/modules/base/dimens.dart';
+import 'package:petjoo/constants/dial_codes.dart';
+import 'package:petjoo/constants/dimens.dart';
 import 'package:petjoo/modules/base/validators.dart';
 
 class RegisterView extends StatelessWidget {

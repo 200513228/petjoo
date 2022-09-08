@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/num_extension.dart';
-import 'package:petjoo/modules/base/dropdown_x.dart';
+import 'package:petjoo/ui/dropdown_x.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_genders.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_habits.dart';
@@ -12,7 +12,7 @@ import 'package:petjoo/modules/pet/model/pet_advert_toilets.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_vaccines.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_filter_viewmodel.dart';
-import 'package:petjoo/modules/base/dimens.dart';
+import 'package:petjoo/constants/dimens.dart';
 
 class PetFilterView extends StatelessWidget {
   final PetFilterViewModel vm = PetFilterViewModel();

@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:petjoo/modules/base/please_auth.dart';
+import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_model.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_userlist_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/modules/base/images.dart';
+import 'package:petjoo/constants/images.dart';
 
 class PetUserListView extends StatelessWidget {
   final PetUserListViewModel vm = PetUserListViewModel();

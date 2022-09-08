@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:petjoo/modules/base/please_auth.dart';
+import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/modules/base/string_converters.dart';
 import 'package:petjoo/modules/store/model/store_advert_model.dart';
 import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_userlist_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/modules/base/images.dart';
+import 'package:petjoo/constants/images.dart';
 
 class StoreUserListView extends StatelessWidget {
   final StoreUserListViewModel vm = StoreUserListViewModel();

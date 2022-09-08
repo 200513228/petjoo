@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:petjoo/modules/base/color_palette.dart';
-import 'package:petjoo/modules/base/please_auth.dart';
+import 'package:petjoo/ui/color_palette.dart';
+import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_genders.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_habits.dart';
@@ -15,7 +15,7 @@ import 'package:petjoo/modules/pet/model/pet_advert_types.dart';
 import 'package:petjoo/modules/pet/model/pet_advert_vaccines.dart';
 import 'package:petjoo/modules/pet/viewmodel/pet_detail_viewmodel.dart';
 import 'package:petjoo/modules/user/model/current_user.dart';
-import 'package:petjoo/modules/base/images.dart';
+import 'package:petjoo/constants/images.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class PetDetailView extends StatelessWidget {

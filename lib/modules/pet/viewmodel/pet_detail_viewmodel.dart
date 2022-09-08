@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:petjoo/modules/base/ui_snackbar.dart';
+import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/modules/chat/model/chat_model.dart';
 import 'package:petjoo/modules/chat/service/chat_service.dart';
 import 'package:petjoo/modules/chat/view/chat_detail_view.dart';

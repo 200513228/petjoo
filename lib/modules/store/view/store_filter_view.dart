@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/modules/base/num_extension.dart';
-import 'package:petjoo/modules/base/dropdown_x.dart';
+import 'package:petjoo/ui/dropdown_x.dart';
 import 'package:petjoo/modules/store/model/store_advert_deliveries.dart';
 import 'package:petjoo/modules/store/model/store_advert_statuses.dart';
 import 'package:petjoo/modules/store/model/store_adverts_types.dart';
 import 'package:petjoo/modules/store/viewmodel/store_filter_viewmodel.dart';
-import 'package:petjoo/modules/base/dimens.dart';
+import 'package:petjoo/constants/dimens.dart';
 
 class StoreFilterView extends StatelessWidget {
   final StoreFilterViewModel vm = StoreFilterViewModel();

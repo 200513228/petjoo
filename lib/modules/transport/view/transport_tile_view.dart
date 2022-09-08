@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:petjoo/modules/base/color_palette.dart';
+import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/modules/transport/model/transport_advert_model.dart';
 import 'package:petjoo/modules/transport/viewmodel/transport_tile_viewmodel.dart';
-import 'package:petjoo/modules/base/images.dart';
-import 'package:petjoo/modules/base/classic_theme.dart';
+import 'package:petjoo/constants/images.dart';
+import 'package:petjoo/ui/classic_theme.dart';
 
 class TransportTileView extends StatelessWidget {
   final TransportTileViewModel vm = TransportTileViewModel();

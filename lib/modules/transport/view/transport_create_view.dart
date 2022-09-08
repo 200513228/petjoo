@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:petjoo/modules/base/loading.dart';
+import 'package:petjoo/ui/loading.dart';
 import 'package:petjoo/modules/transport/viewmodel/transport_create_viewmodel.dart';
 import 'package:petjoo/modules/base/validators.dart';
-import 'package:petjoo/modules/base/classic_theme.dart';
+import 'package:petjoo/ui/classic_theme.dart';
 
 class TransportCreateView extends StatelessWidget {
   static final TransportCreateViewModel vm = TransportCreateViewModel();

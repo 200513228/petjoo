@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';
+import 'package:petjoo/user/model/current_user.dart';
 
 class ReservationService {
   static var db = FirebaseFirestore.instance;
@@ -14,5 +15,12 @@ class ReservationService {
     } on Exception catch (e) {
       return e.toString();
     }
+  }
+
+  static Future<QuerySnapshot<Map<String, dynamic>>> getReservations() async {
+    return await db
+        .collection('transport_reservations')
+        .where('userId', isEqualTo: CurrentUser.id)
+        .get();
   }
 }

@@ -18,9 +18,14 @@ class ReservationService {
   }
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getReservations() async {
-    return await db
-        .collection('transport_reservations')
-        .where('userId', isEqualTo: CurrentUser.id)
-        .get();
+    return CurrentUser.hasTransport
+        ? await db
+            .collection('transport_reservations')
+            .where('advertId', isEqualTo: CurrentUser.id)
+            .get()
+        : await db
+            .collection('transport_reservations')
+            .where('userId', isEqualTo: CurrentUser.id)
+            .get();
   }
 }

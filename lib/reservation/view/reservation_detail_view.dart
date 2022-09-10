@@ -1,5 +1,9 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:petjoo/location/view/location_picker.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';
 import 'package:petjoo/reservation/viewmodel/reservation_detail_viewmodel.dart';
 
@@ -12,6 +16,13 @@ class ReservationDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
+      body: ElevatedButton(
+        onPressed: () async {
+          GeoPoint? res = await showLocationPicker(context);
+          log(res!.latitude.toString());
+        },
+        child: Text('konum seç'.tr()),
+      ),
     );
   }
 

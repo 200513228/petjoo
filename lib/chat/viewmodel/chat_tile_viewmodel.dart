@@ -24,8 +24,8 @@ abstract class ChatTileViewModelBase with Store {
     isLoading = !isLoading;
     var result = await UserService.getUserInfo(userId);
     var data = result.data() as dynamic;
-    name = data['name'] + ' ' + data['surname'];
-    image = data['image'];
+    name = '${data['name'] ?? ''} ${data['surname'] ?? ''}';
+    image = data['image'] ?? '';
     isLoading = !isLoading;
   }
 

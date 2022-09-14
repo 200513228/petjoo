@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/model/message_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
@@ -12,7 +14,15 @@ class ChatDetailViewModel = ChatDetailViewModelBase with _$ChatDetailViewModel;
 
 abstract class ChatDetailViewModelBase with Store {
   @observable
-  List<MessageModel> messageList = [];
+  List<dynamic> messageList = [];
+  @observable
+  List<dynamic> messages = [];
+  @observable
+  List<dynamic> adverts = [];
+  @observable
+  ChatModel? chatModel;
+  @observable
+  ChatAdvertModel? advertModel;
   @observable
   TextEditingController cont = TextEditingController();
   @observable
@@ -21,10 +31,30 @@ abstract class ChatDetailViewModelBase with Store {
   bool isYouBlocked = false;
 
   @action
+  void setChatModel(ChatModel model, ChatAdvertModel? xadvertModel) {
+    chatModel = model;
+    advertModel = xadvertModel;
+  }
+
+  @action
   Future getMessages(String id) async {
-    var stream = ChatService.getMessages(id);
-    stream.listen((event) {
-      messageList = event.docs.map((e) => MessageModel.fromQDS(e)).toList();
+    List<dynamic> temp = [];
+    List<dynamic> advertsTemp = [];
+    var advertData = await ChatService.getAdverts(id);
+    for (var element in advertData.docs) {
+      advertsTemp.add(ChatAdvertModel.fromQDS(element));
+    }
+    var messageStream = ChatService.getMessages(id);
+    messageStream.listen((event) {
+      messages = event.docs.map((e) => MessageModel.fromQDS(e)).toList();
+      temp = advertsTemp + messages;
+      temp.sort((b, a) {
+        var adate = a.date as Timestamp;
+        var bdate = b.date as Timestamp;
+        return adate.microsecondsSinceEpoch
+            .compareTo(bdate.microsecondsSinceEpoch);
+      });
+      messageList = temp;
     });
   }
 
@@ -33,7 +63,8 @@ abstract class ChatDetailViewModelBase with Store {
     String text = cont.text;
     cont.clear();
     if (text != '') {
-      await ChatService.sendMessage(MessageModel.toMap(text), model);
+      await ChatService.sendMessage(
+          MessageModel.toMap(text), model, model.userIds.first);
     }
   }
 

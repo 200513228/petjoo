@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
@@ -81,8 +82,12 @@ abstract class StoreDetailViewModelBase with Store {
               _,
               MaterialPageRoute(
                   builder: (builder) => ChatDetailView(
-                      model: ChatModel.fromUser(CurrentUser.id, advert!.userId),
-                      name: userName ?? '')))
+                        model:
+                            ChatModel.fromUser(CurrentUser.id, advert!.userId),
+                        name: userName ?? '',
+                        advertModel: ChatAdvertModel.fromManuel(
+                            advert!.id, 'store_adverts'),
+                      )))
           : openCurrentChat(_, value);
     });
   }
@@ -92,8 +97,12 @@ abstract class StoreDetailViewModelBase with Store {
     await ChatService.getOnes(id).then((value) => Navigator.push(
         _,
         MaterialPageRoute(
-            builder: (builder) =>
-                ChatDetailView(model: value, name: userName ?? ''))));
+            builder: (builder) => ChatDetailView(
+                  model: value,
+                  name: userName ?? '',
+                  advertModel:
+                      ChatAdvertModel.fromManuel(advert!.id, 'store_adverts'),
+                ))));
   }
 
   @action

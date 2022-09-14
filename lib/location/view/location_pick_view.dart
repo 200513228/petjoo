@@ -32,9 +32,7 @@ class LocationPickView extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context, vm.loc);
-                    },
+                    onPressed: () => vm.onSave(context),
                     child: Text('save'.tr())),
               ),
             ),

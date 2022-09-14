@@ -19,5 +19,7 @@ abstract class LocationPickViewModelBase with Store {
   }
 
   @action
-  onSave(BuildContext context) {}
+  onSave(BuildContext context) {
+    Navigator.pop(context, loc);
+  }
 }

@@ -1,21 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/base/string_converters.dart';
+import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/model/message_model.dart';
+import 'package:petjoo/chat/view/message_advert_box_view.dart';
 import 'package:petjoo/chat/viewmodel/chat_detail_viewmodel.dart';
 import 'package:petjoo/user/model/current_user.dart';
 
 class ChatDetailView extends StatelessWidget {
   final ChatModel model;
   final String name;
+  final ChatAdvertModel? advertModel;
   final ChatDetailViewModel vm = ChatDetailViewModel();
-  ChatDetailView({required this.model, required this.name, Key? key})
+  ChatDetailView(
+      {required this.model, required this.name, this.advertModel, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    vm.setChatModel(model, advertModel);
     List findUser = model.userIds;
     findUser.remove(CurrentUser.id);
     vm.getMessages(model.id);
@@ -58,7 +63,13 @@ class ChatDetailView extends StatelessWidget {
     return Observer(builder: (_) {
       return ListView(
         reverse: true,
-        children: [...vm.messageList.map((e) => messageBox(e))],
+        children: [
+          ...vm.messageList.map((e) {
+            return (e.runtimeType.toString() == 'MessageModel')
+                ? messageBox(e)
+                : MessageAdvertBoxView(model: e);
+          })
+        ],
       );
     });
   }
@@ -92,7 +103,8 @@ class ChatDetailView extends StatelessWidget {
                               color: isUser ? Colors.white : Colors.black),
                         ))),
                 Text(
-                  dateToTime(model.date),
+                  hourToString(
+                      '${model.date.toDate().hour}:${model.date.toDate().minute}'),
                   style: TextStyle(
                       color: isUser ? Colors.white54 : Colors.black54),
                 )
@@ -116,19 +128,12 @@ class ChatDetailView extends StatelessWidget {
           )),
           const SizedBox(width: 15),
           IconButton(
-              onPressed: () {
-                vm.sendMessage(model);
-              },
+              onPressed: () => vm.sendMessage(model),
               icon: const Icon(Icons.send),
               color: Colors.black),
         ],
       ),
     );
-  }
-
-  String dateToTime(Timestamp date) {
-    var d = date.toDate();
-    return '${d.hour}:${d.minute}';
   }
 
   AppBar buildAppBar(BuildContext context, String uid) {

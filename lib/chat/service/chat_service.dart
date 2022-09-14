@@ -21,14 +21,36 @@ class ChatService {
         .snapshots();
   }
 
+  // static Stream<QuerySnapshot<Map<String, dynamic>>> getAdverts(String doc) {
+  //   return db
+  //       .collection('chats')
+  //       .doc(doc)
+  //       .collection('adverts')
+  //       .orderBy('date', descending: true)
+  //       .snapshots();
+  // }
+
+  static Future<QuerySnapshot<Map<String, dynamic>>> getAdverts(
+      String doc) async {
+    return await db
+        .collection('chats')
+        .doc(doc)
+        .collection('adverts')
+        .orderBy('date', descending: true)
+        .get();
+  }
+
   static Future<String> sendMessage(
-      Map<String, dynamic> map, ChatModel model) async {
-    await db.collection('chats').doc(model.id).get().then((value) async =>
-        value.exists == false
-            ? await db
-                .collection('chats')
-                .doc(model.id)
-                .set({'id': model.id, 'userIds': model.userIds})
+      Map<String, dynamic> map, ChatModel model, String reciverId) async {
+    await db
+        .collection('chats')
+        .doc(model.id)
+        .get()
+        .then((value) async => value.exists == false
+            ? await db.collection('chats').doc(model.id).set({
+                'id': model.id,
+                'userIds': [CurrentUser.id, reciverId]
+              })
             : null);
     await db.collection('chats').doc(model.id).collection('messages').add(map);
     return 'SEND';
@@ -58,5 +80,17 @@ class ChatService {
   static Future<ChatModel> getOnes(String docid) async {
     var result = await db.collection('chats').doc(docid).get();
     return ChatModel.fromDS(result);
+  }
+
+  static Future<Map<String, String>> getAdvertInfo(
+      String type, String id) async {
+    String image = '';
+    String title = '';
+    var result = await db.collection(type).doc(id).get();
+    var data = result.data() as dynamic;
+    title = data['title'] ?? '';
+    image = data['images'][0] ?? '';
+
+    return {'image': image, 'title': title};
   }
 }

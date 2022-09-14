@@ -43,12 +43,7 @@ class ChatTileView extends StatelessWidget {
                     contentPadding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     leading: image(),
-                    title: Material(
-                        type: MaterialType.transparency,
-                        child: Text(
-                          vm.name,
-                          style: const TextStyle(fontSize: 16),
-                        )),
+                    title: Text(vm.name, style: const TextStyle(fontSize: 16)),
                     subtitle:
                         Text(vm.isBlocked ? '' : model.lastMessage.content),
                     trailing: Text(dateToString(model.lastMessage.date))),

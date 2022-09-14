@@ -13,15 +13,79 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
       Atom(name: 'ChatDetailViewModelBase.messageList', context: context);
 
   @override
-  List<MessageModel> get messageList {
+  List<dynamic> get messageList {
     _$messageListAtom.reportRead();
     return super.messageList;
   }
 
   @override
-  set messageList(List<MessageModel> value) {
+  set messageList(List<dynamic> value) {
     _$messageListAtom.reportWrite(value, super.messageList, () {
       super.messageList = value;
+    });
+  }
+
+  late final _$messagesAtom =
+      Atom(name: 'ChatDetailViewModelBase.messages', context: context);
+
+  @override
+  List<dynamic> get messages {
+    _$messagesAtom.reportRead();
+    return super.messages;
+  }
+
+  @override
+  set messages(List<dynamic> value) {
+    _$messagesAtom.reportWrite(value, super.messages, () {
+      super.messages = value;
+    });
+  }
+
+  late final _$advertsAtom =
+      Atom(name: 'ChatDetailViewModelBase.adverts', context: context);
+
+  @override
+  List<dynamic> get adverts {
+    _$advertsAtom.reportRead();
+    return super.adverts;
+  }
+
+  @override
+  set adverts(List<dynamic> value) {
+    _$advertsAtom.reportWrite(value, super.adverts, () {
+      super.adverts = value;
+    });
+  }
+
+  late final _$chatModelAtom =
+      Atom(name: 'ChatDetailViewModelBase.chatModel', context: context);
+
+  @override
+  ChatModel? get chatModel {
+    _$chatModelAtom.reportRead();
+    return super.chatModel;
+  }
+
+  @override
+  set chatModel(ChatModel? value) {
+    _$chatModelAtom.reportWrite(value, super.chatModel, () {
+      super.chatModel = value;
+    });
+  }
+
+  late final _$advertModelAtom =
+      Atom(name: 'ChatDetailViewModelBase.advertModel', context: context);
+
+  @override
+  ChatAdvertModel? get advertModel {
+    _$advertModelAtom.reportRead();
+    return super.advertModel;
+  }
+
+  @override
+  set advertModel(ChatAdvertModel? value) {
+    _$advertModelAtom.reportWrite(value, super.advertModel, () {
+      super.advertModel = value;
     });
   }
 
@@ -113,10 +177,28 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
     return _$unblockUserAsyncAction.run(() => super.unblockUser(context, uid));
   }
 
+  late final _$ChatDetailViewModelBaseActionController =
+      ActionController(name: 'ChatDetailViewModelBase', context: context);
+
+  @override
+  void setChatModel(ChatModel model, ChatAdvertModel? xadvertModel) {
+    final _$actionInfo = _$ChatDetailViewModelBaseActionController.startAction(
+        name: 'ChatDetailViewModelBase.setChatModel');
+    try {
+      return super.setChatModel(model, xadvertModel);
+    } finally {
+      _$ChatDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 messageList: ${messageList},
+messages: ${messages},
+adverts: ${adverts},
+chatModel: ${chatModel},
+advertModel: ${advertModel},
 cont: ${cont},
 isBlocked: ${isBlocked},
 isYouBlocked: ${isYouBlocked}

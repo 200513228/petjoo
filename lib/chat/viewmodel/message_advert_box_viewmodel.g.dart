@@ -82,6 +82,14 @@ mixin _$MessageAdvertBoxViewModel on MessageAdvertBoxViewModelBase, Store {
     return _$getAdvertInfoAsyncAction.run(() => super.getAdvertInfo());
   }
 
+  late final _$goAdvertAsyncAction =
+      AsyncAction('MessageAdvertBoxViewModelBase.goAdvert', context: context);
+
+  @override
+  Future<dynamic> goAdvert(BuildContext context) {
+    return _$goAdvertAsyncAction.run(() => super.goAdvert(context));
+  }
+
   late final _$MessageAdvertBoxViewModelBaseActionController =
       ActionController(name: 'MessageAdvertBoxViewModelBase', context: context);
 

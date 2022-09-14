@@ -25,6 +25,22 @@ mixin _$RegisterViewModel on RegisterViewModelBase, Store {
     });
   }
 
+  late final _$obscPassAtom =
+      Atom(name: 'RegisterViewModelBase.obscPass', context: context);
+
+  @override
+  bool get obscPass {
+    _$obscPassAtom.reportRead();
+    return super.obscPass;
+  }
+
+  @override
+  set obscPass(bool value) {
+    _$obscPassAtom.reportWrite(value, super.obscPass, () {
+      super.obscPass = value;
+    });
+  }
+
   late final _$formKeyAtom =
       Atom(name: 'RegisterViewModelBase.formKey', context: context);
 
@@ -149,6 +165,17 @@ mixin _$RegisterViewModel on RegisterViewModelBase, Store {
       ActionController(name: 'RegisterViewModelBase', context: context);
 
   @override
+  void changeObsc() {
+    final _$actionInfo = _$RegisterViewModelBaseActionController.startAction(
+        name: 'RegisterViewModelBase.changeObsc');
+    try {
+      return super.changeObsc();
+    } finally {
+      _$RegisterViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void navigate(BuildContext _, String asset) {
     final _$actionInfo = _$RegisterViewModelBaseActionController.startAction(
         name: 'RegisterViewModelBase.navigate');
@@ -185,6 +212,7 @@ mixin _$RegisterViewModel on RegisterViewModelBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+obscPass: ${obscPass},
 formKey: ${formKey},
 emailCont: ${emailCont},
 passCont: ${passCont},

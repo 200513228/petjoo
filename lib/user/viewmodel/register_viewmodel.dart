@@ -13,6 +13,8 @@ abstract class RegisterViewModelBase with Store {
   @observable
   bool isLoading = false;
   @observable
+  bool obscPass = true;
+  @observable
   GlobalKey<FormState> formKey = GlobalKey();
   @observable
   TextEditingController emailCont = TextEditingController();
@@ -41,6 +43,9 @@ abstract class RegisterViewModelBase with Store {
       });
     }
   }
+
+  @action
+  void changeObsc() => obscPass = !obscPass;
 
   @action
   void navigate(BuildContext _, String asset) {

@@ -142,5 +142,7 @@
     "collar": "Tasma",
     "catch": "Yakalama",
     "start": "Başlangıç",
-    "end": "Bitiş"
+    "end": "Bitiş",
+    "under_maintenance": "Bakım Aşamasında",
+    "under_maintenance_content": "Erişmek istediğiniz kısım bakım aşamasındadır. Lütfen daha sonra tekrar deneyin."
 }

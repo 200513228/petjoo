@@ -41,7 +41,7 @@ class RegisterView extends StatelessWidget {
               textField(vm.nameCont, 'name'.tr()),
               textField(vm.surNameCont, 'surname'.tr()),
               buildPhone,
-              textField(vm.passCont, 'password'.tr()),
+              passField,
               info(context),
               registerButton(context),
             ],
@@ -53,15 +53,34 @@ class RegisterView extends StatelessWidget {
 
   Widget textField(TextEditingController cont, String label) {
     return Container(
+        padding: const EdgeInsets.all(8),
+        child: TextFormField(
+          controller: cont,
+          validator: ((value) => value == '' ? 'register_valid'.tr() : null),
+          maxLength: 70,
+          maxLines: 1,
+          minLines: 1,
+          decoration: InputDecoration(labelText: label, counterText: ''),
+        ));
+  }
+
+  Widget get passField {
+    return Container(
       padding: const EdgeInsets.all(8),
       child: TextFormField(
-        controller: cont,
-        obscureText: label == 'password'.tr(),
+        controller: vm.passCont,
+        obscureText: vm.obscPass,
         validator: ((value) => value == '' ? 'register_valid'.tr() : null),
         maxLength: 70,
         maxLines: 1,
         minLines: 1,
-        decoration: InputDecoration(labelText: label, counterText: ''),
+        decoration: InputDecoration(
+            labelText: 'password'.tr(),
+            counterText: '',
+            suffixIcon: IconButton(
+              onPressed: vm.changeObsc,
+              icon: const Icon(Icons.password, color: Colors.white),
+            )),
       ),
     );
   }

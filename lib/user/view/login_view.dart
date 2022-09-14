@@ -89,8 +89,15 @@ class LoginView extends StatelessWidget {
     return TextFormField(
       keyboardType: isPass ? TextInputType.text : TextInputType.emailAddress,
       controller: cont,
-      obscureText: isPass,
-      decoration: InputDecoration(labelText: label),
+      obscureText: isPass ? vm.obscPass : false,
+      decoration: InputDecoration(
+          labelText: label,
+          suffixIcon: isPass
+              ? IconButton(
+                  onPressed: vm.changeObsc,
+                  icon: const Icon(Icons.password, color: Colors.white),
+                )
+              : null),
     );
   }
 

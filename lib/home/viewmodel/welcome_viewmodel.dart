@@ -8,6 +8,9 @@ import 'package:petjoo/pet/view/pet_detail_view.dart';
 import 'package:petjoo/store/model/store_advert_model.dart';
 import 'package:petjoo/store/service/store_service.dart';
 import 'package:petjoo/store/view/store_detail_view.dart';
+import 'package:petjoo/transport/model/transport_advert_model.dart';
+import 'package:petjoo/transport/service/transport_service.dart';
+import 'package:petjoo/transport/view/transport_detail_view.dart';
 import 'package:petjoo/user/service/user_service.dart';
 part 'welcome_viewmodel.g.dart';
 
@@ -68,6 +71,20 @@ abstract class WelcomeViewModelBase with Store {
                 context,
                 MaterialPageRoute(
                     builder: (context) => StoreDetailView(model: model)));
+          });
+          break;
+        case 'transport':
+          await TransportService.db
+              .collection('transport_adverts')
+              .doc(DLinkService.docid)
+              .get()
+              .then((value) {
+            TransportAdvertModel model = TransportAdvertModel.fromDS(value);
+            DLinkService.isGo = false;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TransportDetailView(model: model)));
           });
           break;
         default:

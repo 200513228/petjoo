@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/chat/model/chat_advert_model.dart';
+import 'package:petjoo/home/service/dlink_service.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
@@ -10,7 +11,9 @@ import 'package:petjoo/reservation/view/reservation_shift_view.dart';
 import 'package:petjoo/transport/model/transport_advert_model.dart';
 import 'package:petjoo/transport/service/transport_service.dart';
 import 'package:petjoo/transport/view/transport_create_view.dart';
+import 'package:petjoo/ui/under_maintenance.dart';
 import 'package:petjoo/user/model/current_user.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'transport_detail_viewmodel.g.dart';
 
@@ -28,10 +31,12 @@ abstract class TransportDetailViewModelBase with Store {
 
   @action
   void makeReservation(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ReservationShiftView(model: advert!)));
+    showDialog(
+        context: context, builder: (context) => const UnderMaintenance());
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => ReservationShiftView(model: advert!)));
   }
 
   @action
@@ -53,6 +58,12 @@ abstract class TransportDetailViewModelBase with Store {
   }
 
   @action
+  Future publish(BuildContext context) async {
+    Uri link = await DLinkService.createTransportLink(advert!.id);
+    Share.share(link.toString());
+  }
+
+  @action
   Future message(BuildContext _) async {
     await ChatService.findChat(advert!.id).then((value) {
       value == null
@@ -62,8 +73,8 @@ abstract class TransportDetailViewModelBase with Store {
                   builder: (builder) => ChatDetailView(
                         model: ChatModel.fromUser(CurrentUser.id, advert!.id),
                         name: advert!.title,
-                        advertModel:
-                            ChatAdvertModel.fromManuel(advert!.id, 'adverts'),
+                        advertModel: ChatAdvertModel.fromManuel(
+                            advert!.id, 'transport_adverts'),
                       )))
           : openCurrentChat(_, value);
     });
@@ -77,8 +88,8 @@ abstract class TransportDetailViewModelBase with Store {
             builder: (builder) => ChatDetailView(
                   model: value,
                   name: advert!.title,
-                  advertModel:
-                      ChatAdvertModel.fromManuel(advert!.id, 'adverts'),
+                  advertModel: ChatAdvertModel.fromManuel(
+                      advert!.id, 'transport_adverts'),
                 ))));
   }
 

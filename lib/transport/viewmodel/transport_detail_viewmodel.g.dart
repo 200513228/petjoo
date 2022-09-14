@@ -42,6 +42,14 @@ mixin _$TransportDetailViewModel on TransportDetailViewModelBase, Store {
     return _$callAsyncAction.run(() => super.call());
   }
 
+  late final _$publishAsyncAction =
+      AsyncAction('TransportDetailViewModelBase.publish', context: context);
+
+  @override
+  Future<dynamic> publish(BuildContext context) {
+    return _$publishAsyncAction.run(() => super.publish(context));
+  }
+
   late final _$messageAsyncAction =
       AsyncAction('TransportDetailViewModelBase.message', context: context);
 

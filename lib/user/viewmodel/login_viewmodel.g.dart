@@ -25,6 +25,22 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
     });
   }
 
+  late final _$obscPassAtom =
+      Atom(name: 'LoginViewModelBase.obscPass', context: context);
+
+  @override
+  bool get obscPass {
+    _$obscPassAtom.reportRead();
+    return super.obscPass;
+  }
+
+  @override
+  set obscPass(bool value) {
+    _$obscPassAtom.reportWrite(value, super.obscPass, () {
+      super.obscPass = value;
+    });
+  }
+
   late final _$emailContAtom =
       Atom(name: 'LoginViewModelBase.emailCont', context: context);
 
@@ -75,6 +91,17 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
 
   late final _$LoginViewModelBaseActionController =
       ActionController(name: 'LoginViewModelBase', context: context);
+
+  @override
+  void changeObsc() {
+    final _$actionInfo = _$LoginViewModelBaseActionController.startAction(
+        name: 'LoginViewModelBase.changeObsc');
+    try {
+      return super.changeObsc();
+    } finally {
+      _$LoginViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void succesful(BuildContext _) {
@@ -135,6 +162,7 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+obscPass: ${obscPass},
 emailCont: ${emailCont},
 passCont: ${passCont}
     ''';

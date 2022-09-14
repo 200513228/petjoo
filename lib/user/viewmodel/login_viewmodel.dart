@@ -13,6 +13,8 @@ abstract class LoginViewModelBase with Store {
   @observable
   bool isLoading = false;
   @observable
+  bool obscPass = true;
+  @observable
   TextEditingController emailCont = TextEditingController();
   @observable
   TextEditingController passCont = TextEditingController();
@@ -29,6 +31,9 @@ abstract class LoginViewModelBase with Store {
     await UserService.forgotPass(emailCont.text).then(
         (value) => value == 'FORGOT' ? succesfulPass(_) : errorPass(_, value));
   }
+
+  @action
+  void changeObsc() => obscPass = !obscPass;
 
   @action
   void succesful(BuildContext _) {

@@ -15,9 +15,16 @@ class ChatAdvertModel {
   }
 
   ChatAdvertModel.fromManuel(String id, String type) {
-    id = id;
     advertId = id;
     advertCollection = type;
     date = Timestamp.now();
+  }
+
+  static Map<String, dynamic> toMap(ChatAdvertModel model) {
+    return {
+      'advertCollection': model.advertCollection,
+      'advertId': model.advertId,
+      'date': model.date
+    };
   }
 }

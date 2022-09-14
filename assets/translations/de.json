@@ -142,5 +142,7 @@
     "collar": "Kragen",
     "catch": "Fang",
     "start": "Anfang",
-    "end": "Ende"
+    "end": "Ende",
+    "under_maintenance": "Wird gewartet",
+    "under_maintenance_content": "Der Teil, auf den Sie zugreifen möchten, wird derzeit gewartet. Bitte versuchen Sie es später erneut."
 }

@@ -441,7 +441,7 @@ class TransportDetailView extends StatelessWidget {
             color: Colors.black,
             itemBuilder: (context) => [
                   PopupMenuItem(
-                    // onTap: () => vm.publish(context),
+                    onTap: () => vm.publish(context),
                     child: Text(
                       'publish'.tr(),
                     ),

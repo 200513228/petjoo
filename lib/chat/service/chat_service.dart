@@ -56,6 +56,12 @@ class ChatService {
     return 'SEND';
   }
 
+  static Future<String> sendAdvert(
+      Map<String, dynamic> map, ChatModel model) async {
+    await db.collection('chats').doc(model.id).collection('adverts').add(map);
+    return 'SENDADVERT';
+  }
+
   static Future readChat(String doc) async {
     var result = await db.collection('chats').doc(doc).get();
     Map map = result.data()!['lastMessage'];
@@ -86,11 +92,13 @@ class ChatService {
       String type, String id) async {
     String image = '';
     String title = '';
+    List imglist = [];
+
     var result = await db.collection(type).doc(id).get();
     var data = result.data() as dynamic;
     title = data['title'] ?? '';
-    image = data['images'][0] ?? '';
-
+    imglist = data['images'] ?? [''];
+    image = imglist.isEmpty ? '' : imglist.first;
     return {'image': image, 'title': title};
   }
 }

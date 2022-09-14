@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/reservation/view/reservation_tile_view.dart';
 import 'package:petjoo/reservation/viewmodel/reservation_list_viewmodel.dart';
 import 'package:petjoo/ui/color_palette.dart';
@@ -15,20 +16,38 @@ class ReservationListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    vm.getReservations();
-    return Observer(builder: (_) {
-      return RefreshIndicator(
-        onRefresh: () => vm.getReservations(),
-        child: Column(
-          children: [
-            calendar(context),
-            vm.reservationList.isEmpty
-                ? const Expanded(child: NothingToSeeHereWidget())
-                : Expanded(child: reservationList()),
-          ],
-        ),
-      );
-    });
+    // vm.getReservations();
+    // return Observer(builder: (_) {
+    //   return RefreshIndicator(
+    //     onRefresh: () => vm.getReservations(),
+    //     child: Column(
+    //       children: [
+    //         calendar(context),
+    //         vm.reservationList.isEmpty
+    //             ? const Expanded(child: NothingToSeeHereWidget())
+    //             : Expanded(child: reservationList()),
+    //       ],
+    //     ),
+    //   );
+    // });
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.construction,
+            color: Colors.black,
+            size: 64,
+          ),
+          const Divider(),
+          Text('under_maintenance'.tr(),
+              style: const TextStyle(color: Colors.black, fontSize: 24)),
+          Text('under_maintenance_content'.tr(),
+              style: const TextStyle(color: Colors.black)),
+        ],
+      ),
+    );
   }
 
   Widget calendar(BuildContext context) {

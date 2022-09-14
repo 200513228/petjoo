@@ -18,14 +18,14 @@ class MessageAdvertBoxView extends StatelessWidget {
     return Observer(builder: (_) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-        child: Align(alignment: Alignment.center, child: buildRow()),
+        child: Align(alignment: Alignment.center, child: buildRow(context)),
       );
     });
   }
 
-  Widget buildRow() {
+  Widget buildRow(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => vm.goAdvert(context),
       child: Container(
         decoration: BoxDecoration(
             color: colorPalette['secondary']!.withOpacity(.6),

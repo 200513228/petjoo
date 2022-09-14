@@ -142,5 +142,7 @@
     "collar": "Collar",
     "catch": "Catch",
     "start": "Start",
-    "end": "End"
+    "end": "End",
+    "under_maintenance": "Under Maintenance",
+    "under_maintenance_content": "The part you want to access is under maintenance. Please try again later."
 }

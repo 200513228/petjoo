@@ -61,10 +61,15 @@ abstract class ChatDetailViewModelBase with Store {
   @action
   Future sendMessage(ChatModel model) async {
     String text = cont.text;
+
     cont.clear();
     if (text != '') {
       await ChatService.sendMessage(
           MessageModel.toMap(text), model, model.userIds.first);
+    }
+    if (advertModel != null) {
+      await ChatService.sendAdvert(ChatAdvertModel.toMap(advertModel!), model);
+      advertModel = null;
     }
   }
 

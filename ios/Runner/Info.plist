@@ -57,10 +57,10 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-	<key>FirebaseDynamicLinksCustomDomains</key>
+	<!-- <key>FirebaseDynamicLinksCustomDomains</key>
 	<array>
         <string>https://url.petjoo.app</string>
-	</array>
+	</array> -->
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

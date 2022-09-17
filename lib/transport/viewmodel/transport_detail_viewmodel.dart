@@ -7,7 +7,6 @@ import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/chat/view/chat_detail_view.dart';
 import 'package:petjoo/home/view/home_view.dart';
-import 'package:petjoo/reservation/view/reservation_shift_view.dart';
 import 'package:petjoo/transport/model/transport_advert_model.dart';
 import 'package:petjoo/transport/service/transport_service.dart';
 import 'package:petjoo/transport/view/transport_create_view.dart';

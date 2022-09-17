@@ -2,12 +2,9 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/reservation/view/reservation_tile_view.dart';
 import 'package:petjoo/reservation/viewmodel/reservation_list_viewmodel.dart';
 import 'package:petjoo/ui/color_palette.dart';
-import 'package:petjoo/ui/nothing_to_see_here_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ReservationListView extends StatelessWidget {
@@ -62,8 +59,8 @@ class ReservationListView extends StatelessWidget {
         firstDay: DateTime.now(),
         lastDay: DateTime(d.year, d.month, d.day + 7),
         onDaySelected: (date, date2) {
-          log(date.toString());
-          log(date2.toString());
+          log('DATE1$date');
+          log('DATE2$date2');
         },
         availableCalendarFormats: const {CalendarFormat.twoWeeks: '2 weeks'},
       ),

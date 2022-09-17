@@ -8,6 +8,7 @@
 	<array>
 		<string>applinks:ppetjoo.page.link</string>
 		<string>applinks:url.petjoo.app</string>
+		<string>applinks:petjoo.app</string>
 	</array>
 </dict>
 </plist>

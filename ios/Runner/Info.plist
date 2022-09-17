@@ -28,15 +28,32 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>Bundle ID</string>
+			<string>url.petjoo.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.petjoo.ios</string>
+				<string>petjooios</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>url.petjoo.app/</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>petjooiosx</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://url.petjoo.app</string>
+		<string>https://url.petjoo.app/path</string>
+	</array>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>sms</string>
@@ -57,10 +74,6 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-	<!-- <key>FirebaseDynamicLinksCustomDomains</key>
-	<array>
-        <string>https://url.petjoo.app</string>
-	</array> -->
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

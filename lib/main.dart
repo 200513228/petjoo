@@ -11,11 +11,12 @@ import 'base/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
   await EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   NotificationService.instance.initialize(_firebaseMessagingBackgroundHandler);
-  DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
+
   runApp(
     EasyLocalization(
       path: 'assets/translations',

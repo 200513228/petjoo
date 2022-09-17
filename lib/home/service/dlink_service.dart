@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class DLinkService {
@@ -5,11 +7,13 @@ class DLinkService {
   static String? docid;
   static bool isGo = false;
 
-  static void instance(PendingDynamicLinkData? initial) {
-    final PendingDynamicLinkData? data = initial;
+  static void instance(PendingDynamicLinkData? initial) async {
+    var init = await FirebaseDynamicLinks.instance.getInitialLink();
+    final PendingDynamicLinkData? data = init;
     if (data == null) {
       return;
     } else {
+      log(initial.toString());
       isGo = true;
       type = data.link.queryParameters['type'];
       docid = data.link.queryParameters['doc'];

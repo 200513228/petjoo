@@ -24,7 +24,7 @@ class ChatDetailView extends StatelessWidget {
     List findUser = vm.chatModel!.userIds;
     findUser.remove(CurrentUser.id);
     vm.getMessages(vm.chatModel!.id);
-    // vm.checkBlock(findUser.first);
+    vm.checkBlock(findUser.first);
     return Observer(builder: (_) {
       return Scaffold(
         appBar: buildAppBar(context, findUser.first),

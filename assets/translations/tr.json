@@ -103,6 +103,7 @@
     "report": "Bildir",
     "new_advert": "Yeni İlan Oluştur",
     "title": "Başlık",
+    "name_min3": "İsim en az 3 harfli olmalıdır.",
     "title_min3": "Başlık en az 3 harfli olmalıdır.",
     "desc_min4": "Açıklama en az 4 harfli olmalıdır.",
     "advert_type": "İlan Türü",

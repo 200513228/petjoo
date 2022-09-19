@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/location/view/location_picker.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';
@@ -27,6 +28,10 @@ abstract class ReservationCreateViewModelBase with Store {
   TextEditingController phoneCont =
       TextEditingController(text: CurrentUser.phone);
   @observable
+  GeoPoint? beginGeoPoint;
+  @observable
+  GeoPoint? endGeoPoint;
+  @observable
   String? dialCode = CurrentUser.dialCode != '' ? CurrentUser.dialCode : '+90';
   @observable
   int? animal;
@@ -41,6 +46,16 @@ abstract class ReservationCreateViewModelBase with Store {
   }
 
   @action
+  Future setBegin(BuildContext context) async {
+    beginGeoPoint = await showLocationPicker(context);
+  }
+
+  @action
+  Future setEnd(BuildContext context) async {
+    endGeoPoint = await showLocationPicker(context);
+  }
+
+  @action
   Future save(BuildContext context) async {
     isLoading = !isLoading;
     model!.id = '${CurrentUser.id}_${advertModel!.id}';
@@ -51,8 +66,8 @@ abstract class ReservationCreateViewModelBase with Store {
     model!.description = descCont.text;
     model!.dialCode = dialCode ?? '+90';
     model!.phone = phoneCont.text;
-    model!.beginGeoPoint = const GeoPoint(0, 0);
-    model!.endGeoPoint = const GeoPoint(0, 0);
+    model!.beginGeoPoint = beginGeoPoint ?? const GeoPoint(0, 0);
+    model!.endGeoPoint = endGeoPoint ?? const GeoPoint(0, 0);
     model!.distance = 0.0;
     model!.resPricePerKm = advertModel!.pricePerKm;
     model!.status = 0;

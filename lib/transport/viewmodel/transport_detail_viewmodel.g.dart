@@ -58,15 +58,6 @@ mixin _$TransportDetailViewModel on TransportDetailViewModelBase, Store {
     return _$messageAsyncAction.run(() => super.message(_));
   }
 
-  late final _$openCurrentChatAsyncAction = AsyncAction(
-      'TransportDetailViewModelBase.openCurrentChat',
-      context: context);
-
-  @override
-  Future<dynamic> openCurrentChat(BuildContext _, String id) {
-    return _$openCurrentChatAsyncAction.run(() => super.openCurrentChat(_, id));
-  }
-
   late final _$TransportDetailViewModelBaseActionController =
       ActionController(name: 'TransportDetailViewModelBase', context: context);
 

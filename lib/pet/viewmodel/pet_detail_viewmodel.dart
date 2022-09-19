@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
-import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/chat/view/chat_detail_view.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
@@ -10,7 +9,6 @@ import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/pet/model/pet_advert_model.dart';
 import 'package:petjoo/pet/service/pet_service.dart';
 import 'package:petjoo/pet/view/pet_add_view.dart';
-import 'package:petjoo/user/model/current_user.dart';
 import 'package:petjoo/user/service/user_service.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -75,33 +73,16 @@ abstract class PetDetailViewModelBase with Store {
 
   @action
   Future message(BuildContext _) async {
-    await ChatService.findChat(advert!.userId).then((value) {
-      value == null
-          ? Navigator.push(
-              _,
-              MaterialPageRoute(
-                  builder: (builder) => ChatDetailView(
-                        model:
-                            ChatModel.fromUser(CurrentUser.id, advert!.userId),
-                        name: userName ?? '',
-                        advertModel:
-                            ChatAdvertModel.fromManuel(advert!.id, 'adverts'),
-                      )))
-          : openCurrentChat(_, value);
-    });
-  }
-
-  @action
-  Future openCurrentChat(BuildContext _, String id) async {
-    await ChatService.getOnes(id).then((value) => Navigator.push(
-        _,
-        MaterialPageRoute(
+    await ChatService.goToChat(advert!.userId).then((value) => Navigator.push(
+          _,
+          MaterialPageRoute(
             builder: (builder) => ChatDetailView(
-                  model: value,
-                  name: userName ?? '',
-                  advertModel:
-                      ChatAdvertModel.fromManuel(advert!.id, 'adverts'),
-                ))));
+              model: value,
+              name: advert!.title,
+              advertModel: ChatAdvertModel.fromManuel(advert!.id, 'adverts'),
+            ),
+          ),
+        ));
   }
 
   @action

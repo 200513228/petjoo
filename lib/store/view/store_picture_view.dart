@@ -33,7 +33,7 @@ class StorePictureView extends StatelessWidget {
                   crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
               children: [
                 if (vm.imageList.length < 2) pickerButton,
-                ...vm.imageList.map((e) => Image.file(e)),
+                ...vm.imageList.map((e) => imageTile(e)),
               ],
             );
     });

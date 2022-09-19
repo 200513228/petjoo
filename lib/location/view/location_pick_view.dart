@@ -9,22 +9,32 @@ class LocationPickView extends StatelessWidget {
   LocationPickView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    vm.onCameraMove(
-        CameraPosition(target: LatLng(vm.loc.latitude, vm.loc.longitude)));
+    vm.currentLoc();
     return Column(
       children: [
         Expanded(
-          child: Observer(builder: (_) {
-            return GoogleMap(
-              zoomControlsEnabled: false,
-              myLocationEnabled: false,
-              myLocationButtonEnabled: false,
-              initialCameraPosition: vm.camPos,
-              onCameraMove: (position) {
-                vm.onCameraMove(position);
-              },
-            );
-          }),
+          child: Stack(
+            children: [
+              Observer(builder: (_) {
+                return GoogleMap(
+                  zoomControlsEnabled: true,
+                  myLocationEnabled: false,
+                  myLocationButtonEnabled: false,
+                  initialCameraPosition: vm.camPos,
+                  onCameraMove: (position) {
+                    vm.onCameraMove(position);
+                  },
+                );
+              }),
+              const Center(
+                child: Icon(
+                  Icons.location_on_sharp,
+                  color: Colors.red,
+                  size: 48,
+                ),
+              )
+            ],
+          ),
         ),
         Row(
           children: [

@@ -105,6 +105,38 @@ mixin _$ReservationCreateViewModel on ReservationCreateViewModelBase, Store {
     });
   }
 
+  late final _$beginGeoPointAtom = Atom(
+      name: 'ReservationCreateViewModelBase.beginGeoPoint', context: context);
+
+  @override
+  GeoPoint? get beginGeoPoint {
+    _$beginGeoPointAtom.reportRead();
+    return super.beginGeoPoint;
+  }
+
+  @override
+  set beginGeoPoint(GeoPoint? value) {
+    _$beginGeoPointAtom.reportWrite(value, super.beginGeoPoint, () {
+      super.beginGeoPoint = value;
+    });
+  }
+
+  late final _$endGeoPointAtom = Atom(
+      name: 'ReservationCreateViewModelBase.endGeoPoint', context: context);
+
+  @override
+  GeoPoint? get endGeoPoint {
+    _$endGeoPointAtom.reportRead();
+    return super.endGeoPoint;
+  }
+
+  @override
+  set endGeoPoint(GeoPoint? value) {
+    _$endGeoPointAtom.reportWrite(value, super.endGeoPoint, () {
+      super.endGeoPoint = value;
+    });
+  }
+
   late final _$dialCodeAtom =
       Atom(name: 'ReservationCreateViewModelBase.dialCode', context: context);
 
@@ -135,6 +167,22 @@ mixin _$ReservationCreateViewModel on ReservationCreateViewModelBase, Store {
     _$animalAtom.reportWrite(value, super.animal, () {
       super.animal = value;
     });
+  }
+
+  late final _$setBeginAsyncAction =
+      AsyncAction('ReservationCreateViewModelBase.setBegin', context: context);
+
+  @override
+  Future<dynamic> setBegin(BuildContext context) {
+    return _$setBeginAsyncAction.run(() => super.setBegin(context));
+  }
+
+  late final _$setEndAsyncAction =
+      AsyncAction('ReservationCreateViewModelBase.setEnd', context: context);
+
+  @override
+  Future<dynamic> setEnd(BuildContext context) {
+    return _$setEndAsyncAction.run(() => super.setEnd(context));
   }
 
   late final _$saveAsyncAction =
@@ -191,6 +239,8 @@ advertModel: ${advertModel},
 nameCont: ${nameCont},
 descCont: ${descCont},
 phoneCont: ${phoneCont},
+beginGeoPoint: ${beginGeoPoint},
+endGeoPoint: ${endGeoPoint},
 dialCode: ${dialCode},
 animal: ${animal}
     ''';

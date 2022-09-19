@@ -7,14 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
 import 'app.dart';
 import 'firebase_options.dart';
-import 'base/notification_service.dart';
+import 'home/service/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
   await EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
   NotificationService.instance.initialize(_firebaseMessagingBackgroundHandler);
 
   runApp(

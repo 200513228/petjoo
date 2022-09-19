@@ -21,10 +21,10 @@ class ChatDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.setChatModel(model, advertModel);
-    List findUser = model.userIds;
+    List findUser = vm.chatModel!.userIds;
     findUser.remove(CurrentUser.id);
-    vm.getMessages(model.id);
-    vm.checkBlock(findUser.first);
+    vm.getMessages(vm.chatModel!.id);
+    // vm.checkBlock(findUser.first);
     return Observer(builder: (_) {
       return Scaffold(
         appBar: buildAppBar(context, findUser.first),
@@ -128,7 +128,7 @@ class ChatDetailView extends StatelessWidget {
           )),
           const SizedBox(width: 15),
           IconButton(
-              onPressed: () => vm.sendMessage(model),
+              onPressed: () => vm.sendMessage(vm.chatModel!),
               icon: const Icon(Icons.send),
               color: Colors.black),
         ],

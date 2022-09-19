@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/base/num_extension.dart';
+import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/ui/dropdown_x.dart';
 import 'package:petjoo/ui/loading.dart';
 import 'package:petjoo/pet/model/pet_advert_animals.dart';
@@ -292,17 +293,33 @@ class PetAddView extends StatelessWidget {
           ],
         ),
       ),
-      Padding(
+      Container(
+        height: 150,
         padding: const EdgeInsets.only(top: 10),
-        child: TextFormField(
-          controller: vm.addressCont,
-          keyboardType: TextInputType.streetAddress,
-          textInputAction: TextInputAction.next,
-          maxLength: 500,
-          maxLines: 4,
-          decoration: InputDecoration(
-            label: Text('address'.tr()),
-          ),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: vm.addressCont,
+                keyboardType: TextInputType.streetAddress,
+                textInputAction: TextInputAction.next,
+                maxLength: 500,
+                maxLines: 4,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15))),
+                  counterText: '',
+                  label: Text('address'.tr()),
+                ),
+              ),
+            ),
+            Container(
+              width: 100,
+              color: colorPalette['secondary'],
+            ),
+          ],
         ),
       ),
     ];

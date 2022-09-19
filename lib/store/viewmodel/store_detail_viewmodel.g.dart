@@ -121,14 +121,6 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
     return _$messageAsyncAction.run(() => super.message(_));
   }
 
-  late final _$openCurrentChatAsyncAction =
-      AsyncAction('StoreDetailViewModelBase.openCurrentChat', context: context);
-
-  @override
-  Future<dynamic> openCurrentChat(BuildContext _, String id) {
-    return _$openCurrentChatAsyncAction.run(() => super.openCurrentChat(_, id));
-  }
-
   late final _$StoreDetailViewModelBaseActionController =
       ActionController(name: 'StoreDetailViewModelBase', context: context);
 

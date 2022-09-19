@@ -137,6 +137,15 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
     });
   }
 
+  late final _$setChatModelAsyncAction =
+      AsyncAction('ChatDetailViewModelBase.setChatModel', context: context);
+
+  @override
+  Future<dynamic> setChatModel(ChatModel model, ChatAdvertModel? xadvertModel) {
+    return _$setChatModelAsyncAction
+        .run(() => super.setChatModel(model, xadvertModel));
+  }
+
   late final _$getMessagesAsyncAction =
       AsyncAction('ChatDetailViewModelBase.getMessages', context: context);
 
@@ -175,20 +184,6 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
   @override
   Future<dynamic> unblockUser(BuildContext context, String uid) {
     return _$unblockUserAsyncAction.run(() => super.unblockUser(context, uid));
-  }
-
-  late final _$ChatDetailViewModelBaseActionController =
-      ActionController(name: 'ChatDetailViewModelBase', context: context);
-
-  @override
-  void setChatModel(ChatModel model, ChatAdvertModel? xadvertModel) {
-    final _$actionInfo = _$ChatDetailViewModelBaseActionController.startAction(
-        name: 'ChatDetailViewModelBase.setChatModel');
-    try {
-      return super.setChatModel(model, xadvertModel);
-    } finally {
-      _$ChatDetailViewModelBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override

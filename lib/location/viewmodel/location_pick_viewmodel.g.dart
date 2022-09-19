@@ -41,11 +41,19 @@ mixin _$LocationPickViewModel on LocationPickViewModelBase, Store {
     });
   }
 
+  late final _$currentLocAsyncAction =
+      AsyncAction('LocationPickViewModelBase.currentLoc', context: context);
+
+  @override
+  Future<dynamic> currentLoc() {
+    return _$currentLocAsyncAction.run(() => super.currentLoc());
+  }
+
   late final _$LocationPickViewModelBaseActionController =
       ActionController(name: 'LocationPickViewModelBase', context: context);
 
   @override
-  dynamic onCameraMove(dynamic xcamPos) {
+  void onCameraMove(dynamic xcamPos) {
     final _$actionInfo = _$LocationPickViewModelBaseActionController
         .startAction(name: 'LocationPickViewModelBase.onCameraMove');
     try {
@@ -56,7 +64,7 @@ mixin _$LocationPickViewModel on LocationPickViewModelBase, Store {
   }
 
   @override
-  dynamic onSave(BuildContext context) {
+  void onSave(BuildContext context) {
     final _$actionInfo = _$LocationPickViewModelBaseActionController
         .startAction(name: 'LocationPickViewModelBase.onSave');
     try {

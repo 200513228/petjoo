@@ -89,15 +89,6 @@ mixin _$ReservationTileViewModel on ReservationTileViewModelBase, Store {
     return _$messageAsyncAction.run(() => super.message(_));
   }
 
-  late final _$openCurrentChatAsyncAction = AsyncAction(
-      'ReservationTileViewModelBase.openCurrentChat',
-      context: context);
-
-  @override
-  Future<dynamic> openCurrentChat(BuildContext _, String id) {
-    return _$openCurrentChatAsyncAction.run(() => super.openCurrentChat(_, id));
-  }
-
   late final _$userInfoAsyncAction =
       AsyncAction('ReservationTileViewModelBase.userInfo', context: context);
 

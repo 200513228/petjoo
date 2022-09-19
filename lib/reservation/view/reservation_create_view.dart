@@ -162,23 +162,37 @@ class ReservationCreateView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: colorPalette['secondary'],
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
+            child: InkWell(
+              onTap: () {
+                vm.setBegin(context);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: colorPalette['secondary'],
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                ),
+                child: vm.beginGeoPoint != null
+                    ? Text('seçildi')
+                    : Center(child: Text('Başlangıç Konumu Seç'.tr())),
               ),
-              child: Center(child: Text('Başlangıç Konumu Seç'.tr())),
             ),
           ),
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: colorPalette['secondary'],
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
+            child: InkWell(
+              onTap: () {
+                vm.setEnd(context);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: colorPalette['secondary'],
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                ),
+                child: vm.endGeoPoint != null
+                    ? Text('seçildi')
+                    : Center(child: Text('Bitiş Konumu Seç'.tr())),
               ),
-              child: Center(child: Text('Bitiş Konumu Seç'.tr())),
             ),
           )
         ],

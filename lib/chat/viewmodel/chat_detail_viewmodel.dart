@@ -31,7 +31,7 @@ abstract class ChatDetailViewModelBase with Store {
   bool isYouBlocked = false;
 
   @action
-  void setChatModel(ChatModel model, ChatAdvertModel? xadvertModel) {
+  Future setChatModel(ChatModel model, ChatAdvertModel? xadvertModel) async {
     chatModel = model;
     advertModel = xadvertModel;
   }

@@ -44,7 +44,7 @@ class StoreDetailView extends StatelessWidget {
                     child: Column(
                       children: [
                         title(),
-                        advertInfo,
+                        advertInfo(context),
                       ],
                     ),
                   ),
@@ -58,7 +58,7 @@ class StoreDetailView extends StatelessWidget {
     );
   }
 
-  Widget get advertInfo {
+  Widget advertInfo(BuildContext context) {
     return Column(
       children: [
         Row(
@@ -81,7 +81,7 @@ class StoreDetailView extends StatelessWidget {
           ],
         ),
         advertDesc,
-        advertAdress,
+        advertAdress(context),
       ],
     );
   }
@@ -142,7 +142,7 @@ class StoreDetailView extends StatelessWidget {
     );
   }
 
-  Widget get advertAdress {
+  Widget advertAdress(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
@@ -181,7 +181,11 @@ class StoreDetailView extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        vm.advert!.geoPoint.latitude != 0
+                            ? vm.showLocation(context)
+                            : null;
+                      },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [

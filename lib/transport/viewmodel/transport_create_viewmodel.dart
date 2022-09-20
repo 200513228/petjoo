@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/location/service/location_picker.dart';
 import 'package:petjoo/transport/model/transport_advert_model.dart';
 import 'package:petjoo/transport/service/transport_service.dart';
 import 'package:petjoo/transport/view/transport_hours_view.dart';
@@ -32,6 +34,13 @@ abstract class TransportCreateViewModelBase with Store {
   bool hasCollar = false;
   @observable
   bool hasCage = false;
+  @observable
+  GeoPoint? geoPoint;
+
+  @action
+  Future pickLocation(BuildContext context) async {
+    geoPoint = await showLocationPicker(context);
+  }
 
   @action
   Future setAdvert() async {
@@ -46,6 +55,7 @@ abstract class TransportCreateViewModelBase with Store {
     isIntercity = advert?.isIntercity ?? false;
     hasCollar = advert?.hasCollar ?? false;
     hasCage = advert?.hasCage ?? false;
+    geoPoint = advert?.geoPoint ?? const GeoPoint(0, 0);
     isLoading = !isLoading;
   }
 
@@ -70,6 +80,7 @@ abstract class TransportCreateViewModelBase with Store {
       advert!.isIntercity = isIntercity;
       advert!.hasCage = hasCage;
       advert!.hasCollar = hasCollar;
+      advert!.geoPoint = geoPoint ?? const GeoPoint(0, 0);
       Navigator.push(
           context,
           MaterialPageRoute(

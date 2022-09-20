@@ -125,6 +125,17 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
       ActionController(name: 'StoreDetailViewModelBase', context: context);
 
   @override
+  void showLocation(BuildContext context) {
+    final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
+        name: 'StoreDetailViewModelBase.showLocation');
+    try {
+      return super.showLocation(context);
+    } finally {
+      _$StoreDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setModel(StoreAdvertModel model) {
     final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
         name: 'StoreDetailViewModelBase.setModel');

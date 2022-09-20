@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/user/model/current_user.dart';
@@ -22,15 +20,6 @@ class ChatService {
         .orderBy('date', descending: true)
         .snapshots();
   }
-
-  // static Stream<QuerySnapshot<Map<String, dynamic>>> getAdverts(String doc) {
-  //   return db
-  //       .collection('chats')
-  //       .doc(doc)
-  //       .collection('adverts')
-  //       .orderBy('date', descending: true)
-  //       .snapshots();
-  // }
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getAdverts(
       String doc) async {
@@ -71,53 +60,21 @@ class ChatService {
     await db.collection('chats').doc(doc).update({'lastMessage': map});
   }
 
-  // static Future<String?> findChat(String userid) async {
-  //   var result = await db.collection('chats').where(
-  //     'userIds',
-  //     isEqualTo: [CurrentUser.id, userid],
-  //   ).get();
-  //   if (result.docs.isNotEmpty) {
-  //     return result.docs.first.id;
-  //   } else {
-  //     var result2 = await db.collection('chats').where(
-  //       'userIds',
-  //       isEqualTo: [userid, CurrentUser.id],
-  //     ).get();
-  //     return result2.docs.isEmpty ? null : result.docs.first.id;
-  //   }
-  // }
-
   static Future<ChatModel> goToChat(String target) async {
     var result = await db
         .collection('chats')
         .where('userIds', isEqualTo: [CurrentUser.id, target]).get();
-
     var result2 = await db
         .collection('chats')
         .where('userIds', isEqualTo: [target, CurrentUser.id]).get();
-
     if (result.size > 0) {
-      log(ChatModel.fromQDS(result.docs.first).id.toString());
       return ChatModel.fromQDS(result.docs.first);
     } else if (result2.size > 0) {
-      log(ChatModel.fromQDS(result2.docs.first).id.toString());
       return ChatModel.fromQDS(result2.docs.first);
     } else {
-      log(ChatModel.fromUser(target, CurrentUser.id).id.toString());
       return ChatModel.fromUser(target, CurrentUser.id);
     }
-
-    // return result.size != 0
-    //     ? ChatModel.fromQDS(result.docs.first)
-    //     : (result2.size != 0
-    //         ? ChatModel.fromQDS(result2.docs.first)
-    //         : ChatModel.fromUser(target, CurrentUser.id));
   }
-
-  // static Future<ChatModel> getOnes(String docid) async {
-  //   var result = await db.collection('chats').doc(docid).get();
-  //   return ChatModel.fromDS(result);
-  // }
 
   static Future<Map<String, String>> getAdvertInfo(
       String type, String id) async {

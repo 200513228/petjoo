@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/ui/loading.dart';
 import 'package:petjoo/transport/viewmodel/transport_create_viewmodel.dart';
 import 'package:petjoo/base/validators.dart';
@@ -39,7 +40,7 @@ class TransportCreateView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      ...advertTiles,
+                      ...advertTiles(context),
                       workHours(context),
                       nextStepButton(context),
                     ],
@@ -50,7 +51,7 @@ class TransportCreateView extends StatelessWidget {
     });
   }
 
-  List<Widget> get advertTiles {
+  List<Widget> advertTiles(BuildContext context) {
     return [
       Padding(
         padding: const EdgeInsets.only(bottom: 10),
@@ -118,6 +119,56 @@ class TransportCreateView extends StatelessWidget {
                 maxLines: 2,
                 decoration: InputDecoration(
                     label: Text('address'.tr()), counterText: ''),
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(
+        height: 150,
+        // padding: const EdgeInsets.only(top: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: vm.addressCont,
+                keyboardType: TextInputType.streetAddress,
+                textInputAction: TextInputAction.next,
+                maxLength: 500,
+                maxLines: 4,
+                decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15))),
+                  border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15))),
+                  counterText: '',
+                  label: Text('address'.tr()),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () => vm.pickLocation(context),
+              child: Container(
+                width: 100,
+                height: 136,
+                decoration: BoxDecoration(
+                    color: colorPalette['secondary'],
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    )),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.location_on_sharp),
+                    Text('pick_on_map'.tr())
+                  ],
+                ),
               ),
             ),
           ],

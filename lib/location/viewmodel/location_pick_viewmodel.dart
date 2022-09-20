@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -14,23 +12,24 @@ abstract class LocationPickViewModelBase with Store {
   @observable
   GeoPoint loc = const GeoPoint(41.046888, 28.845604);
   @observable
-  CameraPosition camPos =
-      const CameraPosition(target: LatLng(38, 38), zoom: 16);
+  CameraPosition? camPos;
+  @observable
+  Position? currentPos;
 
   @action
-  Future currentLoc() async {
-    await Geolocator.requestPermission();
-    var pos = await Geolocator.getCurrentPosition();
-    log(pos.toString());
-    camPos =
-        CameraPosition(target: LatLng(pos.latitude, pos.longitude), zoom: 16);
-    loc = GeoPoint(camPos.target.latitude, camPos.target.longitude);
+  void setCurrentLoc(Position xpos) {
+    // await Geolocator.requestPermission();
+    // var pos = await Geolocator.getCurrentPosition();
+    currentPos = xpos;
+    camPos = CameraPosition(
+        target: LatLng(currentPos!.latitude, currentPos!.longitude), zoom: 16);
+    loc = GeoPoint(camPos!.target.latitude, camPos!.target.longitude);
   }
 
   @action
   void onCameraMove(xcamPos) {
     camPos = xcamPos;
-    loc = GeoPoint(camPos.target.latitude, camPos.target.longitude);
+    loc = GeoPoint(camPos!.target.latitude, camPos!.target.longitude);
   }
 
   @action

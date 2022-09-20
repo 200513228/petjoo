@@ -201,6 +201,22 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
     });
   }
 
+  late final _$geoPointAtom =
+      Atom(name: 'StoreAddViewModelBase.geoPoint', context: context);
+
+  @override
+  GeoPoint? get geoPoint {
+    _$geoPointAtom.reportRead();
+    return super.geoPoint;
+  }
+
+  @override
+  set geoPoint(GeoPoint? value) {
+    _$geoPointAtom.reportWrite(value, super.geoPoint, () {
+      super.geoPoint = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: 'StoreAddViewModelBase.isLoading', context: context);
 
@@ -215,6 +231,14 @@ mixin _$StoreAddViewModel on StoreAddViewModelBase, Store {
     _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
     });
+  }
+
+  late final _$pickLocationAsyncAction =
+      AsyncAction('StoreAddViewModelBase.pickLocation', context: context);
+
+  @override
+  Future<dynamic> pickLocation(BuildContext context) {
+    return _$pickLocationAsyncAction.run(() => super.pickLocation(context));
   }
 
   late final _$nextStepAsyncAction =
@@ -276,6 +300,7 @@ price: ${price},
 type: ${type},
 delivery: ${delivery},
 status: ${status},
+geoPoint: ${geoPoint},
 isLoading: ${isLoading}
     ''';
   }

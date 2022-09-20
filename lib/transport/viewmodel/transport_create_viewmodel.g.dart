@@ -185,6 +185,31 @@ mixin _$TransportCreateViewModel on TransportCreateViewModelBase, Store {
     });
   }
 
+  late final _$geoPointAtom =
+      Atom(name: 'TransportCreateViewModelBase.geoPoint', context: context);
+
+  @override
+  GeoPoint? get geoPoint {
+    _$geoPointAtom.reportRead();
+    return super.geoPoint;
+  }
+
+  @override
+  set geoPoint(GeoPoint? value) {
+    _$geoPointAtom.reportWrite(value, super.geoPoint, () {
+      super.geoPoint = value;
+    });
+  }
+
+  late final _$pickLocationAsyncAction = AsyncAction(
+      'TransportCreateViewModelBase.pickLocation',
+      context: context);
+
+  @override
+  Future<dynamic> pickLocation(BuildContext context) {
+    return _$pickLocationAsyncAction.run(() => super.pickLocation(context));
+  }
+
   late final _$setAdvertAsyncAction =
       AsyncAction('TransportCreateViewModelBase.setAdvert', context: context);
 
@@ -228,7 +253,8 @@ priceCont: ${priceCont},
 canCatch: ${canCatch},
 isIntercity: ${isIntercity},
 hasCollar: ${hasCollar},
-hasCage: ${hasCage}
+hasCage: ${hasCage},
+geoPoint: ${geoPoint}
     ''';
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -44,7 +42,7 @@ class TransportDetailView extends StatelessWidget {
                     child: Column(
                       children: [
                         title,
-                        advertInfo,
+                        advertInfo(context),
                       ],
                     ),
                   ),
@@ -58,7 +56,7 @@ class TransportDetailView extends StatelessWidget {
     );
   }
 
-  Widget get advertInfo {
+  Widget advertInfo(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 10),
@@ -83,7 +81,7 @@ class TransportDetailView extends StatelessWidget {
           ],
         ),
         advertDesc,
-        advertLocation,
+        advertLocation(context),
         for (int i = 0; i < 7; i++) workHours(model.shifts[i])
       ],
     );
@@ -175,11 +173,9 @@ class TransportDetailView extends StatelessWidget {
     );
   }
 
-  Widget get advertLocation {
+  Widget advertLocation(BuildContext context) {
     return InkWell(
-      onTap: () {
-        log('message');
-      },
+      onTap: () {},
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(8),
@@ -214,7 +210,11 @@ class TransportDetailView extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  vm.advert!.geoPoint.latitude != 0
+                      ? vm.showLocation(context)
+                      : null;
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [

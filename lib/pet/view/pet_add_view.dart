@@ -47,7 +47,7 @@ class PetAddView extends StatelessWidget {
                     children: [
                       ...advertTiles,
                       const SizedBox(height: 20),
-                      ...petTiles,
+                      ...petTiles(context),
                       nextStepButton(context),
                     ],
                   ),
@@ -133,7 +133,7 @@ class PetAddView extends StatelessWidget {
     ];
   }
 
-  List<Widget> get petTiles {
+  List<Widget> petTiles(BuildContext context) {
     return [
       Row(
         children: [
@@ -293,10 +293,11 @@ class PetAddView extends StatelessWidget {
           ],
         ),
       ),
-      Container(
+      SizedBox(
         height: 150,
-        padding: const EdgeInsets.only(top: 10),
+        // padding: const EdgeInsets.only(top: 10),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: TextFormField(
@@ -306,6 +307,10 @@ class PetAddView extends StatelessWidget {
                 maxLength: 500,
                 maxLines: 4,
                 decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15))),
                   border: const OutlineInputBorder(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
@@ -315,9 +320,25 @@ class PetAddView extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: 100,
-              color: colorPalette['secondary'],
+            InkWell(
+              onTap: () => vm.pickLocation(context),
+              child: Container(
+                width: 100,
+                height: 136,
+                decoration: BoxDecoration(
+                    color: colorPalette['secondary'],
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    )),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.location_on_sharp),
+                    Text('pick_on_map'.tr())
+                  ],
+                ),
+              ),
             ),
           ],
         ),

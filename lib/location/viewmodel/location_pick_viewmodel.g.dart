@@ -29,28 +29,47 @@ mixin _$LocationPickViewModel on LocationPickViewModelBase, Store {
       Atom(name: 'LocationPickViewModelBase.camPos', context: context);
 
   @override
-  CameraPosition get camPos {
+  CameraPosition? get camPos {
     _$camPosAtom.reportRead();
     return super.camPos;
   }
 
   @override
-  set camPos(CameraPosition value) {
+  set camPos(CameraPosition? value) {
     _$camPosAtom.reportWrite(value, super.camPos, () {
       super.camPos = value;
     });
   }
 
-  late final _$currentLocAsyncAction =
-      AsyncAction('LocationPickViewModelBase.currentLoc', context: context);
+  late final _$currentPosAtom =
+      Atom(name: 'LocationPickViewModelBase.currentPos', context: context);
 
   @override
-  Future<dynamic> currentLoc() {
-    return _$currentLocAsyncAction.run(() => super.currentLoc());
+  Position? get currentPos {
+    _$currentPosAtom.reportRead();
+    return super.currentPos;
+  }
+
+  @override
+  set currentPos(Position? value) {
+    _$currentPosAtom.reportWrite(value, super.currentPos, () {
+      super.currentPos = value;
+    });
   }
 
   late final _$LocationPickViewModelBaseActionController =
       ActionController(name: 'LocationPickViewModelBase', context: context);
+
+  @override
+  void setCurrentLoc(Position xpos) {
+    final _$actionInfo = _$LocationPickViewModelBaseActionController
+        .startAction(name: 'LocationPickViewModelBase.setCurrentLoc');
+    try {
+      return super.setCurrentLoc(xpos);
+    } finally {
+      _$LocationPickViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void onCameraMove(dynamic xcamPos) {
@@ -78,7 +97,8 @@ mixin _$LocationPickViewModel on LocationPickViewModelBase, Store {
   String toString() {
     return '''
 loc: ${loc},
-camPos: ${camPos}
+camPos: ${camPos},
+currentPos: ${currentPos}
     ''';
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
+import 'package:petjoo/location/view/location_show_view.dart';
 import 'package:petjoo/reservation/view/reservation_shift_view.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
@@ -20,6 +21,14 @@ class TransportDetailViewModel = TransportDetailViewModelBase
 abstract class TransportDetailViewModelBase with Store {
   @observable
   TransportAdvertModel? advert;
+
+  @action
+  void showLocation(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LocationShowView(point: advert!.geoPoint)));
+  }
 
   @action
   void setModel(TransportAdvertModel model) {

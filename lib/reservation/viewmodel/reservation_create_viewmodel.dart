@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:petjoo/location/view/location_picker.dart';
+import 'package:petjoo/location/service/location_picker.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';

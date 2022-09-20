@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -69,7 +68,6 @@ abstract class TransportPictureViewModelBase with Store {
     isLoading = !isLoading;
     File? img0 = imageList.isNotEmpty ? imageList[0] : null;
     File? img1 = (imageList.length > 1) ? imageList[1] : null;
-    log(advert!.pricePerKm.toString());
     await TransportService.updateAdvert(advert!, img0, img1)
         .then((value) => value == 'UPDATE' ? successfull(_) : error(_, value));
   }

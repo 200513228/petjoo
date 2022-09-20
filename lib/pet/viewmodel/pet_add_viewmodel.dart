@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/location/service/location_picker.dart';
 import 'package:petjoo/pet/model/pet_advert_model.dart';
 import 'package:petjoo/pet/view/pet_picture_view.dart';
 import 'package:petjoo/user/model/current_user.dart';
@@ -42,7 +44,14 @@ abstract class PetAddViewModelBase with Store {
   @observable
   int? vaccine;
   @observable
+  GeoPoint? geoPoint;
+  @observable
   bool isLoading = false;
+
+  @action
+  Future pickLocation(BuildContext context) async {
+    geoPoint = await showLocationPicker(context);
+  }
 
   @action
   void preEdit(PetAdvertModel model) {
@@ -61,6 +70,7 @@ abstract class PetAddViewModelBase with Store {
     infertility = model.infertility;
     toilet = model.toiletTraining;
     vaccine = model.vaccine;
+    geoPoint = model.geoPoint;
   }
 
   @action
@@ -79,6 +89,7 @@ abstract class PetAddViewModelBase with Store {
     advert.infertility = infertility ?? 0;
     advert.toiletTraining = toilet ?? 0;
     advert.vaccine = vaccine ?? 0;
+    advert.geoPoint = geoPoint ?? const GeoPoint(0, 0);
     if (formKey.currentState?.validate() ?? false) {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => PetPictureView(model: advert)));

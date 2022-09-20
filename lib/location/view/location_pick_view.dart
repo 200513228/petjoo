@@ -1,15 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:petjoo/location/viewmodel/location_pick_viewmodel.dart';
 
 class LocationPickView extends StatelessWidget {
   final LocationPickViewModel vm = LocationPickViewModel();
-  LocationPickView({Key? key}) : super(key: key);
+  final Position position;
+  LocationPickView({required this.position, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    vm.currentLoc();
+    vm.setCurrentLoc(position);
     return Column(
       children: [
         Expanded(
@@ -20,7 +22,7 @@ class LocationPickView extends StatelessWidget {
                   zoomControlsEnabled: true,
                   myLocationEnabled: false,
                   myLocationButtonEnabled: false,
-                  initialCameraPosition: vm.camPos,
+                  initialCameraPosition: vm.camPos!,
                   onCameraMove: (position) {
                     vm.onCameraMove(position);
                   },

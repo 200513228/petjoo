@@ -86,11 +86,11 @@ class StoreAdvertModel {
       'address': model.address,
       'images': [],
       'date': Timestamp.now(),
-      'geoPoint': const GeoPoint(0, 0),
       'type': model.type,
       'delivery': model.delivery,
       'status': model.status,
       'isSold': false,
+      'geoPoint': model.geoPoint
     };
   }
 }

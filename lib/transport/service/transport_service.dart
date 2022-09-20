@@ -85,12 +85,4 @@ class TransportService {
     });
     return 'CREATE';
   }
-
-  // static Future deleteAdvert() async {
-  //   try {
-  //     await db.collection('transport_adverts').doc(CurrentUser.id).delete();
-  //   } on Exception catch (e) {
-  //     log(e.toString());
-  //   }
-  // }
 }

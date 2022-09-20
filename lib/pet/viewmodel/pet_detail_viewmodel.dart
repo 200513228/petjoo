@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/chat/model/chat_advert_model.dart';
+import 'package:petjoo/location/view/location_show_view.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/chat/view/chat_detail_view.dart';
@@ -34,6 +35,14 @@ abstract class PetDetailViewModelBase with Store {
     userName = data['name'] + ' ' + data['surname'];
     userImage = data['image'] ?? '';
     isLoading = !isLoading;
+  }
+
+  @action
+  void showLocation(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LocationShowView(point: advert!.geoPoint)));
   }
 
   @action

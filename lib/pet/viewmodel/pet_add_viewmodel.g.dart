@@ -265,6 +265,22 @@ mixin _$PetAddViewModel on PetAddViewModelBase, Store {
     });
   }
 
+  late final _$geoPointAtom =
+      Atom(name: 'PetAddViewModelBase.geoPoint', context: context);
+
+  @override
+  GeoPoint? get geoPoint {
+    _$geoPointAtom.reportRead();
+    return super.geoPoint;
+  }
+
+  @override
+  set geoPoint(GeoPoint? value) {
+    _$geoPointAtom.reportWrite(value, super.geoPoint, () {
+      super.geoPoint = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: 'PetAddViewModelBase.isLoading', context: context);
 
@@ -279,6 +295,14 @@ mixin _$PetAddViewModel on PetAddViewModelBase, Store {
     _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
     });
+  }
+
+  late final _$pickLocationAsyncAction =
+      AsyncAction('PetAddViewModelBase.pickLocation', context: context);
+
+  @override
+  Future<dynamic> pickLocation(BuildContext context) {
+    return _$pickLocationAsyncAction.run(() => super.pickLocation(context));
   }
 
   late final _$nextStepAsyncAction =
@@ -322,6 +346,7 @@ habit: ${habit},
 infertility: ${infertility},
 toilet: ${toilet},
 vaccine: ${vaccine},
+geoPoint: ${geoPoint},
 isLoading: ${isLoading}
     ''';
   }

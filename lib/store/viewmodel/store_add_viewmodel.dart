@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/location/service/location_picker.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/store/model/store_advert_model.dart';
@@ -36,7 +38,14 @@ abstract class StoreAddViewModelBase with Store {
   @observable
   int? status;
   @observable
+  GeoPoint? geoPoint;
+  @observable
   bool isLoading = false;
+
+  @action
+  Future pickLocation(BuildContext context) async {
+    geoPoint = await showLocationPicker(context);
+  }
 
   @action
   void preEdit(StoreAdvertModel model) {
@@ -51,6 +60,7 @@ abstract class StoreAddViewModelBase with Store {
     delivery = model.delivery;
     status = model.status;
     addressCont.text = model.address;
+    geoPoint = model.geoPoint;
   }
 
   @action
@@ -65,6 +75,7 @@ abstract class StoreAddViewModelBase with Store {
     advert.delivery = delivery ?? 0;
     advert.status = status ?? 0;
     advert.address = addressCont.text;
+    advert.geoPoint = geoPoint ?? const GeoPoint(0, 0);
     if (formKey.currentState?.validate() ?? false) {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => StorePictureView(model: advert)));

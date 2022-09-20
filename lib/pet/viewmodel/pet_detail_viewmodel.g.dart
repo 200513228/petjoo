@@ -125,6 +125,17 @@ mixin _$PetDetailViewModel on PetDetailViewModelBase, Store {
       ActionController(name: 'PetDetailViewModelBase', context: context);
 
   @override
+  void showLocation(BuildContext context) {
+    final _$actionInfo = _$PetDetailViewModelBaseActionController.startAction(
+        name: 'PetDetailViewModelBase.showLocation');
+    try {
+      return super.showLocation(context);
+    } finally {
+      _$PetDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setModel(PetAdvertModel model) {
     final _$actionInfo = _$PetDetailViewModelBaseActionController.startAction(
         name: 'PetDetailViewModelBase.setModel');

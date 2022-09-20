@@ -44,7 +44,6 @@ class ReservationListView extends StatelessWidget {
         lastDay: DateTime(d.year, d.month, d.day + 7),
         onDaySelected: (date, date2) {
           log('DATE1$date');
-          log('DATE2$date2');
         },
         availableCalendarFormats: const {CalendarFormat.twoWeeks: '2 weeks'},
       ),

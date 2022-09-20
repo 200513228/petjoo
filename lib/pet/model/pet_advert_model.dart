@@ -11,7 +11,7 @@ class PetAdvertModel {
   Timestamp date = Timestamp.now();
   String description = '';
   String dialCode = '';
-  GeoPoint? geoPoint = const GeoPoint(0, 0);
+  GeoPoint geoPoint = const GeoPoint(0, 0);
   List images = [];
   int infertility = 0;
   bool isAdopted = false;
@@ -46,14 +46,6 @@ class PetAdvertModel {
     userId = data['userId'] ?? '';
     vaccine = data['vaccine'] ?? 0;
     address = data['address'] ?? '';
-    // oldUserId =
-    //     (data['user'] as Map<String, dynamic>? ?? {'id': ''})['id'] ?? '';
-    var usermap = data['user'] as Map<String, dynamic>?;
-    oldUserId = usermap?['id'] ?? '';
-
-    if (userId == '') {
-      userId = oldUserId;
-    }
   }
 
   PetAdvertModel.fromDS(DocumentSnapshot<Map<String, dynamic>> snapshot) {
@@ -78,14 +70,6 @@ class PetAdvertModel {
     userId = data['userId'] ?? '';
     vaccine = data['vaccine'] ?? 0;
     address = data['address'] ?? '';
-    // oldUserId =
-    //     (data['user'] as Map<String, dynamic>? ?? {'id': ''})['id'] ?? '';
-    var usermap = data['user'] as Map<String, dynamic>?;
-    oldUserId = usermap?['id'] ?? '';
-
-    if (userId == '') {
-      userId = oldUserId;
-    }
   }
 
   PetAdvertModel.empty() {
@@ -131,7 +115,7 @@ class PetAdvertModel {
       'address': model.address,
       'images': [],
       'date': Timestamp.now(),
-      'geoPoint': const GeoPoint(0, 0),
+      'geoPoint': model.geoPoint,
     };
   }
 }

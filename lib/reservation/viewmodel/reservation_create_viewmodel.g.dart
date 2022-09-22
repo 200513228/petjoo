@@ -137,6 +137,22 @@ mixin _$ReservationCreateViewModel on ReservationCreateViewModelBase, Store {
     });
   }
 
+  late final _$formKeyAtom =
+      Atom(name: 'ReservationCreateViewModelBase.formKey', context: context);
+
+  @override
+  GlobalKey<FormState> get formKey {
+    _$formKeyAtom.reportRead();
+    return super.formKey;
+  }
+
+  @override
+  set formKey(GlobalKey<FormState> value) {
+    _$formKeyAtom.reportWrite(value, super.formKey, () {
+      super.formKey = value;
+    });
+  }
+
   late final _$dialCodeAtom =
       Atom(name: 'ReservationCreateViewModelBase.dialCode', context: context);
 
@@ -189,8 +205,18 @@ mixin _$ReservationCreateViewModel on ReservationCreateViewModelBase, Store {
       AsyncAction('ReservationCreateViewModelBase.save', context: context);
 
   @override
-  Future<dynamic> save(BuildContext context) {
+  Future<String> save(BuildContext context) {
     return _$saveAsyncAction.run(() => super.save(context));
+  }
+
+  late final _$calculateAndSaveAsyncAction = AsyncAction(
+      'ReservationCreateViewModelBase.calculateAndSave',
+      context: context);
+
+  @override
+  Future<dynamic> calculateAndSave(BuildContext context) {
+    return _$calculateAndSaveAsyncAction
+        .run(() => super.calculateAndSave(context));
   }
 
   late final _$ReservationCreateViewModelBaseActionController =
@@ -241,6 +267,7 @@ descCont: ${descCont},
 phoneCont: ${phoneCont},
 beginGeoPoint: ${beginGeoPoint},
 endGeoPoint: ${endGeoPoint},
+formKey: ${formKey},
 dialCode: ${dialCode},
 animal: ${animal}
     ''';

@@ -104,26 +104,6 @@ class TransportCreateView extends StatelessWidget {
           ],
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 5,
-              child: TextFormField(
-                enableIMEPersonalizedLearning: true,
-                controller: vm.addressCont,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                maxLength: 200,
-                maxLines: 2,
-                decoration: InputDecoration(
-                    label: Text('address'.tr()), counterText: ''),
-              ),
-            ),
-          ],
-        ),
-      ),
       SizedBox(
         height: 150,
         // padding: const EdgeInsets.only(top: 10),

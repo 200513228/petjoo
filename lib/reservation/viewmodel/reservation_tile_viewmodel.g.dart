@@ -93,8 +93,8 @@ mixin _$ReservationTileViewModel on ReservationTileViewModelBase, Store {
       AsyncAction('ReservationTileViewModelBase.userInfo', context: context);
 
   @override
-  Future<dynamic> userInfo() {
-    return _$userInfoAsyncAction.run(() => super.userInfo());
+  Future<dynamic> userInfo(bool isUser) {
+    return _$userInfoAsyncAction.run(() => super.userInfo(isUser));
   }
 
   late final _$ReservationTileViewModelBaseActionController =

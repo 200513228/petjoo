@@ -11,9 +11,10 @@ class ReservationModel {
   GeoPoint beginGeoPoint = const GeoPoint(0, 0);
   GeoPoint endGeoPoint = const GeoPoint(0, 0);
   Timestamp date = Timestamp.now();
-  double distance = 0.0;
+  double distanceA = 0.0;
+  double distanceB = 0.0;
   double resPricePerKm = 0.0;
-  int status = 0;
+  int status = 0; //waiting, reject, accept
   int animalType = 0;
 
   ReservationModel.fromQDS(QueryDocumentSnapshot snapshot) {
@@ -28,7 +29,8 @@ class ReservationModel {
     beginGeoPoint = data['beginGeoPoint'] ?? const GeoPoint(0, 0);
     endGeoPoint = data['endGeoPoint'] ?? const GeoPoint(0, 0);
     date = data['date'] ?? Timestamp.now();
-    distance = data['distance'] ?? 0.0;
+    distanceA = data['distanceA'] ?? 0.0;
+    distanceB = data['distanceB'] ?? 0.0;
     resPricePerKm = data['resPricePerKm'] ?? 0.0;
     status = data['status'] ?? 0;
     animalType = data['animalType'] ?? 0;
@@ -46,7 +48,8 @@ class ReservationModel {
     beginGeoPoint = data['beginGeoPoint'] ?? const GeoPoint(0, 0);
     endGeoPoint = data['endGeoPoint'] ?? const GeoPoint(0, 0);
     date = data['date'] ?? Timestamp.now();
-    distance = data['distance'] ?? 0.0;
+    distanceA = data['distanceA'] ?? 0.0;
+    distanceB = data['distanceB'] ?? 0.0;
     resPricePerKm = data['resPricePerKm'] ?? 0.0;
     status = data['status'] ?? 0;
     animalType = data['animalType'] ?? 0;
@@ -63,7 +66,8 @@ class ReservationModel {
     beginGeoPoint = const GeoPoint(0, 0);
     endGeoPoint = const GeoPoint(0, 0);
     date = time;
-    distance = 0.0;
+    distanceA = 0.0;
+    distanceB = 0.0;
     resPricePerKm = 0.0;
     status = 0;
     animalType = 0;
@@ -80,7 +84,8 @@ class ReservationModel {
       'beginGeoPoint': model.beginGeoPoint,
       'endGeoPoint': model.endGeoPoint,
       'date': model.date,
-      'distance': model.distance,
+      'distanceA': model.distanceA,
+      'distanceB': model.distanceB,
       'resPricePerKm': model.resPricePerKm,
       'status': model.status,
       'animalType': model.animalType

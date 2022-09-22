@@ -103,6 +103,7 @@
     "report": "Report",
     "new_advert": "Create New Advert",
     "title": "Title",
+    "name_min3": "Name must be at least 3 letters",
     "title_min3": "Title must be at least 3 letters",
     "desc_min4": "Description must be at least 4 letters",
     "advert_type": "Advert Type",
@@ -144,5 +145,11 @@
     "start": "Start",
     "end": "End",
     "under_maintenance": "Under Maintenance",
-    "under_maintenance_content": "The part you want to access is under maintenance. Please try again later."
+    "under_maintenance_content": "The part you want to access is under maintenance. Please try again later.",
+    "date": "Date",
+    "reservation": "Reservation",
+    "estimated_distance": "Estimated Distance",
+    "reservation_details": "Reservation Details",
+    "out_of_service": "We are out of service on the date",
+    "directions": "Directions"
 }

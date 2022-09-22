@@ -85,4 +85,9 @@ class TransportService {
     });
     return 'CREATE';
   }
+
+  static Future<DocumentSnapshot<Map<String, dynamic>>> getTransportInfo(
+      String userId) async {
+    return await db.collection('transport_adverts').doc(userId).get();
+  }
 }

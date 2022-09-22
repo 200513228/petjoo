@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';
 import 'package:petjoo/reservation/service/reservation_service.dart';
@@ -8,15 +9,35 @@ class ReservationListViewModel = ReservationListViewModelBase
 
 abstract class ReservationListViewModelBase with Store {
   @observable
+  DateTime initDate = DateTime(
+      DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
+  @observable
   List<ReservationModel> reservationList = [];
 
   @action
-  Future getReservations() async {
+  Future getUserReservs() async {
     List<ReservationModel> temp = [];
-    var data = await ReservationService.getReservations();
+    var data = await ReservationService.getReservations(Timestamp.now());
     for (var element in data.docs) {
       temp.add(ReservationModel.fromQDS(element));
     }
     reservationList = temp;
+  }
+
+  @action
+  Future getTransportReservs() async {
+    List<ReservationModel> temp = [];
+    var data = await ReservationService.getReservations(
+        Timestamp.fromDate(initDate.subtract(const Duration(hours: 3))));
+    for (var element in data.docs) {
+      temp.add(ReservationModel.fromQDS(element));
+    }
+    reservationList = temp;
+  }
+
+  @action
+  void changeDate(DateTime d) {
+    initDate = d;
+    getTransportReservs();
   }
 }

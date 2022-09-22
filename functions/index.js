@@ -72,7 +72,8 @@ exports.transportReservationCreateFunction = functions
                     body: body,
                 },
                 data: {
-                    reservationId: snap.id,
+                    type: "reservation",
+                    docid: snap.id,
                     click_action: "FLUTTER_NOTIFICATION_CLICK",
                 }
             },
@@ -106,7 +107,8 @@ exports.transportReservationUpdateFunction = functions
                         body: body,
                     },
                     data: {
-                        reservationId: snap.after.id,
+                        type: "reservation",
+                        docid: snap.id,
                         click_action: "FLUTTER_NOTIFICATION_CLICK",
                     }
                 },
@@ -149,7 +151,8 @@ exports.chatNotificationFunction = functions
                     body: message.content,
                 },
                 data: {
-                    chatId: chatDoc.id,
+                    type: "chat",
+                    docid: chatDoc.id,
                     click_action: "FLUTTER_NOTIFICATION_CLICK",
                 }
             },

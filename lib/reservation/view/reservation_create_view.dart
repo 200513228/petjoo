@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:petjoo/base/num_extension.dart';
 import 'package:petjoo/ui/dropdown_x.dart';
 import 'package:petjoo/ui/loading.dart';
@@ -47,106 +48,109 @@ class ReservationCreateView extends StatelessWidget {
               )
             : Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: TextFormField(
-                          controller: vm.nameCont,
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          validator: Validators.title('name_min3'.tr()),
-                          maxLength: 30,
-                          decoration: InputDecoration(
-                            counterText: '',
-                            label: Text('name'.tr()),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: DropdownX<String>(
-                              value: vm.dialCode,
-                              borderRadius:
-                                  Dimens.radiusSmall.toLeftBorderRadius(),
-                              validator: (value) =>
-                                  value?.isEmpty == true ? "" : null,
-                              items: dialCodes.values
-                                  .map((e) => DropdownMenuItem(
-                                        value: e,
-                                        child: Text(e),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) => vm.dialCode = value,
+                child: Form(
+                  key: vm.formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: TextFormField(
+                            controller: vm.nameCont,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            validator: Validators.title('name_min3'.tr()),
+                            maxLength: 30,
+                            decoration: InputDecoration(
+                              counterText: '',
+                              label: Text('name'.tr()),
                             ),
                           ),
-                          Expanded(
-                            flex: 5,
-                            child: TextFormField(
-                              controller: vm.phoneCont,
-                              keyboardType: TextInputType.phone,
-                              maxLength: 10,
-                              textInputAction: TextInputAction.next,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              validator: Validators.phone(
-                                  'register_phone_valid'.tr(), true),
-                              decoration: InputDecoration(
-                                  label: Text('phone'.tr()),
-                                  hintText: '5xx xxx xx xx',
-                                  counterText: '',
-                                  border: UnderlineInputBorder(
-                                      borderRadius: Dimens.radiusSmall
-                                          .toRightBorderRadius()),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderRadius: Dimens.radiusSmall
-                                          .toRightBorderRadius()),
-                                  errorBorder: UnderlineInputBorder(
-                                      borderRadius: Dimens.radiusSmall
-                                          .toRightBorderRadius()),
-                                  focusedErrorBorder: UnderlineInputBorder(
-                                      borderRadius: Dimens.radiusSmall
-                                          .toRightBorderRadius())),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: DropdownX<String>(
+                                value: vm.dialCode,
+                                borderRadius:
+                                    Dimens.radiusSmall.toLeftBorderRadius(),
+                                validator: (value) =>
+                                    value?.isEmpty == true ? "" : null,
+                                items: dialCodes.values
+                                    .map((e) => DropdownMenuItem(
+                                          value: e,
+                                          child: Text(e),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) => vm.dialCode = value,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: TextFormField(
+                                controller: vm.phoneCont,
+                                keyboardType: TextInputType.phone,
+                                maxLength: 10,
+                                textInputAction: TextInputAction.next,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                validator: Validators.phone(
+                                    'register_phone_valid'.tr(), true),
+                                decoration: InputDecoration(
+                                    label: Text('phone'.tr()),
+                                    hintText: '5xx xxx xx xx',
+                                    counterText: '',
+                                    border: UnderlineInputBorder(
+                                        borderRadius: Dimens.radiusSmall
+                                            .toRightBorderRadius()),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderRadius: Dimens.radiusSmall
+                                            .toRightBorderRadius()),
+                                    errorBorder: UnderlineInputBorder(
+                                        borderRadius: Dimens.radiusSmall
+                                            .toRightBorderRadius()),
+                                    focusedErrorBorder: UnderlineInputBorder(
+                                        borderRadius: Dimens.radiusSmall
+                                            .toRightBorderRadius())),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: DropdownX<int>(
+                            value: vm.animal,
+                            hint: 'type'.tr(),
+                            borderRadius: Dimens.radiusSmall.toBorderRadius(),
+                            items: petAdvertAnimals.keys
+                                .map((e) => DropdownMenuItem(
+                                      value: e,
+                                      child: Text(petAdvertAnimals[e]!),
+                                    ))
+                                .toList(),
+                            onChanged: (value) => vm.animal = value,
+                          ),
+                        ),
+                        mapSelectors(context),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: TextFormField(
+                            controller: vm.descCont,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            maxLength: 500,
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                              label: Text('description'.tr()),
                             ),
                           ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: DropdownX<int>(
-                          value: vm.animal,
-                          hint: 'type'.tr(),
-                          borderRadius: Dimens.radiusSmall.toBorderRadius(),
-                          items: petAdvertAnimals.keys
-                              .map((e) => DropdownMenuItem(
-                                    value: e,
-                                    child: Text(petAdvertAnimals[e]!),
-                                  ))
-                              .toList(),
-                          onChanged: (value) => vm.animal = value,
                         ),
-                      ),
-                      mapSelectors(context),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: TextFormField(
-                          controller: vm.descCont,
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          maxLength: 500,
-                          maxLines: 5,
-                          decoration: InputDecoration(
-                            label: Text('description'.tr()),
-                          ),
-                        ),
-                      ),
-                      nextStepButton(context),
-                    ],
+                        nextStepButton(context),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -173,7 +177,24 @@ class ReservationCreateView extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                 ),
                 child: vm.beginGeoPoint != null
-                    ? Text('seçildi')
+                    ? ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
+                        child: GoogleMap(
+                          myLocationButtonEnabled: false,
+                          initialCameraPosition: CameraPosition(
+                              target: LatLng(vm.beginGeoPoint!.latitude,
+                                  vm.beginGeoPoint!.longitude),
+                              zoom: 14),
+                          markers: {
+                            Marker(
+                              markerId: const MarkerId('begin'),
+                              position: LatLng(vm.beginGeoPoint!.latitude,
+                                  vm.beginGeoPoint!.longitude),
+                            )
+                          },
+                        ),
+                      )
                     : Center(child: Text('Başlangıç Konumu Seç'.tr())),
               ),
             ),
@@ -190,7 +211,24 @@ class ReservationCreateView extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                 ),
                 child: vm.endGeoPoint != null
-                    ? Text('seçildi')
+                    ? ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
+                        child: GoogleMap(
+                          myLocationButtonEnabled: false,
+                          initialCameraPosition: CameraPosition(
+                              target: LatLng(vm.endGeoPoint!.latitude,
+                                  vm.endGeoPoint!.longitude),
+                              zoom: 14),
+                          markers: {
+                            Marker(
+                              markerId: const MarkerId('begin'),
+                              position: LatLng(vm.endGeoPoint!.latitude,
+                                  vm.endGeoPoint!.longitude),
+                            )
+                          },
+                        ),
+                      )
                     : Center(child: Text('Bitiş Konumu Seç'.tr())),
               ),
             ),
@@ -207,10 +245,40 @@ class ReservationCreateView extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(12),
             child: ElevatedButton(
-                onPressed: () => vm.save(context), child: Text('save'.tr())),
+                onPressed: () async {
+                  String result = await vm.save(context);
+                  result == 'SHOW'
+                      ? showDialog(
+                          context: context,
+                          builder: (context) => alertSave(context))
+                      : null;
+                },
+                child: Text('save'.tr())),
           ),
         )
       ],
+    );
+  }
+
+  Widget alertSave(BuildContext context) {
+    return AlertDialog(
+      title: Text('accept?'.tr()),
+      actions: [
+        ElevatedButton(
+            onPressed: () => Navigator.pop(context), child: Text('close'.tr())),
+        ElevatedButton(
+            onPressed: () => vm.calculateAndSave(context),
+            child: Text('save'.tr())),
+      ],
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+              '${'estimated_distance'.tr()}: ${(vm.model!.distanceA + vm.model!.distanceB) * 2}'),
+          Text(
+              '${'estimated_price'.tr()}: ${((vm.model!.distanceA + vm.model!.distanceB) * 2 * advertModel.pricePerKm).toStringAsFixed(2)}'),
+        ],
+      ),
     );
   }
 

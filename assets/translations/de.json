@@ -103,6 +103,7 @@
     "report": "Report",
     "new_advert": "Neue Anzeige Erstellen",
     "title": "Titel",
+    "name_min3": "Der Name muss mindestens 3 Buchstaben lang sein",
     "title_min3": "Der Titel muss mindestens 3 Buchstaben lang sein",
     "desc_min4": "Die Beschreibung muss mindestens 4 Buchstaben lang sein",
     "advert_type": "Anzeigen Typ",
@@ -144,5 +145,11 @@
     "start": "Anfang",
     "end": "Ende",
     "under_maintenance": "Wird gewartet",
-    "under_maintenance_content": "Der Teil, auf den Sie zugreifen möchten, wird derzeit gewartet. Bitte versuchen Sie es später erneut."
+    "under_maintenance_content": "Der Teil, auf den Sie zugreifen möchten, wird derzeit gewartet. Bitte versuchen Sie es später erneut.",
+    "date": "Datum",
+    "reservation": "Reservierung",
+    "estimated_distance": "Geschätzte Entfernung",
+    "reservation_details": "Reservierungsdetails",
+    "out_of_service": "Wir sind an dem Tag außer Betrieb",
+    "directions": "Richtungen"
 }

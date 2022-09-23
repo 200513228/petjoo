@@ -57,6 +57,22 @@ mixin _$ReservationDetailViewModel on ReservationDetailViewModelBase, Store {
     });
   }
 
+  late final _$companyPhoneAtom = Atom(
+      name: 'ReservationDetailViewModelBase.companyPhone', context: context);
+
+  @override
+  String? get companyPhone {
+    _$companyPhoneAtom.reportRead();
+    return super.companyPhone;
+  }
+
+  @override
+  set companyPhone(String? value) {
+    _$companyPhoneAtom.reportWrite(value, super.companyPhone, () {
+      super.companyPhone = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: 'ReservationDetailViewModelBase.isLoading', context: context);
 
@@ -148,6 +164,7 @@ mixin _$ReservationDetailViewModel on ReservationDetailViewModelBase, Store {
 model: ${model},
 userImage: ${userImage},
 userName: ${userName},
+companyPhone: ${companyPhone},
 isLoading: ${isLoading}
     ''';
   }

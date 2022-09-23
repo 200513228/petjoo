@@ -41,6 +41,22 @@ mixin _$ReservationListViewModel on ReservationListViewModelBase, Store {
     });
   }
 
+  late final _$eventsAtom =
+      Atom(name: 'ReservationListViewModelBase.events', context: context);
+
+  @override
+  Map<int, List<dynamic>?> get events {
+    _$eventsAtom.reportRead();
+    return super.events;
+  }
+
+  @override
+  set events(Map<int, List<dynamic>?> value) {
+    _$eventsAtom.reportWrite(value, super.events, () {
+      super.events = value;
+    });
+  }
+
   late final _$getUserReservsAsyncAction = AsyncAction(
       'ReservationListViewModelBase.getUserReservs',
       context: context);
@@ -48,6 +64,14 @@ mixin _$ReservationListViewModel on ReservationListViewModelBase, Store {
   @override
   Future<dynamic> getUserReservs() {
     return _$getUserReservsAsyncAction.run(() => super.getUserReservs());
+  }
+
+  late final _$getEventsAsyncAction =
+      AsyncAction('ReservationListViewModelBase.getEvents', context: context);
+
+  @override
+  Future<dynamic> getEvents() {
+    return _$getEventsAsyncAction.run(() => super.getEvents());
   }
 
   late final _$getTransportReservsAsyncAction = AsyncAction(
@@ -78,7 +102,8 @@ mixin _$ReservationListViewModel on ReservationListViewModelBase, Store {
   String toString() {
     return '''
 initDate: ${initDate},
-reservationList: ${reservationList}
+reservationList: ${reservationList},
+events: ${events}
     ''';
   }
 }

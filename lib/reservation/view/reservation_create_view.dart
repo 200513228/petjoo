@@ -195,7 +195,7 @@ class ReservationCreateView extends StatelessWidget {
                           },
                         ),
                       )
-                    : Center(child: Text('Başlangıç Konumu Seç'.tr())),
+                    : Center(child: Text('pick_begin_point'.tr())),
               ),
             ),
           ),
@@ -229,7 +229,7 @@ class ReservationCreateView extends StatelessWidget {
                           },
                         ),
                       )
-                    : Center(child: Text('Bitiş Konumu Seç'.tr())),
+                    : Center(child: Text('pick_end_point'.tr())),
               ),
             ),
           )
@@ -262,7 +262,7 @@ class ReservationCreateView extends StatelessWidget {
 
   Widget alertSave(BuildContext context) {
     return AlertDialog(
-      title: Text('accept?'.tr()),
+      title: Text('accept'.tr()),
       actions: [
         ElevatedButton(
             onPressed: () => Navigator.pop(context), child: Text('close'.tr())),
@@ -274,9 +274,9 @@ class ReservationCreateView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-              '${'estimated_distance'.tr()}: ${(vm.model!.distanceA + vm.model!.distanceB) * 2}'),
+              '${'estimated_distance'.tr()}: ${(vm.model!.distanceA + vm.model!.distanceB) * 2} km'),
           Text(
-              '${'estimated_price'.tr()}: ${((vm.model!.distanceA + vm.model!.distanceB) * 2 * advertModel.pricePerKm).toStringAsFixed(2)}'),
+              '${'estimated_price'.tr()}: ${((vm.model!.distanceA + vm.model!.distanceB) * 2 * advertModel.pricePerKm).toStringAsFixed(2)} ₺'),
         ],
       ),
     );

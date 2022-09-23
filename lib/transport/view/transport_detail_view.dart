@@ -63,20 +63,20 @@ class TransportDetailView extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: advertInfoCard('Şehirlerarası',
+              child: advertInfoCard('intercity'.tr(),
                   FontAwesomeIcons.earthAmericas, model.isIntercity),
             ),
             Expanded(
               child: advertInfoCard(
-                  'Kafes', FontAwesomeIcons.shieldDog, model.hasCage),
+                  'cage'.tr(), FontAwesomeIcons.shieldDog, model.hasCage),
             ),
             Expanded(
               child: advertInfoCard(
-                  'Tasma', Icons.circle_outlined, model.hasCollar),
+                  'collar'.tr(), Icons.circle_outlined, model.hasCollar),
             ),
             Expanded(
               child: advertInfoCard(
-                  'Yakalama', FontAwesomeIcons.personRunning, model.canCatch),
+                  'catch'.tr(), FontAwesomeIcons.personRunning, model.canCatch),
             ),
           ],
         ),
@@ -92,31 +92,7 @@ class TransportDetailView extends StatelessWidget {
     String start = map['start'];
     String end = map['end'];
     int i = map['day'];
-    String day = 'Pazartesi';
-    switch (i) {
-      case 0:
-        day = 'Pazartesi';
-        break;
-      case 1:
-        day = 'Salı';
-        break;
-      case 2:
-        day = 'Çarşamba';
-        break;
-      case 3:
-        day = 'Perşembe';
-        break;
-      case 4:
-        day = 'Cuma';
-        break;
-      case 5:
-        day = 'Cumartesi';
-        break;
-      case 6:
-        day = 'Pazar';
-        break;
-      default:
-    }
+    String day = dayToString(i);
     return Container(
       padding: const EdgeInsets.all(12),
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -132,7 +108,7 @@ class TransportDetailView extends StatelessWidget {
                 Text(
                     isActive
                         ? '${hourToString(start)}-${hourToString(end)}'
-                        : 'KAPALI',
+                        : 'close'.tr(),
                     style: TextStyle(
                         color: isActive ? Colors.greenAccent : Colors.red)),
               ],
@@ -217,9 +193,9 @@ class TransportDetailView extends StatelessWidget {
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.location_on),
-                    Text('Harita'),
+                  children: [
+                    const Icon(Icons.location_on),
+                    Text('map'.tr()),
                   ],
                 ),
               ),
@@ -280,7 +256,7 @@ class TransportDetailView extends StatelessWidget {
             child: FloatingActionButton.extended(
               heroTag: null,
               onPressed: () => vm.makeReservation(_),
-              label: const Text('Rezervasyon Yap'),
+              label: Text('reservation'.tr()),
             ),
           ),
           ...CurrentUser.id == model.id

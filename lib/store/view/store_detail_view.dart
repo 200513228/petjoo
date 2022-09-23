@@ -188,9 +188,9 @@ class StoreDetailView extends StatelessWidget {
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.location_on),
-                          Text('Harita'),
+                        children: [
+                          const Icon(Icons.location_on),
+                          Text('map'.tr()),
                         ],
                       ),
                     ),

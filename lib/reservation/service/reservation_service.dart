@@ -46,6 +46,25 @@ class ReservationService {
         : await db
             .collection('transport_reservations')
             .where('userId', isEqualTo: CurrentUser.id)
+            .orderBy('date', descending: true)
             .get();
+  }
+
+  static Future<List> getWeekCounter(DateTime day) async {
+    Timestamp time = Timestamp.fromDate(day);
+    DateTime d = time.toDate();
+    DateTime limit = DateTime(d.year, d.month, d.day, 24);
+    Timestamp time2 = Timestamp.fromDate(limit);
+    var data = await db
+        .collection('transport_reservations')
+        .where('advertId', isEqualTo: CurrentUser.id)
+        .where('date', isGreaterThanOrEqualTo: time)
+        .where('date', isLessThan: time2)
+        .get();
+    List result = [];
+    for (var i = 0; i < data.size; i++) {
+      result.add(i);
+    }
+    return result;
   }
 }

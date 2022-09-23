@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 String dateToString(Timestamp date) {
   var d = date.toDate();
@@ -14,7 +15,7 @@ String hourToString(String hour) {
       ? '0${hour.split(':')[0]}'
       : hour.split(':')[0];
   String end = hour.split(':')[1].length == 1
-      ? '${hour.split(':')[1]}0'
+      ? '0${hour.split(':')[1]}'
       : hour.split(':')[1];
   return '$start:$end';
 }
@@ -22,21 +23,21 @@ String hourToString(String hour) {
 String dayToString(int day) {
   switch (day) {
     case 0:
-      return 'Pazartesi';
+      return 'monday'.tr();
     case 1:
-      return 'Salı';
+      return 'tuesday'.tr();
     case 2:
-      return 'Çarşamba';
+      return 'wednesday'.tr();
     case 3:
-      return 'Perşembe';
+      return 'thursday'.tr();
     case 4:
-      return 'Cuma';
+      return 'friday'.tr();
     case 5:
-      return 'Cumartesi';
+      return 'saturday'.tr();
     case 6:
-      return 'Pazar';
+      return 'sunday'.tr();
     default:
-      return 'Pazartesi';
+      return 'monday'.tr();
   }
 }
 

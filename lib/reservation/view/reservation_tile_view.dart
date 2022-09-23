@@ -72,7 +72,7 @@ class ReservationTileView extends StatelessWidget {
             maxLines: 1,
           ),
           Text(
-            '${'estimated_distance'.tr()} ${2 * (model.distanceA + model.distanceB)}',
+            '${'estimated_distance'.tr()} ${2 * (model.distanceA + model.distanceB)} km',
             style: ClassicTheme.myTheme()
                 .textTheme
                 .labelSmall

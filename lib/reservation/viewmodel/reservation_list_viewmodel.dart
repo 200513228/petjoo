@@ -13,6 +13,8 @@ abstract class ReservationListViewModelBase with Store {
       DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
   @observable
   List<ReservationModel> reservationList = [];
+  @observable
+  Map<int, List?> events = {};
 
   @action
   Future getUserReservs() async {
@@ -22,6 +24,18 @@ abstract class ReservationListViewModelBase with Store {
       temp.add(ReservationModel.fromQDS(element));
     }
     reservationList = temp;
+  }
+
+  @action
+  Future getEvents() async {
+    DateTime d = DateTime.now();
+    for (var i = 0; i < 7; i++) {
+      var data = await ReservationService.getWeekCounter(
+          DateTime(d.year, d.month, d.day + i));
+      events[d.day + i] = data;
+    }
+    initDate = DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
   }
 
   @action

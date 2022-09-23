@@ -65,7 +65,7 @@ abstract class ReservationCreateViewModelBase with Store {
         endGeoPoint != null &&
         formKey.currentState!.validate()) {
       isLoading = !isLoading;
-      model!.id = '${CurrentUser.id}_${advertModel!.id}';
+      model!.id = '${CurrentUser.id}_${advertModel!.id}_${DateTime.now()}}';
       model!.advertId = advertModel!.id;
       model!.userId = CurrentUser.id;
       model!.fullName = nameCont.text;

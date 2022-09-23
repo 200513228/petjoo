@@ -55,7 +55,7 @@ class ReservationShiftView extends StatelessWidget {
       return vm.hours.isEmpty
           ? Center(
               child: Text(
-                'Belirtilen tarihte hizmet verememekteyiz'.tr(),
+                'out_of_service'.tr(),
                 style: const TextStyle(color: Colors.black),
               ),
             )

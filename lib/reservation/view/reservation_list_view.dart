@@ -15,10 +15,11 @@ class ReservationListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CurrentUser.hasTransport ? vm.getTransportReservs() : vm.getUserReservs();
+    CurrentUser.hasTransport ? vm.getEvents() : null;
     return Observer(builder: (_) {
       return CurrentUser.hasTransport
-          ? buildTransporterList(context)
-          : buildUserList(context);
+          ? buildTransporterList(_)
+          : buildUserList(_);
     });
   }
 
@@ -58,14 +59,22 @@ class ReservationListView extends StatelessWidget {
           locale: context.locale.languageCode,
           startingDayOfWeek: StartingDayOfWeek.monday,
           calendarFormat: CalendarFormat.twoWeeks,
+          calendarStyle: CalendarStyle(
+              markersMaxCount: 1,
+              markerDecoration: BoxDecoration(
+                  color: colorPalette['primary'], shape: BoxShape.circle)),
+          availableCalendarFormats: const {CalendarFormat.twoWeeks: '2 weeks'},
           focusedDay: vm.initDate,
           currentDay: vm.initDate,
+          weekendDays: const [],
           firstDay: DateTime(2020, 1, 1),
           lastDay: DateTime(d.year, d.month, d.day + 7),
           onDaySelected: (date, date2) {
             vm.changeDate(date);
           },
-          availableCalendarFormats: const {CalendarFormat.twoWeeks: '2 weeks'},
+          eventLoader: (day) {
+            return vm.events[day.day] ?? [];
+          },
         );
       }),
     );

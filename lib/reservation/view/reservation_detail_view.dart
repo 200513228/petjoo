@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:petjoo/base/string_converters.dart';
 import 'package:petjoo/constants/images.dart';
 import 'package:petjoo/pet/model/pet_advert_animals.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';
@@ -19,7 +20,7 @@ class ReservationDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.setModels(model);
-    vm.userInfo(model.userId);
+    vm.userInfo(CurrentUser.hasTransport ? model.userId : model.advertId);
     return Scaffold(
       appBar: buildAppBar(context),
       body: buildBody(context),
@@ -32,13 +33,10 @@ class ReservationDetailView extends StatelessWidget {
         Expanded(
             child: SingleChildScrollView(
           child: Column(
-            children: [
-              maps(),
-              ...reservationTiles(),
-            ],
+            children: [maps(), ...reservationTiles(), const Divider()],
           ),
         )),
-        buttons(context),
+        CurrentUser.hasTransport ? buttons(context) : statusBar(),
         bottomContent(),
       ],
     );
@@ -50,6 +48,31 @@ class ReservationDetailView extends StatelessWidget {
     TextStyle style = const TextStyle(fontSize: 16);
     TextStyle style2 = const TextStyle(fontSize: 15, color: Colors.white54);
     return [
+      Container(
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(8),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: Colors.black),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'date'.tr(),
+                style: const TextStyle(fontSize: 15, color: Colors.white54),
+              ),
+            ),
+            const SizedBox(height: 5),
+            Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  '${dateToString(model.date)}  ${hourToString('${model.date.toDate().hour}:00')}',
+                  style: const TextStyle(fontSize: 16),
+                )),
+          ],
+        ),
+      ),
       Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(8),
@@ -75,7 +98,7 @@ class ReservationDetailView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('${'Toplam Mesafe'.tr()}:', style: style2),
+                          Text('${'total_distance'.tr()}:', style: style2),
                           Text('${(transportBegin + beginEnd) * 2} km',
                               style: style),
                         ],
@@ -83,15 +106,14 @@ class ReservationDetailView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('${'Başlangıç ve Bitiş Noktası Arası'.tr()}:',
-                              style: style2),
+                          Text('${'between_begin_end'.tr()}:', style: style2),
                           Text('$beginEnd km', style: style),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('${'Şirket ve Başlangıç Noktası Arası'.tr()}:',
+                          Text('${'between_begin_company'.tr()}:',
                               style: style2),
                           Text('$transportBegin km', style: style),
                         ],
@@ -210,14 +232,16 @@ class ReservationDetailView extends StatelessWidget {
     );
   }
 
-  Widget buttons(BuildContext _) {
-    return model.status != 0
-        ? Container(
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Colors.black),
+  Widget statusBar() {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.black),
+      child: Row(
+        children: [
+          Expanded(
             child: Column(
               children: [
                 Align(
@@ -231,9 +255,67 @@ class ReservationDetailView extends StatelessWidget {
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      model.status == 1 ? 'Reddedildi' : 'Onaylandı',
+                      model.status == 0
+                          ? 'waiting'.tr()
+                          : model.status == 1
+                              ? 'rejected'.tr()
+                              : 'accepted'.tr(),
                       style: const TextStyle(fontSize: 16),
                     )),
+              ],
+            ),
+          ),
+          Icon(
+              model.status == 0
+                  ? Icons.hourglass_bottom
+                  : model.status == 1
+                      ? Icons.close
+                      : Icons.done,
+              color: model.status == 0
+                  ? Colors.orange
+                  : model.status == 1
+                      ? Colors.red
+                      : Colors.green)
+        ],
+      ),
+    );
+  }
+
+  Widget buttons(BuildContext _) {
+    return model.status != 0
+        ? Container(
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.black),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'status'.tr(),
+                          style: const TextStyle(
+                              fontSize: 15, color: Colors.white54),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            model.status == 1
+                                ? 'rejected'.tr()
+                                : 'accepted'.tr(),
+                            style: const TextStyle(fontSize: 16),
+                          )),
+                    ],
+                  ),
+                ),
+                Icon(model.status == 1 ? Icons.close : Icons.done,
+                    color: model.status == 1 ? Colors.red : Colors.green)
               ],
             ),
           )
@@ -314,26 +396,47 @@ class ReservationDetailView extends StatelessWidget {
         child: SafeArea(
           child: Row(
             children: [
-              Expanded(
-                child: FloatingActionButton.extended(
-                  heroTag: null,
-                  backgroundColor: Colors.black,
-                  label: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      image(),
-                      const SizedBox(width: 5),
-                      Text(
-                        vm.userName ?? 'user_not_found'.tr(),
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 16),
+              model.advertId == CurrentUser.id
+                  ? Expanded(
+                      child: FloatingActionButton.extended(
+                        heroTag: null,
+                        backgroundColor: Colors.black,
+                        label: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            image(),
+                            const SizedBox(width: 5),
+                            Text(
+                              model.fullName,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        onPressed: null,
                       ),
-                    ],
-                  ),
-                  onPressed: null,
-                ),
-              ),
+                    )
+                  : Expanded(
+                      child: FloatingActionButton.extended(
+                        heroTag: null,
+                        backgroundColor: Colors.black,
+                        label: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            image(),
+                            const SizedBox(width: 5),
+                            Text(
+                              vm.userName ?? 'user_not_found'.tr(),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        onPressed: null,
+                      ),
+                    ),
               const SizedBox(width: 10),
               ...[
                 FloatingActionButton(

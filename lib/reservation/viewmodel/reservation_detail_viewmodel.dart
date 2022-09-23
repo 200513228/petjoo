@@ -6,6 +6,7 @@ import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';
 import 'package:petjoo/reservation/service/reservation_service.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
+import 'package:petjoo/user/model/current_user.dart';
 import 'package:petjoo/user/service/user_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'reservation_detail_viewmodel.g.dart';
@@ -21,6 +22,8 @@ abstract class ReservationDetailViewModelBase with Store {
   @observable
   String? userName;
   @observable
+  String? companyPhone;
+  @observable
   bool isLoading = false;
 
   @action
@@ -35,27 +38,32 @@ abstract class ReservationDetailViewModelBase with Store {
     var data = result.data() as dynamic;
     userName = data['name'] + ' ' + data['surname'];
     userImage = data['image'] ?? '';
+    companyPhone = data['dialCode'] + data['phone'];
     isLoading = !isLoading;
   }
 
   @action
   Future call() async {
-    Uri url = Uri(scheme: 'tel', path: '${model!.dialCode}${model!.phone}');
+    Uri url = CurrentUser.hasTransport
+        ? Uri(scheme: 'tel', path: '${model!.dialCode}${model!.phone}')
+        : Uri(scheme: 'tel', path: '$companyPhone');
     await launchUrl(url);
   }
 
   @action
   Future message(BuildContext _) async {
-    await ChatService.goToChat(model!.userId).then((value) => Navigator.push(
-          _,
-          MaterialPageRoute(
-            builder: (builder) => ChatDetailView(
-              model: value,
-              name: userName!,
-              // advertModel: ChatAdvertModel.fromManuel(advert!.id, 'adverts'),
-            ),
-          ),
-        ));
+    await ChatService.goToChat(
+            CurrentUser.hasTransport ? model!.userId : model!.advertId)
+        .then((value) => Navigator.push(
+              _,
+              MaterialPageRoute(
+                builder: (builder) => ChatDetailView(
+                  model: value,
+                  name: userName!,
+                  // advertModel: ChatAdvertModel.fromManuel(advert!.id, 'adverts'),
+                ),
+              ),
+            ));
   }
 
   @action

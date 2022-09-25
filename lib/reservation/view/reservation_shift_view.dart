@@ -44,7 +44,7 @@ class ReservationShiftView extends StatelessWidget {
         onDateChanged: (value) => vm.changeDate(value),
         firstDate: d,
         fullCalendar: false,
-        lastDate: DateTime(d.year, d.month, d.day + 6),
+        lastDate: DateTime(d.year, d.month, d.day + 30),
         selectedDate: vm.initDate,
       );
     });

@@ -18,9 +18,58 @@ class ReservationListView extends StatelessWidget {
     CurrentUser.hasTransport ? vm.getEvents() : null;
     return Observer(builder: (_) {
       return CurrentUser.hasTransport
-          ? buildTransporterList(_)
+          ? transporterPageView(_)
           : buildUserList(_);
     });
+  }
+
+  Widget transporterPageView(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: PageView(
+            controller: vm.pc,
+            onPageChanged: (value) =>
+                value == 0 ? vm.getTransportReservs() : vm.getUserReservs(),
+            children: [
+              buildTransporterList(context),
+              buildUserList(context),
+            ],
+          ),
+        ),
+        Row(children: [
+          Expanded(flex: 1, child: Container()),
+          Expanded(
+              flex: 6,
+              child: MaterialButton(
+                  color: colorPalette['secondary'],
+                  onPressed: () {
+                    vm.reservationList.clear();
+                    vm.pc.jumpToPage(0);
+                    // vm.pc.animateToPage(0,
+                    //     duration: const Duration(milliseconds: 100),
+                    //     curve: Curves.bounceOut);
+                  },
+                  child: Text('transport_res'.tr(),
+                      style: const TextStyle(color: Colors.white)))),
+          Expanded(flex: 3, child: Container()),
+          Expanded(
+              flex: 6,
+              child: MaterialButton(
+                  color: colorPalette['secondary'],
+                  onPressed: () {
+                    vm.reservationList.clear();
+                    vm.pc.jumpToPage(1);
+                    // vm.pc.animateToPage(1,
+                    //     duration: const Duration(milliseconds: 100),
+                    //     curve: Curves.decelerate);
+                  },
+                  child: Text('user_res'.tr(),
+                      style: const TextStyle(color: Colors.white)))),
+          Expanded(flex: 1, child: Container()),
+        ]),
+      ],
+    );
   }
 
   Widget buildUserList(BuildContext context) {
@@ -68,12 +117,12 @@ class ReservationListView extends StatelessWidget {
           currentDay: vm.initDate,
           weekendDays: const [],
           firstDay: DateTime(2020, 1, 1),
-          lastDay: DateTime(d.year, d.month, d.day + 7),
+          lastDay: DateTime(d.year, d.month, d.day + 30),
           onDaySelected: (date, date2) {
             vm.changeDate(date);
           },
           eventLoader: (day) {
-            return vm.events[day.day] ?? [];
+            return vm.events['${day.month}.${day.day}'] ?? [];
           },
         );
       }),
@@ -86,7 +135,7 @@ class ReservationListView extends StatelessWidget {
       children: [
         ...vm.reservationList.map((e) => ReservationTileView(
               model: e,
-              isUser: !CurrentUser.hasTransport,
+              isUser: CurrentUser.id != e.advertId,
             ))
       ],
     );

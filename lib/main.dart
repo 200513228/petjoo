@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -14,9 +15,10 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  DLinkService.instance(await FirebaseDynamicLinks.instance.getInitialLink());
+  FirebaseAnalytics.instance;
+  DLinkService.instance(
+      initialLink: await FirebaseDynamicLinks.instance.getInitialLink());
   NotificationService.instance.initialize(_firebaseMessagingBackgroundHandler);
-
   runApp(
     EasyLocalization(
       path: 'assets/translations',

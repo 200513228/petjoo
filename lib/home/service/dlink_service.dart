@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class DLinkService {
@@ -5,15 +6,24 @@ class DLinkService {
   static String? docid;
   static bool isGo = false;
 
-  static void instance(PendingDynamicLinkData? initial) async {
-    var init = await FirebaseDynamicLinks.instance.getInitialLink();
-    final PendingDynamicLinkData? data = init;
-    if (data == null) {
+  static Future instance({PendingDynamicLinkData? initialLink}) async {
+    var init = initialLink;
+
+    if (init == null) {
       return;
     } else {
+      var col = FirebaseFirestore.instance.collection('logs');
+      col.add({'data': 'data'});
+      col.add({
+        'link': initialLink,
+        'params': initialLink!.utmParameters,
+        'deep': initialLink.link,
+        'path': initialLink.link.queryParameters
+      });
+
       isGo = true;
-      type = data.link.queryParameters['type'];
-      docid = data.link.queryParameters['doc'];
+      type = init.link.queryParameters['type'];
+      docid = init.link.queryParameters['doc'];
     }
   }
 
@@ -21,15 +31,17 @@ class DLinkService {
       {SocialMetaTagParameters? metaTagParameters}) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
         uriPrefix: 'https://url.petjoo.app',
+        // navigationInfoParameters:
+        //     const NavigationInfoParameters(forcedRedirectEnabled: true),
         link: Uri.parse('https://url.petjoo.app?type=$type&doc=$doc'),
         androidParameters: const AndroidParameters(
           packageName: "com.petjoo.android",
-          minimumVersion: 33,
+          // minimumVersion: 33,
         ),
         iosParameters: const IOSParameters(
           appStoreId: "1614267680",
           bundleId: "com.petjoo.ios",
-          minimumVersion: '1.3.3',
+          // minimumVersion: '1.3.3',
         ),
         socialMetaTagParameters: metaTagParameters);
 

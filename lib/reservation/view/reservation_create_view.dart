@@ -167,9 +167,7 @@ class ReservationCreateView extends StatelessWidget {
         children: [
           Expanded(
             child: InkWell(
-              onTap: () {
-                vm.setBegin(context);
-              },
+              onTap: () => vm.setBegin(context),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -180,19 +178,39 @@ class ReservationCreateView extends StatelessWidget {
                     ? ClipRRect(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(15)),
-                        child: GoogleMap(
-                          myLocationButtonEnabled: false,
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(vm.beginGeoPoint!.latitude,
-                                  vm.beginGeoPoint!.longitude),
-                              zoom: 14),
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId('begin'),
-                              position: LatLng(vm.beginGeoPoint!.latitude,
-                                  vm.beginGeoPoint!.longitude),
-                            )
-                          },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                      child: Text('begin_point'.tr(),
+                                          textAlign: TextAlign.center)),
+                                  const Icon(Icons.edit)
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: GoogleMap(
+                                onTap: (arg) => vm.setBegin(context),
+                                myLocationButtonEnabled: false,
+                                initialCameraPosition: CameraPosition(
+                                    target: LatLng(vm.beginGeoPoint!.latitude,
+                                        vm.beginGeoPoint!.longitude),
+                                    zoom: 14),
+                                markers: {
+                                  Marker(
+                                    markerId: const MarkerId('begin'),
+                                    position: LatLng(vm.beginGeoPoint!.latitude,
+                                        vm.beginGeoPoint!.longitude),
+                                  )
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     : Center(child: Text('pick_begin_point'.tr())),
@@ -201,9 +219,7 @@ class ReservationCreateView extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
-              onTap: () {
-                vm.setEnd(context);
-              },
+              onTap: () => vm.setEnd(context),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -214,19 +230,39 @@ class ReservationCreateView extends StatelessWidget {
                     ? ClipRRect(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(15)),
-                        child: GoogleMap(
-                          myLocationButtonEnabled: false,
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(vm.endGeoPoint!.latitude,
-                                  vm.endGeoPoint!.longitude),
-                              zoom: 14),
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId('begin'),
-                              position: LatLng(vm.endGeoPoint!.latitude,
-                                  vm.endGeoPoint!.longitude),
-                            )
-                          },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                      child: Text('end_point'.tr(),
+                                          textAlign: TextAlign.center)),
+                                  const Icon(Icons.edit)
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: GoogleMap(
+                                onTap: (arg) => vm.setEnd(context),
+                                myLocationButtonEnabled: false,
+                                initialCameraPosition: CameraPosition(
+                                    target: LatLng(vm.endGeoPoint!.latitude,
+                                        vm.endGeoPoint!.longitude),
+                                    zoom: 14),
+                                markers: {
+                                  Marker(
+                                    markerId: const MarkerId('begin'),
+                                    position: LatLng(vm.endGeoPoint!.latitude,
+                                        vm.endGeoPoint!.longitude),
+                                  )
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     : Center(child: Text('pick_end_point'.tr())),

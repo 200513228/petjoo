@@ -45,15 +45,31 @@ mixin _$ReservationListViewModel on ReservationListViewModelBase, Store {
       Atom(name: 'ReservationListViewModelBase.events', context: context);
 
   @override
-  Map<int, List<dynamic>?> get events {
+  Map<String, List<dynamic>?> get events {
     _$eventsAtom.reportRead();
     return super.events;
   }
 
   @override
-  set events(Map<int, List<dynamic>?> value) {
+  set events(Map<String, List<dynamic>?> value) {
     _$eventsAtom.reportWrite(value, super.events, () {
       super.events = value;
+    });
+  }
+
+  late final _$pcAtom =
+      Atom(name: 'ReservationListViewModelBase.pc', context: context);
+
+  @override
+  PageController get pc {
+    _$pcAtom.reportRead();
+    return super.pc;
+  }
+
+  @override
+  set pc(PageController value) {
+    _$pcAtom.reportWrite(value, super.pc, () {
+      super.pc = value;
     });
   }
 
@@ -103,7 +119,8 @@ mixin _$ReservationListViewModel on ReservationListViewModelBase, Store {
     return '''
 initDate: ${initDate},
 reservationList: ${reservationList},
-events: ${events}
+events: ${events},
+pc: ${pc}
     ''';
   }
 }

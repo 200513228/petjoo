@@ -30,7 +30,7 @@ abstract class WelcomeViewModelBase with Store {
       await UserService.currentUser().then((value) {
         userLog = !userLog;
         isLoading = !isLoading;
-        DLinkService.type != null ? navDLink(context) : null;
+        // DLinkService.isGo ? navDLink(context) : null;
       });
     }
   }

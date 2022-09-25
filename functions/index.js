@@ -93,11 +93,11 @@ exports.transportReservationUpdateFunction = functions
             var body = "";
             if (newData.status == 1) {
                 title = "Rezervasyon Reddedildi!";
-                body = newData.title + " için rezervayonunuz ilan sahibi tarafından reddedildi."
+                body = "Rezervayonunuz ilan sahibi tarafından reddedildi."
             }
             else {
                 title = "Rezervasyon Onaylandı!";
-                body = newData.title + " için rezervayonunuz ilan sahibi tarafından onaylandı."
+                body = "Rezervayonunuz ilan sahibi tarafından onaylandı."
             }
             admin.messaging().sendToDevice(
                 fcmToken,

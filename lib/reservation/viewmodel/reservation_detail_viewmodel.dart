@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/chat/view/chat_detail_view.dart';
 import 'package:petjoo/home/view/home_view.dart';
+import 'package:petjoo/location/view/location_show_view.dart';
 import 'package:petjoo/reservation/model/reservation_model.dart';
 import 'package:petjoo/reservation/service/reservation_service.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
@@ -44,7 +46,7 @@ abstract class ReservationDetailViewModelBase with Store {
 
   @action
   Future call() async {
-    Uri url = CurrentUser.hasTransport
+    Uri url = CurrentUser.id == model!.advertId
         ? Uri(scheme: 'tel', path: '${model!.dialCode}${model!.phone}')
         : Uri(scheme: 'tel', path: '$companyPhone');
     await launchUrl(url);
@@ -53,7 +55,7 @@ abstract class ReservationDetailViewModelBase with Store {
   @action
   Future message(BuildContext _) async {
     await ChatService.goToChat(
-            CurrentUser.hasTransport ? model!.userId : model!.advertId)
+            CurrentUser.id == model!.advertId ? model!.userId : model!.advertId)
         .then((value) => Navigator.push(
               _,
               MaterialPageRoute(
@@ -83,5 +85,13 @@ abstract class ReservationDetailViewModelBase with Store {
         context,
         MaterialPageRoute(builder: (context) => HomeView(title: 'PET NAKİL')),
         (route) => false);
+  }
+
+  @action
+  void showLocation(BuildContext context, GeoPoint geoPoint) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LocationShowView(point: geoPoint)));
   }
 }

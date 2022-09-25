@@ -32,11 +32,11 @@ class ReservationService {
   }
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getReservations(
-      Timestamp time) async {
+      Timestamp time, bool transport) async {
     DateTime d = time.toDate();
     DateTime limit = DateTime(d.year, d.month, d.day, 24);
     Timestamp time2 = Timestamp.fromDate(limit);
-    return CurrentUser.hasTransport
+    return transport
         ? await db
             .collection('transport_reservations')
             .where('advertId', isEqualTo: CurrentUser.id)
@@ -45,8 +45,9 @@ class ReservationService {
             .get()
         : await db
             .collection('transport_reservations')
+            .where('advertId', isNotEqualTo: CurrentUser.id)
             .where('userId', isEqualTo: CurrentUser.id)
-            .orderBy('date', descending: true)
+            // .orderBy('date', descending: true)
             .get();
   }
 

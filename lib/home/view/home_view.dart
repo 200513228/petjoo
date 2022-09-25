@@ -51,7 +51,12 @@ class HomeView extends StatelessWidget {
       centerTitle: true,
       title: Text(titleToAppBar),
       leading: IconButton(
-          onPressed: () => Navigator.pop(_),
+          onPressed: () => Navigator.canPop(_)
+              ? Navigator.pop(_)
+              : Navigator.pushAndRemoveUntil(
+                  _,
+                  MaterialPageRoute(builder: (_) => WelcomeView()),
+                  (route) => false),
           icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.black,

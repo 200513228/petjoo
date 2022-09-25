@@ -159,6 +159,17 @@ mixin _$ReservationDetailViewModel on ReservationDetailViewModelBase, Store {
   }
 
   @override
+  void showLocation(BuildContext context, GeoPoint geoPoint) {
+    final _$actionInfo = _$ReservationDetailViewModelBaseActionController
+        .startAction(name: 'ReservationDetailViewModelBase.showLocation');
+    try {
+      return super.showLocation(context, geoPoint);
+    } finally {
+      _$ReservationDetailViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 model: ${model},

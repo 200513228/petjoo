@@ -4,7 +4,8 @@ class ChatAdvertModel {
   String id = '';
   Timestamp date = Timestamp.now();
   String advertId = '';
-  String advertCollection = '';
+  String advertCollection =
+      ''; //adverts,store_adverts,transport_adverts,transport_reservations
 
   ChatAdvertModel.fromQDS(QueryDocumentSnapshot snapshot) {
     var data = snapshot.data() as dynamic;

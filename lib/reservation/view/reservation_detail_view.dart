@@ -20,7 +20,8 @@ class ReservationDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.setModels(model);
-    vm.userInfo(CurrentUser.hasTransport ? model.userId : model.advertId);
+    vm.userInfo(
+        CurrentUser.id == model.advertId ? model.userId : model.advertId);
     return Scaffold(
       appBar: buildAppBar(context),
       body: buildBody(context),
@@ -33,10 +34,10 @@ class ReservationDetailView extends StatelessWidget {
         Expanded(
             child: SingleChildScrollView(
           child: Column(
-            children: [maps(), ...reservationTiles(), const Divider()],
+            children: [maps(context), ...reservationTiles(), const Divider()],
           ),
         )),
-        CurrentUser.hasTransport ? buttons(context) : statusBar(),
+        CurrentUser.id == model.advertId ? buttons(context) : statusBar(),
         bottomContent(),
       ],
     );
@@ -223,11 +224,11 @@ class ReservationDetailView extends StatelessWidget {
     ];
   }
 
-  Widget maps() {
+  Widget maps(BuildContext _) {
     return Row(
       children: [
-        Expanded(child: mapTile(model.beginGeoPoint)),
-        Expanded(child: mapTile(model.endGeoPoint)),
+        Expanded(child: mapTile(_, model.beginGeoPoint)),
+        Expanded(child: mapTile(_, model.endGeoPoint)),
       ],
     );
   }
@@ -357,7 +358,7 @@ class ReservationDetailView extends StatelessWidget {
           );
   }
 
-  Widget mapTile(GeoPoint geo) {
+  Widget mapTile(BuildContext _, GeoPoint geo) {
     return Stack(
       children: [
         Container(
@@ -368,6 +369,7 @@ class ReservationDetailView extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             child: GoogleMap(
+              onTap: (argument) => vm.showLocation(_, geo),
               initialCameraPosition: CameraPosition(
                   target: LatLng(geo.latitude, geo.longitude), zoom: 16),
               myLocationButtonEnabled: false,

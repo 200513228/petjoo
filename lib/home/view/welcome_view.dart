@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
+import 'package:petjoo/home/service/notification_service.dart';
 import 'package:petjoo/ui/loading.dart';
 import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/home/viewmodel/welcome_viewmodel.dart';
@@ -19,6 +20,7 @@ class WelcomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.userLogin(context);
     DLinkService.isGo ? vm.navDLink(context) : null;
+    NotificationService.isGo ? vm.navNotf(context) : null;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorPalette['primary'],

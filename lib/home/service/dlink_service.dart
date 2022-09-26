@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class DLinkService {
@@ -12,15 +11,6 @@ class DLinkService {
     if (init == null) {
       return;
     } else {
-      var col = FirebaseFirestore.instance.collection('logs');
-      col.add({'data': 'data'});
-      col.add({
-        'link': initialLink,
-        'params': initialLink!.utmParameters,
-        'deep': initialLink.link,
-        'path': initialLink.link.queryParameters
-      });
-
       isGo = true;
       type = init.link.queryParameters['type'];
       docid = init.link.queryParameters['doc'];

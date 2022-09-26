@@ -27,7 +27,7 @@ class ChatService {
         .collection('chats')
         .doc(doc)
         .collection('adverts')
-        .orderBy('date', descending: true)
+        // .orderBy('date', descending: true)
         .get();
   }
 
@@ -83,7 +83,9 @@ class ChatService {
     List imglist = [];
     var result = await db.collection(type).doc(id).get();
     var data = result.data() as dynamic;
-    title = data['title'] ?? '';
+    title =
+        (type != 'transport_reservations' ? data['title'] : data['fullName']) ??
+            '';
     imglist = data['images'] ?? [''];
     image = imglist.isEmpty ? '' : imglist.first;
     return {'image': image, 'title': title};

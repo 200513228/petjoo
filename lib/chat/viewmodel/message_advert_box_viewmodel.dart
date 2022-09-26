@@ -5,6 +5,9 @@ import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/pet/model/pet_advert_model.dart';
 import 'package:petjoo/pet/service/pet_service.dart';
 import 'package:petjoo/pet/view/pet_detail_view.dart';
+import 'package:petjoo/reservation/model/reservation_model.dart';
+import 'package:petjoo/reservation/service/reservation_service.dart';
+import 'package:petjoo/reservation/view/reservation_detail_view.dart';
 import 'package:petjoo/store/model/store_advert_model.dart';
 import 'package:petjoo/store/service/store_service.dart';
 import 'package:petjoo/store/view/store_detail_view.dart';
@@ -45,6 +48,10 @@ abstract class MessageAdvertBoxViewModelBase with Store {
             model!.advertCollection, model!.advertId);
         break;
       case 'transport_adverts':
+        data = await ChatService.getAdvertInfo(
+            model!.advertCollection, model!.advertId);
+        break;
+      case 'transport_reservations':
         data = await ChatService.getAdvertInfo(
             model!.advertCollection, model!.advertId);
         break;
@@ -91,11 +98,23 @@ abstract class MessageAdvertBoxViewModelBase with Store {
             .get()
             .then((value) {
           TransportAdvertModel model = TransportAdvertModel.fromDS(value);
-
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => TransportDetailView(model: model)));
+        });
+        break;
+      case 'transport_reservations':
+        await ReservationService.db
+            .collection('transport_reservations')
+            .doc(model!.advertId)
+            .get()
+            .then((value) {
+          ReservationModel model = ReservationModel.fromDS(value);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ReservationDetailView(model: model)));
         });
         break;
       default:

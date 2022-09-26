@@ -18,7 +18,7 @@ exports.deleteUserData = functions.auth.user().onDelete(async (event) => {
 
     const bucket = storage.bucket();
     await bucket.deleteFiles({
-        prefix: 'user_images/' + snap.id + '.jpg'
+        prefix: 'user_images/' + snap.id
     });
 
     //Delete User

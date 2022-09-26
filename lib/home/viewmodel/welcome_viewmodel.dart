@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/chat/model/chat_model.dart';
+import 'package:petjoo/chat/service/chat_service.dart';
+import 'package:petjoo/chat/view/chat_detail_view.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
+import 'package:petjoo/home/service/notification_service.dart';
 import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/pet/model/pet_advert_model.dart';
 import 'package:petjoo/pet/service/pet_service.dart';
 import 'package:petjoo/pet/view/pet_detail_view.dart';
+import 'package:petjoo/reservation/model/reservation_model.dart';
+import 'package:petjoo/reservation/service/reservation_service.dart';
+import 'package:petjoo/reservation/view/reservation_detail_view.dart';
 import 'package:petjoo/store/model/store_advert_model.dart';
 import 'package:petjoo/store/service/store_service.dart';
 import 'package:petjoo/store/view/store_detail_view.dart';
@@ -89,6 +96,42 @@ abstract class WelcomeViewModelBase with Store {
           break;
         default:
       }
+    }
+  }
+
+  @action
+  Future navNotf(BuildContext context) async {
+    switch (NotificationService.type) {
+      case 'reservation':
+        await ReservationService.db
+            .collection('transport_reservations')
+            .doc(NotificationService.docid)
+            .get()
+            .then((value) {
+          ReservationModel model = ReservationModel.fromDS(value);
+          NotificationService.isGo = false;
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ReservationDetailView(model: model)));
+        });
+        break;
+      case 'chat':
+        await ChatService.db
+            .collection('chats')
+            .doc(NotificationService.docid)
+            .get()
+            .then((value) {
+          ChatModel model = ChatModel.fromDS(value);
+          NotificationService.isGo = false;
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ChatDetailView(model: model, name: '')));
+        });
+        break;
+      default:
     }
   }
 }

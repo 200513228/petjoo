@@ -61,7 +61,6 @@ abstract class ChatDetailViewModelBase with Store {
   @action
   Future sendMessage(ChatModel model) async {
     String text = cont.text;
-
     cont.clear();
     if (text != '') {
       await ChatService.sendMessage(

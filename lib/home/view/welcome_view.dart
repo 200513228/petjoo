@@ -92,7 +92,7 @@ class WelcomeView extends StatelessWidget {
                       launchUrl(Uri(
                           scheme: 'https',
                           host: 'wa.me',
-                          path: '905369102499'));
+                          path: '905308327111'));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

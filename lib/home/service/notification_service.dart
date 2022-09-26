@@ -1,5 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 
 class NotificationService {
   NotificationService._();
@@ -17,7 +16,6 @@ class NotificationService {
     final firebaseMessaging = FirebaseMessaging.instance;
     firebaseMessaging.requestPermission();
     firebaseMessaging.subscribeToTopic("all");
-    if (kDebugMode) firebaseMessaging.subscribeToTopic("debug");
     FirebaseMessaging.onBackgroundMessage(handler);
     firebaseMessaging.getInitialMessage().then((value) {
       if (value != null) {

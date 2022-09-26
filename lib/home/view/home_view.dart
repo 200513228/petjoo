@@ -37,13 +37,16 @@ class HomeView extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => WelcomeView()));
         return true;
       },
-      child: Scaffold(
-        appBar: buildAppBar(context),
-        body: buildBody(),
-        bottomNavigationBar: buildBottomBar(context),
-        floatingActionButton: buildFab(context),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      ),
+      child: Observer(builder: (_) {
+        return Scaffold(
+          appBar: buildAppBar(context),
+          body: buildBody(),
+          bottomNavigationBar: buildBottomBar(context),
+          floatingActionButton: vm.showFab ? buildFab(context) : null,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+        );
+      }),
     );
   }
 

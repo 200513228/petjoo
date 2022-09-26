@@ -26,7 +26,6 @@ class WelcomeViewModel = WelcomeViewModelBase with _$WelcomeViewModel;
 abstract class WelcomeViewModelBase with Store {
   @observable
   bool userLog = false;
-
   @observable
   bool isLoading = false;
 
@@ -96,6 +95,7 @@ abstract class WelcomeViewModelBase with Store {
 
   @action
   Future navNotf(BuildContext context) async {
+    isLoading = !isLoading;
     switch (NotificationService.type) {
       case 'reservation':
         await ReservationService.db
@@ -128,5 +128,6 @@ abstract class WelcomeViewModelBase with Store {
         break;
       default:
     }
+    isLoading = !isLoading;
   }
 }

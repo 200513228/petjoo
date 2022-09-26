@@ -57,6 +57,22 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
     });
   }
 
+  late final _$showFabAtom =
+      Atom(name: 'HomeViewModelBase.showFab', context: context);
+
+  @override
+  bool get showFab {
+    _$showFabAtom.reportRead();
+    return super.showFab;
+  }
+
+  @override
+  set showFab(bool value) {
+    _$showFabAtom.reportWrite(value, super.showFab, () {
+      super.showFab = value;
+    });
+  }
+
   late final _$getChatCountAsyncAction =
       AsyncAction('HomeViewModelBase.getChatCount', context: context);
 
@@ -95,7 +111,8 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
     return '''
 currentPage: ${currentPage},
 currentIndex: ${currentIndex},
-chatCount: ${chatCount}
+chatCount: ${chatCount},
+showFab: ${showFab}
     ''';
   }
 }

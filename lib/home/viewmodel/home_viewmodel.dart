@@ -9,17 +9,18 @@ class HomeViewModel = HomeViewModelBase with _$HomeViewModel;
 abstract class HomeViewModelBase with Store {
   @observable
   Widget currentPage = Container();
-
   @observable
   int currentIndex = 1;
-
   @observable
   int chatCount = 0;
+  @observable
+  bool showFab = true;
 
   @action
   void swithPage(Widget page, int x) {
     currentIndex = x;
     currentPage = page;
+    showFab = x == 1 ? true : false;
   }
 
   @action

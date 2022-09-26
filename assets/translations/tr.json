@@ -171,6 +171,9 @@
     "rejected": "Reddedildi",
     "accepted": "Onaylandı",
     "waiting": "Onay Bekliyor",
-    "map": "Harita",
-    "company": "Şirket"
+    "map": "Yol Tarifi",
+    "company": "Şirket",
+    "location": "Konum",
+    "contact": "İletişim",
+    "social": "Sosyal Medya"
 }

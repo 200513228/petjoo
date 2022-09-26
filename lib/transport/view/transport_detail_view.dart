@@ -184,19 +184,26 @@ class TransportDetailView extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: InkWell(
-                onTap: () {
+              padding: const EdgeInsets.only(right: 10),
+              child: FloatingActionButton.extended(
+                heroTag: null,
+                onPressed: () {
                   vm.advert!.geoPoint.latitude != 0
                       ? vm.showLocation(context)
                       : null;
                 },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.location_on),
-                    Text('map'.tr()),
-                  ],
+                backgroundColor: colorPalette['primary'],
+                foregroundColor: Colors.black,
+                // color: colorPalette['primary'],
+                label: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.location_on),
+                      Text('location'.tr()),
+                    ],
+                  ),
                 ),
               ),
             ),

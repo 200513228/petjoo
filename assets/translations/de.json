@@ -172,5 +172,8 @@
     "accepted": "Akzeptiert",
     "waiting": "Warten",
     "map": "Karte",
-    "company": "Gesellschaft"
+    "company": "Gesellschaft",
+    "location": "Lage",
+    "contact": "Kontakt",
+    "social": "Sozialen Medien"
 }

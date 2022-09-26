@@ -11,6 +11,7 @@ import 'package:petjoo/user/model/current_user.dart';
 import 'package:petjoo/user/view/login_view.dart';
 import 'package:petjoo/constants/images.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WelcomeView extends StatelessWidget {
   final WelcomeViewModel vm = WelcomeViewModel();
@@ -18,31 +19,110 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle style = const TextStyle(
+        fontSize: 14, fontWeight: FontWeight.normal, color: Colors.black);
     vm.userLogin(context);
     DLinkService.isGo ? vm.navDLink(context) : null;
     NotificationService.isGo ? vm.navNotf(context) : null;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorPalette['primary'],
-        actions: [
-          Row(
+    return Observer(builder: (context) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: colorPalette['primary'],
+          title: Row(
             children: [
-              const Text('Language',
-                  style: TextStyle(color: Colors.black, fontSize: 14)),
-              appbarLocal(context),
+              Expanded(
+                  flex: 3,
+                  child: PopupMenuButton(
+                      color: Colors.black,
+                      iconSize: 18,
+                      padding: const EdgeInsets.all(4),
+                      itemBuilder: (context) => [
+                            PopupMenuItem(
+                              onTap: () =>
+                                  context.setLocale(const Locale('tr')),
+                              child: Text('welcome_lang_tr'.tr()),
+                            ),
+                            PopupMenuItem(
+                              onTap: () =>
+                                  context.setLocale(const Locale('en')),
+                              child: Text('welcome_lang_en'.tr()),
+                            ),
+                            PopupMenuItem(
+                              onTap: () =>
+                                  context.setLocale(const Locale('de')),
+                              child: Text('welcome_lang_de'.tr()),
+                            ),
+                          ],
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.translate,
+                            color: Colors.black,
+                          ),
+                          Text('Language', style: style)
+                        ],
+                      ))),
+              Expanded(
+                flex: 4,
+                child: TextButton(
+                    onPressed: () {
+                      launchUrl(Uri(
+                          scheme: 'https',
+                          host: 'instabio.cc',
+                          path: '40322174EAGUB'));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          FontAwesomeIcons.instagram,
+                          color: Colors.black,
+                        ),
+                        Text(
+                          'social'.tr(),
+                          style: style,
+                        ),
+                      ],
+                    )),
+              ),
+              Expanded(
+                flex: 3,
+                child: TextButton(
+                    onPressed: () {
+                      launchUrl(Uri(
+                          scheme: 'https',
+                          host: 'wa.me',
+                          path: '905369102499'));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.whatsapp,
+                          color: Colors.black,
+                        ),
+                        Text(
+                          'contact'.tr(),
+                          style: style,
+                        ),
+                      ],
+                    )),
+              ),
             ],
-          )
-        ],
-      ),
-      backgroundColor: colorPalette['secondary'],
-      body: Column(
-        children: [
-          Expanded(flex: 4, child: slider()),
-          Expanded(flex: 5, child: selector(context)),
-          userCard(context),
-        ],
-      ),
-    );
+          ),
+        ),
+        backgroundColor: colorPalette['secondary'],
+        body: vm.isLoading
+            ? const Loading()
+            : Column(
+                children: [
+                  Expanded(flex: 7, child: slider()),
+                  Expanded(flex: 10, child: selector(context)),
+                  userCard(context),
+                ],
+              ),
+      );
+    });
   }
 
   Widget slider() {
@@ -170,6 +250,8 @@ class WelcomeView extends StatelessWidget {
   Widget appbarLocal(BuildContext context) {
     return PopupMenuButton(
         color: Colors.black,
+        iconSize: 18,
+        padding: const EdgeInsets.all(4),
         itemBuilder: (context) => [
               PopupMenuItem(
                 onTap: () => context.setLocale(const Locale('tr')),
@@ -184,12 +266,9 @@ class WelcomeView extends StatelessWidget {
                 child: Text('welcome_lang_de'.tr()),
               ),
             ],
-        child: const Padding(
-          padding: EdgeInsets.all(12),
-          child: Icon(
-            Icons.translate,
-            color: Colors.black,
-          ),
+        child: const Icon(
+          Icons.translate,
+          color: Colors.black,
         ));
   }
 }

@@ -172,5 +172,8 @@
     "accepted": "Accepted",
     "waiting": "Waiting",
     "map": "Map",
-    "company": "Company"
+    "company": "Company",
+    "location": "Location",
+    "contact": "Contact",
+    "social": "Social Media"
 }

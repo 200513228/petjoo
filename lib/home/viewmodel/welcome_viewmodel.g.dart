@@ -57,6 +57,14 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
     return _$navDLinkAsyncAction.run(() => super.navDLink(context));
   }
 
+  late final _$navNotfAsyncAction =
+      AsyncAction('WelcomeViewModelBase.navNotf', context: context);
+
+  @override
+  Future<dynamic> navNotf(BuildContext context) {
+    return _$navNotfAsyncAction.run(() => super.navNotf(context));
+  }
+
   late final _$WelcomeViewModelBaseActionController =
       ActionController(name: 'WelcomeViewModelBase', context: context);
 

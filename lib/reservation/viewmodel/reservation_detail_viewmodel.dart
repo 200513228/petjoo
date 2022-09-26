@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:petjoo/chat/model/chat_advert_model.dart';
-import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/chat/view/chat_detail_view.dart';
 import 'package:petjoo/home/view/home_view.dart';
@@ -82,15 +80,11 @@ abstract class ReservationDetailViewModelBase with Store {
   }
 
   @action
-  void successfull(BuildContext context) async {
-    await ChatService.goToChat(model!.userId).then((value) {
-      ChatAdvertModel.fromManuel(model!.id, 'transport_reservations');
-      ChatService.sendAdvert({}, value);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => HomeView(title: 'PET NAKİL')),
-          (route) => false);
-    });
+  void successfull(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomeView(title: 'PET NAKİL')),
+        (route) => false);
   }
 
   @action

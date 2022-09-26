@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/transport/view/transport_filter_view.dart';
 import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/chat/view/chat_list_view.dart';
@@ -179,6 +180,8 @@ class HomeView extends StatelessWidget {
         return StoreFilterView();
       case 'İLANLAR':
         return PetFilterView();
+      case 'PET NAKİL':
+        return TransportFilterView();
       default:
         return Column(mainAxisSize: MainAxisSize.min, children: const []);
     }

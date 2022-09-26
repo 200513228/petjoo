@@ -50,7 +50,7 @@ class ReservationListView extends StatelessWidget {
                     //     duration: const Duration(milliseconds: 100),
                     //     curve: Curves.bounceOut);
                   },
-                  child: Text('transport_res'.tr(),
+                  child: Text('company'.tr(),
                       style: const TextStyle(color: Colors.white)))),
           Expanded(flex: 3, child: Container()),
           Expanded(
@@ -64,7 +64,9 @@ class ReservationListView extends StatelessWidget {
                     //     duration: const Duration(milliseconds: 100),
                     //     curve: Curves.decelerate);
                   },
-                  child: Text('user_res'.tr(),
+                  child: Text('other'.tr(),
+                      maxLines: 1,
+                      textWidthBasis: TextWidthBasis.longestLine,
                       style: const TextStyle(color: Colors.white)))),
           Expanded(flex: 1, child: Container()),
         ]),

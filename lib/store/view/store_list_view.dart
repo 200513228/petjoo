@@ -152,9 +152,7 @@ class StoreListView extends StatelessWidget {
             child: TextField(
               controller: vm.cont,
               autofocus: false,
-              onChanged: (value) {
-                vm.query(value);
-              },
+              onChanged: (value) => vm.query(value),
               decoration: InputDecoration(
                   hintText: 'home_search'.tr(),
                   prefixIcon: const Icon(

@@ -12,6 +12,8 @@ class TransportListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.getAdverts();
+    vm.resetFilter();
+
     return Observer(builder: (_) {
       return RefreshIndicator(
         onRefresh: () => vm.getAdverts(),
@@ -43,9 +45,7 @@ class TransportListView extends StatelessWidget {
             child: TextField(
               controller: vm.cont,
               autofocus: false,
-              onChanged: (value) {
-                // vm.query(value);
-              },
+              onChanged: (value) => vm.query(value),
               decoration: InputDecoration(
                   hintText: 'home_search'.tr(),
                   prefixIcon: const Icon(

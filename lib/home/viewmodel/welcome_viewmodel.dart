@@ -18,7 +18,7 @@ import 'package:petjoo/store/view/store_detail_view.dart';
 import 'package:petjoo/transport/model/transport_advert_model.dart';
 import 'package:petjoo/transport/service/transport_service.dart';
 import 'package:petjoo/transport/view/transport_detail_view.dart';
-import 'package:petjoo/user/service/user_service.dart';
+import 'package:petjoo/user/model/current_user.dart';
 part 'welcome_viewmodel.g.dart';
 
 class WelcomeViewModel = WelcomeViewModelBase with _$WelcomeViewModel;
@@ -32,13 +32,8 @@ abstract class WelcomeViewModelBase with Store {
 
   @action
   Future userLogin(BuildContext context) async {
-    if (UserService.auth.currentUser != null) {
-      isLoading = !isLoading;
-      await UserService.currentUser().then((value) {
-        userLog = !userLog;
-        isLoading = !isLoading;
-        // DLinkService.isGo ? navDLink(context) : null;
-      });
+    if (CurrentUser.id != '') {
+      userLog = true;
     }
   }
 

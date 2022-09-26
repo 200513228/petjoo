@@ -15,8 +15,11 @@ class UserService {
       FirebaseMessaging.instance.getToken().onError((error, stackTrace) => "");
 
   static Future currentUser() async {
-    var result = await db.collection('users').doc(auth.currentUser!.uid).get();
-    CurrentUser.fromDS(result);
+    if (auth.currentUser != null) {
+      var result =
+          await db.collection('users').doc(auth.currentUser!.uid).get();
+      CurrentUser.fromDS(result);
+    }
   }
 
   static Future<String> login(String email, String pass) async {

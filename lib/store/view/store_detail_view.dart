@@ -184,7 +184,7 @@ class StoreDetailView extends StatelessWidget {
                       heroTag: null,
                       onPressed: () {
                         vm.advert!.geoPoint.latitude != 0
-                            ? vm.showLocation(context)
+                            ? vm.showLocation()
                             : null;
                       },
                       backgroundColor: colorPalette['primary'],

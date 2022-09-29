@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:map_launcher/map_launcher.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
-import 'package:petjoo/location/view/location_show_view.dart';
 import 'package:petjoo/reservation/view/reservation_shift_view.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
@@ -23,11 +25,20 @@ abstract class TransportDetailViewModelBase with Store {
   TransportAdvertModel? advert;
 
   @action
-  void showLocation(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => LocationShowView(point: advert!.geoPoint)));
+  void showLocation() {
+    double lat = advert!.geoPoint.latitude;
+    double lng = advert!.geoPoint.longitude;
+    if (Platform.isIOS) {
+      MapLauncher.showMarker(
+          mapType: MapType.apple,
+          coords: Coords(lat, lng),
+          title: advert!.title);
+    } else if (Platform.isAndroid) {
+      MapLauncher.showMarker(
+          mapType: MapType.google,
+          coords: Coords(lat, lng),
+          title: advert!.title);
+    }
   }
 
   @action

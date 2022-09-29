@@ -125,11 +125,11 @@ mixin _$StoreDetailViewModel on StoreDetailViewModelBase, Store {
       ActionController(name: 'StoreDetailViewModelBase', context: context);
 
   @override
-  void showLocation(BuildContext context) {
+  void showLocation() {
     final _$actionInfo = _$StoreDetailViewModelBaseActionController.startAction(
         name: 'StoreDetailViewModelBase.showLocation');
     try {
-      return super.showLocation(context);
+      return super.showLocation();
     } finally {
       _$StoreDetailViewModelBaseActionController.endAction(_$actionInfo);
     }

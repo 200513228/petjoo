@@ -5,6 +5,8 @@ import 'package:petjoo/transport/model/transport_advert_model.dart';
 import 'package:petjoo/transport/viewmodel/transport_tile_viewmodel.dart';
 import 'package:petjoo/constants/images.dart';
 import 'package:petjoo/ui/classic_theme.dart';
+import 'package:petjoo/ui/please_auth.dart';
+import 'package:petjoo/user/model/current_user.dart';
 
 class TransportTileView extends StatelessWidget {
   final TransportTileViewModel vm = TransportTileViewModel();
@@ -74,7 +76,10 @@ class TransportTileView extends StatelessWidget {
     return Row(
       children: [
         MaterialButton(
-            onPressed: () => vm.call(),
+            onPressed: () => CurrentUser.id == ''
+                ? showDialog(
+                    context: _, builder: (context) => const PleaseAuth())
+                : vm.call(),
             color: Colors.black,
             minWidth: 45,
             height: 45,
@@ -82,7 +87,10 @@ class TransportTileView extends StatelessWidget {
             shape: const CircleBorder(),
             child: const Icon(Icons.call, color: Colors.greenAccent)),
         MaterialButton(
-            onPressed: () => vm.message(_),
+            onPressed: () => CurrentUser.id == ''
+                ? showDialog(
+                    context: _, builder: (context) => const PleaseAuth())
+                : vm.message(_),
             color: Colors.black,
             minWidth: 45,
             height: 45,

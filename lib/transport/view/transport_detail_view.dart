@@ -188,9 +188,7 @@ class TransportDetailView extends StatelessWidget {
               child: FloatingActionButton.extended(
                 heroTag: null,
                 onPressed: () {
-                  vm.advert!.geoPoint.latitude != 0
-                      ? vm.showLocation(context)
-                      : null;
+                  vm.advert!.geoPoint.latitude != 0 ? vm.showLocation() : null;
                 },
                 backgroundColor: colorPalette['primary'],
                 foregroundColor: Colors.black,
@@ -262,7 +260,10 @@ class TransportDetailView extends StatelessWidget {
           Expanded(
             child: FloatingActionButton.extended(
               heroTag: null,
-              onPressed: () => vm.makeReservation(_),
+              onPressed: () => CurrentUser.id == ''
+                  ? showDialog(
+                      context: _, builder: (context) => const PleaseAuth())
+                  : vm.makeReservation(_),
               label: Text('reservation'.tr()),
             ),
           ),

@@ -62,11 +62,11 @@ mixin _$TransportDetailViewModel on TransportDetailViewModelBase, Store {
       ActionController(name: 'TransportDetailViewModelBase', context: context);
 
   @override
-  void showLocation(BuildContext context) {
+  void showLocation() {
     final _$actionInfo = _$TransportDetailViewModelBaseActionController
         .startAction(name: 'TransportDetailViewModelBase.showLocation');
     try {
-      return super.showLocation(context);
+      return super.showLocation();
     } finally {
       _$TransportDetailViewModelBaseActionController.endAction(_$actionInfo);
     }

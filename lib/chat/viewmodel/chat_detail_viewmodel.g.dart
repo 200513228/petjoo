@@ -162,6 +162,14 @@ mixin _$ChatDetailViewModel on ChatDetailViewModelBase, Store {
     return _$sendMessageAsyncAction.run(() => super.sendMessage(model));
   }
 
+  late final _$reportAsyncAction =
+      AsyncAction('ChatDetailViewModelBase.report', context: context);
+
+  @override
+  Future<dynamic> report(BuildContext context) {
+    return _$reportAsyncAction.run(() => super.report(context));
+  }
+
   late final _$checkBlockAsyncAction =
       AsyncAction('ChatDetailViewModelBase.checkBlock', context: context);
 

@@ -431,7 +431,7 @@ class TransportDetailView extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: null,
+                    onTap: () => vm.report(context),
                     child: Text(
                       'report'.tr(),
                       style: const TextStyle(color: Colors.red),

@@ -23,7 +23,7 @@ class DLinkService {
         uriPrefix: 'https://url.petjoo.app',
         // navigationInfoParameters:
         //     const NavigationInfoParameters(forcedRedirectEnabled: true),
-        link: Uri.parse('https://url.petjoo.app?type=$type&doc=$doc'),
+        link: Uri.parse('https://url.petjoo.app/?type=$type&doc=$doc'),
         androidParameters: const AndroidParameters(
           packageName: "com.petjoo.android",
           // minimumVersion: 33,

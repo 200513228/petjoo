@@ -159,6 +159,23 @@ exports.chatNotificationFunction = functions
         );
     });
 
+exports.customNotificationFunction = functions
+    .region('europe-west6')
+    .firestore
+    .document("custom_notif/{notifId}")
+    .onCreate(async (snap, context) => {
+        const message = snap.data();
+        return admin.messaging().sendToDevice(
+            message.fcmToken,
+            {
+                notification: {
+                    title: message.title,
+                    body: message.message,
+                },
+            },
+        );
+    });
+
 exports.chatUpdateFunction = functions
     .region('europe-west6')
     .firestore

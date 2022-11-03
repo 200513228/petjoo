@@ -153,9 +153,15 @@ class ChatDetailView extends StatelessWidget {
                 child: Text(
                   vm.isBlocked ? 'unblock'.tr() : 'block'.tr(),
                   style: const TextStyle(color: Colors.red),
+                )),
+            PopupMenuItem(
+                onTap: () => vm.report(context),
+                child: Text(
+                  'report'.tr(),
+                  style: const TextStyle(color: Colors.white),
                 ))
           ],
-        )
+        ),
       ],
       title: Text(name,
           style: const TextStyle(

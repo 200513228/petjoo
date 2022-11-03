@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -79,10 +81,14 @@ abstract class ReservationCreateViewModelBase with Store {
       model!.distanceB = 0.0;
       model!.resPricePerKm = advertModel!.pricePerKm;
       model!.status = 0;
-      model!.distanceA = await LocationService.getDirections(
-          origin: advertModel!.geoPoint, destination: beginGeoPoint!);
-      model!.distanceB = await LocationService.getDirections(
-          origin: beginGeoPoint!, destination: endGeoPoint!);
+      try {
+        model!.distanceA = await LocationService.getDirections(
+            origin: advertModel!.geoPoint, destination: beginGeoPoint!);
+        model!.distanceB = await LocationService.getDirections(
+            origin: beginGeoPoint!, destination: endGeoPoint!);
+      } on Exception catch (e) {
+        log(e.toString());
+      }
       isLoading = !isLoading;
       return 'SHOW';
     } else {

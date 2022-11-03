@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
+import 'package:petjoo/home/service/report_service.dart';
 import 'package:petjoo/reservation/view/reservation_shift_view.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
@@ -76,6 +78,19 @@ abstract class TransportDetailViewModelBase with Store {
   Future publish(BuildContext context) async {
     Uri link = await DLinkService.createTransportLink(advert!.id);
     Share.share(link.toString());
+  }
+
+  @action
+  Future report(BuildContext context) async {
+    await ReportService.sendReport({
+      'date': Timestamp.now(),
+      'doc': advert!.id,
+      'col': 'transport_adverts'
+    }).then((value) => value == 'REPORT'
+        ? ScaffoldMessenger.of(context)
+            .showSnackBar(uiSnackBar('Rapor başarıyla gönderildi.'))
+        : ScaffoldMessenger.of(context)
+            .showSnackBar(uiSnackBar('Rapor gönderilirken bir hata oluştu.')));
   }
 
   @action

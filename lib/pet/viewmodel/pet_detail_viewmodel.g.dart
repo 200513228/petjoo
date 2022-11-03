@@ -89,6 +89,14 @@ mixin _$PetDetailViewModel on PetDetailViewModelBase, Store {
     return _$publishAsyncAction.run(() => super.publish(context));
   }
 
+  late final _$reportAsyncAction =
+      AsyncAction('PetDetailViewModelBase.report', context: context);
+
+  @override
+  Future<dynamic> report(BuildContext context) {
+    return _$reportAsyncAction.run(() => super.report(context));
+  }
+
   late final _$changeAdoptAsyncAction =
       AsyncAction('PetDetailViewModelBase.changeAdopt', context: context);
 

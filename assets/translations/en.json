@@ -175,5 +175,7 @@
     "company": "Company",
     "location": "Location",
     "contact": "Contact",
-    "social": "Social Media"
+    "social": "Social Media",
+    "access_title": "You do not have access",
+    "access_content": "You do not have access to use this part. You can send an e-mail to destek@petjoo.app for access authorization."
 }

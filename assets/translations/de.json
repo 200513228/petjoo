@@ -175,5 +175,7 @@
     "company": "Gesellschaft",
     "location": "Lage",
     "contact": "Kontakt",
-    "social": "Sozialen Medien"
+    "social": "Sozialen Medien",
+    "access_title": "Sie haben keinen Zugriff",
+    "access_content": "Sie haben keinen Zugriff, um diesen Teil zu verwenden. Für die Zugangsberechtigung können Sie eine E-Mail an destek@petjoo.app senden."
 }

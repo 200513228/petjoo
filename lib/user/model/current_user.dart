@@ -11,6 +11,7 @@ class CurrentUser {
   static String fcmToken = '';
   static bool hasTransport = false;
   static bool hasVeterinary = false;
+  static bool hasStore = false;
   static List blocks = [];
 
   CurrentUser.fromDS(DocumentSnapshot snapshot) {
@@ -25,6 +26,7 @@ class CurrentUser {
     fcmToken = data['fcmToken'] ?? '';
     hasTransport = data['hasTransport'] ?? false;
     hasVeterinary = data['hasVeterinary'] ?? false;
+    hasStore = data['hasStore'] ?? false;
     blocks = data['blocks'] ?? [];
   }
 
@@ -39,6 +41,7 @@ class CurrentUser {
     fcmToken = '';
     hasTransport = false;
     hasVeterinary = false;
+    hasStore = false;
     blocks = [];
   }
 }

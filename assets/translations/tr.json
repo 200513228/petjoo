@@ -175,5 +175,7 @@
     "company": "Şirket",
     "location": "Konum",
     "contact": "İletişim",
-    "social": "Sosyal Medya"
+    "social": "Sosyal Medya",
+    "access_title": "Bu kısmı kullanmak için erişiminiz yok",
+    "access_content": "Bu kısmı kullanmak için erişiminiz yok. Erişim yetkisi için destek@petjoo.app adresine e-mail atabilirsiniz. "
 }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/ui/please_access.dart';
 import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/base/string_converters.dart';
 import 'package:petjoo/store/model/store_advert_model.dart';
@@ -154,7 +155,10 @@ class StoreUserListView extends StatelessWidget {
           if (CurrentUser.id == '') {
             showDialog(context: _, builder: (context) => const PleaseAuth());
           } else {
-            vm.newAdvert(_);
+            CurrentUser.hasStore
+                ? vm.newAdvert(_)
+                : showDialog(
+                    context: _, builder: (context) => const PleaseAccess());
           }
         },
         child: Column(

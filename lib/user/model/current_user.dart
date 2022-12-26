@@ -12,6 +12,7 @@ class CurrentUser {
   static bool hasTransport = false;
   static bool hasVeterinary = false;
   static bool hasStore = false;
+  static bool hasBan = false;
   static List blocks = [];
 
   CurrentUser.fromDS(DocumentSnapshot snapshot) {
@@ -27,6 +28,7 @@ class CurrentUser {
     hasTransport = data['hasTransport'] ?? false;
     hasVeterinary = data['hasVeterinary'] ?? false;
     hasStore = data['hasStore'] ?? false;
+    hasBan = data['hasBan'] ?? false;
     blocks = data['blocks'] ?? [];
   }
 
@@ -42,6 +44,7 @@ class CurrentUser {
     hasTransport = false;
     hasVeterinary = false;
     hasStore = false;
+    hasBan = false;
     blocks = [];
   }
 }

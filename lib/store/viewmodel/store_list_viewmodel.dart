@@ -17,6 +17,8 @@ abstract class StoreListViewModelBase with Store {
   StoreFilterModel filter = StoreFilterModel.filter(
       advertType: 0, advertStatus: 0, advertDelivery: 0);
   @observable
+  bool? sortStatus;
+  @observable
   TextEditingController cont = TextEditingController();
 
   @action
@@ -30,6 +32,21 @@ abstract class StoreListViewModelBase with Store {
         a.date.microsecondsSinceEpoch.compareTo(b.date.microsecondsSinceEpoch));
     advertList = temp;
     recoveryList = temp;
+  }
+
+  @action
+  void sort(bool? sort) {
+    List<StoreAdvertModel> temp = recoveryList;
+    sortStatus = sort;
+    if (sort == true) {
+      temp.sort((b, a) => a.price.compareTo(b.price));
+      advertList = temp;
+    } else if (sort == false) {
+      temp.sort((a, b) => a.price.compareTo(b.price));
+      advertList = temp;
+    } else {
+      advertList = recoveryList;
+    }
   }
 
   @action

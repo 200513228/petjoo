@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:petjoo/user/view/login_view.dart';
 
 class PleaseAuth extends StatelessWidget {
@@ -21,6 +22,26 @@ class PleaseAuth extends StatelessWidget {
             },
             child: Text('auth_title'.tr())),
       ],
+    );
+  }
+}
+
+class YouRBanned extends StatelessWidget {
+  const YouRBanned({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      actions: [
+        ElevatedButton(
+            onPressed: () {
+              SystemNavigator.pop();
+            },
+            child: const Text('Anladım'))
+      ],
+      title: const Text('Kural İhlali'),
+      content: const Text(
+          'Uygulama kurallarımızı ihlal ettiğiniz için hesabınız kısıtlanmıştır. Eğer bir yanlışlık olduğunu düşünüyorsanız destek@petjoo.app adresine email yoluyla ulaşabilirsiniz.'),
     );
   }
 }

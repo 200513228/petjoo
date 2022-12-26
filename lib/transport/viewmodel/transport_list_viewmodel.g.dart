@@ -57,6 +57,22 @@ mixin _$TransportListViewModel on TransportListViewModelBase, Store {
     });
   }
 
+  late final _$sortStatusAtom =
+      Atom(name: 'TransportListViewModelBase.sortStatus', context: context);
+
+  @override
+  bool? get sortStatus {
+    _$sortStatusAtom.reportRead();
+    return super.sortStatus;
+  }
+
+  @override
+  set sortStatus(bool? value) {
+    _$sortStatusAtom.reportWrite(value, super.sortStatus, () {
+      super.sortStatus = value;
+    });
+  }
+
   late final _$contAtom =
       Atom(name: 'TransportListViewModelBase.cont', context: context);
 
@@ -83,6 +99,17 @@ mixin _$TransportListViewModel on TransportListViewModelBase, Store {
 
   late final _$TransportListViewModelBaseActionController =
       ActionController(name: 'TransportListViewModelBase', context: context);
+
+  @override
+  void sort(bool? sort) {
+    final _$actionInfo = _$TransportListViewModelBaseActionController
+        .startAction(name: 'TransportListViewModelBase.sort');
+    try {
+      return super.sort(sort);
+    } finally {
+      _$TransportListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void query(String query) {
@@ -123,6 +150,7 @@ mixin _$TransportListViewModel on TransportListViewModelBase, Store {
 advertList: ${advertList},
 recoveryList: ${recoveryList},
 filter: ${filter},
+sortStatus: ${sortStatus},
 cont: ${cont}
     ''';
   }

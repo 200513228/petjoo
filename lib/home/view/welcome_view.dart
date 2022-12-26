@@ -1,4 +1,6 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
@@ -7,6 +9,7 @@ import 'package:petjoo/ui/loading.dart';
 import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/home/viewmodel/welcome_viewmodel.dart';
 import 'package:petjoo/settings/view/settings_view.dart';
+import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/user/model/current_user.dart';
 import 'package:petjoo/user/view/login_view.dart';
 import 'package:petjoo/constants/images.dart';
@@ -22,10 +25,10 @@ class WelcomeView extends StatelessWidget {
     TextStyle style = const TextStyle(
         fontSize: 14, fontWeight: FontWeight.normal, color: Colors.black);
     vm.userLogin(context);
+    vm.checkBan();
     DLinkService.isGo ? vm.navDLink(context) : null;
     NotificationService.isGo ? vm.navNotf(context) : null;
-    return Observer(builder: (context) {
-      return Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: colorPalette['primary'],
           title: Row(
@@ -112,17 +115,22 @@ class WelcomeView extends StatelessWidget {
           ),
         ),
         backgroundColor: colorPalette['secondary'],
-        body: vm.isLoading
-            ? const Loading()
-            : Column(
-                children: [
-                  Expanded(flex: 7, child: slider()),
-                  Expanded(flex: 10, child: selector(context)),
-                  userCard(context),
-                ],
-              ),
-      );
-    });
+        body: Observer(
+          builder: (context) {
+            // return vm.hasBan
+            //     ? showBanned(context)
+            //     :
+            return (vm.isLoading
+                ? const Loading()
+                : Column(
+                    children: [
+                      Expanded(flex: 7, child: slider()),
+                      Expanded(flex: 10, child: selector(context)),
+                      userCard(context),
+                    ],
+                  ));
+          },
+        ));
   }
 
   Widget slider() {
@@ -157,7 +165,7 @@ class WelcomeView extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: SmallModule(
-                  icon: FontAwesomeIcons.compassDrafting,
+                  icon: FontAwesomeIcons.solidHospital,
                   title: 'welcome_soon'.tr(),
                   onTap: () => vm.goModule(_, 'YAKINDA'),
                 ),
@@ -197,14 +205,21 @@ class WelcomeView extends StatelessWidget {
         child: ListTile(
             tileColor: colorPalette['primary'],
             onTap: () {
-              vm.userLog
-                  ? Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => SettingsView()),
-                      (route) => true,
-                    )
-                  : Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginView()));
+              CurrentUser.hasBan
+                  ? showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => const YouRBanned())
+                  : (vm.userLog
+                      ? Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => SettingsView()),
+                          (route) => true,
+                        )
+                      : Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginView())));
             },
             leading: vm.userLog
                 ? Container(
@@ -287,7 +302,12 @@ class BigModule extends StatelessWidget {
     return InkWell(
       radius: 25,
       onTap: () {
-        onTap();
+        CurrentUser.hasBan
+            ? showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const YouRBanned())
+            : onTap();
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -337,7 +357,12 @@ class SmallModule extends StatelessWidget {
       onTap: title == 'welcome_soon'.tr()
           ? null
           : () {
-              onTap();
+              CurrentUser.hasBan
+                  ? showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => const YouRBanned())
+                  : onTap();
             },
       radius: 25,
       child: Container(
@@ -356,14 +381,24 @@ class SmallModule extends StatelessWidget {
               color: Colors.black,
               size: size,
             ),
-            Text(
-              title,
-              maxLines: 1,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                letterSpacing: -1.5,
+            Badge(
+              showBadge: title == 'welcome_soon'.tr(),
+              badgeColor: Colors.transparent,
+              position: BadgePosition.bottomEnd(bottom: -20),
+              badgeContent: const Text(
+                'Yakında',
+                style: TextStyle(fontSize: 14, color: Colors.black),
+              ),
+              child: Text(
+                title,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -1.5,
+                ),
               ),
             )
           ],

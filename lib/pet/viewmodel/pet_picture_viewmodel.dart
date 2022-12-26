@@ -67,6 +67,18 @@ abstract class PetPictureViewModelBase with Store {
     isLoading = !isLoading;
     File? img0 = imageList.isNotEmpty ? imageList[0] : null;
     File? img1 = (imageList.length > 1) ? imageList[1] : null;
+    await showDialog(
+        context: _,
+        builder: (context) => AlertDialog(
+              title: const Text('Uyarı'),
+              content: const Text(
+                  'Uygulamamızda hayvan satışı yasaktır. Kuralları ihlal etmeniz durumunda hesabınız kapatılacaktır. Sağlıklı günler.'),
+              actions: [
+                ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Anladım'))
+              ],
+            ));
     await PetService.addAdverts(advert!, img0, img1)
         .then((value) => value == 'ADD' ? successfull(_) : error(_));
   }

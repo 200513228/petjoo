@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -161,6 +162,30 @@ class StoreListView extends StatelessWidget {
                   )),
             ),
           ),
+          Observer(builder: (context) {
+            return Badge(
+              badgeContent: Icon(
+                vm.sortStatus == true
+                    ? Icons.arrow_upward
+                    : Icons.arrow_downward,
+                size: 15,
+                color: Colors.black,
+              ),
+              showBadge: vm.sortStatus != null,
+              position: BadgePosition.topEnd(top: -3, end: -5),
+              badgeColor: Colors.transparent,
+              child: IconButton(
+                  onPressed: () {
+                    vm.sort(vm.sortStatus == null
+                        ? true
+                        : (vm.sortStatus == true ? false : null));
+                  },
+                  icon: const Icon(
+                    Icons.sort_outlined,
+                    color: Colors.black,
+                  )),
+            );
+          })
         ],
       ),
     );

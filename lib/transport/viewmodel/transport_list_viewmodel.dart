@@ -17,6 +17,8 @@ abstract class TransportListViewModelBase with Store {
   TransportFilterModel filter = TransportFilterModel.filter(
       hasIntercity: 0, hasCage: 0, hasCollar: 0, hasCatch: 0);
   @observable
+  bool? sortStatus;
+  @observable
   TextEditingController cont = TextEditingController();
 
   @action
@@ -28,6 +30,21 @@ abstract class TransportListViewModelBase with Store {
     }
     advertList = temp;
     recoveryList = temp;
+  }
+
+  @action
+  void sort(bool? sort) {
+    List<TransportAdvertModel> temp = recoveryList;
+    sortStatus = sort;
+    if (sort == true) {
+      temp.sort((b, a) => a.pricePerKm.compareTo(b.pricePerKm));
+      advertList = temp;
+    } else if (sort == false) {
+      temp.sort((a, b) => a.pricePerKm.compareTo(b.pricePerKm));
+      advertList = temp;
+    } else {
+      advertList = recoveryList;
+    }
   }
 
   @action

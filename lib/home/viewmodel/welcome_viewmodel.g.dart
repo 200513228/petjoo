@@ -41,6 +41,22 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
     });
   }
 
+  late final _$hasBanAtom =
+      Atom(name: 'WelcomeViewModelBase.hasBan', context: context);
+
+  @override
+  bool get hasBan {
+    _$hasBanAtom.reportRead();
+    return super.hasBan;
+  }
+
+  @override
+  set hasBan(bool value) {
+    _$hasBanAtom.reportWrite(value, super.hasBan, () {
+      super.hasBan = value;
+    });
+  }
+
   late final _$userLoginAsyncAction =
       AsyncAction('WelcomeViewModelBase.userLogin', context: context);
 
@@ -69,6 +85,17 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
       ActionController(name: 'WelcomeViewModelBase', context: context);
 
   @override
+  void checkBan() {
+    final _$actionInfo = _$WelcomeViewModelBaseActionController.startAction(
+        name: 'WelcomeViewModelBase.checkBan');
+    try {
+      return super.checkBan();
+    } finally {
+      _$WelcomeViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void goModule(BuildContext _, String title) {
     final _$actionInfo = _$WelcomeViewModelBaseActionController.startAction(
         name: 'WelcomeViewModelBase.goModule');
@@ -83,7 +110,8 @@ mixin _$WelcomeViewModel on WelcomeViewModelBase, Store {
   String toString() {
     return '''
 userLog: ${userLog},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+hasBan: ${hasBan}
     ''';
   }
 }

@@ -28,6 +28,13 @@ abstract class WelcomeViewModelBase with Store {
   bool userLog = false;
   @observable
   bool isLoading = false;
+  @observable
+  bool hasBan = false;
+
+  @action
+  void checkBan() {
+    hasBan = CurrentUser.hasBan;
+  }
 
   @action
   Future userLogin(BuildContext context) async {

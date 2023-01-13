@@ -384,9 +384,9 @@ class SmallModule extends StatelessWidget {
               showBadge: title == 'welcome_soon'.tr(),
               badgeColor: Colors.transparent,
               position: BadgePosition.bottomEnd(bottom: -20),
-              badgeContent: const Text(
-                'Yakında',
-                style: TextStyle(fontSize: 14, color: Colors.black),
+              badgeContent: Text(
+                'soon'.tr(),
+                style: const TextStyle(fontSize: 14, color: Colors.black),
               ),
               child: Text(
                 title,

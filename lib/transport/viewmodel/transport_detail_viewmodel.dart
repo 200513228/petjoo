@@ -8,6 +8,7 @@ import 'package:petjoo/chat/model/chat_advert_model.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
 import 'package:petjoo/home/service/report_service.dart';
 import 'package:petjoo/reservation/view/reservation_shift_view.dart';
+import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/chat/view/chat_detail_view.dart';
@@ -15,6 +16,7 @@ import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/transport/model/transport_advert_model.dart';
 import 'package:petjoo/transport/service/transport_service.dart';
 import 'package:petjoo/transport/view/transport_create_view.dart';
+import 'package:petjoo/user/model/current_user.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 part 'transport_detail_viewmodel.g.dart';
@@ -82,15 +84,21 @@ abstract class TransportDetailViewModelBase with Store {
 
   @action
   Future report(BuildContext context) async {
-    await ReportService.sendReport({
-      'date': Timestamp.now(),
-      'doc': advert!.id,
-      'col': 'transport_adverts'
-    }).then((value) => value == 'REPORT'
-        ? ScaffoldMessenger.of(context)
-            .showSnackBar(uiSnackBar('Rapor başarıyla gönderildi.'))
-        : ScaffoldMessenger.of(context)
-            .showSnackBar(uiSnackBar('Rapor gönderilirken bir hata oluştu.')));
+    if (CurrentUser.id == '') {
+      showDialog(context: context, builder: (context) => const PleaseAuth());
+    } else {
+      await ReportService.sendReport({
+        'date': Timestamp.now(),
+        'doc': advert!.id,
+        'col': 'transport_adverts',
+        'userId': CurrentUser.id,
+        'status': false,
+      }).then((value) => value == 'REPORT'
+          ? ScaffoldMessenger.of(context)
+              .showSnackBar(uiSnackBar('Rapor başarıyla gönderildi.'))
+          : ScaffoldMessenger.of(context).showSnackBar(
+              uiSnackBar('Rapor gönderilirken bir hata oluştu.')));
+    }
   }
 
   @action

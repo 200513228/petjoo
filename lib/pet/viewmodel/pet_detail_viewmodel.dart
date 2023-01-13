@@ -14,6 +14,7 @@ import 'package:petjoo/home/view/home_view.dart';
 import 'package:petjoo/pet/model/pet_advert_model.dart';
 import 'package:petjoo/pet/service/pet_service.dart';
 import 'package:petjoo/pet/view/pet_add_view.dart';
+import 'package:petjoo/user/model/current_user.dart';
 import 'package:petjoo/user/service/user_service.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -80,7 +81,9 @@ abstract class PetDetailViewModelBase with Store {
     await ReportService.sendReport({
       'date': Timestamp.now(),
       'doc': advert!.id,
-      'col': 'adverts'
+      'col': 'adverts',
+      'userId': CurrentUser.id,
+      'status': false,
     }).then((value) => value == 'REPORT'
         ? ScaffoldMessenger.of(context)
             .showSnackBar(uiSnackBar('Rapor başarıyla gönderildi.'))

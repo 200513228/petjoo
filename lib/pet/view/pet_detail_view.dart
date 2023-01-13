@@ -520,7 +520,15 @@ class PetDetailView extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: () => vm.report(context),
+                    onTap: () {
+                      if (CurrentUser.id == '') {
+                        showDialog(
+                            context: context,
+                            builder: (context) => const PleaseAuth());
+                      } else {
+                        vm.report(context);
+                      }
+                    },
                     child: Text(
                       'report'.tr(),
                       style: const TextStyle(color: Colors.red),

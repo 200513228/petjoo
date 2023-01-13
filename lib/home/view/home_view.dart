@@ -92,6 +92,7 @@ class HomeView extends StatelessWidget {
   }
 
   Widget buildBottomBar(BuildContext _) {
+    TextStyle style = const TextStyle(fontSize: 10);
     return Observer(builder: (_) {
       return StylishBottomBar(
         currentIndex: vm.currentIndex,
@@ -99,25 +100,25 @@ class HomeView extends StatelessWidget {
         items: [
           AnimatedBarItems(
             icon: const Icon(Icons.home),
-            title: Text('home_home'.tr()),
+            title: Text('home_home'.tr(), style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white,
           ),
           AnimatedBarItems(
             icon: Icon(toCustom1Icon),
-            title: Text('home_all'.tr()),
+            title: Text(labelToBottom1, style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white54,
           ),
           AnimatedBarItems(
             icon: Icon(toCustom2Icon),
-            title: Text(labelToBottom2),
+            title: Text(labelToBottom2, style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white54,
           ),
           AnimatedBarItems(
             icon: const Icon(Icons.settings),
-            title: Text('home_settings'.tr()),
+            title: Text('home_settings'.tr(), style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white,
           )
@@ -150,10 +151,23 @@ class HomeView extends StatelessWidget {
     }
   }
 
+  String get labelToBottom1 {
+    switch (title) {
+      case 'PET NAKİL':
+        return 'home_all_transport'.tr();
+      case 'PAZAR':
+        return 'home_all_products'.tr();
+      default:
+        return 'home_all'.tr();
+    }
+  }
+
   String get labelToBottom2 {
     switch (title) {
       case 'PET NAKİL':
         return 'home_myres'.tr();
+      case 'PAZAR':
+        return 'home_myproducts'.tr();
       default:
         return 'home_my'.tr();
     }
@@ -173,7 +187,16 @@ class HomeView extends StatelessWidget {
               return titleToModalSheet();
             });
       },
-      child: const Icon(Icons.filter_alt_rounded),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(
+            Icons.filter_alt_rounded,
+            size: 30,
+          ),
+          Text('Filtre', style: TextStyle(fontSize: 10))
+        ],
+      ),
     );
   }
 

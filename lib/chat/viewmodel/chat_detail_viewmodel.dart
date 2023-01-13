@@ -6,6 +6,7 @@ import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/model/message_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/home/service/report_service.dart';
+import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/ui/ui_snackbar.dart';
 import 'package:petjoo/user/model/current_user.dart';
 import 'package:petjoo/user/service/user_service.dart';
@@ -76,15 +77,21 @@ abstract class ChatDetailViewModelBase with Store {
 
   @action
   Future report(BuildContext context) async {
-    await ReportService.sendReport({
-      'date': Timestamp.now(),
-      'doc': chatModel!.id,
-      'col': 'chats'
-    }).then((value) => value == 'REPORT'
-        ? ScaffoldMessenger.of(context)
-            .showSnackBar(uiSnackBar('Rapor başarıyla gönderildi.'))
-        : ScaffoldMessenger.of(context)
-            .showSnackBar(uiSnackBar('Rapor gönderilirken bir hata oluştu.')));
+    if (CurrentUser.id == '') {
+      showDialog(context: context, builder: (context) => const PleaseAuth());
+    } else {
+      await ReportService.sendReport({
+        'date': Timestamp.now(),
+        'doc': chatModel!.id,
+        'col': 'chats',
+        'userId': CurrentUser.id,
+        'status': false,
+      }).then((value) => value == 'REPORT'
+          ? ScaffoldMessenger.of(context)
+              .showSnackBar(uiSnackBar('Rapor başarıyla gönderildi.'))
+          : ScaffoldMessenger.of(context).showSnackBar(
+              uiSnackBar('Rapor gönderilirken bir hata oluştu.')));
+    }
   }
 
   @action

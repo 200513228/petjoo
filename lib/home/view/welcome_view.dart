@@ -123,8 +123,8 @@ class WelcomeView extends StatelessWidget {
                 ? const Loading()
                 : Column(
                     children: [
-                      Expanded(flex: 7, child: slider()),
-                      Expanded(flex: 10, child: selector(context)),
+                      Expanded(flex: 6, child: slider()),
+                      Expanded(flex: 11, child: selector(context)),
                       userCard(context),
                     ],
                   ));
@@ -147,7 +147,7 @@ class WelcomeView extends StatelessWidget {
 
   Widget selector(BuildContext _) {
     return Container(
-      padding: const EdgeInsets.all(25),
+      padding: const EdgeInsets.all(15),
       child: Row(
         children: [
           Expanded(
@@ -159,6 +159,14 @@ class WelcomeView extends StatelessWidget {
                   icon: Icons.pets,
                   title: 'welcome_advert'.tr(),
                   onTap: () => vm.goModule(_, 'İLANLAR'),
+                ),
+              ),
+              Expanded(
+                flex: 6,
+                child: SmallModule(
+                  icon: Icons.forum,
+                  title: 'welcome_blog'.tr(),
+                  onTap: () => vm.goModule(_, 'BLOG'),
                 ),
               ),
               Expanded(
@@ -188,6 +196,14 @@ class WelcomeView extends StatelessWidget {
                   icon: Icons.store,
                   title: 'welcome_store'.tr(),
                   onTap: () => vm.goModule(_, 'PAZAR'),
+                ),
+              ),
+              Expanded(
+                flex: 6,
+                child: SmallModule(
+                  icon: Icons.emergency,
+                  title: 'welcome_emergancy'.tr(),
+                  onTap: () => vm.goModule(_, 'ACİL'),
                 ),
               ),
             ],
@@ -309,7 +325,7 @@ class BigModule extends StatelessWidget {
             : onTap();
       },
       child: Container(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(5),
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -365,7 +381,7 @@ class SmallModule extends StatelessWidget {
             },
       radius: 25,
       child: Container(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(5),
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(

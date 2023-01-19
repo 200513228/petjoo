@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/blog/view/blog_list_view.dart';
 import 'package:petjoo/transport/view/transport_filter_view.dart';
 import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/ui/please_auth.dart';
@@ -146,6 +147,10 @@ class HomeView extends StatelessWidget {
         return 'advert'.tr();
       case 'PET NAKİL':
         return 'transport'.tr();
+      case 'BLOG':
+        return 'blog'.tr();
+      case 'ACİL':
+        return 'emergancy'.tr();
       default:
         return ' ';
     }
@@ -263,6 +268,12 @@ class HomeView extends StatelessWidget {
         break;
       case 'PET NAKİL':
         page = const TransportListView();
+        break;
+      case 'BLOG':
+        page = BlogListView();
+        break;
+      case 'ACİL':
+        page = StoreFilterView();
         break;
       default:
         page = Container();

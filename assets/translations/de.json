@@ -21,6 +21,8 @@
     "welcome_store": "PET SHOP",
     "welcome_transport": "PET TRANSP.",
     "welcome_soon": "TIERARZT\nDEMNÄCHST",
+    "welcome_blog": "BLOG",
+    "welcome_emergancy": "EMERGANT",
     "login_title": "Einloggen",
     "login_no_account": "Sie haben kein Konto? Ein Konto erstellen.",
     "login_forgot": "Ich habe mein Passwort vergessen",

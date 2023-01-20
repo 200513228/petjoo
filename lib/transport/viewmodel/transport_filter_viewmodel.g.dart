@@ -73,6 +73,22 @@ mixin _$TransportFilterViewModel on TransportFilterViewModelBase, Store {
     });
   }
 
+  late final _$is24Atom =
+      Atom(name: 'TransportFilterViewModelBase.is24', context: context);
+
+  @override
+  int? get is24 {
+    _$is24Atom.reportRead();
+    return super.is24;
+  }
+
+  @override
+  set is24(int? value) {
+    _$is24Atom.reportWrite(value, super.is24, () {
+      super.is24 = value;
+    });
+  }
+
   late final _$TransportFilterViewModelBaseActionController =
       ActionController(name: 'TransportFilterViewModelBase', context: context);
 
@@ -115,7 +131,8 @@ mixin _$TransportFilterViewModel on TransportFilterViewModelBase, Store {
 hasIntercity: ${hasIntercity},
 hasCage: ${hasCage},
 hasCollar: ${hasCollar},
-hasCatch: ${hasCatch}
+hasCatch: ${hasCatch},
+is24: ${is24}
     ''';
   }
 }

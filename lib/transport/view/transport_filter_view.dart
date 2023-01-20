@@ -76,6 +76,20 @@ class TransportFilterView extends StatelessWidget {
               onChanged: (value) => vm.hasCatch = value,
             ),
             const SizedBox(height: 20),
+            DropdownX<int>(
+              value: vm.is24,
+              hint: '7/24',
+              label: '7/24',
+              borderRadius: Dimens.radiusSmall.toBorderRadius(),
+              items: transportFilterIntercities.keys
+                  .map((e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(transportFilterIntercities[e]!),
+                      ))
+                  .toList(),
+              onChanged: (value) => vm.is24 = value,
+            ),
+            const SizedBox(height: 20),
             buildButtons(context),
           ],
         ),

@@ -187,6 +187,12 @@ class TransportCreateView extends StatelessWidget {
                   child: advertInfoCard('catch'.tr(),
                       FontAwesomeIcons.personRunning, vm.canCatch),
                 ),
+              ),
+              Expanded(
+                child: InkWell(
+                  onTap: () => vm.is24 = !vm.is24,
+                  child: advertInfoCard('7/24', Icons.emergency, vm.is24),
+                ),
               )
             ],
           );
@@ -197,8 +203,8 @@ class TransportCreateView extends StatelessWidget {
 
   Widget advertInfoCard(String title, IconData icon, bool isTrue) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 7.5),
-      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      padding: const EdgeInsets.all(7),
       decoration: const BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(16))),

@@ -15,6 +15,7 @@ class TransportAdvertModel {
   bool hasCage = false;
   bool hasCollar = false;
   bool canCatch = false;
+  bool is24 = false;
   List images = [];
   List shifts = [];
 
@@ -34,6 +35,7 @@ class TransportAdvertModel {
     hasCage = data['hasCage'] ?? false;
     hasCollar = data['hasCollar'] ?? false;
     canCatch = data['canCatch'] ?? false;
+    is24 = data['is24'] ?? false;
     images = data['images'] ?? [];
     shifts = data['shifts'] ??
         [
@@ -98,6 +100,7 @@ class TransportAdvertModel {
     hasCage = data['hasCage'] ?? false;
     hasCollar = data['hasCollar'] ?? false;
     canCatch = data['canCatch'] ?? false;
+    is24 = data['is24'] ?? false;
     images = data['images'] ?? [];
     shifts = data['shifts'] ??
         [
@@ -161,6 +164,7 @@ class TransportAdvertModel {
       'hasCage': model.hasCage,
       'hasCollar': model.hasCollar,
       'canCatch': model.canCatch,
+      'is24': model.is24,
       'shifts': model.shifts,
       // 'images': model.images,
     };
@@ -181,6 +185,7 @@ class TransportAdvertModel {
     hasCage = false;
     hasCollar = false;
     canCatch = false;
+    is24 = false;
     images = [];
     shifts = [
       {

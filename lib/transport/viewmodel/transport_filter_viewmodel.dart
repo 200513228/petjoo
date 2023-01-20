@@ -16,6 +16,8 @@ abstract class TransportFilterViewModelBase with Store {
   int? hasCollar;
   @observable
   int? hasCatch;
+  @observable
+  int? is24;
   @action
   void resetFilter(BuildContext context) {
     TransportListView.vm.resetFilter();
@@ -28,7 +30,8 @@ abstract class TransportFilterViewModelBase with Store {
         hasIntercity: hasIntercity ?? 0,
         hasCollar: hasCollar ?? 0,
         hasCatch: hasCatch ?? 0,
-        hasCage: hasCage ?? 0);
+        hasCage: hasCage ?? 0,
+        is24: is24 ?? 0);
     TransportListView.vm.setFilter(result);
     Navigator.pop(context);
   }
@@ -39,5 +42,6 @@ abstract class TransportFilterViewModelBase with Store {
     hasCage = TransportListView.vm.filter.hasCage;
     hasCatch = TransportListView.vm.filter.hasCatch;
     hasCollar = TransportListView.vm.filter.hasCollar;
+    is24 = TransportListView.vm.filter.is24;
   }
 }

@@ -15,7 +15,7 @@ abstract class TransportListViewModelBase with Store {
   List<TransportAdvertModel> recoveryList = [];
   @observable
   TransportFilterModel filter = TransportFilterModel.filter(
-      hasIntercity: 0, hasCage: 0, hasCollar: 0, hasCatch: 0);
+      hasIntercity: 0, hasCage: 0, hasCollar: 0, hasCatch: 0, is24: 0);
   @observable
   bool? sortStatus;
   @observable
@@ -64,7 +64,7 @@ abstract class TransportListViewModelBase with Store {
   @action
   void resetFilter() {
     filter = TransportFilterModel.filter(
-        hasIntercity: 0, hasCage: 0, hasCollar: 0, hasCatch: 0);
+        hasIntercity: 0, hasCage: 0, hasCollar: 0, hasCatch: 0, is24: 0);
     advertList = recoveryList;
   }
 
@@ -84,6 +84,8 @@ abstract class TransportListViewModelBase with Store {
         .where((element) =>
             filter.hasCollar == (element.hasCollar ? 1 : 2) ||
             filter.hasCollar == 0)
+        .where((element) =>
+            filter.is24 == (element.is24 ? 1 : 2) || filter.is24 == 0)
         .toList();
   }
 }

@@ -35,6 +35,8 @@ abstract class TransportCreateViewModelBase with Store {
   @observable
   bool hasCage = false;
   @observable
+  bool is24 = false;
+  @observable
   GeoPoint? geoPoint;
 
   @action
@@ -55,6 +57,7 @@ abstract class TransportCreateViewModelBase with Store {
     isIntercity = advert?.isIntercity ?? false;
     hasCollar = advert?.hasCollar ?? false;
     hasCage = advert?.hasCage ?? false;
+    is24 = advert?.is24 ?? false;
     geoPoint = advert?.geoPoint ?? const GeoPoint(0, 0);
     isLoading = !isLoading;
   }
@@ -80,6 +83,7 @@ abstract class TransportCreateViewModelBase with Store {
       advert!.isIntercity = isIntercity;
       advert!.hasCage = hasCage;
       advert!.hasCollar = hasCollar;
+      advert!.is24 = is24;
       advert!.geoPoint = geoPoint ?? const GeoPoint(0, 0);
       Navigator.push(
           context,

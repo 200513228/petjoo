@@ -65,6 +65,7 @@ class TransportTileView extends StatelessWidget {
               featureIcon(FontAwesomeIcons.shieldDog, model.hasCage),
               featureIcon(Icons.circle_outlined, model.hasCollar),
               featureIcon(FontAwesomeIcons.personRunning, model.canCatch),
+              featureIcon(Icons.emergency, model.is24),
             ],
           )
         ],

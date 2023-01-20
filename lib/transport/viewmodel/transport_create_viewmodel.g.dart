@@ -185,6 +185,22 @@ mixin _$TransportCreateViewModel on TransportCreateViewModelBase, Store {
     });
   }
 
+  late final _$is24Atom =
+      Atom(name: 'TransportCreateViewModelBase.is24', context: context);
+
+  @override
+  bool get is24 {
+    _$is24Atom.reportRead();
+    return super.is24;
+  }
+
+  @override
+  set is24(bool value) {
+    _$is24Atom.reportWrite(value, super.is24, () {
+      super.is24 = value;
+    });
+  }
+
   late final _$geoPointAtom =
       Atom(name: 'TransportCreateViewModelBase.geoPoint', context: context);
 
@@ -254,6 +270,7 @@ canCatch: ${canCatch},
 isIntercity: ${isIntercity},
 hasCollar: ${hasCollar},
 hasCage: ${hasCage},
+is24: ${is24},
 geoPoint: ${geoPoint}
     ''';
   }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'blog_list_viewmodel.dart';
+part of 'blog_detail_viewmodel.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'blog_list_viewmodel.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$BlogListViewModel on BlogListViewModelBase, Store {
+mixin _$BlogDetailViewModel on BlogDetailViewModelBase, Store {
   late final _$isLoadingAtom =
-      Atom(name: 'BlogListViewModelBase.isLoading', context: context);
+      Atom(name: 'BlogDetailViewModelBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -25,35 +25,35 @@ mixin _$BlogListViewModel on BlogListViewModelBase, Store {
     });
   }
 
-  late final _$topicsAtom =
-      Atom(name: 'BlogListViewModelBase.topics', context: context);
+  late final _$messagesAtom =
+      Atom(name: 'BlogDetailViewModelBase.messages', context: context);
 
   @override
-  List<BlogTopicModel> get topics {
-    _$topicsAtom.reportRead();
-    return super.topics;
+  List<BlogMsgModel> get messages {
+    _$messagesAtom.reportRead();
+    return super.messages;
   }
 
   @override
-  set topics(List<BlogTopicModel> value) {
-    _$topicsAtom.reportWrite(value, super.topics, () {
-      super.topics = value;
+  set messages(List<BlogMsgModel> value) {
+    _$messagesAtom.reportWrite(value, super.messages, () {
+      super.messages = value;
     });
   }
 
-  late final _$getTopicsAsyncAction =
-      AsyncAction('BlogListViewModelBase.getTopics', context: context);
+  late final _$getMessagesAsyncAction =
+      AsyncAction('BlogDetailViewModelBase.getMessages', context: context);
 
   @override
-  Future<dynamic> getTopics() {
-    return _$getTopicsAsyncAction.run(() => super.getTopics());
+  Future<dynamic> getMessages(String docid) {
+    return _$getMessagesAsyncAction.run(() => super.getMessages(docid));
   }
 
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-topics: ${topics}
+messages: ${messages}
     ''';
   }
 }

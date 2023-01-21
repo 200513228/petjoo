@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/blog/view/blog_list_view.dart';
+import 'package:petjoo/emergancy/view/emergancy_list_view.dart';
 import 'package:petjoo/transport/view/transport_filter_view.dart';
 import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/ui/please_auth.dart';
@@ -162,6 +163,10 @@ class HomeView extends StatelessWidget {
         return 'home_all_transport'.tr();
       case 'PAZAR':
         return 'home_all_products'.tr();
+      case 'ACİL':
+        return 'home_all_topics'.tr();
+      case 'BLOG':
+        return 'home_all_topics'.tr();
       default:
         return 'home_all'.tr();
     }
@@ -173,6 +178,8 @@ class HomeView extends StatelessWidget {
         return 'home_myres'.tr();
       case 'PAZAR':
         return 'home_myproducts'.tr();
+      case 'BLOG':
+        return 'home_mytopics'.tr();
       default:
         return 'home_my'.tr();
     }
@@ -273,7 +280,7 @@ class HomeView extends StatelessWidget {
         page = BlogListView();
         break;
       case 'ACİL':
-        page = StoreFilterView();
+        page = EmergancyListView();
         break;
       default:
         page = Container();

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -201,7 +203,7 @@ class WelcomeView extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: SmallModule(
-                  icon: Icons.emergency,
+                  icon: Icons.warning_rounded,
                   title: 'welcome_emergancy'.tr(),
                   onTap: () => vm.goModule(_, 'ACİL'),
                 ),
@@ -368,6 +370,8 @@ class SmallModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.height / 32;
+    log(title);
+    log(icon.runtimeType.toString());
     return InkWell(
       onTap: title == 'welcome_soon'.tr()
           ? null
@@ -384,9 +388,11 @@ class SmallModule extends StatelessWidget {
         margin: const EdgeInsets.all(5),
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-          color: Color(0xffFFE427),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(25)),
+          color: title == 'welcome_emergancy'.tr()
+              ? Colors.red.shade800
+              : const Color(0xffFFE427),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -394,7 +400,9 @@ class SmallModule extends StatelessWidget {
             Icon(
               icon,
               color: Colors.black,
-              size: size,
+              size: icon.runtimeType.toString() == 'IconData'
+                  ? size * (3 / 2)
+                  : size,
             ),
             Badge(
               showBadge: title == 'welcome_soon'.tr(),

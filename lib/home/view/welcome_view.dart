@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -370,8 +368,6 @@ class SmallModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.height / 32;
-    log(title);
-    log(icon.runtimeType.toString());
     return InkWell(
       onTap: title == 'welcome_soon'.tr()
           ? null

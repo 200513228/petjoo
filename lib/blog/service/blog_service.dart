@@ -9,6 +9,25 @@ class BlogService {
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getMessages(
       String docid) async {
-    return await db.collection('blog').doc(docid).collection('messages').get();
+    return await db
+        .collection('blog')
+        .doc(docid)
+        .collection('messages')
+        .orderBy('date')
+        .get();
+  }
+
+  static Future<String> sendMessage(
+      Map<String, dynamic> msgModel, String docid) async {
+    try {
+      await db
+          .collection('blog')
+          .doc(docid)
+          .collection('messages')
+          .add(msgModel);
+      return 'OKAY';
+    } on Exception catch (e) {
+      return e.toString();
+    }
   }
 }

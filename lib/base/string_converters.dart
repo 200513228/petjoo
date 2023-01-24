@@ -20,6 +20,17 @@ String hourToString(String hour) {
   return '$start:$end';
 }
 
+String hourToStringFromStamp(Timestamp time) {
+  String hour = '${time.toDate().hour}:${time.toDate().minute}';
+  String start = hour.split(':')[0].length == 1
+      ? '0${hour.split(':')[0]}'
+      : hour.split(':')[0];
+  String end = hour.split(':')[1].length == 1
+      ? '0${hour.split(':')[1]}'
+      : hour.split(':')[1];
+  return '$start:$end';
+}
+
 String dayToString(int day) {
   switch (day) {
     case 0:

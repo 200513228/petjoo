@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/blog/model/blog_msg_model.dart';
 import 'package:petjoo/blog/service/blog_service.dart';
@@ -23,5 +24,13 @@ abstract class BlogDetailViewModelBase with Store {
     }
     messages = temp;
     isLoading = false;
+  }
+
+  @action
+  Future sendMessage(String message, String docid) async {
+    isLoading = true;
+    Map<String, dynamic> data = {'message': message, 'date': Timestamp.now()};
+    await BlogService.sendMessage(data, docid)
+        .then((value) => value == 'OKAY' ? getMessages(docid) : null);
   }
 }

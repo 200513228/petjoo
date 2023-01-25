@@ -49,6 +49,15 @@ mixin _$BlogDetailViewModel on BlogDetailViewModelBase, Store {
     return _$getMessagesAsyncAction.run(() => super.getMessages(docid));
   }
 
+  late final _$sendMessageAsyncAction =
+      AsyncAction('BlogDetailViewModelBase.sendMessage', context: context);
+
+  @override
+  Future<dynamic> sendMessage(String message, String docid) {
+    return _$sendMessageAsyncAction
+        .run(() => super.sendMessage(message, docid));
+  }
+
   @override
   String toString() {
     return '''

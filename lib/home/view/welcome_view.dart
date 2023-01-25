@@ -2,6 +2,8 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:petjoo/blog/view/blog_list_view.dart';
+import 'package:petjoo/emergancy/view/emergancy_list_view.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
 import 'package:petjoo/home/service/notification_service.dart';
 import 'package:petjoo/ui/loading.dart';
@@ -166,7 +168,8 @@ class WelcomeView extends StatelessWidget {
                 child: SmallModule(
                   icon: Icons.forum,
                   title: 'welcome_blog'.tr(),
-                  onTap: () => vm.goModule(_, 'BLOG'),
+                  onTap: () => Navigator.push(_,
+                      MaterialPageRoute(builder: (context) => BlogListView())),
                 ),
               ),
               Expanded(
@@ -203,7 +206,10 @@ class WelcomeView extends StatelessWidget {
                 child: SmallModule(
                   icon: Icons.warning_rounded,
                   title: 'welcome_emergancy'.tr(),
-                  onTap: () => vm.goModule(_, 'ACİL'),
+                  onTap: () => Navigator.push(
+                      _,
+                      MaterialPageRoute(
+                          builder: (context) => EmergancyListView())),
                 ),
               ),
             ],
@@ -387,7 +393,7 @@ class SmallModule extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(25)),
           color: title == 'welcome_emergancy'.tr()
-              ? Colors.red.shade800
+              ? Colors.red
               : const Color(0xffFFE427),
         ),
         child: Column(
@@ -403,10 +409,19 @@ class SmallModule extends StatelessWidget {
             Badge(
               showBadge: title == 'welcome_soon'.tr(),
               badgeColor: Colors.transparent,
-              position: BadgePosition.bottomEnd(bottom: -20),
-              badgeContent: Text(
-                'soon'.tr(),
-                style: const TextStyle(fontSize: 14, color: Colors.black),
+              position: BadgePosition.bottomEnd(bottom: -25),
+              badgeContent: Container(
+                padding: const EdgeInsets.all(2),
+                decoration: const BoxDecoration(
+                    color: Colors.white54,
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: Text(
+                  'soon'.tr(),
+                  style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.deepOrangeAccent,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               child: Text(
                 title,

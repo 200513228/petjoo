@@ -15,7 +15,12 @@ class BlogDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     vm.getMessages(topic.id);
     return Scaffold(
-      appBar: AppBar(title: Text(topic.title)),
+      appBar: AppBar(
+        title: Text(topic.title),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
+      ),
       body: Observer(builder: (context) {
         return RefreshIndicator(
           onRefresh: () async => vm.getMessages(topic.id),
@@ -56,7 +61,7 @@ class BlogDetailView extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: Text(
               '${dateToString(model.date)} ${hourToStringFromStamp(model.date)}',
-              style: TextStyle(color: Colors.white38),
+              style: const TextStyle(color: Colors.white38),
             ),
           )
         ],
@@ -67,7 +72,7 @@ class BlogDetailView extends StatelessWidget {
   Widget newMessageTile() {
     TextEditingController cont = TextEditingController();
     return Container(
-      margin: const EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(top: 10, bottom: 20),
       child: Row(
         children: [
           Expanded(
@@ -75,7 +80,7 @@ class BlogDetailView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: TextField(
                 controller: cont,
-                maxLines: 3,
+                maxLines: 2,
               ),
             ),
           ),

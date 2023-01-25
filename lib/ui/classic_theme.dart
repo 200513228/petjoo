@@ -25,14 +25,14 @@ class ClassicTheme {
         dividerColor: colorScheme.onSurface,
         toggleableActiveColor: colorScheme.primary.withOpacity(.7),
         unselectedWidgetColor: colorScheme.onSurface,
-        iconTheme: IconThemeData(color: colorScheme.onSurface.withOpacity(.7)),
+        // iconTheme: IconThemeData(color: colorScheme.onSurface.withOpacity(.7)),
         textTheme: _textTheme(colorScheme),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
           systemOverlayStyle:
-              OverlayStyles.toAll(colorScheme.background, Brightness.dark),
+              OverlayStyles.toAll(colorScheme.background, Brightness.light),
           iconTheme: const IconThemeData(color: Colors.black),
           actionsIconTheme: const IconThemeData(color: Colors.black),
           titleTextStyle: TextStyle(

@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/base/string_converters.dart';
 import 'package:petjoo/blog/model/blog_topic_model.dart';
+import 'package:petjoo/blog/view/blog_add_view.dart';
 import 'package:petjoo/blog/view/blog_detail_view.dart';
 import 'package:petjoo/blog/viewmodel/blog_list_viewmodel.dart';
 import 'package:petjoo/ui/loading.dart';
@@ -13,16 +15,36 @@ class BlogListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.getTopics();
-    return Observer(
-      builder: (context) {
-        return RefreshIndicator(
-            onRefresh: () async => vm.getTopics(),
-            child: vm.isLoading
-                ? const Center(child: Loading())
-                : ListView(
-                    children: [...vm.topics.map((e) => topicCard(e, context))],
-                  ));
-      },
+    return WillPopScope(
+      onWillPop: () async => Navigator.canPop(context),
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BlogAddView())),
+                icon:
+                    const Icon(Icons.new_label, size: 30, color: Colors.black))
+          ],
+          leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
+          title: Text('welcome_blog'.tr()),
+        ),
+        body: Observer(
+          builder: (context) {
+            return RefreshIndicator(
+                onRefresh: () async => vm.getTopics(),
+                child: vm.isLoading
+                    ? const Center(child: Loading())
+                    : ListView(
+                        children: [
+                          ...vm.topics.map((e) => topicCard(e, context))
+                        ],
+                      ));
+          },
+        ),
+      ),
     );
   }
 
@@ -35,7 +57,7 @@ class BlogListView extends StatelessWidget {
         },
         style: ListTileStyle.list,
         title: Text(model.title),
-        subtitle: Text(dateToString(model.date)),
+        trailing: Text(dateToString(model.date)),
       ),
     );
   }

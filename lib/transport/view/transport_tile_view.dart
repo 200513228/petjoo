@@ -65,7 +65,7 @@ class TransportTileView extends StatelessWidget {
               featureIcon(FontAwesomeIcons.shieldDog, model.hasCage),
               featureIcon(Icons.circle_outlined, model.hasCollar),
               featureIcon(FontAwesomeIcons.personRunning, model.canCatch),
-              featureIcon(Icons.emergency, model.is24),
+              featureIcon(Icons.warning_rounded, model.is24),
             ],
           )
         ],
@@ -129,7 +129,9 @@ class TransportTileView extends StatelessWidget {
       icon,
       size: 16,
       color: isActive
-          ? Colors.white.withOpacity(.9)
+          ? (icon == Icons.warning_rounded
+              ? Colors.red
+              : Colors.white.withOpacity(.9))
           : ClassicTheme.myTheme().colorScheme.onSurface.withOpacity(.2),
     );
   }

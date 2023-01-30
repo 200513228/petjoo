@@ -18,6 +18,7 @@ abstract class TransportFilterViewModelBase with Store {
   int? hasCatch;
   @observable
   int? is24;
+
   @action
   void resetFilter(BuildContext context) {
     TransportListView.vm.resetFilter();

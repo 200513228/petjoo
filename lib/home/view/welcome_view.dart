@@ -394,47 +394,102 @@ class SmallModule extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(25)),
           color: title == 'welcome_emergancy'.tr()
               ? Colors.red
-              : const Color(0xffFFE427),
+              : title == 'welcome_soon'.tr()
+                  ? const Color(0xffFFE427).withOpacity(0.68)
+                  : const Color(0xffFFE427),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Icon(
-              icon,
-              color: Colors.black,
-              size: icon.runtimeType.toString() == 'IconData'
-                  ? size * (3 / 2)
-                  : size,
-            ),
-            Badge(
-              showBadge: title == 'welcome_soon'.tr(),
-              badgeColor: Colors.transparent,
-              position: BadgePosition.bottomEnd(bottom: -25),
-              badgeContent: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                    color: Colors.white54,
-                    borderRadius: BorderRadius.all(Radius.circular(5))),
-                child: Text(
-                  'soon'.tr(),
-                  style: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.deepOrangeAccent,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              child: Text(
-                title,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 20,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
                   color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: -1.5,
+                  size: icon.runtimeType.toString() == 'IconData'
+                      ? size * (3 / 2)
+                      : size,
                 ),
-              ),
-            )
+                // Text(
+                //   title,
+                //   maxLines: 1,
+                //   textAlign: TextAlign.center,
+                //   style: const TextStyle(
+                //     fontSize: 20,
+                //     color: Colors.black,
+                //     fontWeight: FontWeight.bold,
+                //     letterSpacing: -1.5,
+                //     // decoration: TextDecoration.lineThrough,
+                //   ),
+                // ),
+                Badge(
+                  showBadge: title == 'welcome_soon'.tr(),
+                  badgeColor: Colors.transparent,
+                  position: BadgePosition.bottomEnd(bottom: -25, end: 11),
+                  badgeContent: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.65),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5))),
+                    child: Text(
+                      'soon'.tr(),
+                      style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -1.5,
+                      // decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            // if (title == 'welcome_soon'.tr())
+            //   Container(
+            //     padding:
+            //         const EdgeInsets.symmetric(vertical: 3, horizontal: 18),
+            //     child: Center(
+            //       child: Transform(
+            //         alignment: FractionalOffset.center,
+            //         transform: Matrix4.identity()
+            //           ..rotateZ(-20 * 3.1415927 / 180),
+            //         child: Container(
+            //           decoration: BoxDecoration(
+            //               color: Colors.red.withOpacity(0.65),
+            //               borderRadius:
+            //                   const BorderRadius.all(Radius.circular(8))),
+            //           child: Text(
+            //             'soon'.tr(),
+            //             textAlign: TextAlign.center,
+            //             style: const TextStyle(
+            //               fontSize: 24,
+            //               // color: Colors.redAccent,
+            //               letterSpacing: 5,
+            //               color: Colors.white,
+            //               // foreground: Paint()
+            //               //   ..style = PaintingStyle.fill
+            //               //   ..style = PaintingStyle.stroke
+            //               //   ..strokeWidth = 2
+            //               //   ..color = Colors.black,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
           ],
         ),
       ),

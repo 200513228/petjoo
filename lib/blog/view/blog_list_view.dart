@@ -39,6 +39,7 @@ class BlogListView extends StatelessWidget {
                     ? const Center(child: Loading())
                     : ListView(
                         children: [
+                          queryText(),
                           ...vm.topics.map((e) => topicCard(e, context))
                         ],
                       ));
@@ -58,6 +59,31 @@ class BlogListView extends StatelessWidget {
         style: ListTileStyle.list,
         title: Text(model.title),
         trailing: Text(dateToString(model.date)),
+      ),
+    );
+  }
+
+  Widget queryText() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: vm.cont,
+              autofocus: false,
+              onChanged: (value) {
+                vm.query(value);
+              },
+              decoration: InputDecoration(
+                  hintText: 'home_search'.tr(),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  )),
+            ),
+          ),
+        ],
       ),
     );
   }

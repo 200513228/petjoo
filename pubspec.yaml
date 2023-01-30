@@ -33,7 +33,7 @@ dependencies:
   google_maps_flutter: ^2.2.0
   geolocator: ^9.0.1
   map_launcher: ^2.4.0
-  timeline_list: ^0.0.6
+  im_stepper: ^1.0.1+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/blog/model/blog_topic_model.dart';
 import 'package:petjoo/blog/service/blog_service.dart';
@@ -10,6 +11,10 @@ abstract class BlogListViewModelBase with Store {
   bool isLoading = false;
   @observable
   List<BlogTopicModel> topics = [];
+  @observable
+  List<BlogTopicModel> recoveryList = [];
+  @observable
+  TextEditingController cont = TextEditingController();
 
   @action
   Future getTopics() async {
@@ -21,6 +26,20 @@ abstract class BlogListViewModelBase with Store {
       temp.add(BlogTopicModel.fromQDS(element));
     }
     topics = temp;
+    recoveryList = temp;
     isLoading = false;
+  }
+
+  @action
+  void query(String query) {
+    List<BlogTopicModel> temp = recoveryList;
+    if (query == '') {
+      topics = recoveryList;
+    } else {
+      topics = temp
+          .where((element) =>
+              ('${element.title.toLowerCase()} ').contains(query.toLowerCase()))
+          .toList();
+    }
   }
 }

@@ -41,6 +41,38 @@ mixin _$BlogListViewModel on BlogListViewModelBase, Store {
     });
   }
 
+  late final _$recoveryListAtom =
+      Atom(name: 'BlogListViewModelBase.recoveryList', context: context);
+
+  @override
+  List<BlogTopicModel> get recoveryList {
+    _$recoveryListAtom.reportRead();
+    return super.recoveryList;
+  }
+
+  @override
+  set recoveryList(List<BlogTopicModel> value) {
+    _$recoveryListAtom.reportWrite(value, super.recoveryList, () {
+      super.recoveryList = value;
+    });
+  }
+
+  late final _$contAtom =
+      Atom(name: 'BlogListViewModelBase.cont', context: context);
+
+  @override
+  TextEditingController get cont {
+    _$contAtom.reportRead();
+    return super.cont;
+  }
+
+  @override
+  set cont(TextEditingController value) {
+    _$contAtom.reportWrite(value, super.cont, () {
+      super.cont = value;
+    });
+  }
+
   late final _$getTopicsAsyncAction =
       AsyncAction('BlogListViewModelBase.getTopics', context: context);
 
@@ -49,11 +81,27 @@ mixin _$BlogListViewModel on BlogListViewModelBase, Store {
     return _$getTopicsAsyncAction.run(() => super.getTopics());
   }
 
+  late final _$BlogListViewModelBaseActionController =
+      ActionController(name: 'BlogListViewModelBase', context: context);
+
+  @override
+  void query(String query) {
+    final _$actionInfo = _$BlogListViewModelBaseActionController.startAction(
+        name: 'BlogListViewModelBase.query');
+    try {
+      return super.query(query);
+    } finally {
+      _$BlogListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-topics: ${topics}
+topics: ${topics},
+recoveryList: ${recoveryList},
+cont: ${cont}
     ''';
   }
 }

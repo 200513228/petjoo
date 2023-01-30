@@ -13,8 +13,8 @@ class TransportListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vm.getAdverts();
-    vm.resetFilter();
-
+    // vm.setFilter(vm.filter);
+    // vm.resetFilter();
     return Observer(builder: (_) {
       return RefreshIndicator(
         onRefresh: () => vm.getAdverts(),

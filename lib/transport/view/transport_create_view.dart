@@ -191,7 +191,7 @@ class TransportCreateView extends StatelessWidget {
               Expanded(
                 child: InkWell(
                   onTap: () => vm.is24 = !vm.is24,
-                  child: advertInfoCard('7/24', Icons.emergency, vm.is24),
+                  child: advertInfoCard('7/24', Icons.warning_rounded, vm.is24),
                 ),
               )
             ],

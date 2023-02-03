@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -29,7 +29,7 @@ class ReservationTileView extends StatelessWidget {
         height: 100,
         child: vm.isLoading
             ? const Center(child: Loading())
-            : Badge(
+            : badges.Badge(
                 badgeContent: Icon(model.status == 0
                     ? Icons.hourglass_bottom_rounded
                     : (model.status == 1 ? Icons.close : Icons.done)),
@@ -60,7 +60,7 @@ class ReservationTileView extends StatelessWidget {
         children: [
           Text(
             vm.userName!,
-            style: ClassicTheme.myTheme().textTheme.bodyText1,
+            style: ClassicTheme.myTheme().textTheme.bodyMedium,
             maxLines: 1,
           ),
           Text(

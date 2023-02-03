@@ -78,8 +78,8 @@ class TransportFilterView extends StatelessWidget {
             const SizedBox(height: 20),
             DropdownX<int>(
               value: vm.is24,
-              hint: '7/24',
-              label: '7/24',
+              hint: 'Acil',
+              label: 'Acil',
               borderRadius: Dimens.radiusSmall.toBorderRadius(),
               items: transportFilterIntercities.keys
                   .map((e) => DropdownMenuItem(

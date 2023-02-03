@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -79,9 +79,10 @@ class SettingsView extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Badge(
+                  badges.Badge(
                     badgeContent: const Icon(Icons.camera_alt),
-                    position: BadgePosition.bottomEnd(end: 16, bottom: 10),
+                    position:
+                        badges.BadgePosition.bottomEnd(end: 16, bottom: 10),
                     badgeColor: Colors.black54,
                     child: InkWell(
                       onTap: () {

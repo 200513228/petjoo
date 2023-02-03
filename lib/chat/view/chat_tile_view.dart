@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/ui/loading.dart';
@@ -29,7 +29,7 @@ class ChatTileView extends StatelessWidget {
                 title: Loading(),
                 subtitle: Text(''),
               )
-            : Badge(
+            : badges.Badge(
                 badgeContent: const Text(''),
                 showBadge: (model.lastMessage.senderId != CurrentUser.id &&
                     !model.lastMessage.isReaded),

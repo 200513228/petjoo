@@ -38,7 +38,8 @@ abstract class BlogListViewModelBase with Store {
     } else {
       topics = temp
           .where((element) =>
-              ('${element.title.toLowerCase()} ').contains(query.toLowerCase()))
+              ('${element.title.toLowerCase()} ${element.title.toLowerCase()} ${element.date.toString().toLowerCase()} ')
+                  .contains(query.toLowerCase()))
           .toList();
     }
   }

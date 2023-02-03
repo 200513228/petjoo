@@ -37,7 +37,7 @@ class BlogListView extends StatelessWidget {
                 onRefresh: () async => vm.getTopics(),
                 child: vm.isLoading
                     ? const Center(child: Loading())
-                    : ListView(
+                    : Column(
                         children: [
                           queryText(),
                           ...vm.topics.map((e) => topicCard(e, context))

@@ -79,7 +79,7 @@ class TransportDetailView extends StatelessWidget {
                   'catch'.tr(), FontAwesomeIcons.personRunning, model.canCatch),
             ),
             Expanded(
-              child: advertInfoCard('7/24', Icons.warning_rounded, model.is24),
+              child: advertInfoCard('Acil', Icons.warning_rounded, model.is24),
             ),
           ],
         ),

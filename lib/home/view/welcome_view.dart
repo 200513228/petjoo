@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -102,7 +102,7 @@ class WelcomeView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(
-                          Icons.whatsapp,
+                          Icons.message,
                           color: Colors.black,
                         ),
                         Text(
@@ -125,7 +125,7 @@ class WelcomeView extends StatelessWidget {
                 ? const Loading()
                 : Column(
                     children: [
-                      Expanded(flex: 6, child: slider()),
+                      Expanded(flex: 9, child: slider()),
                       Expanded(flex: 11, child: selector(context)),
                       userCard(context),
                     ],
@@ -156,7 +156,7 @@ class WelcomeView extends StatelessWidget {
               child: Column(
             children: [
               Expanded(
-                flex: 10,
+                flex: 13,
                 child: BigModule(
                   icon: Icons.pets,
                   title: 'welcome_advert'.tr(),
@@ -164,7 +164,7 @@ class WelcomeView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 6,
+                flex: 7,
                 child: SmallModule(
                   icon: Icons.forum,
                   title: 'welcome_blog'.tr(),
@@ -172,21 +172,21 @@ class WelcomeView extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => BlogListView())),
                 ),
               ),
-              Expanded(
-                flex: 6,
-                child: SmallModule(
-                  icon: FontAwesomeIcons.solidHospital,
-                  title: 'welcome_soon'.tr(),
-                  onTap: () => vm.goModule(_, 'YAKINDA'),
-                ),
-              ),
+              // Expanded(
+              //   flex: 6,
+              //   child: SmallModule(
+              //     icon: FontAwesomeIcons.solidHospital,
+              //     title: 'welcome_soon'.tr(),
+              //     onTap: () => vm.goModule(_, 'YAKINDA'),
+              //   ),
+              // ),
             ],
           )),
           Expanded(
               child: Column(
             children: [
               Expanded(
-                flex: 6,
+                flex: 7,
                 child: SmallModule(
                   icon: FontAwesomeIcons.truck,
                   title: 'welcome_transport'.tr(),
@@ -194,24 +194,24 @@ class WelcomeView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 10,
+                flex: 13,
                 child: BigModule(
                   icon: Icons.store,
                   title: 'welcome_store'.tr(),
                   onTap: () => vm.goModule(_, 'PAZAR'),
                 ),
               ),
-              Expanded(
-                flex: 6,
-                child: SmallModule(
-                  icon: Icons.warning_rounded,
-                  title: 'welcome_emergancy'.tr(),
-                  onTap: () => Navigator.push(
-                      _,
-                      MaterialPageRoute(
-                          builder: (context) => EmergancyListView())),
-                ),
-              ),
+              // Expanded(
+              //   flex: 6,
+              //   child: SmallModule(
+              //     icon: Icons.warning_rounded,
+              //     title: 'welcome_emergancy'.tr(),
+              //     onTap: () => Navigator.push(
+              //         _,
+              //         MaterialPageRoute(
+              //             builder: (context) => EmergancyListView())),
+              //   ),
+              // ),
             ],
           )),
         ],
@@ -423,10 +423,11 @@ class SmallModule extends StatelessWidget {
                 //     // decoration: TextDecoration.lineThrough,
                 //   ),
                 // ),
-                Badge(
+                badges.Badge(
                   showBadge: title == 'welcome_soon'.tr(),
                   badgeColor: Colors.transparent,
-                  position: BadgePosition.bottomEnd(bottom: -25, end: 11),
+                  position:
+                      badges.BadgePosition.bottomEnd(bottom: -25, end: 11),
                   badgeContent: Container(
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(

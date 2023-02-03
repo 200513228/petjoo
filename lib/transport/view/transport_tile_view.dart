@@ -47,7 +47,7 @@ class TransportTileView extends StatelessWidget {
         children: [
           Text(
             model.title,
-            style: ClassicTheme.myTheme().textTheme.bodyText1,
+            style: ClassicTheme.myTheme().textTheme.bodyMedium,
             maxLines: 1,
           ),
           Text(

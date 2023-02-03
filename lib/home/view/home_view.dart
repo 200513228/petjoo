@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -20,7 +20,7 @@ import 'package:petjoo/store/view/store_list_view.dart';
 import 'package:petjoo/store/view/store_userlist_view.dart';
 import 'package:petjoo/transport/view/transport_list_view.dart';
 import 'package:petjoo/user/model/current_user.dart';
-import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart' as stylish;
 
 class HomeView extends StatelessWidget {
   final String title;
@@ -75,7 +75,7 @@ class HomeView extends StatelessWidget {
             vm.navigate(_, ChatListView(), true);
           }
         }, icon: Observer(builder: (_) {
-          return Badge(
+          return badges.Badge(
               badgeContent: Text(vm.chatCount.toString()),
               showBadge: vm.chatCount != 0,
               child: const Icon(
@@ -96,36 +96,36 @@ class HomeView extends StatelessWidget {
   Widget buildBottomBar(BuildContext _) {
     TextStyle style = const TextStyle(fontSize: 10);
     return Observer(builder: (_) {
-      return StylishBottomBar(
+      return stylish.StylishBottomBar(
         currentIndex: vm.currentIndex,
         backgroundColor: const Color(0xff202020),
         items: [
-          AnimatedBarItems(
+          stylish.AnimatedBarItems(
             icon: const Icon(Icons.home),
             title: Text('home_home'.tr(), style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white,
           ),
-          AnimatedBarItems(
+          stylish.AnimatedBarItems(
             icon: Icon(toCustom1Icon),
             title: Text(labelToBottom1, style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white54,
           ),
-          AnimatedBarItems(
+          stylish.AnimatedBarItems(
             icon: Icon(toCustom2Icon),
             title: Text(labelToBottom2, style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white54,
           ),
-          AnimatedBarItems(
+          stylish.AnimatedBarItems(
             icon: const Icon(Icons.settings),
             title: Text('home_settings'.tr(), style: style),
             unSelectedColor: Colors.white,
             selectedColor: Colors.white,
           )
         ],
-        fabLocation: StylishBarFabLocation.center,
+        fabLocation: stylish.StylishBarFabLocation.center,
         onTap: (id) {
           id == 0 ? vm.navigate(_, WelcomeView(), false) : null;
           id == 3

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -46,7 +46,7 @@ class TransportPictureView extends StatelessWidget {
   }
 
   Widget imageTile(File e) {
-    return Badge(
+    return badges.Badge(
       badgeContent: IconButton(
           onPressed: () {
             vm.imageDelete(e);

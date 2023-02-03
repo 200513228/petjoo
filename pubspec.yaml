@@ -1,7 +1,7 @@
 name: petjoo
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.4.1+141
+version: 1.4.2+142
 environment:
   sdk: ">=2.17.0 <3.0.0"
 dependencies:
@@ -10,30 +10,56 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   #teska
-  mobx: ^2.0.7+5
-  flutter_mobx: ^2.0.6+1
-  dio: ^4.0.6
-  firebase_core: ^1.22.0
-  firebase_auth: ^3.8.0
-  cloud_firestore: ^3.4.7
-  firebase_storage: ^10.3.8
-  firebase_messaging: ^13.0.1
-  firebase_dynamic_links: ^4.3.8
-  firebase_analytics: ^9.3.6
-  easy_localization: ^3.0.1
+  # mobx: ^2.0.7+5
+  # flutter_mobx: ^2.0.6+1
+  # dio: ^4.0.6
+  # firebase_core: ^1.22.0
+  # firebase_auth: ^3.8.0
+  # cloud_firestore: ^3.4.7
+  # firebase_storage: ^10.3.8
+  # firebase_messaging: ^13.0.1
+  # firebase_dynamic_links: ^4.3.8
+  # firebase_analytics: ^9.3.6
+  # easy_localization: ^3.0.1
+  # url_launcher:
+  # image_picker: ^0.8.5+3
+  # stylish_bottom_bar: ^0.1.5
+  # path_provider: ^2.0.11
+  # badges: 
+  # share_plus: ^4.1.0
+  # calendar_appbar: ^0.0.6
+  # table_calendar: ^3.0.7
+  # font_awesome_flutter: ^10.2.1
+  # google_maps_flutter: ^2.2.0
+  # geolocator: ^9.0.1
+  # map_launcher: ^2.4.0
+  # im_stepper: ^1.0.1+1
+
+  mobx: 
+  flutter_mobx: 
+  dio:
+  firebase_core: 
+  firebase_auth:
+  cloud_firestore:
+  firebase_storage: 
+  firebase_messaging: 
+  firebase_dynamic_links:
+  firebase_analytics:
+  easy_localization:
   url_launcher:
-  image_picker: ^0.8.5+3
-  stylish_bottom_bar: ^0.1.5
-  path_provider: ^2.0.11
-  badges: ^2.0.3
-  share_plus: ^4.1.0
-  calendar_appbar: ^0.0.6
-  table_calendar: ^3.0.7
-  font_awesome_flutter: ^10.2.1
-  google_maps_flutter: ^2.2.0
-  geolocator: ^9.0.1
-  map_launcher: ^2.4.0
-  im_stepper: ^1.0.1+1
+  image_picker: 
+  stylish_bottom_bar:
+  path_provider: 
+  badges: 
+  share_plus: 
+  calendar_appbar: 
+  table_calendar: 
+  font_awesome_flutter: 
+  google_maps_flutter: 
+  geolocator: 
+  map_launcher: 
+  im_stepper: 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

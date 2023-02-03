@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -163,7 +163,7 @@ class StoreListView extends StatelessWidget {
             ),
           ),
           Observer(builder: (context) {
-            return Badge(
+            return badges.Badge(
               badgeContent: Icon(
                 vm.sortStatus == true
                     ? Icons.arrow_upward
@@ -172,7 +172,7 @@ class StoreListView extends StatelessWidget {
                 color: Colors.black,
               ),
               showBadge: vm.sortStatus != null,
-              position: BadgePosition.topEnd(top: -3, end: -5),
+              position: badges.BadgePosition.topEnd(top: -3, end: -5),
               badgeColor: Colors.transparent,
               child: IconButton(
                   onPressed: () {

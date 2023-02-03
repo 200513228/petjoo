@@ -23,9 +23,9 @@ class ClassicTheme {
         colorScheme: colorScheme,
         scaffoldBackgroundColor: colorScheme.primary,
         dividerColor: colorScheme.onSurface,
-        toggleableActiveColor: colorScheme.primary.withOpacity(.7),
+        // toggleableActiveColor: colorScheme.primary.withOpacity(.7),
         unselectedWidgetColor: colorScheme.onSurface,
-        // iconTheme: IconThemeData(color: colorScheme.onSurface.withOpacity(.7)),
+        iconTheme: IconThemeData(color: colorScheme.onSurface.withOpacity(.7)),
         textTheme: _textTheme(colorScheme),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -86,9 +86,9 @@ class ClassicTheme {
       borderSide: const BorderSide(color: Colors.transparent));
 
   static TextTheme _textTheme(ColorScheme colorScheme) => TextTheme(
-      button: TextStyle(color: colorScheme.onSurface),
-      subtitle1: TextStyle(color: colorScheme.onSurface),
-      bodyText1: TextStyle(color: colorScheme.onSurface, fontSize: 14),
-      bodyText2: TextStyle(color: colorScheme.onSurface, fontSize: 12),
-      caption: TextStyle(color: colorScheme.onSurface.withOpacity(.8)));
+      labelLarge: TextStyle(color: colorScheme.onSurface),
+      titleMedium: TextStyle(color: colorScheme.onSurface),
+      bodyLarge: TextStyle(color: colorScheme.onSurface, fontSize: 14),
+      bodyMedium: TextStyle(color: colorScheme.onSurface, fontSize: 12),
+      bodySmall: TextStyle(color: colorScheme.onSurface.withOpacity(.8)));
 }

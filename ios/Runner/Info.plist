@@ -52,13 +52,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Petjoo wants to use your camera for select profile photo or advert images.</string>
+	<string>Petjoo profilinize ve ilanlarınıza fotoğraf ekleyebilmeniz için kameranıza erişmek ister.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Petjoo needs access to location for your advert in the background.</string>
+	<string>Petjoo size uygun ilanları gösterebilmek için konumunuza erişmek ister.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Petjoo needs access to location for your advert.</string>
+	<string>Petjoo ilanların konumunu kullanmak için konumunuza erişmek ister.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Petjoo wants to use your photo library for select profile photo or advert images.</string>
+	<string>Petjoo profilize ve ilanlarınıza resim ekleyebilmeniz için dosyalarınıza erişmek ister.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

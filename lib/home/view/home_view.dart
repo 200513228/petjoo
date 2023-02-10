@@ -233,6 +233,8 @@ class HomeView extends StatelessWidget {
         return id == 1 ? const PetListView() : PetUserListView();
       case 'PET NAKİL':
         return id == 1 ? const TransportListView() : ReservationListView();
+      case 'BLOG':
+        return id == 1 ? BlogListView() : BlogListView();
       default:
         return Container();
     }

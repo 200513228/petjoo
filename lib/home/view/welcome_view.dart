@@ -125,7 +125,7 @@ class WelcomeView extends StatelessWidget {
                 ? const Loading()
                 : Column(
                     children: [
-                      Expanded(flex: 9, child: slider()),
+                      Expanded(flex: 6, child: slider()),
                       Expanded(flex: 11, child: selector(context)),
                       userCard(context),
                     ],
@@ -156,7 +156,7 @@ class WelcomeView extends StatelessWidget {
               child: Column(
             children: [
               Expanded(
-                flex: 13,
+                flex: 11,
                 child: BigModule(
                   icon: Icons.pets,
                   title: 'welcome_advert'.tr(),
@@ -164,29 +164,30 @@ class WelcomeView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 7,
+                flex: 6,
                 child: SmallModule(
                   icon: Icons.forum,
                   title: 'welcome_blog'.tr(),
-                  onTap: () => Navigator.push(_,
-                      MaterialPageRoute(builder: (context) => BlogListView())),
+                  onTap: () {
+                    vm.goModule(_, 'BLOG');
+                  },
                 ),
               ),
-              // Expanded(
-              //   flex: 6,
-              //   child: SmallModule(
-              //     icon: FontAwesomeIcons.solidHospital,
-              //     title: 'welcome_soon'.tr(),
-              //     onTap: () => vm.goModule(_, 'YAKINDA'),
-              //   ),
-              // ),
+              Expanded(
+                flex: 6,
+                child: SmallModule(
+                  icon: FontAwesomeIcons.solidHospital,
+                  title: 'welcome_soon'.tr(),
+                  onTap: () => vm.goModule(_, 'YAKINDA'),
+                ),
+              ),
             ],
           )),
           Expanded(
               child: Column(
             children: [
               Expanded(
-                flex: 7,
+                flex: 6,
                 child: SmallModule(
                   icon: FontAwesomeIcons.truck,
                   title: 'welcome_transport'.tr(),
@@ -194,24 +195,24 @@ class WelcomeView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 13,
+                flex: 11,
                 child: BigModule(
                   icon: Icons.store,
                   title: 'welcome_store'.tr(),
                   onTap: () => vm.goModule(_, 'PAZAR'),
                 ),
               ),
-              // Expanded(
-              //   flex: 6,
-              //   child: SmallModule(
-              //     icon: Icons.warning_rounded,
-              //     title: 'welcome_emergancy'.tr(),
-              //     onTap: () => Navigator.push(
-              //         _,
-              //         MaterialPageRoute(
-              //             builder: (context) => EmergancyListView())),
-              //   ),
-              // ),
+              Expanded(
+                flex: 6,
+                child: SmallModule(
+                  icon: Icons.warning_rounded,
+                  title: 'welcome_emergancy'.tr(),
+                  onTap: () => Navigator.push(
+                      _,
+                      MaterialPageRoute(
+                          builder: (context) => EmergancyListView())),
+                ),
+              ),
             ],
           )),
         ],

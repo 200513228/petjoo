@@ -47,11 +47,6 @@ class _DocumentViewState extends State<DocumentView> {
   }
 
   AppBar buildAppBar() {
-    return AppBar(
-      centerTitle: true,
-      title: widget.assetName == 'privacy_policy.txt'
-          ? Text('privacypolicy'.tr())
-          : Text('termsofuse'.tr()),
-    );
+    return AppBar(centerTitle: true, title: Text('Belge'.tr()));
   }
 }

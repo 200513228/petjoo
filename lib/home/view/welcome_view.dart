@@ -2,7 +2,6 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:petjoo/blog/view/blog_list_view.dart';
 import 'package:petjoo/emergancy/view/emergancy_list_view.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
 import 'package:petjoo/home/service/notification_service.dart';
@@ -427,6 +426,7 @@ class SmallModule extends StatelessWidget {
                 badges.Badge(
                   showBadge: title == 'welcome_soon'.tr(),
                   badgeColor: Colors.transparent,
+                  elevation: 0,
                   position:
                       badges.BadgePosition.bottomEnd(bottom: -25, end: 11),
                   badgeContent: Container(

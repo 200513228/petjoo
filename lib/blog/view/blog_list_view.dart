@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/base/string_converters.dart';
 import 'package:petjoo/blog/model/blog_topic_model.dart';
-import 'package:petjoo/blog/view/blog_add_view.dart';
 import 'package:petjoo/blog/view/blog_detail_view.dart';
 import 'package:petjoo/blog/viewmodel/blog_list_viewmodel.dart';
 import 'package:petjoo/ui/loading.dart';

@@ -29,7 +29,11 @@ class DocumentsView extends StatelessWidget {
             settingTile('privacypolicy'.tr(), Icons.privacy_tip_rounded,
                 () => navigate(_, 'privacy_policy.txt')),
             settingTile('termsofuse'.tr(), Icons.description_rounded,
-                () => navigate(_, 'privacy_policy.txt')),
+                () => navigate(_, 'terms_of_use.txt')),
+            settingTile('Cezai Yaptırımlar'.tr(), Icons.privacy_tip_rounded,
+                () => navigate(_, 'cezai_yaptirimlar.txt')),
+            settingTile('Ödeme Sorumlulukları'.tr(), Icons.privacy_tip_rounded,
+                () => navigate(_, 'odeme_sorumluluklari.txt')),
             settingTile(
                 'adoption_form'.tr(),
                 Icons.details_rounded,
@@ -47,8 +51,7 @@ class DocumentsView extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
-        style: ListTileStyle.list,
-        visualDensity: VisualDensity.compact,
+        dense: true,
         leading: Icon(icon, color: Colors.white, size: 32),
         title: Text(title, style: const TextStyle(fontSize: 18)),
         onTap: () => ontap(),

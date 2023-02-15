@@ -55,7 +55,7 @@ class BlogDetailView extends StatelessWidget {
         children: [
           Text(
             model.message,
-            style: const TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 14),
           ),
           Align(
             alignment: Alignment.bottomRight,

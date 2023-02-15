@@ -32,7 +32,7 @@ class ClassicTheme {
           elevation: 0,
           centerTitle: true,
           systemOverlayStyle:
-              OverlayStyles.toAll(colorScheme.background, Brightness.light),
+              OverlayStyles.toAll(colorScheme.background, Brightness.dark),
           iconTheme: const IconThemeData(color: Colors.black),
           actionsIconTheme: const IconThemeData(color: Colors.black),
           titleTextStyle: TextStyle(
@@ -52,6 +52,9 @@ class ClassicTheme {
         snackBarTheme: SnackBarThemeData(
             backgroundColor: colorScheme.surface,
             behavior: SnackBarBehavior.floating,
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            contentTextStyle: const TextStyle(color: Colors.white),
             shape: RoundedRectangleBorder(
                 borderRadius: Dimens.radiusSmall.toBorderRadius())),
         dialogTheme: DialogTheme(
@@ -66,6 +69,8 @@ class ClassicTheme {
         listTileTheme: ListTileThemeData(
             tileColor: colorScheme.surface,
             style: ListTileStyle.drawer,
+            dense: true,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
             contentPadding: const EdgeInsets.all(Dimens.paddingSmall),
             shape: RoundedRectangleBorder(
                 borderRadius: Dimens.radiusSmall.toBorderRadius())),

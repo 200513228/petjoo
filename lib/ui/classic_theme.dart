@@ -23,7 +23,6 @@ class ClassicTheme {
         colorScheme: colorScheme,
         scaffoldBackgroundColor: colorScheme.primary,
         dividerColor: colorScheme.onSurface,
-        // toggleableActiveColor: colorScheme.primary.withOpacity(.7),
         unselectedWidgetColor: colorScheme.onSurface,
         iconTheme: IconThemeData(color: colorScheme.onSurface.withOpacity(.7)),
         textTheme: _textTheme(colorScheme),
@@ -83,7 +82,53 @@ class ClassicTheme {
             border: _inputBorder,
             focusedBorder: _inputBorder,
             errorBorder: _inputBorder,
-            focusedErrorBorder: _inputBorder));
+            focusedErrorBorder: _inputBorder),
+        switchTheme: SwitchThemeData(
+          thumbColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colorScheme.primary.withOpacity(.7);
+            }
+            return null;
+          }),
+          trackColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colorScheme.primary.withOpacity(.7);
+            }
+            return null;
+          }),
+        ),
+        radioTheme: RadioThemeData(
+          fillColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colorScheme.primary.withOpacity(.7);
+            }
+            return null;
+          }),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colorScheme.primary.withOpacity(.7);
+            }
+            return null;
+          }),
+        ));
   }
 
   static InputBorder get _inputBorder => UnderlineInputBorder(

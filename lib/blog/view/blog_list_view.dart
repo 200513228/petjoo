@@ -17,32 +17,17 @@ class BlogListView extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => Navigator.canPop(context),
       child: Scaffold(
-        // appBar: AppBar(
-        //   actions: [
-        //     IconButton(
-        //         onPressed: () => Navigator.push(context,
-        //             MaterialPageRoute(builder: (context) => BlogAddView())),
-        //         icon:
-        //             const Icon(Icons.new_label, size: 30, color: Colors.black))
-        //   ],
-        //   leading: IconButton(
-        //       onPressed: () => Navigator.pop(context),
-        //       icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
-        //   title: Text('welcome_blog'.tr()),
-        // ),
         body: Observer(
           builder: (context) {
             return RefreshIndicator(
                 onRefresh: () async => vm.getTopics(),
                 child: vm.isLoading
                     ? const Center(child: Loading())
-                    : SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            queryText(),
-                            ...vm.topics.map((e) => topicCard(e, context))
-                          ],
-                        ),
+                    : ListView(
+                        children: [
+                          queryText(),
+                          ...vm.topics.map((e) => topicCard(e, context))
+                        ],
                       ));
           },
         ),

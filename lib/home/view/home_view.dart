@@ -2,6 +2,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:petjoo/blog/view/blog_filter_view.dart';
 import 'package:petjoo/blog/view/blog_list_view.dart';
 import 'package:petjoo/emergancy/view/emergancy_list_view.dart';
 import 'package:petjoo/transport/view/transport_filter_view.dart';
@@ -220,6 +221,8 @@ class HomeView extends StatelessWidget {
         return PetFilterView();
       case 'PET NAKİL':
         return TransportFilterView();
+      case 'BLOG':
+        return BlogFilterView();
       default:
         return Column(mainAxisSize: MainAxisSize.min, children: const []);
     }

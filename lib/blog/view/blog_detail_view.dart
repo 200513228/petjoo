@@ -1,10 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/base/string_converters.dart';
 import 'package:petjoo/blog/model/blog_msg_model.dart';
 import 'package:petjoo/blog/model/blog_topic_model.dart';
+import 'package:petjoo/blog/view/blog_list_view.dart';
 import 'package:petjoo/blog/viewmodel/blog_detail_viewmodel.dart';
 import 'package:petjoo/ui/loading.dart';
+import 'package:petjoo/ui/please_auth.dart';
+import 'package:petjoo/user/model/current_user.dart';
 
 class BlogDetailView extends StatelessWidget {
   final BlogDetailViewModel vm = BlogDetailViewModel();
@@ -20,9 +24,54 @@ class BlogDetailView extends StatelessWidget {
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.arrow_back_ios, color: Colors.black)),
+        actions: [
+          PopupMenuButton(
+              icon: const Icon(
+                Icons.more_horiz,
+                color: Colors.black,
+              ),
+              color: Colors.black,
+              itemBuilder: (context) => [
+                    // PopupMenuItem(
+                    //   onTap: () => vm.publish(context),
+                    //   child: Text(
+                    //     'publish'.tr(),
+                    //   ),
+                    // ),
+                    PopupMenuItem(
+                      onTap: () {
+                        if (CurrentUser.id == '') {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const PleaseAuth());
+                        } else {
+                          // vm.report(context);
+                        }
+                      },
+                      child: Text(
+                        'report'.tr(),
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ),
+                    if (topic.userId == CurrentUser.id)
+                      PopupMenuItem(
+                        onTap: () {
+                          vm.deleteTopic(topic.id).then((value) {
+                            BlogListView.vm.getTopics();
+                            Navigator.pop(context);
+                          });
+                        },
+                        child: Text(
+                          'Konuyu Sil'.tr(),
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
+                  ])
+        ],
       ),
       body: Observer(builder: (context) {
         return RefreshIndicator(
+          color: Colors.black,
           onRefresh: () async => vm.getMessages(topic.id),
           child: vm.isLoading
               ? const Center(child: Loading())

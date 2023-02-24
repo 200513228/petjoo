@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
 import 'package:petjoo/blog/model/blog_msg_model.dart';
 import 'package:petjoo/blog/service/blog_service.dart';
+import 'package:petjoo/user/model/current_user.dart';
 part 'blog_detail_viewmodel.g.dart';
 
 class BlogDetailViewModel = BlogDetailViewModelBase with _$BlogDetailViewModel;
@@ -28,9 +29,17 @@ abstract class BlogDetailViewModelBase with Store {
 
   @action
   Future sendMessage(String message, String docid) async {
-    isLoading = true;
-    Map<String, dynamic> data = {'message': message, 'date': Timestamp.now()};
+    Map<String, dynamic> data = {
+      'message': message,
+      'userId': CurrentUser.id,
+      'date': Timestamp.now()
+    };
     await BlogService.sendMessage(data, docid)
         .then((value) => value == 'OKAY' ? getMessages(docid) : null);
+  }
+
+  @action
+  Future deleteTopic(String docid) async {
+    await BlogService.deleteBlog(docid);
   }
 }

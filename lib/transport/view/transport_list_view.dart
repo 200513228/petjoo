@@ -17,6 +17,7 @@ class TransportListView extends StatelessWidget {
     // vm.resetFilter();
     return Observer(builder: (_) {
       return RefreshIndicator(
+        color: Colors.black,
         onRefresh: () => vm.getAdverts(),
         child: Column(
           children: [

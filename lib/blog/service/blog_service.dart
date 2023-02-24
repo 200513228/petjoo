@@ -2,12 +2,23 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:petjoo/blog/model/blog_topic_model.dart';
+import 'package:petjoo/user/model/current_user.dart';
 
 class BlogService {
   static var db = FirebaseFirestore.instance;
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getTopics() async {
     return await db.collection('blog').orderBy('date', descending: true).get();
+  }
+
+  static Future<QuerySnapshot<Map<String, dynamic>>> getUserTopics(
+      String uid) async {
+    var data = await db
+        .collection('blog')
+        .where('userId', isEqualTo: uid)
+        .orderBy('date', descending: true)
+        .get();
+    return data;
   }
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getMessages(
@@ -37,12 +48,20 @@ class BlogService {
   static Future newBlog(Map<String, dynamic> blogData, String firstMsg) async {
     try {
       var result = await db.collection('blog').add(blogData);
-      sendMessage({'message': firstMsg, 'date': Timestamp.now()}, result.id);
+      sendMessage({
+        'message': firstMsg,
+        'userId': CurrentUser.id,
+        'date': Timestamp.now()
+      }, result.id);
       var data = await db.collection('blog').doc(result.id).get();
       return BlogTopicModel.fromDS(data);
     } on Exception catch (e) {
       log(e.toString());
       return 'ERROR';
     }
+  }
+
+  static Future deleteBlog(String docid) async {
+    await db.collection('blog').doc(docid).delete();
   }
 }

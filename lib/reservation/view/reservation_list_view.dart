@@ -76,6 +76,7 @@ class ReservationListView extends StatelessWidget {
 
   Widget buildUserList(BuildContext context) {
     return RefreshIndicator(
+      color: Colors.black,
       onRefresh: () => vm.getUserReservs(),
       child: Column(
         children: [
@@ -89,6 +90,7 @@ class ReservationListView extends StatelessWidget {
 
   Widget buildTransporterList(BuildContext context) {
     return RefreshIndicator(
+      color: Colors.black,
       onRefresh: () => vm.getTransportReservs(),
       child: Column(
         children: [

@@ -8,29 +8,29 @@ import 'package:petjoo/blog/viewmodel/blog_list_viewmodel.dart';
 import 'package:petjoo/ui/loading.dart';
 
 class BlogListView extends StatelessWidget {
-  final BlogListViewModel vm = BlogListViewModel();
-  BlogListView({super.key});
+  static final BlogListViewModel vm = BlogListViewModel();
+  const BlogListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     vm.getTopics();
+    vm.resetFilter();
     return WillPopScope(
       onWillPop: () async => Navigator.canPop(context),
-      child: Scaffold(
-        body: Observer(
-          builder: (context) {
-            return RefreshIndicator(
-                onRefresh: () async => vm.getTopics(),
-                child: vm.isLoading
-                    ? const Center(child: Loading())
-                    : ListView(
-                        children: [
-                          queryText(),
-                          ...vm.topics.map((e) => topicCard(e, context))
-                        ],
-                      ));
-          },
-        ),
+      child: Observer(
+        builder: (context) {
+          return RefreshIndicator(
+              color: Colors.black,
+              onRefresh: () async => vm.getTopics(),
+              child: vm.isLoading
+                  ? const Center(child: Loading())
+                  : ListView(
+                      children: [
+                        queryText(),
+                        ...vm.topics.map((e) => topicCard(e, context))
+                      ],
+                    ));
+        },
       ),
     );
   }

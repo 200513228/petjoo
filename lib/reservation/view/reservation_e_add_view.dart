@@ -2,37 +2,28 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:petjoo/base/num_extension.dart';
-import 'package:petjoo/ui/dropdown_x.dart';
-import 'package:petjoo/ui/loading.dart';
-import 'package:petjoo/ui/color_palette.dart';
-import 'package:petjoo/base/string_converters.dart';
-import 'package:petjoo/pet/model/pet_advert_animals.dart';
-import 'package:petjoo/reservation/model/reservation_model.dart';
-import 'package:petjoo/reservation/viewmodel/reservation_create_viewmodel.dart';
-import 'package:petjoo/transport/model/transport_advert_model.dart';
+import 'package:petjoo/base/validators.dart';
 import 'package:petjoo/constants/dial_codes.dart';
 import 'package:petjoo/constants/dimens.dart';
-import 'package:petjoo/base/validators.dart';
+import 'package:petjoo/pet/model/pet_advert_animals.dart';
+import 'package:petjoo/reservation/viewmodel/reservation_e_add_viewmodel.dart';
+import 'package:petjoo/ui/dropdown_x.dart';
+import 'package:petjoo/ui/loading.dart';
 
-class ReservationCreateView extends StatelessWidget {
-  final ReservationCreateViewModel vm = ReservationCreateViewModel();
-  final TransportAdvertModel advertModel;
-  final ReservationModel model;
-  ReservationCreateView(
-      {required this.advertModel, required this.model, super.key});
+class ReservationEAddView extends StatelessWidget {
+  final ReservationEAddViewModel vm = ReservationEAddViewModel();
+  ReservationEAddView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    vm.setModels(model, advertModel);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
-        title: Text(appBarTitle),
+        title: const Text('ACİL PET NAKİL'),
         centerTitle: true,
       ),
       body: buildBody(context),
@@ -134,7 +125,7 @@ class ReservationCreateView extends StatelessWidget {
                             onChanged: (value) => vm.animal = value,
                           ),
                         ),
-                        mapSelectors(context),
+                        // mapSelectors(context),
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: TextFormField(
@@ -148,7 +139,7 @@ class ReservationCreateView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        nextStepButton(context),
+                        // nextStepButton(context),
                       ],
                     ),
                   ),
@@ -157,130 +148,4 @@ class ReservationCreateView extends StatelessWidget {
       },
     );
   }
-
-  Widget mapSelectors(BuildContext context) {
-    return Container(
-      height: 200,
-      padding: const EdgeInsets.only(top: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: InkWell(
-              onTap: () => vm.setBegin(context),
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: colorPalette['secondary'],
-                  borderRadius: const BorderRadius.all(Radius.circular(15)),
-                ),
-                child: vm.beginGeoPoint != null
-                    ? ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(15)),
-                        child: GoogleMap(
-                          onTap: (arg) => vm.setBegin(context),
-                          myLocationButtonEnabled: false,
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(vm.beginGeoPoint!.latitude,
-                                  vm.beginGeoPoint!.longitude),
-                              zoom: 14),
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId('begin'),
-                              position: LatLng(vm.beginGeoPoint!.latitude,
-                                  vm.beginGeoPoint!.longitude),
-                            )
-                          },
-                        ),
-                      )
-                    : Center(child: Text('pick_begin_point'.tr())),
-              ),
-            ),
-          ),
-          Expanded(
-            child: InkWell(
-              onTap: () => vm.setEnd(context),
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: colorPalette['secondary'],
-                  borderRadius: const BorderRadius.all(Radius.circular(15)),
-                ),
-                child: vm.endGeoPoint != null
-                    ? ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(15)),
-                        child: GoogleMap(
-                          onTap: (arg) => vm.setEnd(context),
-                          myLocationButtonEnabled: false,
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(vm.endGeoPoint!.latitude,
-                                  vm.endGeoPoint!.longitude),
-                              zoom: 14),
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId('begin'),
-                              position: LatLng(vm.endGeoPoint!.latitude,
-                                  vm.endGeoPoint!.longitude),
-                            )
-                          },
-                        ),
-                      )
-                    : Center(child: Text('pick_end_point'.tr())),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget nextStepButton(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            child: ElevatedButton(
-                onPressed: () async {
-                  await vm.save(context).then((value) {
-                    value == 'SHOW'
-                        ? showDialog(
-                            context: context,
-                            builder: (context) => alertSave(context))
-                        : null;
-                  });
-                },
-                child: Text('save'.tr())),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget alertSave(BuildContext context) {
-    return AlertDialog(
-      title: Text('accept'.tr()),
-      actions: [
-        ElevatedButton(
-            onPressed: () => Navigator.pop(context), child: Text('close'.tr())),
-        ElevatedButton(
-            onPressed: () => vm.calculateAndSave(context),
-            child: Text('save'.tr())),
-      ],
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-              '${'estimated_distance'.tr()}: ${(vm.model!.distanceA + vm.model!.distanceB) * 2} km'),
-          Text(
-              '${'estimated_price'.tr()}: ${((vm.model!.distanceA + vm.model!.distanceB) * 2 * advertModel.pricePerKm).toStringAsFixed(2)} ₺'),
-        ],
-      ),
-    );
-  }
-
-  String get appBarTitle =>
-      '${dateToString(model.date)}  ${hourToString('${model.date.toDate().hour}:${model.date.toDate().minute}')}';
 }

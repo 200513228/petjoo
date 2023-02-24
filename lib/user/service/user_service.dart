@@ -34,7 +34,13 @@ class UserService {
       CurrentUser.fromDS(result);
       return 'LOGIN';
     } on FirebaseAuthException catch (e) {
-      return e.toString();
+      if (e.code == 'wrong-password') {
+        return 'Parola hatalı';
+      } else if (e.code == 'user-not-found') {
+        return 'Kayıtlı kullanıcı bulunamadı';
+      } else {
+        return 'Beklenmeyen bir hata oluştu';
+      }
     }
   }
 
@@ -69,7 +75,13 @@ class UserService {
       CurrentUser.fromDS(result);
       return 'REGISTER';
     } on FirebaseAuthException catch (e) {
-      return e.toString();
+      if (e.code == 'weak-password') {
+        return 'Parola çok zayıf';
+      } else if (e.code == 'email-already-exists') {
+        return 'Bu mail adresi ile kayıtlı bir kullanıcı mevcut';
+      } else {
+        return 'Beklenmeyen bir hata oluştu';
+      }
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:petjoo/blog/view/blog_filter_view.dart';
 import 'package:petjoo/blog/view/blog_list_view.dart';
+import 'package:petjoo/blog/view/blog_userlist_view.dart';
 import 'package:petjoo/emergancy/view/emergancy_list_view.dart';
 import 'package:petjoo/transport/view/transport_filter_view.dart';
 import 'package:petjoo/ui/color_palette.dart';
@@ -237,7 +238,7 @@ class HomeView extends StatelessWidget {
       case 'PET NAKİL':
         return id == 1 ? const TransportListView() : ReservationListView();
       case 'BLOG':
-        return id == 1 ? BlogListView() : BlogListView();
+        return id == 1 ? const BlogListView() : BlogUserListView();
       default:
         return Container();
     }
@@ -282,7 +283,7 @@ class HomeView extends StatelessWidget {
         page = const TransportListView();
         break;
       case 'BLOG':
-        page = BlogListView();
+        page = const BlogListView();
         break;
       case 'ACİL':
         page = EmergancyListView();

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'blog_add_viewmodel.dart';
+part of 'blog_userlist_viewmodel.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'blog_add_viewmodel.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$BlogAddViewModel on BlogAddViewModelBase, Store {
+mixin _$BlogUserListViewModel on BlogUserListViewModelBase, Store {
   late final _$isLoadingAtom =
-      Atom(name: 'BlogAddViewModelBase.isLoading', context: context);
+      Atom(name: 'BlogUserListViewModelBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -25,35 +25,35 @@ mixin _$BlogAddViewModel on BlogAddViewModelBase, Store {
     });
   }
 
-  late final _$typeAtom =
-      Atom(name: 'BlogAddViewModelBase.type', context: context);
+  late final _$topicsAtom =
+      Atom(name: 'BlogUserListViewModelBase.topics', context: context);
 
   @override
-  int? get type {
-    _$typeAtom.reportRead();
-    return super.type;
+  List<BlogTopicModel> get topics {
+    _$topicsAtom.reportRead();
+    return super.topics;
   }
 
   @override
-  set type(int? value) {
-    _$typeAtom.reportWrite(value, super.type, () {
-      super.type = value;
+  set topics(List<BlogTopicModel> value) {
+    _$topicsAtom.reportWrite(value, super.topics, () {
+      super.topics = value;
     });
   }
 
-  late final _$newBlogAsyncAction =
-      AsyncAction('BlogAddViewModelBase.newBlog', context: context);
+  late final _$getTopicsAsyncAction =
+      AsyncAction('BlogUserListViewModelBase.getTopics', context: context);
 
   @override
-  Future<dynamic> newBlog(String title, String firstMsg) {
-    return _$newBlogAsyncAction.run(() => super.newBlog(title, firstMsg));
+  Future<dynamic> getTopics() {
+    return _$getTopicsAsyncAction.run(() => super.getTopics());
   }
 
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-type: ${type}
+topics: ${topics}
     ''';
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/blog/model/blog_filter_model.dart';
 import 'package:petjoo/blog/model/blog_topic_model.dart';
 import 'package:petjoo/blog/service/blog_service.dart';
 part 'blog_list_viewmodel.g.dart';
@@ -13,6 +14,8 @@ abstract class BlogListViewModelBase with Store {
   List<BlogTopicModel> topics = [];
   @observable
   List<BlogTopicModel> recoveryList = [];
+  @observable
+  BlogFilterModel filter = BlogFilterModel.filter(0);
   @observable
   TextEditingController cont = TextEditingController();
 
@@ -42,5 +45,20 @@ abstract class BlogListViewModelBase with Store {
                   .contains(query.toLowerCase()))
           .toList();
     }
+  }
+
+  @action
+  void resetFilter() {
+    filter = BlogFilterModel.filter(0);
+    topics = recoveryList;
+  }
+
+  @action
+  void setFilter(BlogFilterModel model) {
+    filter = model;
+    List<BlogTopicModel> temp = recoveryList;
+    topics = temp
+        .where((element) => filter.type == element.type || filter.type == 0)
+        .toList();
   }
 }

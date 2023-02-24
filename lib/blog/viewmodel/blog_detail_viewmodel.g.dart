@@ -58,6 +58,14 @@ mixin _$BlogDetailViewModel on BlogDetailViewModelBase, Store {
         .run(() => super.sendMessage(message, docid));
   }
 
+  late final _$deleteTopicAsyncAction =
+      AsyncAction('BlogDetailViewModelBase.deleteTopic', context: context);
+
+  @override
+  Future<dynamic> deleteTopic(String docid) {
+    return _$deleteTopicAsyncAction.run(() => super.deleteTopic(docid));
+  }
+
   @override
   String toString() {
     return '''

@@ -25,6 +25,42 @@ mixin _$BlogFilterViewModel on BlogFilterViewModelBase, Store {
     });
   }
 
+  late final _$BlogFilterViewModelBaseActionController =
+      ActionController(name: 'BlogFilterViewModelBase', context: context);
+
+  @override
+  void resetFilter(BuildContext context) {
+    final _$actionInfo = _$BlogFilterViewModelBaseActionController.startAction(
+        name: 'BlogFilterViewModelBase.resetFilter');
+    try {
+      return super.resetFilter(context);
+    } finally {
+      _$BlogFilterViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setFilter(BuildContext context) {
+    final _$actionInfo = _$BlogFilterViewModelBaseActionController.startAction(
+        name: 'BlogFilterViewModelBase.setFilter');
+    try {
+      return super.setFilter(context);
+    } finally {
+      _$BlogFilterViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCurrent() {
+    final _$actionInfo = _$BlogFilterViewModelBaseActionController.startAction(
+        name: 'BlogFilterViewModelBase.setCurrent');
+    try {
+      return super.setCurrent();
+    } finally {
+      _$BlogFilterViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

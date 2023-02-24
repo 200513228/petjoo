@@ -17,6 +17,7 @@ class ChatListView extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Observer(builder: (_) {
           return RefreshIndicator(
+            color: Colors.black,
             onRefresh: () => vm.getChats(),
             child: ListView(
               children: [

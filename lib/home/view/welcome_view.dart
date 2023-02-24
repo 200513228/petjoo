@@ -335,7 +335,7 @@ class BigModule extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           color: Color(0xffFFE427),
         ),
         child: Column(
@@ -349,11 +349,11 @@ class BigModule extends StatelessWidget {
             Text(
               title,
               maxLines: 1,
-              style: const TextStyle(
-                fontSize: 20,
+              style: TextStyle(
+                fontSize: size / (3.4),
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-                letterSpacing: -1.5,
+                letterSpacing: -1.8,
               ),
             ),
           ],
@@ -391,7 +391,7 @@ class SmallModule extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(25)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
           color: title == 'welcome_emergancy'.tr()
               ? Colors.red
               : title == 'welcome_soon'.tr()
@@ -427,8 +427,7 @@ class SmallModule extends StatelessWidget {
                   showBadge: title == 'welcome_soon'.tr(),
                   badgeColor: Colors.transparent,
                   elevation: 0,
-                  position:
-                      badges.BadgePosition.bottomEnd(bottom: -25, end: 11),
+                  position: badges.BadgePosition.bottomEnd(bottom: -25, end: 5),
                   badgeContent: Container(
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
@@ -447,51 +446,16 @@ class SmallModule extends StatelessWidget {
                     title,
                     maxLines: 1,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20,
+                    style: TextStyle(
+                      fontSize: ((size * 32) / 14) / 3.5,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       letterSpacing: -1.5,
-                      // decoration: TextDecoration.lineThrough,
                     ),
                   ),
                 )
               ],
             ),
-            // if (title == 'welcome_soon'.tr())
-            //   Container(
-            //     padding:
-            //         const EdgeInsets.symmetric(vertical: 3, horizontal: 18),
-            //     child: Center(
-            //       child: Transform(
-            //         alignment: FractionalOffset.center,
-            //         transform: Matrix4.identity()
-            //           ..rotateZ(-20 * 3.1415927 / 180),
-            //         child: Container(
-            //           decoration: BoxDecoration(
-            //               color: Colors.red.withOpacity(0.65),
-            //               borderRadius:
-            //                   const BorderRadius.all(Radius.circular(8))),
-            //           child: Text(
-            //             'soon'.tr(),
-            //             textAlign: TextAlign.center,
-            //             style: const TextStyle(
-            //               fontSize: 24,
-            //               // color: Colors.redAccent,
-            //               letterSpacing: 5,
-            //               color: Colors.white,
-            //               // foreground: Paint()
-            //               //   ..style = PaintingStyle.fill
-            //               //   ..style = PaintingStyle.stroke
-            //               //   ..strokeWidth = 2
-            //               //   ..color = Colors.black,
-            //               fontWeight: FontWeight.bold,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
           ],
         ),
       ),

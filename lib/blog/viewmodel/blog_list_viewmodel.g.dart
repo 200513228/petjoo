@@ -57,6 +57,22 @@ mixin _$BlogListViewModel on BlogListViewModelBase, Store {
     });
   }
 
+  late final _$filterAtom =
+      Atom(name: 'BlogListViewModelBase.filter', context: context);
+
+  @override
+  BlogFilterModel get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(BlogFilterModel value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   late final _$contAtom =
       Atom(name: 'BlogListViewModelBase.cont', context: context);
 
@@ -96,11 +112,34 @@ mixin _$BlogListViewModel on BlogListViewModelBase, Store {
   }
 
   @override
+  void resetFilter() {
+    final _$actionInfo = _$BlogListViewModelBaseActionController.startAction(
+        name: 'BlogListViewModelBase.resetFilter');
+    try {
+      return super.resetFilter();
+    } finally {
+      _$BlogListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setFilter(BlogFilterModel model) {
+    final _$actionInfo = _$BlogListViewModelBaseActionController.startAction(
+        name: 'BlogListViewModelBase.setFilter');
+    try {
+      return super.setFilter(model);
+    } finally {
+      _$BlogListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 topics: ${topics},
 recoveryList: ${recoveryList},
+filter: ${filter},
 cont: ${cont}
     ''';
   }

@@ -5,12 +5,17 @@ import 'package:petjoo/location/view/location_pick_view.dart';
 import 'package:petjoo/ui/color_palette.dart';
 
 Future<GeoPoint?> showLocationPicker(BuildContext context) async {
-  Position? pos;
   await Geolocator.requestPermission();
-  pos = await Geolocator.getCurrentPosition();
-  return await showDialog<GeoPoint?>(
-      barrierDismissible: false,
-      barrierColor: colorPalette['primary'],
-      context: context,
-      builder: (context) => LocationPickView(position: pos!));
+  // pos = await Geolocator.getCurrentPosition();
+  // return await showDialog<GeoPoint?>(
+  //     barrierDismissible: false,
+  //     barrierColor: colorPalette['primary'],
+  //     context: context,
+  //     builder: (context) => LocationPickView(position: pos!));
+  return await Geolocator.getCurrentPosition().then((value) async =>
+      await showDialog<GeoPoint?>(
+          barrierDismissible: false,
+          barrierColor: colorPalette['primary'],
+          context: context,
+          builder: (context) => LocationPickView(position: value)));
 }

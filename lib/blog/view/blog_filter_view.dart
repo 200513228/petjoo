@@ -13,6 +13,7 @@ class BlogFilterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    vm.setCurrent();
     return Observer(
       builder: (context) => Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -44,7 +45,7 @@ class BlogFilterView extends StatelessWidget {
       children: [
         Expanded(
           child: ElevatedButton(
-            onPressed: () => null,
+            onPressed: () => vm.resetFilter(context),
             child: Text('reset'.tr(),
                 style: const TextStyle(color: Colors.redAccent)),
           ),
@@ -52,7 +53,7 @@ class BlogFilterView extends StatelessWidget {
         const SizedBox(width: 20),
         Expanded(
           child: ElevatedButton(
-            onPressed: () => null,
+            onPressed: () => vm.setFilter(context),
             child: Text('apply'.tr()),
           ),
         )

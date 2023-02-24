@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:petjoo/reservation/view/reservation_e_add_view.dart';
 import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/ui/please_auth.dart';
 import 'package:petjoo/base/string_converters.dart';
@@ -59,7 +60,7 @@ class TransportDetailView extends StatelessWidget {
   Widget advertInfo(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 10),
+        if (model.is24) emergancyTransport(context),
         Row(
           children: [
             Expanded(
@@ -119,6 +120,35 @@ class TransportDetailView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget emergancyTransport(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+            // padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.red),
+            child: TextButton(
+              // style: ButtonStyle(visualDensity: VisualDensity.compact),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ReservationEAddView()));
+              },
+              child: const Text(
+                'ACİL REZERVASYON',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

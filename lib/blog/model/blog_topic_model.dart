@@ -4,6 +4,7 @@ class BlogTopicModel {
   String id = '';
   String title = '';
   int type = 0;
+  String userId = '';
   Timestamp date = Timestamp.fromDate(DateTime.now());
 
   BlogTopicModel.fromQDS(QueryDocumentSnapshot snapshot) {
@@ -11,6 +12,7 @@ class BlogTopicModel {
     id = snapshot.id;
     title = data['title'] ?? '';
     type = data['type'] ?? 0;
+    userId = data['userId'] ?? '';
     date = data['date'] ?? Timestamp.fromDate(DateTime.now());
   }
   BlogTopicModel.fromDS(DocumentSnapshot snapshot) {
@@ -18,6 +20,7 @@ class BlogTopicModel {
     id = snapshot.id;
     title = data['title'] ?? '';
     type = data['type'] ?? 0;
+    userId = data['userId'] ?? '';
     date = data['date'] ?? Timestamp.fromDate(DateTime.now());
   }
 }

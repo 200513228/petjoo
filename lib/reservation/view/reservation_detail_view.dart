@@ -67,9 +67,19 @@ class ReservationDetailView extends StatelessWidget {
             const SizedBox(height: 5),
             Align(
                 alignment: Alignment.topLeft,
-                child: Text(
-                  '${dateToString(model.date)}  ${hourToString('${model.date.toDate().hour}:00')}',
-                  style: const TextStyle(fontSize: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${dateToString(model.date)}  ${hourToString('${model.date.toDate().hour}:00')}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Text(
+                      model.isEmergancy ? 'ACİL' : '',
+                      style: const TextStyle(fontSize: 18, color: Colors.red),
+                    )
+                  ],
                 )),
           ],
         ),

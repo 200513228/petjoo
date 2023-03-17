@@ -21,11 +21,15 @@ class BlogUserListView extends StatelessWidget {
       child: Observer(builder: (context) {
         return vm.isLoading
             ? const Center(child: Loading())
-            : ListView(
-                children: [
-                  newTopicCard(context),
-                  ...vm.topics.map((e) => topicCard(e, context))
-                ],
+            : RefreshIndicator(
+                color: Colors.black,
+                onRefresh: () async => vm.getTopics(),
+                child: ListView(
+                  children: [
+                    newTopicCard(context),
+                    ...vm.topics.map((e) => topicCard(e, context))
+                  ],
+                ),
               );
       }),
     );

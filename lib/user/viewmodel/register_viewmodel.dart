@@ -52,7 +52,10 @@ abstract class RegisterViewModelBase with Store {
     Navigator.push(
         _,
         MaterialPageRoute(
-            builder: (context) => DocumentView(assetName: asset)));
+            builder: (context) => DocumentView(
+                  assetName: asset,
+                  links: const [],
+                )));
   }
 
   Future<Map<String, dynamic>> usermap() async {

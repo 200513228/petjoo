@@ -51,6 +51,14 @@ class ReservationService {
             .get();
   }
 
+  static Future<QuerySnapshot<Map<String, dynamic>>> getEReservations() async {
+    return await db
+        .collection('transport_reservations')
+        .where('advertId', isEqualTo: CurrentUser.id)
+        .where('isEmergancy', isEqualTo: true)
+        .get();
+  }
+
   static Future<List> getWeekCounter(DateTime day) async {
     Timestamp time = Timestamp.fromDate(day);
     DateTime d = time.toDate();

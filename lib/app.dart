@@ -16,6 +16,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Petjoo',
+      color: Colors.black,
       theme: ClassicTheme.myTheme(),
       locale: context.locale,
       supportedLocales: context.supportedLocales,

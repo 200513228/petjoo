@@ -32,12 +32,12 @@ class BlogDetailView extends StatelessWidget {
               ),
               color: Colors.black,
               itemBuilder: (context) => [
-                    // PopupMenuItem(
-                    //   onTap: () => vm.publish(context),
-                    //   child: Text(
-                    //     'publish'.tr(),
-                    //   ),
-                    // ),
+                    PopupMenuItem(
+                      onTap: () => vm.publish(context, topic.id),
+                      child: Text(
+                        'publish'.tr(),
+                      ),
+                    ),
                     PopupMenuItem(
                       onTap: () {
                         if (CurrentUser.id == '') {
@@ -45,7 +45,7 @@ class BlogDetailView extends StatelessWidget {
                               context: context,
                               builder: (context) => const PleaseAuth());
                         } else {
-                          // vm.report(context);
+                          vm.report(context, topic.id);
                         }
                       },
                       child: Text(
@@ -80,11 +80,11 @@ class BlogDetailView extends StatelessWidget {
                     Expanded(
                       child: ListView(
                         children: [
-                          ...vm.messages.map((e) => messageTile(e)),
+                          ...vm.messages.map((e) => messageTile(e, context)),
                         ],
                       ),
                     ),
-                    newMessageTile()
+                    if (topic.userId == CurrentUser.id) newMessageTile(false)
                   ],
                 ),
         );
@@ -92,34 +92,45 @@ class BlogDetailView extends StatelessWidget {
     );
   }
 
-  Widget messageTile(BlogMsgModel model) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-          color: Colors.grey.shade900,
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            model.message,
-            style: const TextStyle(color: Colors.white, fontSize: 14),
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Text(
-              '${dateToString(model.date)} ${hourToStringFromStamp(model.date)}',
-              style: const TextStyle(color: Colors.white38),
+  Widget messageTile(BlogMsgModel model, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (topic.userId == CurrentUser.id) {
+          showDialog(
+              context: (context),
+              barrierColor: Colors.black26,
+              builder: (diaContext) => updateMessage(diaContext, model));
+        }
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        decoration: BoxDecoration(
+            color: Colors.grey.shade900,
+            borderRadius: const BorderRadius.all(Radius.circular(10))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              model.message,
+              style: const TextStyle(color: Colors.white, fontSize: 14),
             ),
-          )
-        ],
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                '${dateToString(model.date)} ${hourToStringFromStamp(model.date)}',
+                style: const TextStyle(color: Colors.white38),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
-  Widget newMessageTile() {
-    TextEditingController cont = TextEditingController();
+  Widget newMessageTile(bool update,
+      {String? text, String? msgId, BuildContext? context}) {
+    TextEditingController cont = TextEditingController(text: text);
     return Container(
       margin: const EdgeInsets.only(top: 10, bottom: 20),
       child: Row(
@@ -135,13 +146,34 @@ class BlogDetailView extends StatelessWidget {
           ),
           IconButton(
               onPressed: () {
-                vm.sendMessage(cont.text, topic.id);
+                if (update) {
+                  vm
+                      .updateMessage(cont.text, topic.id, msgId!)
+                      .then((value) => Navigator.pop(context!));
+                } else {
+                  vm.sendMessage(cont.text, topic.id);
+                }
                 cont.clear();
               },
               icon: Icon(
                 Icons.send,
                 color: Colors.grey.shade900,
               ))
+        ],
+      ),
+    );
+  }
+
+  Widget updateMessage(BuildContext context, BlogMsgModel message) {
+    return Dialog(
+      insetPadding: const EdgeInsets.all(0),
+      alignment: Alignment.center,
+      backgroundColor: Colors.transparent,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          newMessageTile(true,
+              text: message.message, msgId: message.id, context: context)
         ],
       ),
     );

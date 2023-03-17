@@ -29,13 +29,13 @@ mixin _$ReservationEAddViewModel on ReservationEAddViewModelBase, Store {
       Atom(name: 'ReservationEAddViewModelBase.model', context: context);
 
   @override
-  ReservationModel? get model {
+  ReservationModel get model {
     _$modelAtom.reportRead();
     return super.model;
   }
 
   @override
-  set model(ReservationModel? value) {
+  set model(ReservationModel value) {
     _$modelAtom.reportWrite(value, super.model, () {
       super.model = value;
     });
@@ -185,6 +185,81 @@ mixin _$ReservationEAddViewModel on ReservationEAddViewModelBase, Store {
     });
   }
 
+  late final _$callAtom =
+      Atom(name: 'ReservationEAddViewModelBase.call', context: context);
+
+  @override
+  bool get call {
+    _$callAtom.reportRead();
+    return super.call;
+  }
+
+  @override
+  set call(bool value) {
+    _$callAtom.reportWrite(value, super.call, () {
+      super.call = value;
+    });
+  }
+
+  late final _$setBeginAsyncAction =
+      AsyncAction('ReservationEAddViewModelBase.setBegin', context: context);
+
+  @override
+  Future<dynamic> setBegin(BuildContext context) {
+    return _$setBeginAsyncAction.run(() => super.setBegin(context));
+  }
+
+  late final _$setEndAsyncAction =
+      AsyncAction('ReservationEAddViewModelBase.setEnd', context: context);
+
+  @override
+  Future<dynamic> setEnd(BuildContext context) {
+    return _$setEndAsyncAction.run(() => super.setEnd(context));
+  }
+
+  late final _$saveAsyncAction =
+      AsyncAction('ReservationEAddViewModelBase.save', context: context);
+
+  @override
+  Future<String> save(BuildContext context) {
+    return _$saveAsyncAction.run(() => super.save(context));
+  }
+
+  late final _$calculateAndSaveAsyncAction = AsyncAction(
+      'ReservationEAddViewModelBase.calculateAndSave',
+      context: context);
+
+  @override
+  Future<dynamic> calculateAndSave(BuildContext context) {
+    return _$calculateAndSaveAsyncAction
+        .run(() => super.calculateAndSave(context));
+  }
+
+  late final _$ReservationEAddViewModelBaseActionController =
+      ActionController(name: 'ReservationEAddViewModelBase', context: context);
+
+  @override
+  void error(BuildContext _, String error) {
+    final _$actionInfo = _$ReservationEAddViewModelBaseActionController
+        .startAction(name: 'ReservationEAddViewModelBase.error');
+    try {
+      return super.error(_, error);
+    } finally {
+      _$ReservationEAddViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void successfull(BuildContext context) {
+    final _$actionInfo = _$ReservationEAddViewModelBaseActionController
+        .startAction(name: 'ReservationEAddViewModelBase.successfull');
+    try {
+      return super.successfull(context);
+    } finally {
+      _$ReservationEAddViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -198,7 +273,8 @@ beginGeoPoint: ${beginGeoPoint},
 endGeoPoint: ${endGeoPoint},
 formKey: ${formKey},
 dialCode: ${dialCode},
-animal: ${animal}
+animal: ${animal},
+call: ${call}
     ''';
   }
 }

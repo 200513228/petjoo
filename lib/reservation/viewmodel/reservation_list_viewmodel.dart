@@ -32,6 +32,18 @@ abstract class ReservationListViewModelBase with Store {
   }
 
   @action
+  Future getEmergancyReservs() async {
+    List<ReservationModel> temp = [];
+    var data = await ReservationService.getEReservations();
+    for (var element in data.docs) {
+      temp.add(ReservationModel.fromQDS(element));
+      temp.sort((b, a) => a.date.millisecondsSinceEpoch
+          .compareTo(b.date.millisecondsSinceEpoch));
+    }
+    reservationList = temp;
+  }
+
+  @action
   Future getEvents() async {
     DateTime d = DateTime.now();
     for (var i = 0; i < 7; i++) {

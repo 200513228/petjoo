@@ -2,9 +2,11 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:petjoo/blog/service/blog_service.dart';
 import 'package:petjoo/emergancy/view/emergancy_list_view.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
 import 'package:petjoo/home/service/notification_service.dart';
+import 'package:petjoo/ui/blog_alert.dart';
 import 'package:petjoo/ui/loading.dart';
 import 'package:petjoo/ui/color_palette.dart';
 import 'package:petjoo/home/viewmodel/welcome_viewmodel.dart';
@@ -167,8 +169,16 @@ class WelcomeView extends StatelessWidget {
                 child: SmallModule(
                   icon: Icons.forum,
                   title: 'welcome_blog'.tr(),
-                  onTap: () {
-                    vm.goModule(_, 'BLOG');
+                  onTap: () async {
+                    BlogService.prefsCheck().then((value) {
+                      if (BlogService.checkAlert) {
+                        vm.goModule(_, 'BLOG');
+                      } else {
+                        showDialog(
+                                context: (_), builder: (_) => const BlogAlert())
+                            .then((value) => vm.goModule(_, 'BLOG'));
+                      }
+                    });
                   },
                 ),
               ),

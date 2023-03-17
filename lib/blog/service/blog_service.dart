@@ -3,9 +3,21 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:petjoo/blog/model/blog_topic_model.dart';
 import 'package:petjoo/user/model/current_user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BlogService {
   static var db = FirebaseFirestore.instance;
+  static bool checkAlert = false;
+  static SharedPreferences? prefs;
+
+  static Future prefsCheck() async {
+    prefs = await SharedPreferences.getInstance();
+    checkAlert = prefs!.getBool('checkAlert') ?? false;
+  }
+
+  static void prefsSet() {
+    prefs!.setBool('checkAlert', true);
+  }
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getTopics() async {
     return await db.collection('blog').orderBy('date', descending: true).get();
@@ -39,6 +51,21 @@ class BlogService {
           .doc(docid)
           .collection('messages')
           .add(msgModel);
+      return 'OKAY';
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> updateMessage(
+      String topicId, String msgId, String newMessage) async {
+    try {
+      await db
+          .collection('blog')
+          .doc(topicId)
+          .collection('messages')
+          .doc(msgId)
+          .update({'message': newMessage});
       return 'OKAY';
     } on Exception catch (e) {
       return e.toString();

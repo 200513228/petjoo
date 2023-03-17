@@ -29,15 +29,28 @@ class ReservationListView extends StatelessWidget {
         Expanded(
           child: PageView(
             controller: vm.pc,
-            onPageChanged: (value) =>
-                value == 0 ? vm.getTransportReservs() : vm.getUserReservs(),
+            onPageChanged: (value) {
+              switch (value) {
+                case 0:
+                  vm.getTransportReservs();
+                  break;
+                case 1:
+                  vm.getEmergancyReservs();
+                  break;
+                case 2:
+                  vm.getUserReservs();
+                  break;
+                default:
+              }
+            },
             children: [
               buildTransporterList(context),
+              buildEmergancyList(context),
               buildUserList(context),
             ],
           ),
         ),
-        Row(children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Expanded(flex: 1, child: Container()),
           Expanded(
               flex: 6,
@@ -56,10 +69,24 @@ class ReservationListView extends StatelessWidget {
           Expanded(
               flex: 6,
               child: MaterialButton(
-                  color: colorPalette['secondary'],
+                  color: Colors.red,
                   onPressed: () {
                     vm.reservationList.clear();
                     vm.pc.jumpToPage(1);
+                    // vm.pc.animateToPage(0,
+                    //     duration: const Duration(milliseconds: 100),
+                    //     curve: Curves.bounceOut);
+                  },
+                  child: Text('Acil'.tr(),
+                      style: const TextStyle(color: Colors.white)))),
+          Expanded(flex: 3, child: Container()),
+          Expanded(
+              flex: 6,
+              child: MaterialButton(
+                  color: colorPalette['secondary'],
+                  onPressed: () {
+                    vm.reservationList.clear();
+                    vm.pc.jumpToPage(2);
                     // vm.pc.animateToPage(1,
                     //     duration: const Duration(milliseconds: 100),
                     //     curve: Curves.decelerate);
@@ -75,9 +102,24 @@ class ReservationListView extends StatelessWidget {
   }
 
   Widget buildUserList(BuildContext context) {
+    // vm.getUserReservs();
     return RefreshIndicator(
       color: Colors.black,
       onRefresh: () => vm.getUserReservs(),
+      child: Column(
+        children: [
+          vm.reservationList.isEmpty
+              ? const Expanded(child: NothingToSeeHereWidget())
+              : Expanded(child: reservationList()),
+        ],
+      ),
+    );
+  }
+
+  Widget buildEmergancyList(BuildContext context) {
+    return RefreshIndicator(
+      color: Colors.black,
+      onRefresh: () => vm.getEmergancyReservs(),
       child: Column(
         children: [
           vm.reservationList.isEmpty

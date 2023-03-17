@@ -129,7 +129,7 @@ Widget title1content(BuildContext context, int index) {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const DocumentView(
-                              assetName: 'cezai_yaptirimlar.txt'))),
+                              assetName: 'cezai_yaptirimlar.txt', links: []))),
                   child: const Text('Cezai Yaptırımlar'))),
           const SizedBox(height: 10),
           SizedBox(
@@ -139,7 +139,9 @@ Widget title1content(BuildContext context, int index) {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const DocumentView(
-                            assetName: 'odeme_sorumluluklari.txt'))),
+                              assetName: 'odeme_sorumluluklari.txt',
+                              links: [],
+                            ))),
                 child: const Text('Ödeme Sorumlulukları')),
           ),
         ],
@@ -311,8 +313,16 @@ Widget title3content(BuildContext context, int index) {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const DocumentView(assetName: 'belvetkan.txt'))),
+                      builder: (context) => const DocumentView(
+                            assetName: 'belvetkan.txt',
+                            links: [
+                              {
+                                'link':
+                                    'https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=5199&MevzuatTur=1&MevzuatTertip=5',
+                                'name': 'Hayvan Hakları Yasası'
+                              }
+                            ],
+                          ))),
               child: const Text('Belediye Vet. Kanun')),
         ],
       );
@@ -341,8 +351,8 @@ Widget title3content(BuildContext context, int index) {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const DocumentView(assetName: 'belvetakis.txt'))),
+                      builder: (context) => const DocumentView(
+                          assetName: 'belvetakis.txt', links: []))),
               child: const Text('Belediye Vet. Akışı')),
         ],
       );
@@ -372,8 +382,10 @@ Widget title3content(BuildContext context, int index) {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const DocumentView(assetName: 'sahipsizakis.txt'))),
+                      builder: (context) => const DocumentView(
+                            assetName: 'sahipsizakis.txt',
+                            links: [],
+                          ))),
               child: const Text('Sahipsiz Hayvan Akışı')),
         ],
       );

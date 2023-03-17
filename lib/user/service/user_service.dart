@@ -11,7 +11,7 @@ class UserService {
   static var db = FirebaseFirestore.instance;
   static var storage = FirebaseStorage.instance.ref();
 
-  static Future<String?> get token =>
+  static Future<String?> get token async =>
       FirebaseMessaging.instance.getToken().onError((error, stackTrace) => "");
 
   static Future currentUser() async {

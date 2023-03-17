@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:im_stepper/stepper.dart';
@@ -21,27 +23,25 @@ class EmergancyDetailView extends StatelessWidget {
           title: Text(title),
         ),
         body: Observer(builder: (_) {
-          return GestureDetector(
-            onPanUpdate: (details) {
-              if (details.delta.dx > 0) {
-                vm.newPage(vm.currentPage + 1);
-              }
-              if (details.delta.dx < 0) {
-                vm.newPage(vm.currentPage - 1);
-              }
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(child: timeLine(context)),
-                Expanded(
-                    child: Padding(
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(child: timeLine(context)),
+              Expanded(
+                child: Container(
                   padding: const EdgeInsets.all(18.0),
-                  child: content(context),
-                )),
-                const SizedBox(height: 100)
-              ],
-            ),
+                  child: PageView(
+                    pageSnapping: true,
+                    onPageChanged: (value) => vm.currentPage = value,
+                    controller: vm.cont,
+                    children: [
+                      ...counterList().map((e) => content(context, e - 1))
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 100)
+            ],
           );
         }),
       ),
@@ -72,23 +72,25 @@ class EmergancyDetailView extends StatelessWidget {
       activeStepBorderWidth: 1.2,
       enableStepTapping: true,
       onStepReached: (index) => vm.newPage(index),
+      enableNextPreviousButtons: true,
       numberStyle: const TextStyle(fontSize: 14, color: Colors.white),
       stepColor: Colors.grey.shade800,
       stepRadius: 22,
-      steppingEnabled: true,
+      // steppingEnabled: true,
       nextButtonIcon: const Icon(Icons.navigate_next, color: Colors.black),
+      activeStepBorderPadding: 1.5,
       previousButtonIcon:
           const Icon(Icons.navigate_before, color: Colors.black),
     );
   }
 
-  Widget content(BuildContext context) {
+  Widget content(BuildContext context, int value) {
     if (title == 'Bir Hayvana Çarptım') {
-      return title1content(context, vm.currentPage);
+      return title1content(context, value);
     } else if (title == 'Hayvanım Hastalandı') {
-      return title2content(context, vm.currentPage);
+      return title2content(context, value);
     } else if (title == 'Yaralı Hayvan Gördüm') {
-      return title3content(context, vm.currentPage);
+      return title3content(context, value);
     } else {
       return Container();
     }

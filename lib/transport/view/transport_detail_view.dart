@@ -139,7 +139,7 @@ class TransportDetailView extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ReservationEAddView()));
+                        builder: (context) => ReservationEAddView(model)));
               },
               child: const Text(
                 'ACİL REZERVASYON',
@@ -262,7 +262,9 @@ class TransportDetailView extends StatelessWidget {
               icon,
               size: 20,
               color: isTrue
-                  ? Colors.white.withOpacity(.9)
+                  ? (icon != Icons.warning_rounded
+                      ? Colors.white.withOpacity(.9)
+                      : Colors.red)
                   : ClassicTheme.myTheme()
                       .colorScheme
                       .onSurface

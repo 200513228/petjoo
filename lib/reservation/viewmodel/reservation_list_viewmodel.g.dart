@@ -82,6 +82,16 @@ mixin _$ReservationListViewModel on ReservationListViewModelBase, Store {
     return _$getUserReservsAsyncAction.run(() => super.getUserReservs());
   }
 
+  late final _$getEmergancyReservsAsyncAction = AsyncAction(
+      'ReservationListViewModelBase.getEmergancyReservs',
+      context: context);
+
+  @override
+  Future<dynamic> getEmergancyReservs() {
+    return _$getEmergancyReservsAsyncAction
+        .run(() => super.getEmergancyReservs());
+  }
+
   late final _$getEventsAsyncAction =
       AsyncAction('ReservationListViewModelBase.getEvents', context: context);
 

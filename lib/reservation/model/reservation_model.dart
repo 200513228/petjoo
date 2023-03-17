@@ -16,6 +16,10 @@ class ReservationModel {
   double resPricePerKm = 0.0;
   int status = 0; //waiting, reject, accept
   int animalType = 0;
+  bool isEmergancy = false;
+  bool isCalled = false;
+
+  ReservationModel.empty();
 
   ReservationModel.fromQDS(QueryDocumentSnapshot snapshot) {
     var data = snapshot.data() as dynamic;
@@ -34,6 +38,7 @@ class ReservationModel {
     resPricePerKm = data['resPricePerKm'] ?? 0.0;
     status = data['status'] ?? 0;
     animalType = data['animalType'] ?? 0;
+    isEmergancy = data['isEmergancy'] ?? false;
   }
 
   ReservationModel.fromDS(DocumentSnapshot snapshot) {
@@ -53,6 +58,7 @@ class ReservationModel {
     resPricePerKm = data['resPricePerKm'] ?? 0.0;
     status = data['status'] ?? 0;
     animalType = data['animalType'] ?? 0;
+    isEmergancy = data['isEmergancy'] ?? false;
   }
 
   ReservationModel.withDate(Timestamp time) {
@@ -88,7 +94,8 @@ class ReservationModel {
       'distanceB': model.distanceB,
       'resPricePerKm': model.resPricePerKm,
       'status': model.status,
-      'animalType': model.animalType
+      'animalType': model.animalType,
+      'isEmergancy': model.isEmergancy
     };
   }
 }

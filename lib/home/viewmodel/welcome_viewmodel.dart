@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:petjoo/blog/model/blog_topic_model.dart';
+import 'package:petjoo/blog/view/blog_detail_view.dart';
 import 'package:petjoo/chat/model/chat_model.dart';
 import 'package:petjoo/chat/service/chat_service.dart';
 import 'package:petjoo/chat/view/chat_detail_view.dart';
@@ -93,6 +95,18 @@ abstract class WelcomeViewModelBase with Store {
                 context,
                 MaterialPageRoute(
                     builder: (context) => TransportDetailView(model: model)));
+          });
+          break;
+        case 'blog':
+          await TransportService.db
+              .collection('blog')
+              .doc(DLinkService.docid)
+              .get()
+              .then((value) {
+            BlogTopicModel model = BlogTopicModel.fromDS(value);
+            DLinkService.isGo = false;
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => BlogDetailView(model)));
           });
           break;
         default:

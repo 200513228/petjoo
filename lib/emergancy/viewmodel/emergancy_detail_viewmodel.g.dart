@@ -25,6 +25,22 @@ mixin _$EmergancyDetailViewModel on EmergancyDetailViewModelBase, Store {
     });
   }
 
+  late final _$contAtom =
+      Atom(name: 'EmergancyDetailViewModelBase.cont', context: context);
+
+  @override
+  PageController get cont {
+    _$contAtom.reportRead();
+    return super.cont;
+  }
+
+  @override
+  set cont(PageController value) {
+    _$contAtom.reportWrite(value, super.cont, () {
+      super.cont = value;
+    });
+  }
+
   late final _$EmergancyDetailViewModelBaseActionController =
       ActionController(name: 'EmergancyDetailViewModelBase', context: context);
 
@@ -42,7 +58,8 @@ mixin _$EmergancyDetailViewModel on EmergancyDetailViewModelBase, Store {
   @override
   String toString() {
     return '''
-currentPage: ${currentPage}
+currentPage: ${currentPage},
+cont: ${cont}
     ''';
   }
 }

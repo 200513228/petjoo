@@ -58,6 +58,31 @@ mixin _$BlogDetailViewModel on BlogDetailViewModelBase, Store {
         .run(() => super.sendMessage(message, docid));
   }
 
+  late final _$updateMessageAsyncAction =
+      AsyncAction('BlogDetailViewModelBase.updateMessage', context: context);
+
+  @override
+  Future<dynamic> updateMessage(String message, String topicId, String msgId) {
+    return _$updateMessageAsyncAction
+        .run(() => super.updateMessage(message, topicId, msgId));
+  }
+
+  late final _$publishAsyncAction =
+      AsyncAction('BlogDetailViewModelBase.publish', context: context);
+
+  @override
+  Future<dynamic> publish(BuildContext context, String doc) {
+    return _$publishAsyncAction.run(() => super.publish(context, doc));
+  }
+
+  late final _$reportAsyncAction =
+      AsyncAction('BlogDetailViewModelBase.report', context: context);
+
+  @override
+  Future<dynamic> report(BuildContext context, String doc) {
+    return _$reportAsyncAction.run(() => super.report(context, doc));
+  }
+
   late final _$deleteTopicAsyncAction =
       AsyncAction('BlogDetailViewModelBase.deleteTopic', context: context);
 

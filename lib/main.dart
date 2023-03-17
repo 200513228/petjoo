@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:petjoo/home/service/dlink_service.dart';
 import 'package:petjoo/user/service/user_service.dart';
 import 'app.dart';
-import 'firebase_options.dart';
+import 'gitsafe/firebase_options.dart';
 import 'home/service/notification_service.dart';
 
 void main() async {
